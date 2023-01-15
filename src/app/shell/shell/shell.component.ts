@@ -1,20 +1,18 @@
-import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { TopAppBarComponent } from '../top-app-bar/top-app-bar.component';
 
 @Component({
   selector: 'app-shell',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TopAppBarComponent],
   template: `
+    <top-app-bar></top-app-bar>
     <section>
-      <header>app shell works!</header>
       <ng-content></ng-content>
     </section>
   `,
-  styles: [
-  ],
-  encapsulation: ViewEncapsulation.ShadowDom
+  styles: [],
+  encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class ShellComponent {
-
-}
+export class ShellComponent {}
