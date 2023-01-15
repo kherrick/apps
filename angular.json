@@ -19,7 +19,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps",
+            "outputPath": "dist/apps/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -99,6 +99,27 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/apps/server",
+            "main": "src/main.server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
