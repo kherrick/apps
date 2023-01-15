@@ -8,6 +8,8 @@
     "build": "npm run clean && ng build",
     "watch": "npm run build -- --watch --configuration development",
     "test": "ng test",
+    "test:ci": "npm run test -- --browsers ChromeHeadless --watch=false --progress=false",
+    "test:coverage": "npm run test:ci -- --code-coverage",
     "dev:ssr": "ng run apps:serve-ssr",
     "serve:ssr": "node dist/apps/server/main.js",
     "build:ssr": "ng build && ng run apps:server",
