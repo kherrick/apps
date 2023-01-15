@@ -1,8 +1,11 @@
+import { APP_BASE_HREF } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -12,7 +15,9 @@ import { AppComponent } from './app.component';
     BrowserModule.withServerTransition({ appId: 'apps' }),
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    { provide: APP_BASE_HREF, useValue: environment.APP_BASE_HREF },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
