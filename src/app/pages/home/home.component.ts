@@ -1,14 +1,14 @@
-import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <p>
+    <ng-container>
       home works!
-    </p>
+    </ng-container>
   `,
   styles: [
   ],
