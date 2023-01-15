@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ShellComponent } from './shell/shell/shell.component';
 
 import { environment } from 'src/environments/environment';
 
@@ -13,7 +14,8 @@ import { environment } from 'src/environments/environment';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'apps' }),
-    AppRoutingModule
+    AppRoutingModule,
+    ShellComponent
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: environment.APP_BASE_HREF },

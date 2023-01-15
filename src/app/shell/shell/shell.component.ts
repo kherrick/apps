@@ -6,9 +6,10 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <p>
-      shell works!
-    </p>
+    <section>
+      <header>app shell works!</header>
+      <ng-content></ng-content>
+    </section>
   `,
   styles: [
   ],
