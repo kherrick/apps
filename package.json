@@ -3,14 +3,20 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "start": "ng serve --port 4000",
+    "clean": "rimraf dist",
+    "build": "npm run clean && ng build",
+    "watch": "npm run build -- --watch --configuration development",
     "test": "ng test",
     "dev:ssr": "ng run apps:serve-ssr",
     "serve:ssr": "node dist/apps/server/main.js",
     "build:ssr": "ng build && ng run apps:server",
-    "prerender": "ng run apps:prerender"
+    "prerender": "npm run clean && ng run apps:prerender:development",
+    "prerender:production": "npm run clean && npm run base:set && ng run apps:prerender:production && npm run base:unset",
+    "prerender:gh-pages": "npm run prerender:production",
+    "publish:gh-pages": "gh-pages --dist dist/apps/browser --remote upstream -f",
+    "base:set": "node util/build-base.mjs src/index.html / /apps/",
+    "base:unset": "node util/build-base.mjs src/index.html /apps/ /"
   },
   "private": true,
   "dependencies": {
@@ -37,12 +43,14 @@
     "@types/express": "^4.17.0",
     "@types/jasmine": "~4.3.0",
     "@types/node": "^14.15.0",
+    "gh-pages": "^4.0.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "rimraf": "^4.0.5",
     "typescript": "~4.9.4"
   }
 }
