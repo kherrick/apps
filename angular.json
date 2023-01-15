@@ -104,7 +104,7 @@
           "builder": "@angular-devkit/build-angular:server",
           "options": {
             "outputPath": "dist/apps/server",
-            "main": "src/main.server.ts",
+            "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
             "inlineStyleLanguage": "scss"
           },
@@ -117,6 +117,39 @@
               "sourceMap": true,
               "extractLicenses": false,
               "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "apps:build:development",
+              "serverTarget": "apps:server:development"
+            },
+            "production": {
+              "browserTarget": "apps:build:production",
+              "serverTarget": "apps:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "apps:build:production",
+              "serverTarget": "apps:server:production"
+            },
+            "development": {
+              "browserTarget": "apps:build:development",
+              "serverTarget": "apps:server:development"
             }
           },
           "defaultConfiguration": "production"
