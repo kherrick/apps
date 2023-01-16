@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  SimpleChanges,
-  ViewChild,
-  ViewEncapsulation
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnChanges,
+    Output,
+    SimpleChanges,
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
@@ -23,7 +23,7 @@ import { Router, RouterModule } from '@angular/router';
       id="nav-drawer"
       class="navigation-drawer modal"
     >
-      <div class="drawer-title">News</div>
+      <div class="drawer-title">Apps</div>
       <div class="drawer-scrollable">
         <section>
           <label class="section-header">Sections</label>
@@ -94,7 +94,7 @@ export class NavigationDrawerComponent implements OnChanges {
   @Output() drawerButton = new EventEmitter<string>();
   @ViewChild('dialog') dialog!: ElementRef;
 
-  constructor(public router: Router) { }
+  constructor(public router: Router) {}
 
   handleDrawerClose(event: any) {
     this.drawerButton.emit(event);
@@ -102,7 +102,9 @@ export class NavigationDrawerComponent implements OnChanges {
 
   handleKeydown(event: any) {
     if (event.key === ' ' || event.key === 'Enter') {
-      this.router.navigate([event.target.getAttribute('ng-reflect-router-link')])
+      this.router.navigate([
+        event.target.getAttribute('ng-reflect-router-link'),
+      ]);
     }
   }
 

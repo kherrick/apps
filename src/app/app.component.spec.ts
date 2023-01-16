@@ -6,13 +6,8 @@ import { ShellComponent } from './shell/shell/shell.component';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        ShellComponent
-      ],
-      declarations: [
-        AppComponent
-      ],
+      imports: [RouterTestingModule, ShellComponent],
+      declarations: [AppComponent],
     }).compileComponents();
   });
 

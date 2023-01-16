@@ -9,9 +9,8 @@ describe('TopAppBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ TopAppBarComponent, RouterTestingModule ]
-    })
-    .compileComponents();
+      imports: [TopAppBarComponent, RouterTestingModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TopAppBarComponent);
     component = fixture.componentInstance;

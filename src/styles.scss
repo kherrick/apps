@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @use "node_modules/material-design-lite/docsite/public/css/core.css";
-@use "node_modules/material-design-lite/docsite/public/css/components/progress-indicator/style.css" as progress-style;
+@use "node_modules/material-design-lite/docsite/public/css/components/progress-indicator/style.css"
+  as progress-style;
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap");
 @font-face {
   font-family: "Material Icons";

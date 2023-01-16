@@ -1,5 +1,11 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { Component, Inject, OnInit, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+  ViewEncapsulation
+} from '@angular/core';
 
 @Component({
   encapsulation: ViewEncapsulation.ShadowDom,

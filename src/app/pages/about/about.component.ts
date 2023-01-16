@@ -247,14 +247,12 @@ export class AboutComponent {
   public posts: Post[] = initialState;
 
   constructor(private httpClient: HttpClient) {
-    this.httpClient
-      .get(environment.API_URL)
-      .subscribe((posts: any) => {
-        this.posts = posts.map(
-          (post: Post) =>
-            this.posts.find((searchPost: Post) => searchPost.id === post.id) ??
-            post
-        );
-      });
+    this.httpClient.get(environment.API_URL).subscribe((posts: any) => {
+      this.posts = posts.map(
+        (post: Post) =>
+          this.posts.find((searchPost: Post) => searchPost.id === post.id) ??
+          post
+      );
+    });
   }
 }

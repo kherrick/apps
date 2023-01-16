@@ -14,10 +14,15 @@ import { TopAppBarComponent } from '../top-app-bar/top-app-bar.component';
     NavigationDrawerComponent,
   ],
   template: `
-    <app-navigation-drawer [open]="open" (drawerButton)="handleDrawerButton($event);"></app-navigation-drawer>
-    <app-navigation-rail (drawerButton)="handleDrawerButton($event);"></app-navigation-rail>
+    <app-navigation-drawer
+      [open]="open"
+      (drawerButton)="handleDrawerButton($event)"
+    ></app-navigation-drawer>
+    <app-navigation-rail
+      (drawerButton)="handleDrawerButton($event)"
+    ></app-navigation-rail>
     <section>
-      <top-app-bar (drawerButton)="handleDrawerButton($event);"></top-app-bar>
+      <top-app-bar (drawerButton)="handleDrawerButton($event)"></top-app-bar>
       <ng-content></ng-content>
     </section>
   `,

@@ -20,7 +20,7 @@ import { RouterModule } from '@angular/router';
       >
         <i class="material-icons">menu</i>
       </button>
-      <a [routerLink]="'/'"><span class="title">News</span></a>
+      <a [routerLink]="'/'"><span class="title">Apps</span></a>
       <div class="actions">
         <a class="icon-button" [routerLink]="'/about'">
           <i class="material-icons">help</i>

@@ -3,7 +3,7 @@ import {
   Component,
   EventEmitter,
   Output,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
