@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  ViewEncapsulation
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -8,10 +13,14 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, RouterModule],
   template: `
     <header id="header" class="top-app-bar">
-      <button id="drawer-btn" class="icon-button leading">
+      <button
+        (click)="handleDrawerButton($event)"
+        id="drawer-btn"
+        class="icon-button leading"
+      >
         <i class="material-icons">menu</i>
       </button>
-      <span class="title">Components</span>
+      <a [routerLink]="'/'"><span class="title">News</span></a>
       <div class="actions">
         <a class="icon-button" [routerLink]="'/about'">
           <i class="material-icons">help</i>
@@ -44,6 +53,7 @@ import { RouterModule } from '@angular/router';
   `,
   styles: [
     `
+      @use 'node_modules/material-design-lite/docsite/public/css/core.css';
       @use 'node_modules/material-design-lite/docsite/public/css/components/list/style.css'
         as list-style;
       @use 'node_modules/material-design-lite/docsite/public/css/components/top-app-bar/style.css'
@@ -59,11 +69,31 @@ import { RouterModule } from '@angular/router';
         margin-right: 1rem;
       }
 
+      #drawer-btn:hover {
+        cursor: pointer;
+      }
+
       button {
         border: 0;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      @media screen and (min-width: 859px) {
+        #drawer-btn {
+          display: none;
+        }
       }
     `,
   ],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class TopAppBarComponent {}
+export class TopAppBarComponent {
+  @Output() drawerButton = new EventEmitter<string>();
+
+  handleDrawerButton(event: any) {
+    this.drawerButton.emit(event);
+  }
+}

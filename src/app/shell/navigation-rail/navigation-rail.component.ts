@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  ViewEncapsulation
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -8,10 +13,13 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, RouterModule],
   template: `
     <aside id="nav-rail" class="navigation-rail">
-      <button class="icon-button" id="drawer-btn">
+      <button
+        (click)="handleDrawerButton($event)"
+        class="icon-button"
+        id="drawer-btn"
+      >
         <i class="material-icons">menu</i>
       </button>
-
       <nav>
         <label class="navigation-icon">
           <input
@@ -40,6 +48,7 @@ import { RouterModule } from '@angular/router';
   `,
   styles: [
     `
+      @use 'node_modules/material-design-lite/docsite/public/css/core.css';
       @use 'node_modules/material-design-lite/docsite/public/css/components/navigation-icon/style.css'
         as navigation-icon-style;
       @use 'node_modules/material-design-lite/docsite/public/css/components/navigation-rail/style.css'
@@ -47,21 +56,32 @@ import { RouterModule } from '@angular/router';
 
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-      label:focus-within {
-        outline: -webkit-focus-ring-color auto 1px;
-      }
-
       :host {
         min-height: 100vh;
 
         --md-comp-navigation-rail-container-height: 100%;
       }
 
+      :is(.navigation-rail)::before {
+        content: unset;
+      }
+
+      label:focus-within {
+        outline: -webkit-focus-ring-color auto 1px;
+      }
+
       button {
+        cursor: pointer;
         border: 0;
       }
     `,
   ],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class NavigationRailComponent {}
+export class NavigationRailComponent {
+  @Output() drawerButton = new EventEmitter<string>();
+
+  handleDrawerButton(event: any) {
+    this.drawerButton.emit(event);
+  }
+}
