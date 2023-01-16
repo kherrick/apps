@@ -52,6 +52,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
         as top-app-bar-style;
 
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+      button {
+        border: 0;
+      }
     `,
   ],
   encapsulation: ViewEncapsulation.ShadowDom,
