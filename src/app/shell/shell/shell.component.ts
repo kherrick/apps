@@ -19,6 +19,10 @@ import { TopAppBarComponent } from '../top-app-bar/top-app-bar.component';
       section {
         width: 100%;
       }
+
+      section > main {
+        padding: 1rem;
+      }
     `,
   ],
   encapsulation: ViewEncapsulation.ShadowDom,

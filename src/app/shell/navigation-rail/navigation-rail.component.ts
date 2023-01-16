@@ -62,6 +62,11 @@ import { Component, ViewEncapsulation } from '@angular/core';
 
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
+      aside {
+        height: 100%;
+        min-height: 100vh;
+      }
+
       button {
         border: 0;
       }

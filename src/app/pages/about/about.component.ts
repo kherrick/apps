@@ -233,9 +233,7 @@ interface Post {
   imports: [CommonModule, RouterModule, HttpClientModule],
   template: `
     <ng-container>
-      about works!
-
-      <a [routerLink]="'/'">home</a>
+      <p>about works! <a [routerLink]="'/'">home</a></p>
 
       <ul>
         <li *ngFor="let post of posts">{{ post.id }}</li>
