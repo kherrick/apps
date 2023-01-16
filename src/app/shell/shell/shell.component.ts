@@ -16,8 +16,8 @@ import { TopAppBarComponent } from '../top-app-bar/top-app-bar.component';
   `,
   styles: [
     `
-      :host {
-        display: flex;
+      section {
+        width: 100%;
       }
     `,
   ],

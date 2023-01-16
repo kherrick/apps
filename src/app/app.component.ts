@@ -11,7 +11,11 @@ import { Component, Inject, OnInit, PLATFORM_ID, ViewEncapsulation } from '@angu
       </main>
     </app-shell>
   `,
-  styles: []
+  styles: [`
+    app-shell {
+      display: flex;
+    }
+  `],
 })
 export class AppComponent implements OnInit {
   private isBrowser: boolean;
