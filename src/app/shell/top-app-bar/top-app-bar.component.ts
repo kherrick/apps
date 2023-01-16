@@ -46,7 +46,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
   `,
   styles: [
     `
-      @use 'node_modules/material-design-lite/docsite/public/css/components/list/style.css';
+      @use 'node_modules/material-design-lite/docsite/public/css/components/list/style.css'
+        as list-style;
       @use 'node_modules/material-design-lite/docsite/public/css/components/top-app-bar/style.css'
         as top-app-bar-style;
 
