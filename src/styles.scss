@@ -12,8 +12,14 @@
 }
 
 body {
-  margin: 0;
+  --md-sys-comp-progress-background-color: rgb(0, 0, 0, 0);
+  --md-sys-comp-progress-circular-center-color: rgb(0, 0, 0, 0);
+  --md-sys-comp-progress-circular-size: 4rem;
+  --md-sys-comp-progress-color: var(--md-sys-color-primary, rgb(0, 0, 0, 1));
+
+  background-color: var(--md-sys-color-surface);
   font-family: "Roboto", "sans-serif";
+  margin: 0;
 }
 
 .progress-container {
