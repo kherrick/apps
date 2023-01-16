@@ -18,7 +18,8 @@
     "prerender:gh-pages": "npm run prerender:production",
     "publish:gh-pages": "gh-pages --dist dist/apps/browser --remote upstream -f",
     "base:set": "node util/build-base.mjs src/index.html / /apps/",
-    "base:unset": "node util/build-base.mjs src/index.html /apps/ /"
+    "base:unset": "node util/build-base.mjs src/index.html /apps/ /",
+    "format": "prettier --write src"
   },
   "private": true,
   "dependencies": {
