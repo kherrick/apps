@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'top-app-bar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   template: `
     <header id="header" class="top-app-bar">
       <button id="drawer-btn" class="icon-button leading">
@@ -12,12 +13,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
       </button>
       <span class="title">Components</span>
       <div class="actions">
-        <a class="icon-button" href="/material-design-lite/overview/faq">
+        <a class="icon-button" [routerLink]="'/about'">
           <i class="material-icons">help</i>
         </a>
         <a
           class="icon-button"
-          href="https://github.com/rodydavis/material-design-lite"
+          href="https://github.com/kherrick/apps"
           target="_blank"
           rel="noopener"
         >
@@ -38,9 +39,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
             ></path>
           </svg>
         </a>
-        <button id="options" class="icon-button">
-          <i class="material-icons">palette</i>
-        </button>
       </div>
     </header>
   `,
@@ -52,6 +50,14 @@ import { Component, ViewEncapsulation } from '@angular/core';
         as top-app-bar-style;
 
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+      :host {
+        --md-sys-comp-top-app-bar-padding: 1rem;
+      }
+
+      #drawer-btn {
+        margin-right: 1rem;
+      }
 
       button {
         border: 0;

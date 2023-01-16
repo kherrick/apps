@@ -51,9 +51,10 @@ import { RouterModule } from '@angular/router';
         outline: -webkit-focus-ring-color auto 1px;
       }
 
-      aside {
-        height: 100%;
+      :host {
         min-height: 100vh;
+
+        --md-comp-navigation-rail-container-height: 100%;
       }
 
       button {
