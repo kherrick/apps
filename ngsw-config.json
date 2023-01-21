@@ -12,6 +12,10 @@
           "/manifest.webmanifest",
           "/*.css",
           "/*.js"
+        ],
+        "urls": [
+          "**/about/",
+          "**/about"
         ]
       }
     },
@@ -43,9 +47,9 @@
       "updateMode": "prefetch",
       "resources": {
         "urls": [
+          "https://content.karlherrick.com/**",
           "https://herrickdesign.com/**",
-          "https://infinitym.ca/**",
-          "https://content.karlherrick.com/**"
+          "https://infinitym.ca/**"
         ]
       }
     }
