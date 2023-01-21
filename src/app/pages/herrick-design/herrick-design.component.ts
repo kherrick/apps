@@ -263,12 +263,16 @@ interface Post {
         }
 
         hr {
-          margin: 1rem;
+          margin: 2rem;
         }
 
         h1 {
           font-size: larger;
           font-weight: bold;
+        }
+
+        h2 {
+          color: var(--md-ref-palette-neutral0, rgb(0, 0, 0, 1));
         }
       }
 

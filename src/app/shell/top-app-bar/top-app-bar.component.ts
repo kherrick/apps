@@ -26,6 +26,7 @@ import { RouterModule } from '@angular/router';
           <i class="material-icons">help</i>
         </a>
         <a
+          aria-label="Github"
           class="icon-button"
           href="https://github.com/kherrick/apps"
           target="_blank"
