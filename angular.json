@@ -44,7 +44,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "550kb",
                   "maximumError": "1mb"
                 },
                 {
@@ -170,7 +170,8 @@
           "options": {
             "routes": [
               "/",
-              "/about"
+              "/about",
+              "/herrick-design"
             ]
           },
           "configurations": {

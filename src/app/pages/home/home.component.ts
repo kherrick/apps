@@ -8,8 +8,6 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, RouterModule],
   template: `
     <ng-container>
-      <p>home works! <a [routerLink]="'/about'">about</a></p>
-
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus felis
         neque, sodales a scelerisque et, tincidunt non dui. Phasellus tempor

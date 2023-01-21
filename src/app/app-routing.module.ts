@@ -13,6 +13,13 @@ export const routes: Routes = [
       import('./pages/about/about.component').then((x) => x.AboutComponent),
   },
   {
+    path: 'herrick-design',
+    loadComponent: () =>
+      import('./pages/herrick-design/herrick-design.component').then(
+        (x) => x.HerrickDesignComponent
+      ),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

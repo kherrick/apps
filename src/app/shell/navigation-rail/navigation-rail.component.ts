@@ -3,7 +3,7 @@ import {
   Component,
   EventEmitter,
   Output,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -43,6 +43,17 @@ import { RouterModule } from '@angular/router';
           <i class="material-icons">help</i>
           <span>Help</span>
         </label>
+        <label class="navigation-icon">
+          <input
+            [routerLink]="'/herrick-design'"
+            id="Help"
+            name="side-navigation"
+            type="radio"
+            value="Help"
+          />
+          <i class="material-icons">palette</i>
+          <span>Herrick Design</span>
+        </label>
       </nav>
     </aside>
   `,
@@ -68,6 +79,10 @@ import { RouterModule } from '@angular/router';
 
       label:focus-within {
         outline: -webkit-focus-ring-color auto 1px;
+      }
+
+      label {
+        text-align: center;
       }
 
       button {

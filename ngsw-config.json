@@ -15,7 +15,9 @@
         ],
         "urls": [
           "**/about/",
-          "**/about"
+          "**/about",
+          "**/herrick-design/",
+          "**/herrick-design"
         ]
       }
     },
@@ -40,18 +42,21 @@
           "https://fonts.gstatic.com/**"
         ]
       }
-    },
+    }
+  ],
+  "dataGroups": [
     {
       "name": "apps",
-      "installMode": "prefetch",
-      "updateMode": "prefetch",
-      "resources": {
-        "urls": [
-          "https://content.karlherrick.com/**",
-          "https://herrickdesign.com/**",
-          "https://infinitym.ca/**"
-        ]
-      }
+      "cacheConfig": {
+        "maxSize": 999,
+        "maxAge": "365d",
+        "strategy": "freshness"
+      },
+      "urls": [
+        "https://content.karlherrick.com/**",
+        "https://herrickdesign.com/**",
+        "https://infinitym.ca/**"
+      ]
     }
   ]
 }

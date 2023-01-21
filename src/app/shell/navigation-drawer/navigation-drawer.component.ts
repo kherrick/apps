@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import {
-    Component,
-    ElementRef,
-    EventEmitter,
-    Input,
-    OnChanges,
-    Output,
-    SimpleChanges,
-    ViewChild,
-    ViewEncapsulation
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  ViewChild,
+  ViewEncapsulation
 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
@@ -41,6 +41,13 @@ import { Router, RouterModule } from '@angular/router';
             class="list-tile draft"
           >
             <span class="title">About</span>
+          </div>
+          <div
+            (click)="closeDrawer()"
+            [routerLink]="'/herrick-design'"
+            class="list-tile draft"
+          >
+            <span class="title">Herrick Design</span>
           </div>
           <div class="divider"></div>
         </section>
