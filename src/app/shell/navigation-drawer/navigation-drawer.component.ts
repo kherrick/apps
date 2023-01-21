@@ -70,7 +70,7 @@ import { Router, RouterModule } from '@angular/router';
       @use 'node_modules/material-design-lite/docsite/public/css/components/button/style.css'
         as button-style;
 
-      @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+      @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=swap');
 
       :host {
         --md-sys-comp-navigation-drawer-background-color: var(

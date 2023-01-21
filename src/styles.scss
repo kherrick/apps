@@ -2,8 +2,9 @@
 @use "node_modules/material-design-lite/docsite/public/css/core.css";
 @use "node_modules/material-design-lite/docsite/public/css/components/progress-indicator/style.css"
   as progress-style;
-@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
 @font-face {
+  font-display: swap;
   font-family: "Material Icons";
   font-style: normal;
   font-weight: 400;

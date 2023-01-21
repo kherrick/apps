@@ -65,7 +65,7 @@ import { RouterModule } from '@angular/router';
       @use 'node_modules/material-design-lite/docsite/public/css/components/navigation-rail/style.css'
         as navigation-rail-style;
 
-      @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+      @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=swap');
 
       :host {
         min-height: 100vh;

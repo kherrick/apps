@@ -60,7 +60,7 @@ import { RouterModule } from '@angular/router';
       @use 'node_modules/material-design-lite/docsite/public/css/components/top-app-bar/style.css'
         as top-app-bar-style;
 
-      @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+      @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=swap');
 
       :host {
         --md-sys-comp-top-app-bar-padding: 1rem;
