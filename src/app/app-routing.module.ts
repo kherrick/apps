@@ -20,6 +20,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'infinitym',
+    loadComponent: () =>
+      import('./pages/infinitym/infinitym.component').then(
+        (x) => x.InfinitymComponent
+      ),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

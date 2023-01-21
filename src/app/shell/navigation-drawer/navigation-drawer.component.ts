@@ -49,6 +49,13 @@ import { Router, RouterModule } from '@angular/router';
           >
             <span class="title">Herrick Design</span>
           </div>
+          <div
+            (click)="closeDrawer()"
+            [routerLink]="'/infinitym'"
+            class="list-tile draft"
+          >
+            <span class="title">InfinityM</span>
+          </div>
           <div class="divider"></div>
         </section>
       </div>

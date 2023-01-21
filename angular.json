@@ -171,7 +171,8 @@
             "routes": [
               "/",
               "/about",
-              "/herrick-design"
+              "/herrick-design",
+              "/infinitym"
             ]
           },
           "configurations": {
