@@ -36,6 +36,18 @@
           "https://fonts.gstatic.com/**"
         ]
       }
+    },
+    {
+      "name": "apps",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "resources": {
+        "urls": [
+          "https://herrickdesign.com/**",
+          "https://infinitym.ca/**",
+          "https://content.karlherrick.com/**"
+        ]
+      }
     }
   ]
 }
