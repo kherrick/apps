@@ -14,14 +14,7 @@
           "/*.js"
         ],
         "urls": [
-          "**/about/",
-          "**/about",
-          "**/herrick-design/",
-          "**/herrick-design",
-          "**/infinitym/",
-          "**/infinitym",
-          "**/karl-herrick/",
-          "**/karl-herrick"
+          "!^/apps/$"
         ]
       }
     },
