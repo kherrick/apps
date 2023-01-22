@@ -65,6 +65,17 @@ import { RouterModule } from '@angular/router';
           <i class="material-icons">memory</i>
           <span>InfinityM</span>
         </label>
+        <label class="navigation-icon">
+          <input
+            [routerLink]="'/karl-herrick'"
+            id="KarlHerrick"
+            name="side-navigation"
+            type="radio"
+            value="KarlHerrick"
+          />
+          <i class="material-icons">bolt</i>
+          <span>Karl Herrick</span>
+        </label>
       </nav>
     </aside>
   `,

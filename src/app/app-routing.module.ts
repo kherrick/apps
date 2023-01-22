@@ -27,6 +27,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'karl-herrick',
+    loadComponent: () =>
+      import('./pages/karl-herrick/karl-herrick.component').then(
+        (x) => x.KarlHerrickComponent
+      ),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

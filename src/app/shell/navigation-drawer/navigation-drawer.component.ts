@@ -57,6 +57,14 @@ import { Router, RouterModule } from '@angular/router';
             <span class="title">InfinityM</span>
           </div>
           <div class="divider"></div>
+          <div
+            (click)="closeDrawer()"
+            [routerLink]="'/karl-herrick'"
+            class="list-tile draft"
+          >
+            <span class="title">Karl Herrick</span>
+          </div>
+          <div class="divider"></div>
         </section>
       </div>
       <form method="dialog">

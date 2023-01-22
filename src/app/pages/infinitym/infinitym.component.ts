@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
 
-// first from environment.API_URL
+// first from environment.API_URL_INFINITYM
 // consider investigating TransferState:
 // https://angular.io/api/platform-browser/TransferState
 // https://brianflove.com/2020-06-05/angular-transfer-state/

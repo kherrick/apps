@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
 
-// first from environment.API_URL
+// first from environment.API_URL_HERRICKDESIGN
 // consider investigating TransferState:
 // https://angular.io/api/platform-browser/TransferState
 // https://brianflove.com/2020-06-05/angular-transfer-state/
@@ -470,7 +470,7 @@ export class HerrickDesignComponent {
   public posts: Post[] = initialState;
 
   constructor(private httpClient: HttpClient) {
-    this.httpClient.get(environment.API_URL).subscribe((posts: any) => {
+    this.httpClient.get(environment.API_URL_HERRICKDESIGN).subscribe((posts: any) => {
       this.posts = posts.map(
         (post: Post) =>
           this.posts.find((searchPost: Post) => searchPost.id === post.id) ??
