@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/service-worker/config/schema.json",
-  "index": "/index.html",
+  "index": "/shell/index.html",
   "assetGroups": [
     {
       "name": "app",
@@ -8,8 +8,9 @@
       "resources": {
         "files": [
           "/favicon.ico",
-          "/index.html",
           "/manifest.webmanifest",
+          "/index.html",
+          "/**/index.html",
           "/*.css",
           "/*.js"
         ],
@@ -51,7 +52,8 @@
       },
       "urls": [
         "https://content.karlherrick.com/**",
-        "https://herrickdesign.com/**",
+        "https://herrickdesign.com/wp-content/**",
+        "https://herrickdesign.com/wp-json/**",
         "https://infinitym.ca/**"
       ]
     }

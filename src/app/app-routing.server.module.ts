@@ -1,5 +1,6 @@
+import { Location } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
@@ -41,17 +42,42 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'shell',
+    loadComponent: () =>
+      import('./shell/shell/shell.component').then((x) => x.ShellComponent),
+  },
+  {
     path: '**',
     redirectTo: '',
   },
 ];
 
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      initialNavigation: 'enabledNonBlocking',
-    }),
+      initialNavigation: 'disabled',
+    })
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingServerModule {
+  // allow custom routes to be fully rendered server side - note the absence
+  // of "/shell"
+  constructor(private router: Router, private loc: Location ) {
+    const path = this.loc.path();
+
+    const validPaths = [
+      "",
+      "/about",
+      "/herrick-design",
+      "/infinitym",
+      "/karl-herrick",
+      "/calculator"
+    ]
+
+    if (validPaths.includes(path)) {
+      this.router.navigate([path])
+    }
+  }
+}

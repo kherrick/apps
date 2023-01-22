@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { NavigationDrawerComponent } from '../navigation-drawer/navigation-drawer.component';
 import { NavigationRailComponent } from '../navigation-rail/navigation-rail.component';
 import { TopAppBarComponent } from '../top-app-bar/top-app-bar.component';
@@ -12,6 +13,7 @@ import { TopAppBarComponent } from '../top-app-bar/top-app-bar.component';
     TopAppBarComponent,
     NavigationRailComponent,
     NavigationDrawerComponent,
+    RouterModule
   ],
   template: `
     <app-navigation-drawer
@@ -23,7 +25,9 @@ import { TopAppBarComponent } from '../top-app-bar/top-app-bar.component';
     ></app-navigation-rail>
     <section>
       <top-app-bar (drawerButton)="handleDrawerButton($event)"></top-app-bar>
-      <ng-content></ng-content>
+      <main>
+        <router-outlet></router-outlet>
+      </main>
     </section>
   `,
   styles: [

@@ -30,7 +30,12 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/minimal-c-sharp-wasm/dist",
+                "output": "./assets/"
+              }
             ],
             "styles": [
               "src/styles.scss"
@@ -169,11 +174,13 @@
           "builder": "@nguniversal/builders:prerender",
           "options": {
             "routes": [
+              "/shell",
               "/",
               "/about",
               "/herrick-design",
               "/infinitym",
-              "/karl-herrick"
+              "/karl-herrick",
+              "/calculator"
             ]
           },
           "configurations": {

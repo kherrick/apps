@@ -5,7 +5,7 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navigation-rail',
@@ -21,9 +21,13 @@ import { RouterModule } from '@angular/router';
         <i class="material-icons">menu</i>
       </button>
       <nav>
-        <label class="navigation-icon">
+        <label
+          (keydown)="handleEnterKey('/')($event)"
+          [routerLink]="'/'"
+          class="navigation-icon"
+        >
           <input
-            [routerLink]="'/'"
+            tabindex="-1"
             id="Home"
             name="side-navigation"
             type="radio"
@@ -32,9 +36,13 @@ import { RouterModule } from '@angular/router';
           <i class="material-icons">home</i>
           <span>Home</span>
         </label>
-        <label class="navigation-icon">
+        <label
+          (keydown)="handleEnterKey('/about')($event)"
+          [routerLink]="'/about'"
+          class="navigation-icon"
+        >
           <input
-            [routerLink]="'/about'"
+            tabindex="-1"
             id="Help"
             name="side-navigation"
             type="radio"
@@ -43,9 +51,13 @@ import { RouterModule } from '@angular/router';
           <i class="material-icons">help</i>
           <span>Help</span>
         </label>
-        <label class="navigation-icon">
+        <label
+          (keydown)="handleEnterKey('/herrick-design')($event)"
+          [routerLink]="'/herrick-design'"
+          class="navigation-icon"
+        >
           <input
-            [routerLink]="'/herrick-design'"
+            tabindex="-1"
             id="HerrickDesign"
             name="side-navigation"
             type="radio"
@@ -54,9 +66,13 @@ import { RouterModule } from '@angular/router';
           <i class="material-icons">palette</i>
           <span>Herrick Design</span>
         </label>
-        <label class="navigation-icon">
+        <label
+          (keydown)="handleEnterKey('/infinitym')($event)"
+          [routerLink]="'/infinitym'"
+          class="navigation-icon"
+        >
           <input
-            [routerLink]="'/infinitym'"
+            tabindex="-1"
             id="InfinityM"
             name="side-navigation"
             type="radio"
@@ -65,9 +81,13 @@ import { RouterModule } from '@angular/router';
           <i class="material-icons">memory</i>
           <span>InfinityM</span>
         </label>
-        <label class="navigation-icon">
+        <label
+          (keydown)="handleEnterKey('/karl-herrick')($event)"
+          [routerLink]="'/karl-herrick'"
+          class="navigation-icon"
+        >
           <input
-            [routerLink]="'/karl-herrick'"
+            tabindex="-1"
             id="KarlHerrick"
             name="side-navigation"
             type="radio"
@@ -75,6 +95,21 @@ import { RouterModule } from '@angular/router';
           />
           <i class="material-icons">bolt</i>
           <span>Karl Herrick</span>
+        </label>
+        <label
+          (keydown)="handleEnterKey('/calculator')($event)"
+          [routerLink]="'/calculator'"
+          class="navigation-icon"
+        >
+          <input
+            tabindex="-1"
+            id="Calculator"
+            name="side-navigation"
+            type="radio"
+            value="Calculator"
+          />
+          <i class="material-icons">calculate</i>
+          <span>Calculator</span>
         </label>
       </nav>
     </aside>
@@ -117,6 +152,16 @@ import { RouterModule } from '@angular/router';
 })
 export class NavigationRailComponent {
   @Output() drawerButton = new EventEmitter<string>();
+
+  constructor(private router: Router) {}
+
+  handleEnterKey(path: string) {
+    return (event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        this.router.navigate([path]);
+      }
+    };
+  }
 
   handleDrawerButton(event: any) {
     this.drawerButton.emit(event);

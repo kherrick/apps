@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -29,14 +30,15 @@ import { Router, RouterModule } from '@angular/router';
           <label class="section-header">Sections</label>
           <div
             (click)="closeDrawer()"
+            (keydown)="handleEnterKey('/')($event)"
             [routerLink]="'/'"
             class="list-tile draft"
-            (keydown)="handleKeydown($event)"
           >
             <span class="title">Home</span>
           </div>
           <div
             (click)="closeDrawer()"
+            (keydown)="handleEnterKey('/about')($event)"
             [routerLink]="'/about'"
             class="list-tile draft"
           >
@@ -44,6 +46,7 @@ import { Router, RouterModule } from '@angular/router';
           </div>
           <div
             (click)="closeDrawer()"
+            (keydown)="handleEnterKey('/herrick-design')($event)"
             [routerLink]="'/herrick-design'"
             class="list-tile draft"
           >
@@ -51,6 +54,7 @@ import { Router, RouterModule } from '@angular/router';
           </div>
           <div
             (click)="closeDrawer()"
+            (keydown)="handleEnterKey('/infinitym')($event)"
             [routerLink]="'/infinitym'"
             class="list-tile draft"
           >
@@ -59,10 +63,19 @@ import { Router, RouterModule } from '@angular/router';
           <div class="divider"></div>
           <div
             (click)="closeDrawer()"
+            (keydown)="handleEnterKey('/karl-herrick')($event)"
             [routerLink]="'/karl-herrick'"
             class="list-tile draft"
           >
             <span class="title">Karl Herrick</span>
+          </div>
+          <div
+            (click)="closeDrawer()"
+            (keydown)="handleEnterKey('/calculator')($event)"
+            [routerLink]="'/calculator'"
+            class="list-tile draft"
+          >
+            <span class="title">Calculator</span>
           </div>
           <div class="divider"></div>
         </section>
@@ -111,31 +124,45 @@ import { Router, RouterModule } from '@angular/router';
   ],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class NavigationDrawerComponent implements OnChanges {
+export class NavigationDrawerComponent implements AfterViewInit, OnChanges {
   @Input() open: boolean = false;
   @Output() drawerButton = new EventEmitter<string>();
   @ViewChild('dialog') dialog!: ElementRef;
 
   constructor(public router: Router) {}
 
+  ngAfterViewInit() {
+    // polyfill dialog as needed
+    if (typeof HTMLDialogElement !== 'function') {
+      import('dialog-polyfill').then((dialogPolyfill) => {
+        dialogPolyfill.default.registerDialog(this.dialog.nativeElement);
+      });
+    }
+  }
+
   handleDrawerClose(event: any) {
     this.drawerButton.emit(event);
   }
 
-  handleKeydown(event: any) {
-    if (event.key === ' ' || event.key === 'Enter') {
-      this.router.navigate([
-        event.target.getAttribute('ng-reflect-router-link'),
-      ]);
-    }
+  handleEnterKey(path: string) {
+    return (event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        this.router.navigate([path]);
+        this.closeDrawer();
+      }
+    };
   }
 
   closeDrawer() {
-    this.dialog?.nativeElement.close();
+    requestAnimationFrame(() => {
+      this.dialog?.nativeElement.close();
+    });
   }
 
   openDrawer() {
-    this.dialog?.nativeElement.showModal();
+    requestAnimationFrame(() => {
+      this.dialog?.nativeElement.showModal();
+    });
   }
 
   ngOnChanges({ open }: SimpleChanges) {
