@@ -16,7 +16,7 @@
     "prerender": "npm run clean && ng run apps:prerender:development",
     "prerender:production": "npm run clean && npm run base:set && npm run manifest:set && ng run apps:prerender:production && npm run base:unset && npm run manifest:unset && npm run ngsw:config",
     "prerender:gh-pages": "npm run prerender:production",
-    "publish:gh-pages": "gh-pages --dist dist/apps/browser --remote upstream -f",
+    "publish:gh-pages": "gh-pages --dist dist/apps/browser --remote upstream --no-history --dotfiles",
     "base:set": "node util/build-base.mjs src/index.html / /apps/",
     "base:unset": "node util/build-base.mjs src/index.html /apps/ /",
     "manifest:set": "node util/build-manifest.mjs src/manifest.webmanifest /apps/ /apps/",
