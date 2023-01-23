@@ -42,6 +42,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'pwgen',
+    loadComponent: () =>
+      import('./pages/pwgen/pwgen.component').then(
+        (x) => x.PwgenComponent
+      ),
+  },
+  {
     path: 'shell',
     loadComponent: () =>
       import('./shell/shell/shell.component').then((x) => x.ShellComponent),
@@ -51,7 +58,6 @@ export const routes: Routes = [
     redirectTo: '',
   },
 ];
-
 
 @NgModule({
   imports: [
@@ -73,7 +79,8 @@ export class AppRoutingServerModule {
       "/herrick-design",
       "/infinitym",
       "/karl-herrick",
-      "/calculator"
+      "/calculator",
+      "/pwgen",
     ]
 
     if (validPaths.includes(path)) {

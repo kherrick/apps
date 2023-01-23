@@ -111,6 +111,21 @@ import { Router, RouterModule } from '@angular/router';
           <i class="material-icons">calculate</i>
           <span>Calculator</span>
         </label>
+        <label
+          (keydown)="handleEnterKey('/pwgen')($event)"
+          [routerLink]="'/pwgen'"
+          class="navigation-icon"
+        >
+          <input
+            tabindex="-1"
+            id="pwgen"
+            name="side-navigation"
+            type="radio"
+            value="pwgen"
+          />
+          <i class="material-icons">password</i>
+          <span>pwgen</span>
+        </label>
       </nav>
     </aside>
   `,
@@ -128,6 +143,14 @@ import { Router, RouterModule } from '@angular/router';
         min-height: 100vh;
 
         --md-comp-navigation-rail-container-height: 100%;
+      }
+
+      :is(.navigation-rail) {
+        padding-bottom: unset;
+      }
+
+      :is(.navigation-rail) :is(nav, .navigation-rail-destinations) {
+        margin-bottom: unset;
       }
 
       :is(.navigation-rail)::before {

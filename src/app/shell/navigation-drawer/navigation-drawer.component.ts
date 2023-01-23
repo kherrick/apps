@@ -77,6 +77,14 @@ import { Router, RouterModule } from '@angular/router';
           >
             <span class="title">Calculator</span>
           </div>
+          <div
+            (click)="closeDrawer()"
+            (keydown)="handleEnterKey('/pwgen')($event)"
+            [routerLink]="'/pwgen'"
+            class="list-tile draft"
+          >
+            <span class="title">pwgen</span>
+          </div>
           <div class="divider"></div>
         </section>
       </div>

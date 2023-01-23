@@ -82,6 +82,10 @@
   }
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   --md-sys-comp-progress-background-color: rgb(0, 0, 0, 0);
   --md-sys-comp-progress-circular-center-color: rgb(0, 0, 0, 0);

@@ -42,8 +42,10 @@
     "express": "^4.15.2",
     "material-design-lite": "github:rodydavis/material-design-lite#v3.0.0-rc.1",
     "minimal-c-sharp-wasm": "github:kherrick/minimal-c-sharp-wasm#0.0.1+angular",
+    "pwgen": "^1.2.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "x-pwgen-components": "github:kherrick/x-pwgen-components",
     "zone.js": "~0.12.0"
   },
   "devDependencies": {

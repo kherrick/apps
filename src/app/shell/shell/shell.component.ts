@@ -32,12 +32,19 @@ import { TopAppBarComponent } from '../top-app-bar/top-app-bar.component';
   `,
   styles: [
     `
+      :host {
+        height: 100%;
+      }
+
       section {
+        display: flex;
+        flex-direction: column;
         width: 100%;
       }
 
       section > main {
-        padding: 1rem;
+        height: 100%;
+        padding: 1rem 1rem 0 1rem;
       }
 
       app-navigation-rail {

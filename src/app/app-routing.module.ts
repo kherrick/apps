@@ -41,6 +41,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'pwgen',
+    loadComponent: () =>
+      import('./pages/pwgen/pwgen.component').then(
+        (x) => x.PwgenComponent
+      ),
+  },
+  {
     path: '**',
     redirectTo: '',
   },
