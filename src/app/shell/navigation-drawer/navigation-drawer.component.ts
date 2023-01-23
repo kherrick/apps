@@ -133,6 +133,7 @@ import { Router, RouterModule } from '@angular/router';
   encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class NavigationDrawerComponent implements AfterViewInit, OnChanges {
+  @Input() isBrowser: boolean = false;
   @Input() open: boolean = false;
   @Output() drawerButton = new EventEmitter<string>();
   @ViewChild('dialog') dialog!: ElementRef;
@@ -162,15 +163,19 @@ export class NavigationDrawerComponent implements AfterViewInit, OnChanges {
   }
 
   closeDrawer() {
-    requestAnimationFrame(() => {
-      this.dialog?.nativeElement.close();
-    });
+    if (this.isBrowser) {
+      requestAnimationFrame(() => {
+        this.dialog?.nativeElement.close();
+      });
+    }
   }
 
   openDrawer() {
-    requestAnimationFrame(() => {
-      this.dialog?.nativeElement.showModal();
-    });
+    if (this.isBrowser) {
+      requestAnimationFrame(() => {
+        this.dialog?.nativeElement.showModal();
+      });
+    }
   }
 
   ngOnChanges({ open }: SimpleChanges) {
