@@ -221,6 +221,7 @@ import {
         grid-template-rows: auto 1fr auto;
         height: 100%;
         justify-items: center;
+        width: 100%;
       }
 
       #top {
