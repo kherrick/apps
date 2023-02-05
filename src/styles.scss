@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @use "node_modules/material-design-lite/docsite/public/css/core.css";
-@use "node_modules/material-design-lite/docsite/public/css/components/progress-indicator/style.css"
-  as progress-style;
+@use "node_modules/material-design-lite/docsite/public/css/components/progress-indicator/style.css" as progress-style;
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
+
 @font-face {
   font-display: swap;
   font-family: "Material Icons";
@@ -87,6 +87,9 @@ html, body {
 }
 
 body {
+  --md-comp-button-container-shape: 1.25rem;
+  --md-comp-button-container-height: 2.5rem;
+
   --md-sys-comp-progress-background-color: rgb(0, 0, 0, 0);
   --md-sys-comp-progress-circular-center-color: rgb(0, 0, 0, 0);
   --md-sys-comp-progress-circular-size: 4rem;

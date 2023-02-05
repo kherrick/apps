@@ -55,10 +55,8 @@ import { RouterModule } from '@angular/router';
   styles: [
     `
       @use 'node_modules/material-design-lite/docsite/public/css/core.css';
-      @use 'node_modules/material-design-lite/docsite/public/css/components/list/style.css'
-        as list-style;
-      @use 'node_modules/material-design-lite/docsite/public/css/components/top-app-bar/style.css'
-        as top-app-bar-style;
+      @use 'node_modules/material-design-lite/docsite/public/css/components/list/style.css' as list-style;
+      @use 'node_modules/material-design-lite/docsite/public/css/components/top-app-bar/style.css' as top-app-bar-style;
 
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=swap');
 

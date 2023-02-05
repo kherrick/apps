@@ -89,7 +89,7 @@ import { Router, RouterModule } from '@angular/router';
         </section>
       </div>
       <form method="dialog">
-        <button class="text">
+        <button class="button">
           <i class="material-icons">close</i>
           <label>Close Drawer</label>
         </button>
@@ -99,12 +99,9 @@ import { Router, RouterModule } from '@angular/router';
   styles: [
     `
       @use 'node_modules/material-design-lite/docsite/public/css/core.css';
-      @use 'node_modules/material-design-lite/docsite/public/css/components/navigation-drawer/style.css'
-        as navigation-drawer-style;
-      @use 'node_modules/material-design-lite/docsite/public/css/components/list-tile/style.css'
-        as list-tile-style;
-      @use 'node_modules/material-design-lite/docsite/public/css/components/button/style.css'
-        as button-style;
+      @use 'node_modules/material-design-lite/docsite/public/css/components/navigation-drawer/style.css' as navigation-drawer-style;
+      @use 'node_modules/material-design-lite/docsite/public/css/components/list-tile/style.css' as list-tile-style;
+      @use 'node_modules/material-design-lite/docsite/public/css/components/button/style.css' as button-style;
 
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=swap');
 
