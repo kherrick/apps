@@ -46,6 +46,14 @@ import { Router, RouterModule } from '@angular/router';
           </div>
           <div
             (click)="closeDrawer()"
+            (keydown)="handleEnterKey('/slides')($event)"
+            [routerLink]="'/slides'"
+            class="list-tile"
+          >
+            <span class="title">Slides</span>
+          </div>
+          <div
+            (click)="closeDrawer()"
             (keydown)="handleEnterKey('/herrick-design')($event)"
             [routerLink]="'/herrick-design'"
             class="list-tile"

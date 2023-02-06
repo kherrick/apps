@@ -1,6 +1,7 @@
 import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
   Component,
+  ElementRef,
   Inject,
   isDevMode,
   OnDestroy,
@@ -30,16 +31,20 @@ import { TopAppBarComponent } from '../top-app-bar/top-app-bar.component';
   ],
   template: `
     <app-navigation-drawer
-      (drawerButton)="handleDrawerButton($event)"
+      (drawerButton)="handleDrawerButton()"
       [isBrowser]="isBrowser"
       [open]="isDrawerOpen"
     ></app-navigation-drawer>
     <app-navigation-rail
-      (drawerButton)="handleDrawerButton($event)"
+      *ngIf="!isFullscreen"
+      (drawerButton)="handleDrawerButton()"
     ></app-navigation-rail>
     <section>
-      <top-app-bar (drawerButton)="handleDrawerButton($event)"></top-app-bar>
-      <main>
+      <top-app-bar
+        *ngIf="!isFullscreen"
+        (drawerButton)="handleDrawerButton()"
+      ></top-app-bar>
+      <main [ngClass]="{ 'with-padding': !isFullscreen }">
         <app-dialog></app-dialog>
         <router-outlet></router-outlet>
       </main>
@@ -48,7 +53,7 @@ import { TopAppBarComponent } from '../top-app-bar/top-app-bar.component';
   styles: [
     `
       :host {
-        height: 100%;
+        min-height: 100vh;
       }
 
       section {
@@ -59,6 +64,9 @@ import { TopAppBarComponent } from '../top-app-bar/top-app-bar.component';
 
       section > main {
         height: 100%;
+      }
+
+      .with-padding {
         padding: 1rem 1rem 0 1rem;
       }
 
@@ -78,6 +86,7 @@ import { TopAppBarComponent } from '../top-app-bar/top-app-bar.component';
 export class ShellComponent implements OnInit, OnDestroy {
   public isBrowser: boolean;
   public isDrawerOpen: boolean = false;
+  public isFullscreen: boolean = false;
 
   private unrecoverable!: Subscription;
   private versionUpdates!: Subscription;
@@ -85,7 +94,8 @@ export class ShellComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     @Inject(PLATFORM_ID) private platformId: Object,
-    private swUpdate: SwUpdate
+    private swUpdate: SwUpdate,
+    public el: ElementRef
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
 
@@ -137,20 +147,64 @@ export class ShellComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const progress: HTMLProgressElement | null =
-      this.document.querySelector('.progress');
+    if (this.isBrowser) {
+      const progress: HTMLProgressElement | null =
+        this.document.querySelector('.progress');
 
-    if (progress && this.isBrowser) {
-      progress.style.display = 'none';
+      if (progress) {
+        progress.style.display = 'none';
+      }
+
+      this.el.nativeElement.addEventListener('fullscreen', () =>
+        this.fullscreenListener()
+      );
+      this.document.addEventListener('fullscreenchange', () =>
+        this.fullscreenChangeListener()
+      );
+
+      // clear persisted state
+      sessionStorage.removeItem('apps-slides-fullscreen');
+      sessionStorage.removeItem('apps-slides-mode');
+      sessionStorage.removeItem('apps-slides-last');
     }
   }
 
   ngOnDestroy(): void {
     this.unrecoverable?.unsubscribe();
     this.versionUpdates?.unsubscribe();
+
+    this.el.nativeElement.removeEventListener(
+      'fullscreen',
+      this.fullscreenListener
+    );
+    this.document.removeEventListener(
+      'fullscreenchange',
+      this.fullscreenChangeListener
+    );
   }
 
-  handleDrawerButton(event: any) {
+  handleDrawerButton(): void {
     this.isDrawerOpen = !this.isDrawerOpen;
+  }
+
+  fullscreenListener() {
+    this.toggleFullscreen();
+  }
+
+  fullscreenChangeListener() {
+    this.isFullscreen = !!this.document.fullscreenElement;
+
+    sessionStorage.setItem(
+      'apps-slides-fullscreen',
+      this.isFullscreen ? 'enabled' : 'disabled'
+    );
+  }
+
+  toggleFullscreen() {
+    if (!this.document.fullscreenElement) {
+      this.document.documentElement.requestFullscreen();
+    } else if (this.document.exitFullscreen) {
+      this.document.exitFullscreen();
+    }
   }
 }

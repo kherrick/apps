@@ -78,6 +78,7 @@ import { RouterModule } from '@angular/router';
 
       a {
         text-decoration: none;
+        color: var(--md-sys-comp-top-app-bar-color);
       }
 
       @media screen and (min-width: 859px) {

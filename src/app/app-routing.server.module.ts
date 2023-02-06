@@ -14,6 +14,12 @@ export const routes: Routes = [
       import('./pages/about/about.component').then((x) => x.AboutComponent),
   },
   {
+    path: 'slides',
+    loadChildren: () =>
+        import('./pages/slides/slides-routing.module')
+            .then(m => m.SlidesRoutingModule)
+  },
+  {
     path: 'herrick-design',
     loadComponent: () =>
       import('./pages/herrick-design/herrick-design.component').then(

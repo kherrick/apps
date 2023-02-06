@@ -52,6 +52,21 @@ import { Router, RouterModule } from '@angular/router';
           <span>Help</span>
         </label>
         <label
+          (keydown)="handleEnterKey('/slides')($event)"
+          [routerLink]="'/slides'"
+          class="navigation-icon"
+        >
+          <input
+            tabindex="-1"
+            id="Slides"
+            name="side-navigation"
+            type="radio"
+            value="Slides"
+          />
+          <i class="material-icons">slideshow</i>
+          <span>Slides</span>
+        </label>
+        <label
           (keydown)="handleEnterKey('/herrick-design')($event)"
           [routerLink]="'/herrick-design'"
           class="navigation-icon"

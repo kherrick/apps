@@ -141,8 +141,7 @@ import {
                 <path
                   d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1z"
                   fill="#626262"
-                /></svg
-              >&nbsp;Copy
+                /></svg>&nbsp;Copy
             </mwc-button>
           </mwc-formfield>
         </section>
@@ -150,19 +149,19 @@ import {
     </section>
     <div id="password-background">
       <ng-container *ngFor="let password of passwords">
-      <span>{{ password }}</span
-      >&nbsp;
+        <span>{{ password }}</span
+        >&nbsp;
       </ng-container>
     </div>
   `,
   styles: [
     `
-    :host {
-      display: flex;
-      height: 100%;
-      overflow: hidden;
-      position: relative;
-    }
+      :host {
+        display: flex;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+      }
 
       h1 {
         font-size: 1.5rem;
@@ -332,7 +331,10 @@ export class PwgenComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     // :-( -- https://github.com/material-components/material-components-web/issues/4221
-    this.mwcTabBar.nativeElement.removeEventListener('MDCTabBar:activated', this.tabListener);
+    this.mwcTabBar.nativeElement.removeEventListener(
+      'MDCTabBar:activated',
+      this.tabListener
+    );
   }
 
   copyButtonClickHandler() {
