@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
   Component,
   Inject,
@@ -9,13 +9,13 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { SwUpdate, UnrecoverableStateEvent } from '@angular/service-worker';
+import { interval, Subscription } from 'rxjs';
+
+import { DialogComponent } from '../dialog/dialog.component';
 import { NavigationDrawerComponent } from '../navigation-drawer/navigation-drawer.component';
 import { NavigationRailComponent } from '../navigation-rail/navigation-rail.component';
 import { TopAppBarComponent } from '../top-app-bar/top-app-bar.component';
-
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { SwUpdate, UnrecoverableStateEvent } from '@angular/service-worker';
-import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shell',
@@ -25,13 +25,14 @@ import { interval, Subscription } from 'rxjs';
     TopAppBarComponent,
     NavigationRailComponent,
     NavigationDrawerComponent,
+    DialogComponent,
     RouterModule,
   ],
   template: `
     <app-navigation-drawer
       (drawerButton)="handleDrawerButton($event)"
       [isBrowser]="isBrowser"
-      [open]="open"
+      [open]="isDrawerOpen"
     ></app-navigation-drawer>
     <app-navigation-rail
       (drawerButton)="handleDrawerButton($event)"
@@ -39,6 +40,7 @@ import { interval, Subscription } from 'rxjs';
     <section>
       <top-app-bar (drawerButton)="handleDrawerButton($event)"></top-app-bar>
       <main>
+        <app-dialog></app-dialog>
         <router-outlet></router-outlet>
       </main>
     </section>
@@ -73,9 +75,9 @@ import { interval, Subscription } from 'rxjs';
   ],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class ShellComponent implements OnInit, OnDestroy{
+export class ShellComponent implements OnInit, OnDestroy {
   public isBrowser: boolean;
-  public open: boolean = false;
+  public isDrawerOpen: boolean = false;
 
   private unrecoverable!: Subscription;
   private versionUpdates!: Subscription;
@@ -149,6 +151,6 @@ export class ShellComponent implements OnInit, OnDestroy{
   }
 
   handleDrawerButton(event: any) {
-    this.open = !this.open;
+    this.isDrawerOpen = !this.isDrawerOpen;
   }
 }

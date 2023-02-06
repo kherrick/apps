@@ -9,7 +9,8 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { DialogService } from 'src/app/shell/dialog/dialog.service';
 
 import { environment } from 'src/environments/environment';
 
@@ -31,16 +32,9 @@ export interface CalculatorModel {
   imports: [CommonModule],
   template: `
     <ng-container>
-      <article>
-        <h1>Calculator</h1>
-        <dialog #dialog>
-          <h1></h1>
-          <form method="dialog">
-            <button>OK</button>
-          </form>
-        </dialog>
-        <div class="column">
-          <div class="row">
+      <div class="column">
+        <div class="row">
+          <label class="text-field outlined">
             <input
               (keydown)="handleResultKeydown($event)"
               (beforeInput)="handleResultBeforeInput($event)"
@@ -49,136 +43,224 @@ export interface CalculatorModel {
               id="result"
               #result
             />
-            <input
-              type="button"
-              (click)="buttonHandler($event)"
-              (keydown)="buttonHandler($event)"
-              value="c"
-              #clear
-            />
-          </div>
-          <div class="row">
-            <input
-              type="button"
-              (click)="buttonHandler($event)"
-              (keydown)="buttonHandler($event)"
-              value="1"
-            />
-            <input
-              type="button"
-              (click)="buttonHandler($event)"
-              (keydown)="buttonHandler($event)"
-              value="2"
-            />
-            <input
-              type="button"
-              (click)="buttonHandler($event)"
-              (keydown)="buttonHandler($event)"
-              value="3"
-            />
-            <input
-              type="button"
-              (click)="buttonHandler($event)"
-              (keydown)="buttonHandler($event)"
-              value="/"
-            />
-          </div>
-          <div class="row">
-            <input
-              type="button"
-              (click)="buttonHandler($event)"
-              (keydown)="buttonHandler($event)"
-              value="4"
-            />
-            <input
-              type="button"
-              (click)="buttonHandler($event)"
-              (keydown)="buttonHandler($event)"
-              value="5"
-            />
-            <input
-              type="button"
-              (click)="buttonHandler($event)"
-              (keydown)="buttonHandler($event)"
-              value="6"
-            />
-            <input
-              type="button"
-              (click)="buttonHandler($event)"
-              (keydown)="buttonHandler($event)"
-              value="*"
-            />
-          </div>
-          <div class="row">
-            <input
-              type="button"
-              (click)="buttonHandler($event)"
-              (keydown)="buttonHandler($event)"
-              value="7"
-            />
-            <input
-              type="button"
-              (click)="buttonHandler($event)"
-              (keydown)="buttonHandler($event)"
-              value="8"
-            />
-            <input
-              type="button"
-              (click)="buttonHandler($event)"
-              (keydown)="buttonHandler($event)"
-              value="9"
-            />
-            <input
-              type="button"
-              (click)="buttonHandler($event)"
-              (keydown)="buttonHandler($event)"
-              value="-"
-            />
-          </div>
-          <div class="row">
-            <input
-              type="button"
-              (click)="buttonHandler($event)"
-              (keydown)="buttonHandler($event)"
-              value="0"
-            />
-            <input
-              type="button"
-              (click)="buttonHandler($event)"
-              (keydown)="buttonHandler($event)"
-              value="."
-            />
-            <input
-              type="button"
-              (click)="buttonHandler($event)"
-              (keydown)="buttonHandler($event)"
-              value="="
-            />
-            <input
-              type="button"
-              (click)="buttonHandler($event)"
-              (keydown)="buttonHandler($event)"
-              value="+"
-            />
-          </div>
+            <span>Calculator</span>
+          </label>
+          <button
+            type="button"
+            (click)="buttonHandler($event)"
+            (keydown)="buttonHandler($event)"
+            value="c"
+            #clear
+          >
+            c
+          </button>
         </div>
-      </article>
+        <div class="row">
+          <button
+            type="button"
+            (click)="buttonHandler($event)"
+            (keydown)="buttonHandler($event)"
+            value="1"
+          >
+            1
+          </button>
+          <button
+            type="button"
+            (click)="buttonHandler($event)"
+            (keydown)="buttonHandler($event)"
+            value="2"
+          >
+            2
+          </button>
+          <button
+            type="button"
+            (click)="buttonHandler($event)"
+            (keydown)="buttonHandler($event)"
+            value="3"
+          >
+            3
+          </button>
+          <button
+            type="button"
+            (click)="buttonHandler($event)"
+            (keydown)="buttonHandler($event)"
+            value="/"
+          >
+            /
+          </button>
+        </div>
+        <div class="row">
+          <button
+            type="button"
+            (click)="buttonHandler($event)"
+            (keydown)="buttonHandler($event)"
+            value="4"
+          >
+            4
+          </button>
+          <button
+            type="button"
+            (click)="buttonHandler($event)"
+            (keydown)="buttonHandler($event)"
+            value="5"
+          >
+            5
+          </button>
+          <button
+            type="button"
+            (click)="buttonHandler($event)"
+            (keydown)="buttonHandler($event)"
+            value="6"
+          >
+            6
+          </button>
+          <button
+            type="button"
+            (click)="buttonHandler($event)"
+            (keydown)="buttonHandler($event)"
+            value="*"
+          >
+            *
+          </button>
+        </div>
+        <div class="row">
+          <button
+            type="button"
+            (click)="buttonHandler($event)"
+            (keydown)="buttonHandler($event)"
+            value="7"
+          >
+            7
+          </button>
+          <button
+            type="button"
+            (click)="buttonHandler($event)"
+            (keydown)="buttonHandler($event)"
+            value="8"
+          >
+            8
+          </button>
+          <button
+            type="button"
+            (click)="buttonHandler($event)"
+            (keydown)="buttonHandler($event)"
+            value="9"
+          >
+            9
+          </button>
+          <button
+            type="button"
+            (click)="buttonHandler($event)"
+            (keydown)="buttonHandler($event)"
+            value="-"
+          >
+            -
+          </button>
+        </div>
+        <div class="row">
+          <button
+            type="button"
+            (click)="buttonHandler($event)"
+            (keydown)="buttonHandler($event)"
+            value="0"
+          >
+            0
+          </button>
+          <button
+            type="button"
+            (click)="buttonHandler($event)"
+            (keydown)="buttonHandler($event)"
+            value="."
+          >
+            .
+          </button>
+          <button
+            type="button"
+            (click)="buttonHandler($event)"
+            (keydown)="buttonHandler($event)"
+            value="="
+          >
+            =
+          </button>
+          <button
+            type="button"
+            (click)="buttonHandler($event)"
+            (keydown)="buttonHandler($event)"
+            value="+"
+          >
+            +
+          </button>
+        </div>
+      </div>
     </ng-container>
   `,
   styles: [
     `
+      @use 'node_modules/material-design-lite/docsite/public/css/components/button/style.css' as button-style;
+      @use 'node_modules/material-design-lite/docsite/public/css/components/text-field/style.css' as text-field-style;
+
       :host {
-        article {
-          max-width: 60rem;
+        --md-comp-button-container-shape: 0.5rem;
+        --md-comp-button-container-height: 6.5rem;
+        --md-sys-color-on-surface-rgb: 25 25 25;
+
+        --md-sys-color-primary: black;
+
+        display: flex;
+        justify-content: center;
+
+        .column {
+          display: flex;
+          flex-direction: column;
+          max-width: 50rem;
+          width: 100%;
+        }
+
+        .row {
+          align-items: center;
+          display: flex;
+          flex-direction: row;
+        }
+
+        :is(.text-field).outlined input {
+          font-family: monospace;
+          font-size: 3.75rem;
+          height: 6rem;
         }
 
         h1 {
-          color: var(--x-postpress-h1-color, inherit);
-          margin: var(--x-postpress-h1-margin, inherit);
-          text-align: var(--x-postpress-h1-text-align, initial);
-
           font-size: larger;
           font-weight: bold;
+        }
+
+        button {
+          font-size: 1.75rem;
+          font-weight: normal;
+          height: 6rem;
+          margin: 0;
+          margin: 0.25rem;
+          min-width: 4.0625rem;
+          width: 100%;
+        }
+
+        button:active,
+        button:hover {
+          background-color: var(--md-sys-color-secondary);
+          color: var(--md-sys-color-on-secondary);
+        }
+
+        button[value='c'] {
+          flex: 1;
+          margin-top: 0.375rem;
+          max-width: 11.5rem;
+          min-width: 4.0625rem;
+        }
+
+        label {
+          flex: 3;
+          margin: 0 0.25rem 0 0.25rem;
+          min-width: 9.6875rem;
+          width: 100%;
         }
       }
 
@@ -191,67 +273,19 @@ export interface CalculatorModel {
           opacity: 0;
         }
       }
-
-      .column {
-        display: flex;
-        flex-direction: column;
-        max-width: 50rem;
-        width: 100%;
-      }
-
-      .row {
-        display: flex;
-        flex-direction: row;
-      }
-
-      dialog {
-        text-align: center;
-      }
-
-      button,
-      input[type='button'] {
-        background-color: darkblue;
-        border-radius: 0.3125rem;
-        border: 0.0625rem solid white;
-        color: white;
-        font-size: 3rem;
-        height: 6rem;
-        margin: 0;
-        min-width: 4.0625rem;
-        width: 100%;
-      }
-
-      button:active,
-      button:hover,
-      input[type='button']:active,
-      input[type='button']:hover {
-        background-color: darkslategray;
-      }
-
-      input[type='text'] {
-        border-radius: 0.3125rem;
-        border: 0.0625rem outset grey;
-        font-family: monospace;
-        font-size: 3.75rem;
-        margin: 0.1875rem;
-        min-width: 9.6875rem;
-        padding: 0.5rem;
-        width: 100%;
-      }
-
-      input[value='c'] {
-        max-width: 25%;
-      }
     `,
   ],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class CalculatorComponent implements OnInit, OnDestroy {
   private isBrowser: boolean;
-  private isReady = new Subject<boolean>();
+  private isReady: Subject<boolean> = new Subject<boolean>();
+  private dialogSubscription: Subscription;
+
   private calculator = null; // define placeholder for instance of C# calculator
 
   public results = 'loading...';
+  public isDialogOpen = false;
 
   public model: CalculatorModel = {
     numbers: {
@@ -262,7 +296,6 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   };
 
   @ViewChild('result') result!: ElementRef;
-  @ViewChild('dialog') dialog!: ElementRef;
   @ViewChild('clear') clear!: ElementRef;
 
   nativeElement!: HTMLElement;
@@ -270,6 +303,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(DialogService) public dialogService: DialogService,
     el: ElementRef
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -279,14 +313,11 @@ export class CalculatorComponent implements OnInit, OnDestroy {
       this.isReady.next(false);
       this.isReady.subscribe(() => this.isReadyHandler());
     }
-  }
 
-  handleKeys(event: any) {
-    return this.handleKeydownAndPaste(
-      this.calculator,
-      this.model,
-      this.result,
-      event
+    this.dialogSubscription = this.dialogService.open$.subscribe(
+      (isDialogOpen) => {
+        this.isDialogOpen = isDialogOpen;
+      }
     );
   }
 
@@ -337,55 +368,50 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     }
   }
 
-  private handleCalculatorValue(
+  ngOnDestroy(): void {
+    this.isReady?.unsubscribe();
+    this.dialogSubscription?.unsubscribe();
+  }
+
+  buttonHandler(event: Event) {
+    this.handleCalculatorButtons(
+      this.calculator,
+      this.model,
+      this.result.nativeElement,
+      event,
+      event.target
+    );
+  }
+
+  closeDialog() {
+    this.dialogService.open$.next(false);
+    this.dialogService.content = '';
+    this.dialogService.title = '';
+  }
+
+  // event handler for calculator buttons
+  handleCalculatorButtons(
     calculator: any,
     model: CalculatorModel,
     result: HTMLInputElement,
-    val: string
+    e: any,
+    el: any
   ) {
-    if (
-      val == 'Escape' ||
-      val == 'Enter' ||
-      val == '.' ||
-      val == '=' ||
-      val == 'c' ||
-      val == '0' ||
-      val == '1' ||
-      val == '2' ||
-      val == '3' ||
-      val == '4' ||
-      val == '5' ||
-      val == '6' ||
-      val == '7' ||
-      val == '8' ||
-      val == '9' ||
-      val == '+' ||
-      val == '-' ||
-      val == '*' ||
-      val == '/'
-    ) {
-      this.resolveOperations(calculator, model, result, val);
+    // handle only clicks without detail (0) that identify as a space key
+    if (!e?.detail && e?.key !== ' ') {
+      return;
     }
 
-    if (val.length > 1 && val.match(/^\d+$/)) {
-      Array.from(val).forEach((number) => {
-        this.resolveOperations(calculator, model, result, number);
-      });
-    }
+    this.handleCalculatorValue(calculator, model, result, el.value);
   }
 
-  handleResultKeydown(e: any) {
-    // prevent modifying the results directly
-    if (e.key !== 'Tab') {
-      e.preventDefault();
-    }
-  }
-
-  handleResultBeforeInput(e: any) {
-    // check insertFromPaste using beforeinput
-    if (e.inputType === 'insertFromPaste') {
-      this.handleKeydownAndPaste(this.calculator, this.model, this.result, e);
-    }
+  handleKeys(event: any) {
+    return this.handleKeydownAndPaste(
+      this.calculator,
+      this.model,
+      this.result,
+      event
+    );
   }
 
   // event handler for keydown and paste
@@ -416,113 +442,33 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     this.handleCalculatorValue(calculator, model, result.nativeElement, val);
   }
 
-  // event handler for calculator buttons
-  handleCalculatorButtons(
-    calculator: any,
-    model: CalculatorModel,
-    result: HTMLInputElement,
-    e: any,
-    el: any
-  ) {
-    // handle only clicks without detail (0) that identify as a space key
-    if (!e?.detail && e?.key !== ' ') {
-      return;
+  handleResultKeydown(e: any) {
+    // prevent modifying the results directly
+    if (e.key !== 'Tab') {
+      e.preventDefault();
     }
-
-    this.handleCalculatorValue(calculator, model, result, el.value);
   }
 
-  // determine next steps for the calculator
-  private resolveOperations(
-    calculator: any,
-    model: CalculatorModel,
-    result: HTMLInputElement,
-    val: any
-  ) {
-    const isOperationValue = isOperation(val);
-
-    // prevent leading with an operation
-    if (isOperationValue && !model.numbers.first) {
-      return;
+  handleResultBeforeInput(e: any) {
+    // check insertFromPaste using beforeinput
+    if (e.inputType === 'insertFromPaste') {
+      this.handleKeydownAndPaste(this.calculator, this.model, this.result, e);
     }
+  }
 
-    // prevent two decimals
-    if (result.value.includes('.') && val === '.') {
-      return;
-    }
+  isReadyHandler() {
+    // clear the calculator on first load
+    clear(this.model, this.result.nativeElement);
 
-    // handle "c" key and escape key
-    if (val === 'c' || val === 'Escape') {
-      clear(model, result);
+    // focus the calculator input
+    this.result.nativeElement.focus();
+  }
 
-      return;
-    }
-
-    // handle equals and enter key
-    if (val === '=' || val === 'Enter') {
-      // do not solve when the dialog is open
-      if (this.dialog.nativeElement.getAttribute('open')) {
-        return;
-      }
-
-      this.solve(calculator, model, result);
-
-      return;
-    }
-
-    // handle "Error" and "NaN" value
-    if (result.value === 'Error' || result.value === 'NaN') {
-      clear(model, result);
-    }
-
-    // handle operation and number1
-    if (!model.operation) {
-      // handle operation
-      if (isOperationValue) {
-        model.operation = val;
-        result.value = val;
-
-        return;
-      }
-
-      // do not allow a number with length longer than sixteen for number1
-      if (result.value.length === 16) {
-        return;
-      }
-
-      // handle number1
-      model.numbers.first += val;
-      result.value += val;
-
-      return;
-    } else {
-      // prevent changing operation before solving
-      if (isOperationValue) {
-        return;
-      }
-    }
-
-    // handle first time seeing number2
-    if (!model.numbers.second) {
-      model.numbers.second = val;
-      result.value = val;
-
-      return;
-    }
-
-    // do not allow to divide by more than a number with length of nine
-    if (model.operation === '/' && result.value.length === 9) {
-      return;
-    }
-
-    // do not allow a number with length longer than sixteen for number2
-    if (result.value.length === 16) {
-      return;
-    }
-
-    // handle appending to number2
-    model.numbers.second += val;
-    result.value += val;
+  openDialog(message: string) {
+    this.dialogService.open$.next(true);
+    this.dialogService.content = message;
+    this.dialogService.title = 'Alert';
+    this.dialogService.indeterminateProgress = true;
   }
 
   // solve the stored equation and set the result
@@ -535,11 +481,11 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     if (calculator === null) {
       this.openDialog('Required dependencies are still loading...');
 
-      setTimeout(() => {
-        (
-          this.dialog.nativeElement.querySelector('button') as HTMLElement
-        ).focus();
-      }, 0);
+      // setTimeout(() => {
+      //   (
+      //     this.dialog.nativeElement.querySelector('button') as HTMLElement
+      //   ).focus();
+      // }, 0);
 
       return;
     }
@@ -615,35 +561,134 @@ export class CalculatorComponent implements OnInit, OnDestroy {
       result.value = answer;
     }
   }
-  closeDialog() {
-    this.dialog.nativeElement.removeAttribute('open');
+
+  private handleCalculatorValue(
+    calculator: any,
+    model: CalculatorModel,
+    result: HTMLInputElement,
+    val: string
+  ) {
+    if (
+      val == 'Escape' ||
+      val == 'Enter' ||
+      val == '.' ||
+      val == '=' ||
+      val == 'c' ||
+      val == '0' ||
+      val == '1' ||
+      val == '2' ||
+      val == '3' ||
+      val == '4' ||
+      val == '5' ||
+      val == '6' ||
+      val == '7' ||
+      val == '8' ||
+      val == '9' ||
+      val == '+' ||
+      val == '-' ||
+      val == '*' ||
+      val == '/'
+    ) {
+      this.resolveOperations(calculator, model, result, val);
+    }
+
+    if (val.length > 1 && val.match(/^\d+$/)) {
+      Array.from(val).forEach((number) => {
+        this.resolveOperations(calculator, model, result, number);
+      });
+    }
   }
 
-  openDialog(message: string | null = null) {
-    this.dialog.nativeElement.setAttribute('open', 'open');
-    (this.dialog.nativeElement.querySelector('h1') as HTMLElement).textContent =
-      message;
-  }
+  // determine next steps for the calculator
+  private resolveOperations(
+    calculator: any,
+    model: CalculatorModel,
+    result: HTMLInputElement,
+    val: any
+  ) {
+    const isOperationValue = isOperation(val);
 
-  buttonHandler(event: Event) {
-    this.handleCalculatorButtons(
-      this.calculator,
-      this.model,
-      this.result.nativeElement,
-      event,
-      event.target
-    );
-  }
+    // prevent leading with an operation
+    if (isOperationValue && !model.numbers.first) {
+      return;
+    }
 
-  isReadyHandler() {
-    // clear the calculator on first load
-    clear(this.model, this.result.nativeElement);
+    // prevent two decimals
+    if (result.value.includes('.') && val === '.') {
+      return;
+    }
 
-    // focus the calculator input
-    this.result.nativeElement.focus();
-  }
+    // handle "c" key and escape key
+    if (val === 'c' || val === 'Escape') {
+      clear(model, result);
 
-  ngOnDestroy(): void {
-    this.isReady?.unsubscribe();
+      return;
+    }
+
+    // handle equals and enter key
+    if (val === '=' || val === 'Enter') {
+      // do not solve when the dialog is open
+      if (this.isDialogOpen) {
+        return;
+      }
+
+      this.solve(calculator, model, result);
+
+      return;
+    }
+
+    // handle "Error" and "NaN" value
+    if (result.value === 'Error' || result.value === 'NaN') {
+      clear(model, result);
+    }
+
+    // handle operation and number1
+    if (!model.operation) {
+      // handle operation
+      if (isOperationValue) {
+        model.operation = val;
+        result.value = val;
+
+        return;
+      }
+
+      // do not allow a number with length longer than sixteen for number1
+      if (result.value.length === 16) {
+        return;
+      }
+
+      // handle number1
+      model.numbers.first += val;
+      result.value += val;
+
+      return;
+    } else {
+      // prevent changing operation before solving
+      if (isOperationValue) {
+        return;
+      }
+    }
+
+    // handle first time seeing number2
+    if (!model.numbers.second) {
+      model.numbers.second = val;
+      result.value = val;
+
+      return;
+    }
+
+    // do not allow to divide by more than a number with length of nine
+    if (model.operation === '/' && result.value.length === 9) {
+      return;
+    }
+
+    // do not allow a number with length longer than sixteen for number2
+    if (result.value.length === 16) {
+      return;
+    }
+
+    // handle appending to number2
+    model.numbers.second += val;
+    result.value += val;
   }
 }

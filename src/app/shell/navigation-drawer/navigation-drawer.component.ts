@@ -32,7 +32,7 @@ import { Router, RouterModule } from '@angular/router';
             (click)="closeDrawer()"
             (keydown)="handleEnterKey('/')($event)"
             [routerLink]="'/'"
-            class="list-tile draft"
+            class="list-tile"
           >
             <span class="title">Home</span>
           </div>
@@ -40,7 +40,7 @@ import { Router, RouterModule } from '@angular/router';
             (click)="closeDrawer()"
             (keydown)="handleEnterKey('/about')($event)"
             [routerLink]="'/about'"
-            class="list-tile draft"
+            class="list-tile"
           >
             <span class="title">About</span>
           </div>
@@ -48,7 +48,7 @@ import { Router, RouterModule } from '@angular/router';
             (click)="closeDrawer()"
             (keydown)="handleEnterKey('/herrick-design')($event)"
             [routerLink]="'/herrick-design'"
-            class="list-tile draft"
+            class="list-tile"
           >
             <span class="title">Herrick Design</span>
           </div>
@@ -56,7 +56,7 @@ import { Router, RouterModule } from '@angular/router';
             (click)="closeDrawer()"
             (keydown)="handleEnterKey('/infinitym')($event)"
             [routerLink]="'/infinitym'"
-            class="list-tile draft"
+            class="list-tile"
           >
             <span class="title">InfinityM</span>
           </div>
@@ -65,7 +65,7 @@ import { Router, RouterModule } from '@angular/router';
             (click)="closeDrawer()"
             (keydown)="handleEnterKey('/karl-herrick')($event)"
             [routerLink]="'/karl-herrick'"
-            class="list-tile draft"
+            class="list-tile"
           >
             <span class="title">Karl Herrick</span>
           </div>
@@ -73,7 +73,7 @@ import { Router, RouterModule } from '@angular/router';
             (click)="closeDrawer()"
             (keydown)="handleEnterKey('/calculator')($event)"
             [routerLink]="'/calculator'"
-            class="list-tile draft"
+            class="list-tile"
           >
             <span class="title">Calculator</span>
           </div>
@@ -81,7 +81,7 @@ import { Router, RouterModule } from '@angular/router';
             (click)="closeDrawer()"
             (keydown)="handleEnterKey('/pwgen')($event)"
             [routerLink]="'/pwgen'"
-            class="list-tile draft"
+            class="list-tile"
           >
             <span class="title">pwgen</span>
           </div>

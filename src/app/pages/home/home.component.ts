@@ -623,7 +623,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
       </article>
     </ng-container>
   `,
-  styles: [],
+  styles: [`
+    article {
+      font-size: larger;
+      padding: 0 1rem 1rem 1rem;
+    }
+  `],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class HomeComponent {}

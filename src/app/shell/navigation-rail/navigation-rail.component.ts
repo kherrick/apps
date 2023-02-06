@@ -132,10 +132,8 @@ import { Router, RouterModule } from '@angular/router';
   styles: [
     `
       @use 'node_modules/material-design-lite/docsite/public/css/core.css';
-      @use 'node_modules/material-design-lite/docsite/public/css/components/navigation-icon/style.css'
-        as navigation-icon-style;
-      @use 'node_modules/material-design-lite/docsite/public/css/components/navigation-rail/style.css'
-        as navigation-rail-style;
+      @use 'node_modules/material-design-lite/docsite/public/css/components/navigation-icon/style.css' as navigation-icon-style;
+      @use 'node_modules/material-design-lite/docsite/public/css/components/navigation-rail/style.css' as navigation-rail-style;
 
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=swap');
 

@@ -47,7 +47,9 @@ interface Post {
         --x-postpress-img-margin: auto;
 
         article {
+          font-size: larger;
           max-width: 85vw;
+          padding-left: 1rem;
         }
 
         hr {

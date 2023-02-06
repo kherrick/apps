@@ -44,7 +44,9 @@ interface Post {
         --x-postpress-img-max-width: 100%;
 
         article {
+          font-size: larger;
           max-width: 60rem;
+          padding-left: 1rem;
         }
 
         hr {
