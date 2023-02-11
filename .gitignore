@@ -1,10 +1,11 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
 # Compiled output
 /dist
 /tmp
 /out-tsc
 /bazel-out
+/.routes.txt
 
 # Node
 /node_modules
@@ -40,3 +41,9 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Initial feed state
+src/app/pages/feeds/**/*.json
+
+# Initial news state
+src/app/pages/news/**/*.json

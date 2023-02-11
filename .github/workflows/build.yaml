@@ -1,0 +1,59 @@
+name: build
+
+on:
+  push:
+    branches:
+      - main
+      - beta
+  schedule:
+    - cron:  '*/5 * * * *'
+
+jobs:
+  scheduled:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out this repo
+      uses: actions/checkout@v4
+      with:
+        ref: beta
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+    - name: Setup git
+      run: |-
+        git config user.name "Karl Herrick"
+        git config user.email "me@karlherrick.com"
+        git checkout beta
+    - name: Init app
+      run: |-
+        npm run init
+    - name: Build HTML
+      run: |-
+        npm run build-routes
+        npm run build-json-news-hacker-news
+        npm run build-json-news-soylent-news
+        npm run build-json-news-lobsters
+        npm run build-json-news-slashdot
+        npm run build-feed-herrick-design
+        npm run build-feed-infinitym
+        npm run build-feed-karl-herrick
+        npm run gh-pages--build
+        npm run build-html-news-hacker-news
+        npm run build-html-news-soylent-news
+        npm run build-html-news-lobsters
+        npm run build-html-news-slashdot
+        npm run build-site-verification
+        npm run build-txt-sitemap
+        npm run build-txt-robots
+        npm run gh-pages--build-nojekyll
+        npm run gh-pages--build-revision
+        npm run gh-pages--build-manifest
+        npm run ngsw:config
+    - uses: webfactory/ssh-agent@v0.9.0
+      with:
+        ssh-private-key: ${{ secrets.APPS_DEPLOY_KEY }}
+    - name: Commit and push gh-pages
+      run: |-
+        npm run gh-pages--deploy

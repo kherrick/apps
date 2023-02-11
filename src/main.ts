@@ -1,18 +1,6 @@
-import { ViewEncapsulation } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { appConfig } from './app/app.config';
+import { XRootComponent } from './app/x-root.component';
 
-import { AppModule } from './app/app.module';
-
-function bootstrap() {
-  platformBrowserDynamic()
-    .bootstrapModule(AppModule, {
-      defaultEncapsulation: ViewEncapsulation.ShadowDom,
-    })
-    .catch((err) => console.error(err));
-}
-
-if (document.readyState === 'complete') {
-  bootstrap();
-} else {
-  document.addEventListener('DOMContentLoaded', bootstrap);
-}
+bootstrapApplication(XRootComponent, appConfig)
+  .catch((err) => console.error(err));

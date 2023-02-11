@@ -1,29 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { title } from 'src/app/app.routes';
+
 export const routes: Routes = [
   {
-    path: '',
-    loadComponent: () => import('./slide.000.component').then((x) => x.Slide000Component),
-  },
-  {
-    path: '1',
-    loadComponent: () => import('./slide.001.component').then((x) => x.Slide001Component),
-  },
-  {
-    path: 'end',
-    loadComponent: () => import('./slide.end.component').then((x) => x.SlideEndComponent),
+    path: 'rendering-app-shells-and-pwas-oh-my',
+    loadChildren: () =>
+      import('./rendering-app-shells-and-pwas-oh-my/presentation-001-routing.module').then(
+        (m) => m.Presentation001RoutingModule
+      ),
+    title: `${title} | Slides | Rendering App Shells and PWAs oh my!`,
   },
   {
     path: '**',
-    redirectTo: '',
+    redirectTo: 'rendering-app-shells-and-pwas-oh-my',
   },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes),
-  ],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class SlidesRoutingModule {}
