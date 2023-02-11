@@ -1,0 +1,81 @@
+import { CommonModule } from '@angular/common';
+import { Component, ElementRef, OnInit, ViewEncapsulation } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
+import { addNewsItems } from '../shared/utilities/add-news-items';
+import { getArchives, getIndex, NewsWindow, UpdateQueue } from '../shared/utilities/state';
+
+import initialState from './lobsters.json';
+
+@Component({
+  selector: 'app-lobsters',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  template: `
+    <ng-container>
+      <h1>
+        <a [routerLink]="'/news/lobsters'">Lobsters</a>
+      </h1>
+      <section id="latest">
+        <h2>Latest</h2>
+      </section>
+      <section id="archives">
+        <h2>
+          <a href="https://github.com/kherrick/lobsters/blob/main/archives/index.md">Archives</a>
+        </h2>
+        <section>
+          <h3>
+            <a href="https://github.com/kherrick/lobsters/blob/main/archives/2022/index.md">2022</a>
+          </h3>
+        </section>
+        <section>
+          <h3>
+            <a href="https://github.com/kherrick/lobsters/blob/main/archives/2023/index.md">2023</a>
+          </h3>
+        </section>
+        <section>
+          <h3>
+            <a href="https://github.com/kherrick/lobsters/blob/main/archives/2024/index.md">2024</a>
+          </h3>
+        </section>
+      </section>
+    </ng-container>
+  `,
+  styleUrls: ['../shared/styles/news.scss'],
+  styles: [
+    `
+      :host {
+        --news-heading-background: linear-gradient(#500, #ac130d);
+      }
+    `,
+  ],
+  encapsulation: ViewEncapsulation.ShadowDom,
+})
+export class LobstersComponent implements OnInit {
+  dataUrl: string = 'https://raw.githubusercontent.com/kherrick/lobsters/main/archives/';
+  shadowRoot: ShadowRoot;
+
+  constructor(el: ElementRef) {
+    this.shadowRoot = el.nativeElement.shadowRoot;
+  }
+
+  async ngOnInit(): Promise<void> {
+    NewsWindow.newsState = initialState;
+
+    // await getIndex(1, this.shadowRoot); // try for tomorrow
+    await getIndex(0, this.shadowRoot, this.dataUrl);
+    await getIndex(-1, this.shadowRoot, this.dataUrl);
+
+    const queue = new UpdateQueue(this.shadowRoot);
+    const newsState = NewsWindow.newsState;
+
+    addNewsItems(this.shadowRoot, newsState, queue);
+
+    if ('IntersectionObserver' in globalThis) {
+      getArchives(this.shadowRoot, newsState, queue, this.dataUrl);
+
+      (this.shadowRoot.querySelector('#latest') as HTMLElement).style.display = 'block';
+      (this.shadowRoot.querySelector('#archives') as HTMLElement).style.display = 'block';
+    }
+  }
+}

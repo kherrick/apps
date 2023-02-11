@@ -1,71 +1,116 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
   Component,
   ElementRef,
   Inject,
   OnDestroy,
   OnInit,
-  ViewEncapsulation
+  PLATFORM_ID,
+  ViewEncapsulation,
 } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  RouterModule,
+  UrlSegment,
+} from '@angular/router';
 
-import * as Hammer from 'hammerjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-slide',
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <div
-      (keydown)="handleKeydown($event)"
-      id="stage"
-      tabindex="0"
-      [ngClass]="{ dark: !isLightMode, light: isLightMode }"
-    >
-      <section [ngClass]="{ 'with-padding': isFullscreen }">
-        <header>
-          <ng-content select="[header]"></ng-content>
-          <div class="toggles">
-            <i
-              *ngIf="isFullscreen"
-              (click)="handleModeToggle()"
-              class="material-icons mode-toggle"
-              >{{ isLightMode ? 'dark_mode' : 'light_mode' }}</i
-            >
-            <i (click)="handleFullScreen($event)" class="material-icons">{{
-              isFullscreen ? 'fullscreen_exit' : 'fullscreen'
-            }}</i>
-          </div>
-        </header>
-        <section class="content">
-          <ng-content select="[sub-header]"></ng-content>
-          <ng-content select="[list]"></ng-content>
+    <div style="display: flex; height: 100%">
+      @if (tune === 'on' && !isFirst) {
+        <div (click)="handleBackward()" class="previous">
+          <i style="slide-icon" class="material-icons control-icon"
+            >arrow_back</i
+          >
+        </div>
+      }
+      <section
+        app-section
+        (keydown)="handleKeydown($event)"
+        id="stage"
+        tabindex="0"
+        [ngClass]="{ dark: !isLightMode, light: isLightMode }"
+      >
+        <section [ngClass]="{ 'with-padding': isFullscreen }">
+          <header>
+            <ng-content select="[header]"></ng-content>
+            <div class="toggles">
+              <i (click)="handleTune()" class="material-icons">tune</i>
+              <i (click)="handleFullScreen($event)" class="material-icons">{{
+                isFullscreen ? 'fullscreen_exit' : 'fullscreen'
+              }}</i>
+            </div>
+          </header>
+          <section class="content">
+            <ng-content select="[sub-header]"></ng-content>
+            <ng-content select="[list]"></ng-content>
+          </section>
+          <footer><ng-content select="[footer]"></ng-content></footer>
         </section>
-        <footer><ng-content select="[footer]"></ng-content></footer>
       </section>
+      @if (tune === 'on' && !isEnd) {
+        <div class="next" (click)="handleForward()">
+          <i style="slide-icon" class="material-icons control-icon"
+            >arrow_forward</i
+          >
+        </div>
+      }
     </div>
   `,
   styles: [
     `
-      @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=swap');
+      @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
+
+      .control-icon {
+        font-size: 2.5rem;
+      }
+
+      .next,
+      .previous {
+        align-items: center;
+        color: var(--md-sys-color-tertiary);
+        display: flex;
+        height: calc(100vh - 6rem);
+        justify-content: center;
+        user-select: none;
+        width: 4rem;
+      }
+
+      .next:hover,
+      .previous:hover {
+        color: var(--md-sys-color-primary);
+        cursor: pointer;
+      }
 
       #stage {
         display: block;
+        flex: 1;
         min-height: 100%;
         outline: none;
 
-        a {
-          color: #222;
+        a,
+        a:link,
+        a:focus,
+        a:hover,
+        a:active,
+        a:visited {
+          color: var(--md-sys-color-on-surface);
         }
 
-        &.dark {
+        /* &.dark {
           background-color: black;
           color: white;
 
           a {
             color: #ddd;
           }
-        }
+        } */
 
         header {
           display: flex;
@@ -75,13 +120,10 @@ import * as Hammer from 'hammerjs';
 
           .toggles {
             display: flex;
+            margin-right: 1rem;
 
             i.material-icons {
               cursor: pointer;
-            }
-
-            .mode-toggle {
-              margin-right: 0.5rem;
             }
           }
 
@@ -117,7 +159,6 @@ import * as Hammer from 'hammerjs';
               }
             }
 
-
             @media only screen and (min-width: 600px) {
               ul {
                 font-size: 1.75rem;
@@ -144,19 +185,28 @@ import * as Hammer from 'hammerjs';
               width: 100%;
             }
 
+            li:is([quote]) {
+              list-style: none;
+            }
+
             li {
               animation: 1s alternate slidein;
               margin-top: 0.25rem;
-
 
               blockquote {
                 font-style: italic;
                 margin: 0.25rem 0 0 0;
               }
 
-              blockquote { quotes: '"' '"'; }
-              blockquote:before { content: open-quote; }
-              blockquote:after  { content: close-quote; }
+              blockquote {
+                quotes: '"' '"';
+              }
+              blockquote:before {
+                content: open-quote;
+              }
+              blockquote:after {
+                content: close-quote;
+              }
 
               img {
                 max-width: 700px;
@@ -185,49 +235,77 @@ import * as Hammer from 'hammerjs';
 export class SlideComponent implements OnInit, OnDestroy {
   public isFullscreen: boolean = false;
   public isLightMode: boolean = true;
-  public isEnd: boolean = false;
+  public isFirst: boolean = false;
   public isLast: boolean = false;
-  public lastSlide: string = '';
+  public isEnd: boolean = false;
+  public endFlag: boolean = false;
+  public autoAdvance: string | null = '';
+  public tune: string = 'on';
 
-  private slide: number;
+  private isBrowser: boolean;
+  private maxSteps: number = 100;
+  private slide: number = 0;
   private list!: HTMLUListElement;
+  private routeSubscription: Subscription;
   private shouldHide: boolean =
-    history.state['next'] !== false || history.state['next'] === true;
+    globalThis?.history?.state['next'] !== false ||
+    globalThis?.history?.state['next'] === true;
+
+  seg!: any;
+
+  private scrollHandlerTimeout: any;
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     @Inject(DOCUMENT) private document: Document,
     private el: ElementRef,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
-    const path =
-      this.router.getCurrentNavigation()?.finalUrl?.root.children['primary']
-        .segments[1]?.path;
+    this.isBrowser = isPlatformBrowser(platformId);
 
-    this.slide = path ? Number(path) : 0;
+    this.routeSubscription = this.route.url.subscribe(
+      (urlseg: UrlSegment[]) => {
+        const path = urlseg[0]?.path;
+        this.slide = path ? Number(path) : 0;
+      },
+    );
 
     this.document.addEventListener('fullscreenchange', () =>
-      this.fullscreenChangeListener()
+      this.fullscreenChangeListener(),
     );
   }
 
   ngOnInit(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    const currentVal = localStorage.getItem('apps-slides-tune');
+    const nextVal = currentVal === null || currentVal === 'on' ? 'on' : 'off';
+
+    localStorage.setItem('apps-slides-tune', nextVal);
+    this.tune = nextVal;
+
+    // setup gesture detection
+    import('hammerjs').then((HammerStatic) => {
+      const hammer = new (HammerStatic as any).default(stage).on(
+        'swipeleft swiperight',
+        (event: HammerInput) => this.handleGestures(event),
+      );
+    });
+
     // get persisted state for fullscreen and mode
-    const slidesMode = sessionStorage.getItem('apps-slides-mode');
     const isFullscreen =
       sessionStorage.getItem('apps-slides-fullscreen') === 'enabled';
 
     this.isFullscreen =
       isFullscreen === null || isFullscreen === false ? false : true;
-    this.isLightMode =
-      slidesMode === null || slidesMode === 'light' ? true : false;
-
-    if (slidesMode === 'dark') {
-      this.toggleMode(false);
-    }
 
     const shadowRoot = this.el.nativeElement.shadowRoot;
 
     // check for last/end slide
+    this.isFirst = shadowRoot.host.getAttribute('first') !== null;
     this.isEnd = shadowRoot.host.getAttribute('end') !== null;
     this.isLast = shadowRoot.host.getAttribute('last') !== null;
 
@@ -235,9 +313,8 @@ export class SlideComponent implements OnInit, OnDestroy {
     const stage = shadowRoot.getElementById('stage');
     stage.focus();
 
-    // setup gesture detection
-    const hammer = new Hammer(stage);
-    hammer.on('swipeleft swiperight', (event) => this.handleGestures(event));
+    this.list = shadowRoot.querySelector('ul');
+    this.list?.removeAttribute('hidden');
 
     // initialize the list to hidden
     if (this.shouldHide) {
@@ -247,32 +324,55 @@ export class SlideComponent implements OnInit, OnDestroy {
       shadowRoot
         .querySelectorAll('li')
         .forEach((el: HTMLLIElement) => el.setAttribute('hidden', 'hidden'));
+
+      history.replaceState({}, this.document.title);
+
+      const nextQueryParam = new URLSearchParams(location.search);
+      this.autoAdvance = nextQueryParam.get('n');
+
+      if (this.autoAdvance) {
+        const steps =
+          Number(this.autoAdvance) < this.maxSteps
+            ? Number(this.autoAdvance)
+            : this.maxSteps;
+
+        for (let index = 0; index < steps; index++) {
+          this.handleForward(true);
+          this.autoAdvance = `${Number(this.autoAdvance) - 1}`;
+        }
+      }
+    } else {
+      // we navigated back to a previous slide
+      const searchParams = new URLSearchParams(location.search);
+
+      searchParams.set('n', `${shadowRoot.querySelectorAll('li').length}`);
+
+      history.replaceState(
+        {},
+        this.document.title,
+        `${location.pathname}?${searchParams}`,
+      );
     }
 
-    this.list = shadowRoot.querySelector('ul');
-    this.list?.removeAttribute('hidden');
-
-    history.replaceState({}, document.title);
-
-    setTimeout(() => {
-      (window as unknown as Window).scrollTo(
-        0,
-        this.document.body.scrollHeight
-      );
+    // @todo // (globalThis as any).
+    this.scrollHandlerTimeout = setTimeout(() => {
+      (globalThis as any).scrollTo(0, this.document.body.scrollHeight);
     }, 1000);
   }
 
   ngOnDestroy(): void {
     this.document.removeEventListener(
       'fullscreenchange',
-      this.fullscreenChangeListener
+      this.fullscreenChangeListener,
     );
+
+    clearTimeout(this.scrollHandlerTimeout);
+
+    this.routeSubscription.unsubscribe();
   }
 
   fullscreenChangeListener() {
     this.isFullscreen = !!this.document.fullscreenElement;
-
-    this.toggleMode();
   }
 
   handleBackward() {
@@ -296,9 +396,30 @@ export class SlideComponent implements OnInit, OnDestroy {
     if (!lastListItem) {
       this.handlePreviousSlide();
     }
+
+    const visibleItems =
+      this.el.nativeElement.shadowRoot.querySelectorAll('li:not([hidden])')
+        .length - 1;
+
+    if (visibleItems >= 0) {
+      const searchParams = new URLSearchParams(location.search);
+
+      searchParams.set('n', `${visibleItems}`);
+
+      history.replaceState(
+        {},
+        this.document.title,
+        `${location.pathname}?${searchParams}`,
+      );
+    }
+
+    if (this.isEnd && !this.endFlag) {
+      this.endFlag = true;
+      this.handlePreviousSlide();
+    }
   }
 
-  handleForward() {
+  handleForward(isAutoAdvance: boolean = false) {
     const hiddenListItem = this.list.querySelector('li[hidden]');
 
     if (hiddenListItem) {
@@ -313,16 +434,32 @@ export class SlideComponent implements OnInit, OnDestroy {
       this.handleNextSlide();
     }
 
-    if (
-      this.document.body.scrollHeight >
-      (window as unknown as Window).innerHeight
-    ) {
-      requestAnimationFrame(() => {
-        (window as unknown as Window).scrollTo(
-          0,
-          this.document.body.scrollHeight
-        );
-      });
+    if (isAutoAdvance) {
+      if (this.autoAdvance === '1') {
+        this.autoAdvance = null;
+      }
+
+      return;
+    }
+
+    const searchParams = new URLSearchParams(location.search);
+    const visibleItems =
+      this.el.nativeElement.shadowRoot.querySelectorAll('li:not([hidden])');
+
+    if (visibleItems.length <= this.maxSteps) {
+      searchParams.set('n', `${visibleItems.length}`);
+
+      history.replaceState(
+        {},
+        this.document.title,
+        `${location.pathname}?${searchParams}`,
+      );
+
+      if (this.document.body.scrollHeight > (globalThis as any).innerHeight) {
+        requestAnimationFrame(() => {
+          (globalThis as any).scrollTo(0, this.document.body.scrollHeight);
+        });
+      }
     }
   }
 
@@ -347,39 +484,65 @@ export class SlideComponent implements OnInit, OnDestroy {
   }
 
   handleNextSlide() {
+    const presentationPath = location.pathname
+      .split('/')
+      .reduce(
+        (acc: string[], cur: any, ind, arr) =>
+          cur !== 'apps' && isNaN(cur) ? [...acc, cur] : acc,
+        [],
+      )
+      .join('/');
+
     if (this.isLast) {
       sessionStorage.setItem('apps-slides-last', `${this.slide}`);
 
-      this.router.navigate([`slides/end`], {
+      this.router.navigate([`/${presentationPath}/end`], {
         state: { next: true },
+        queryParams: { n: '1' },
       });
 
       return;
     }
 
     if (!this.isEnd) {
-      this.router.navigate([`slides/${this.slide + 1}`], {
+      this.router.navigate([`/${presentationPath}/${this.slide + 1}`], {
         state: { next: true },
       });
     }
   }
 
   handlePreviousSlide() {
+    const presentationPath = location.pathname
+      .split('/')
+      .reduce(
+        (acc: string[], cur: any, ind, arr) =>
+          cur !== 'apps' && cur !== 'end' && isNaN(cur) ? [...acc, cur] : acc,
+        [],
+      )
+      .join('/');
+
     const hasLastSlide = sessionStorage.getItem('apps-slides-last');
 
     if (hasLastSlide) {
       sessionStorage.removeItem('apps-slides-last');
 
-      this.router.navigate([`slides/${hasLastSlide}`], {
+      this.router.navigate([`/${presentationPath}/${hasLastSlide}`], {
         state: { next: false },
       });
 
       return;
     }
-
-    this.router.navigate([`slides/${this.slide - 1}`], {
+    this.router.navigate([`/${presentationPath}/${this.slide - 1}`], {
       state: { next: false },
     });
+  }
+
+  handleTune() {
+    const currentVal = localStorage.getItem('apps-slides-tune');
+    const nextVal = currentVal === 'on' ? 'off' : 'on';
+
+    localStorage.setItem('apps-slides-tune', nextVal);
+    this.tune = nextVal;
   }
 
   handleFullScreen(event: Event) {
@@ -392,39 +555,7 @@ export class SlideComponent implements OnInit, OnDestroy {
       new CustomEvent('fullscreen', {
         detail: { isFullscreen },
         composed: true,
-      })
+      }),
     );
-  }
-
-  handleModeToggle() {
-    const currentIcon = this.el.nativeElement.shadowRoot.querySelector(
-      '.mode-toggle'
-    ) as HTMLElement;
-    const isLightMode = currentIcon?.textContent === 'light_mode';
-
-    this.toggleMode(isLightMode);
-  }
-
-  // @todo - revisit this, as it is really basic, and uses predefined colors
-  // consider using https://github.com/rodydavis/material-theme-control
-  toggleMode(isLightMode: boolean = true) {
-    const stage = this.el.nativeElement.shadowRoot.getElementById('stage');
-    const svgText = stage.querySelector('tspan');
-
-    this.isLightMode = isLightMode;
-
-    if (isLightMode) {
-      sessionStorage.setItem('apps-slides-mode', 'light');
-
-      if (svgText) {
-        svgText.style.stroke = 'black';
-      }
-    } else {
-      sessionStorage.setItem('apps-slides-mode', 'dark');
-
-      if (svgText) {
-        svgText.style.stroke = 'white';
-      }
-    }
   }
 }

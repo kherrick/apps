@@ -1,22 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"/>
     <title>Apps</title>
-    <base href="/"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="apps"/>
-    <link rel="icon" type="image/x-icon" href="favicon.ico"/>
-    <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#1976d2">
-</head>
-  <body>
+    <base href="/" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="apps" />
+    <meta name="theme-color" content="#1976d2" />
+    <meta name="revision" content="" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="manifest" href="manifest.webmanifest" />
+  </head>
+  <body class="mat-typography">
+    <style>
+      body {
+        display: flex;
+      }
+
+      .progress-container > .circular {
+        display: none;
+        height: 10rem;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 10rem;
+      }
+    </style>
     <div class="progress-container">
       <div class="progress circular indeterminate">
         <progress indeterminate="">75%</progress>
       </div>
     </div>
-    <app-root></app-root>
-    <noscript>Please enable JavaScript to continue using this application.</noscript>
-</body>
+    <x-root></x-root>
+  </body>
 </html>

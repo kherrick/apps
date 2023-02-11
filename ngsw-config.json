@@ -52,9 +52,12 @@
       },
       "urls": [
         "https://content.karlherrick.com/**",
+        "https://hacker-news.firebaseio.com/**",
         "https://herrickdesign.com/wp-content/**",
         "https://herrickdesign.com/wp-json/**",
-        "https://infinitym.ca/**"
+        "https://infinitym.ca/**",
+        "https://raw.githubusercontent.com/**",
+        "https://tfhub.dev/**"
       ]
     }
   ]
