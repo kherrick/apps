@@ -1,4 +1,8 @@
-# Apps
+# <a href="https://kherrick.github.io/apps/">Apps</a>
+
+<a href="https://kherrick.github.io/apps/">
+  <img src="./src/assets/images/screenshot.png" />
+</a>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.0.
 
