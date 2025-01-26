@@ -1,12 +1,55 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
+import { Observable, firstValueFrom } from 'rxjs';
+
+import { parse, parseFragment, serialize } from 'parse5';
 
 @Component({
   selector: 'app-news',
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
+    <style>
+      [news-summary] {
+        margin: auto;
+        max-width: 50rem;
+        padding: 0 5rem;
+      }
+
+      [news-summary] ul {
+        margin-top: 0;
+      }
+
+      [news-summary] a,
+      [news-sources] a,
+      [app-section-cards] a {
+        text-decoration: underline;
+      }
+
+      [news-summary] h2,
+      [news-sources] h2 {
+        margin-bottom: 0;
+        margin-top: 0;
+      }
+
+      [news-sources] {
+        margin-top: 1rem;
+        text-align: center;
+      }
+    </style>
+    <section news-summary [innerHTML]="newsSummary"></section>
+    <section news-sources>
+      <h1>
+        <a href="https://kherrick.github.io/news-summary/">News Summary</a>
+      </h1>
+      <h2>Sources</h2>
+      <p>
+        The content above has been machine generated from the sources below.
+      </p>
+    </section>
     <section app-section-cards>
       <div soylentNews class="card">
         <div [routerLink]="'/news/soylent-news'" class="title link">
@@ -65,6 +108,17 @@ import { RouterModule } from '@angular/router';
 
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
 
+      [news-summary] {
+        margin: auto;
+        max-width: 50rem;
+        padding: 0 5rem;
+      }
+
+      [news-sources] {
+        margin-top: 1rem;
+        text-align: center;
+      }
+
       [app-section-cards] {
         align-items: center;
         display: flex;
@@ -87,7 +141,10 @@ import { RouterModule } from '@angular/router';
 
       .title {
         align-items: center;
-        background: var(--card-heading-background, var(--md-ref-palette-neutral30));
+        background: var(
+          --card-heading-background,
+          var(--md-ref-palette-neutral30)
+        );
         border-radius: 0.25rem 0.25rem 0 0;
         color: var(--card-heading-color, #fff);
         display: flex;
@@ -141,8 +198,75 @@ import { RouterModule } from '@angular/router';
         background-color: var(--md-ref-palette-neutral50);
         color: var(--md-ref-palette-neutral90);
       }
+
+      h1 {
+        font-size: 2rem;
+      }
     `,
   ],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class NewsComponent {}
+export class NewsComponent implements OnInit {
+  private http = inject(HttpClient);
+
+  newsSummary: string = '';
+  data: Observable<string> = this.http.get(
+    'https://kherrick.github.io/news-summary/index.html',
+    {
+      responseType: 'text',
+    },
+  );
+
+  async ngOnInit(): Promise<void> {
+    const data = await firstValueFrom(this.data);
+    const parsedDoc = parse(data);
+
+    const [htmlDoc] = parsedDoc.childNodes.filter(
+      (childNode) => childNode.nodeName === 'html',
+    );
+
+    const [bodyNode] = (
+      (htmlDoc as unknown as ChildNode).childNodes as unknown as ChildNode[]
+    ).filter((childNode) => childNode.nodeName === 'body');
+
+    // create a blank fragment
+    const result = parseFragment('');
+
+    // method to push child nodes
+    const pushChildNode = (arr: ChildNode[], el: ChildNode) => arr.push(el);
+
+    let index = 0;
+    // grab all of the elements up to the horizontal rule
+    while (
+      index < bodyNode.childNodes.length &&
+      bodyNode.childNodes[index].nodeName !== 'hr'
+    ) {
+      // find and adjust the header value
+      if (bodyNode.childNodes[index].nodeName === 'h1') {
+        const [anchor] = bodyNode.childNodes[index].childNodes as any;
+        const [anchorText] = anchor.childNodes as any;
+        const [anchorLink] = anchor.attrs;
+
+        anchorLink.value = 'https://kherrick.github.io/apps/news';
+        anchorText.value = 'News';
+      }
+
+      pushChildNode(
+        result.childNodes as unknown as ChildNode[],
+        bodyNode.childNodes[index],
+      );
+
+      index = index + 1;
+    }
+
+    // push the 'hr' node
+    pushChildNode(
+      result.childNodes as unknown as ChildNode[],
+      bodyNode.childNodes[index],
+    );
+
+    try {
+      this.newsSummary = serialize(result);
+    } catch (error) {}
+  }
+}
