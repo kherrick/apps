@@ -6,7 +6,7 @@ on:
       - main
       - beta
   schedule:
-    - cron:  '*/5 * * * *'
+    - cron:  '10 * * * *'
 
 jobs:
   scheduled:
