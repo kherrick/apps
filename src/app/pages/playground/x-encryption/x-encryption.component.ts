@@ -38,26 +38,81 @@ import { XDialogService } from 'src/app/shell/x-dialog/x-dialog.service';
             integrity protection.
           </p>
         </header>
+        <section class="settings">
+          @if (isPlainText) {
+            <md-outlined-button
+              (click)="handleDecryptButton($event)"
+              #decryptButton
+              mat-stroked-button
+              disabled
+            >
+              Decrypt
+            </md-outlined-button>
+          } @else {
+            <label for="shouldEncrypt">Decrypt</label>
+          }
+          <md-switch
+            id="shouldEncrypt"
+            (input)="handleMatShouldEncryptSlideToggle($event)"
+            [selected]="shouldEncrypt"
+            #shouldEncryptToggle
+          />
+          @if (isPlainText) {
+            <md-outlined-button
+              (click)="handleEncryptButton($event)"
+              #encryptButton
+              mat-stroked-button
+            >
+              Encrypt
+            </md-outlined-button>
+          } @else {
+            <label for="shouldEncrypt">Encrypt</label>
+          }
+        </section>
+        <section class="settings">
+          <label for="isPlainText">File</label>
+          <md-switch
+            id="isPlainText"
+            (input)="handleMatIsPlainTextSlideToggle($event)"
+            [selected]="isPlainText"
+            #isPlainTextToggle
+          />
+          <label for="isPlainText">Plain Text</label>
+        </section>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input
+            (input)="passwordChange($event)"
+            matInput
+            type="password"
+            [value]="password"
+            #passwordInput
+          />
+          @if (password) {
+            <button
+              matSuffix
+              mat-icon-button
+              aria-label="Clear"
+              (click)="
+                passwordInput.type === 'password'
+                  ? (passwordInput.type = 'text')
+                  : (passwordInput.type = 'password')
+              "
+            >
+              <mat-icon>{{
+                passwordInput.type === 'password'
+                  ? 'visibility'
+                  : 'visibility_off'
+              }}</mat-icon>
+            </button>
+          }
+        </mat-form-field>
         @if (isPlainText) {
           <div class="text-container">
             <md-outlined-text-field
+              (input)="handlePlainTextInput($event)"
               #plainText
               label="Plain Text"
-              type="textarea"
-            />
-            <md-outlined-button
-              (click)="handleCopyTextButtonClick(this.encryptedText)"
-              #copyEncryptedTextButton
-              mat-stroked-button
-            >
-              Copy Encrypted Text
-            </md-outlined-button>
-          </div>
-          <div class="text-container">
-            <md-outlined-text-field
-              #encryptedText
-              disabled
-              label="Encrypted Text"
               type="textarea"
             />
             <md-outlined-button
@@ -69,7 +124,25 @@ import { XDialogService } from 'src/app/shell/x-dialog/x-dialog.service';
               Copy Plain Text
             </md-outlined-button>
           </div>
-        } @else {
+          <div class="text-container">
+            <md-outlined-text-field
+              (input)="handleEncryptedTextInput($event)"
+              #encryptedText
+              label="Encrypted Text"
+              type="textarea"
+            />
+            <md-outlined-button
+              (click)="handleCopyTextButtonClick(this.encryptedText)"
+              #copyEncryptedTextButton
+              mat-stroked-button
+              disabled
+            >
+              Copy Encrypted Text
+            </md-outlined-button>
+          </div>
+        }
+
+        @if (!isPlainText) {
           <div
             (click)="clickDropZoneHandler()"
             (dragenter)="dragEnterHandler($event)"
@@ -86,75 +159,6 @@ import { XDialogService } from 'src/app/shell/x-dialog/x-dialog.service';
           </div>
         }
       </section>
-      <section class="settings">
-        <label for="isPlainText">File</label>
-        <md-switch
-          id="isPlainText"
-          (input)="handleMatIsPlainTextSlideToggle($event)"
-          [selected]="isPlainText"
-          #isPlainTextToggle
-        />
-        <label for="isPlainText">Plain Text</label>
-      </section>
-      <section class="settings">
-        @if (isPlainText) {
-          <md-outlined-button
-            (click)="handleDecryptButton($event)"
-            #decryptButton
-            mat-stroked-button
-            disabled
-          >
-            Decrypt
-          </md-outlined-button>
-        } @else {
-          <label for="shouldEncrypt">Decrypt</label>
-        }
-        <md-switch
-          id="shouldEncrypt"
-          (input)="handleMatShouldEncryptSlideToggle($event)"
-          [selected]="shouldEncrypt"
-          #shouldEncryptToggle
-        />
-        @if (isPlainText) {
-          <md-outlined-button
-            (click)="handleEncryptButton($event)"
-            #encryptButton
-            mat-stroked-button
-          >
-            Encrypt
-          </md-outlined-button>
-        } @else {
-          <label for="shouldEncrypt">Encrypt</label>
-        }
-      </section>
-      <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input
-          (input)="passwordChange($event)"
-          matInput
-          type="password"
-          [value]="password"
-          #passwordInput
-        />
-        @if (password) {
-          <button
-            matSuffix
-            mat-icon-button
-            aria-label="Clear"
-            (click)="
-              passwordInput.type === 'password'
-                ? (passwordInput.type = 'text')
-                : (passwordInput.type = 'password')
-            "
-          >
-            <mat-icon>{{
-              passwordInput.type === 'password'
-                ? 'visibility'
-                : 'visibility_off'
-            }}</mat-icon>
-          </button>
-        }
-      </mat-form-field>
       <input #fileInput type="file" (change)="handleFileInputChange($event)" />
       <div class="link-container">
         <a #link href=""></a>
@@ -186,12 +190,13 @@ import { XDialogService } from 'src/app/shell/x-dialog/x-dialog.service';
     }
 
     #dropZone {
-      outline: var(--x-shell-default-outline);
+      border-radius: 1rem;
       height: 5rem;
+      margin-bottom: 1rem;
+      outline: var(--x-shell-default-outline);
       padding: 1rem;
       text-align: center;
-      width: calc(100% - 1rem);
-      border-radius: 1rem;
+      width: calc(100% - 2rem);
     }
 
     .settings {
@@ -232,8 +237,7 @@ import { XDialogService } from 'src/app/shell/x-dialog/x-dialog.service';
     }
 
     mat-form-field:has(input) {
-      margin-left: 1rem;
-      width: 100%;
+      width: 90%;
     }
 
     section {
@@ -348,6 +352,7 @@ export class XEncryptionComponent implements OnDestroy {
               title: 'Encryption',
               modal: true,
             });
+            this.copyEncryptedTextButton.nativeElement.disabled = false;
             break;
           case 'decrypt-text':
             this.plainText.nativeElement.value = new TextDecoder().decode(
@@ -357,6 +362,7 @@ export class XEncryptionComponent implements OnDestroy {
               title: 'Decryption',
               modal: true,
             });
+            this.copyPlainTextButton.nativeElement.disabled = false;
             break;
           case 'encrypt-file':
             filename = `${event.data.result.filename}.enc`;
@@ -472,6 +478,16 @@ export class XEncryptionComponent implements OnDestroy {
     }
   }
 
+  handleEncryptedTextInput(event: Event) {
+    this.copyEncryptedTextButton.nativeElement.disabled =
+      (event.currentTarget as MdOutlinedTextField).value === '';
+  }
+
+  handlePlainTextInput(event: Event) {
+    this.copyPlainTextButton.nativeElement.disabled =
+      (event.currentTarget as MdOutlinedTextField).value === '';
+  }
+
   async handleCopyTextButtonClick(inputElement: MdOutlinedTextField) {
     await navigator.clipboard.writeText(inputElement.value);
   }
@@ -548,68 +564,9 @@ export class XEncryptionComponent implements OnDestroy {
 
     (this.shouldEncryptToggle as any).selected = this.shouldEncrypt;
 
-    if (!this.isPlainText) {
-      if (this.decryptButton) {
-        this.decryptButton.nativeElement.disabled = true;
-      }
-
-      if (this.encryptButton) {
-        this.encryptButton.nativeElement.disabled = true;
-      }
-
-      return;
-    }
-
-    if (this.shouldEncrypt) {
-      if (this.copyEncryptedTextButton) {
-        this.copyEncryptedTextButton.nativeElement.disabled = false;
-      }
-
-      if (this.copyPlainTextButton) {
-        this.copyPlainTextButton.nativeElement.disabled = true;
-      }
-
-      if (this.decryptButton) {
-        this.decryptButton.nativeElement.disabled = true;
-      }
-
-      if (this.encryptButton) {
-        this.encryptButton.nativeElement.disabled = false;
-      }
-
-      if (this.encryptedText) {
-        this.encryptedText.nativeElement.disabled = true;
-      }
-
-      if (this.plainText) {
-        this.plainText.nativeElement.disabled = false;
-      }
-
-      return;
-    }
-
-    if (this.copyEncryptedTextButton) {
-      this.copyEncryptedTextButton.nativeElement.disabled = true;
-    }
-
-    if (this.copyPlainTextButton) {
-      this.copyPlainTextButton.nativeElement.disabled = false;
-    }
-
-    if (this.decryptButton) {
-      this.decryptButton.nativeElement.disabled = false;
-    }
-
-    if (this.encryptButton) {
-      this.encryptButton.nativeElement.disabled = true;
-    }
-
-    if (this.encryptedText) {
-      this.encryptedText.nativeElement.disabled = false;
-    }
-
-    if (this.plainText) {
-      this.plainText.nativeElement.disabled = true;
+    if (this.isPlainText) {
+      this.decryptButton.nativeElement.disabled = this.shouldEncrypt;
+      this.encryptButton.nativeElement.disabled = !this.shouldEncrypt;
     }
   }
 
