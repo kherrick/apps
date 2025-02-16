@@ -18,150 +18,155 @@ import '@material/web/textfield/outlined-text-field.js';
 
 import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
 
-import { XDialogService } from 'src/app/shell/x-dialog/x-dialog.service';
+import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service';
 
 @Component({
   selector: 'x-encryption',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  standalone: true,
   imports: [MatInputModule, MatButtonModule, MatIconModule],
   template: `
-    <div class="encryption-container">
-      <section>
-        <header>
-          <h1>&lt;x-encryption&gt;</h1>
-          <p>
-            <a href="https://en.wikipedia.org/wiki/PBKDF2">PBKDF2</a> will
-            securely generate an encryption key from a given password, then
-            <a href="https://en.wikipedia.org/wiki/AES-GCM">AES-GCM</a> will use
-            that key to encrypt provided data, offering both confidentiality and
-            integrity protection.
-          </p>
-        </header>
-        <section class="settings">
-          @if (isPlainText) {
-            <md-outlined-button
-              (click)="handleDecryptButton($event)"
-              #decryptButton
-              mat-stroked-button
-              disabled
-            >
-              Decrypt
-            </md-outlined-button>
-          } @else {
-            <label for="shouldEncrypt">Decrypt</label>
-          }
-          <md-switch
-            id="shouldEncrypt"
-            (input)="handleMatShouldEncryptSlideToggle($event)"
-            [selected]="shouldEncrypt"
-            #shouldEncryptToggle
-          />
-          @if (isPlainText) {
-            <md-outlined-button
-              (click)="handleEncryptButton($event)"
-              #encryptButton
-              mat-stroked-button
-            >
-              Encrypt
-            </md-outlined-button>
-          } @else {
-            <label for="shouldEncrypt">Encrypt</label>
-          }
-        </section>
-        <section class="settings">
-          <label for="isPlainText">File</label>
-          <md-switch
-            id="isPlainText"
-            (input)="handleMatIsPlainTextSlideToggle($event)"
-            [selected]="isPlainText"
-            #isPlainTextToggle
-          />
-          <label for="isPlainText">Plain Text</label>
-        </section>
-        <mat-form-field>
-          <mat-label>Password</mat-label>
-          <input
-            (input)="passwordChange($event)"
-            matInput
-            type="password"
-            [value]="password"
-            #passwordInput
-          />
-          @if (password) {
-            <button
-              matSuffix
-              mat-icon-button
-              aria-label="Clear"
-              (click)="
-                passwordInput.type === 'password'
-                  ? (passwordInput.type = 'text')
-                  : (passwordInput.type = 'password')
-              "
-            >
-              <mat-icon>{{
-                passwordInput.type === 'password'
-                  ? 'visibility'
-                  : 'visibility_off'
-              }}</mat-icon>
-            </button>
-          }
-        </mat-form-field>
-        @if (isPlainText) {
-          <div class="text-container">
-            <md-outlined-text-field
-              (input)="handlePlainTextInput($event)"
-              #plainText
-              label="Plain Text"
-              type="textarea"
+    <div encryption-container>
+      <div encryption>
+        <section>
+          <header>
+            <h1>&lt;x-encryption&gt;</h1>
+            <p>
+              <a href="https://en.wikipedia.org/wiki/PBKDF2">PBKDF2</a> will
+              securely generate an encryption key from a given password, then
+              <a href="https://en.wikipedia.org/wiki/AES-GCM">AES-GCM</a> will
+              use that key to encrypt provided data, offering both
+              confidentiality and integrity protection.
+            </p>
+          </header>
+          <section class="settings">
+            @if (isPlainText) {
+              <md-outlined-button
+                (click)="handleDecryptButton($event)"
+                #decryptButton
+                mat-stroked-button
+                disabled
+              >
+                Decrypt
+              </md-outlined-button>
+            } @else {
+              <label for="shouldEncrypt">Decrypt</label>
+            }
+            <md-switch
+              id="shouldEncrypt"
+              (input)="handleMatShouldEncryptSlideToggle($event)"
+              [selected]="shouldEncrypt"
+              #shouldEncryptToggle
             />
-            <md-outlined-button
-              (click)="handleCopyTextButtonClick(this.plainText)"
-              #copyPlainTextButton
-              disabled
-              mat-stroked-button
-            >
-              Copy Plain Text
-            </md-outlined-button>
-          </div>
-          <div class="text-container">
-            <md-outlined-text-field
-              (input)="handleEncryptedTextInput($event)"
-              #encryptedText
-              label="Encrypted Text"
-              type="textarea"
+            @if (isPlainText) {
+              <md-outlined-button
+                (click)="handleEncryptButton($event)"
+                #encryptButton
+                mat-stroked-button
+              >
+                Encrypt
+              </md-outlined-button>
+            } @else {
+              <label for="shouldEncrypt">Encrypt</label>
+            }
+          </section>
+          <section class="settings">
+            <label for="isPlainText">File</label>
+            <md-switch
+              id="isPlainText"
+              (input)="handleMatIsPlainTextSlideToggle($event)"
+              [selected]="isPlainText"
+              #isPlainTextToggle
             />
-            <md-outlined-button
-              (click)="handleCopyTextButtonClick(this.encryptedText)"
-              #copyEncryptedTextButton
-              mat-stroked-button
-              disabled
-            >
-              Copy Encrypted Text
-            </md-outlined-button>
-          </div>
-        }
+            <label for="isPlainText">Plain Text</label>
+          </section>
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input
+              (input)="passwordChange($event)"
+              matInput
+              type="password"
+              [value]="password"
+              #passwordInput
+            />
+            @if (password) {
+              <button
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="
+                  passwordInput.type === 'password'
+                    ? (passwordInput.type = 'text')
+                    : (passwordInput.type = 'password')
+                "
+              >
+                <mat-icon>{{
+                  passwordInput.type === 'password'
+                    ? 'visibility'
+                    : 'visibility_off'
+                }}</mat-icon>
+              </button>
+            }
+          </mat-form-field>
+          @if (isPlainText) {
+            <div class="text-container">
+              <md-outlined-text-field
+                (input)="handlePlainTextInput($event)"
+                #plainText
+                label="Plain Text"
+                type="textarea"
+              />
+              <md-outlined-button
+                (click)="handleCopyTextButtonClick(this.plainText)"
+                #copyPlainTextButton
+                disabled
+                mat-stroked-button
+              >
+                Copy Plain Text
+              </md-outlined-button>
+            </div>
+            <div class="text-container">
+              <md-outlined-text-field
+                (input)="handleEncryptedTextInput($event)"
+                #encryptedText
+                label="Encrypted Text"
+                type="textarea"
+              />
+              <md-outlined-button
+                (click)="handleCopyTextButtonClick(this.encryptedText)"
+                #copyEncryptedTextButton
+                mat-stroked-button
+                disabled
+              >
+                Copy Encrypted Text
+              </md-outlined-button>
+            </div>
+          }
 
-        @if (!isPlainText) {
-          <div
-            (click)="clickDropZoneHandler()"
-            (dragenter)="dragEnterHandler($event)"
-            (dragleave)="dragLeaveHandler($event)"
-            (dragover)="dragOverHandler($event)"
-            (drop)="dropHandler($event)"
-            (mousedown)="mousedownHandler()"
-            (mouseup)="mouseupHandler()"
-            #dropZone
-            id="dropZone"
-          >
-            Drag a single file to this drop zone or touch / click here to select
-            a file.
-          </div>
-        }
-      </section>
-      <input #fileInput type="file" (change)="handleFileInputChange($event)" />
-      <div class="link-container">
-        <a #link href=""></a>
+          @if (!isPlainText) {
+            <div
+              (click)="clickDropZoneHandler()"
+              (dragenter)="dragEnterHandler($event)"
+              (dragleave)="dragLeaveHandler($event)"
+              (dragover)="dragOverHandler($event)"
+              (drop)="dropHandler($event)"
+              (mousedown)="mousedownHandler()"
+              (mouseup)="mouseupHandler()"
+              #dropZone
+              id="dropZone"
+            >
+              Drag a single file to this drop zone or touch / click here to
+              select a file.
+            </div>
+          }
+        </section>
+        <input
+          #fileInput
+          type="file"
+          (change)="handleFileInputChange($event)"
+        />
+        <div class="link-container">
+          <a #link href=""></a>
+        </div>
       </div>
     </div>
   `,
@@ -169,83 +174,85 @@ import { XDialogService } from 'src/app/shell/x-dialog/x-dialog.service';
     @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
 
     :host {
-      align-items: center;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      grid-column-gap: 1rem;
-      grid-row-gap: 1rem;
-      justify-content: center;
-      padding: 0 1rem 1rem 1rem;
-
       --md-outlined-text-field-container-shape: 1rem;
       --md-outlined-button-container-shape: 1rem;
       --md-outlined-button-disabled-label-text-color: var(
         --md-sys-color-on-surface
       );
 
-      .encryption-container {
-        max-width: 60rem;
-      }
-    }
+      [encryption-container] {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+        justify-content: center;
 
-    #dropZone {
-      border-radius: 1rem;
-      height: 5rem;
-      margin-bottom: 1rem;
-      outline: var(--x-shell-default-outline);
-      padding: 1rem;
-      text-align: center;
-      width: calc(100% - 2rem);
-    }
+        [encryption] {
+          max-width: 60rem;
+          padding: 0 1rem 1rem 1rem;
 
-    .settings {
-      align-items: center;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-    }
+          #dropZone {
+            border-radius: 1rem;
+            height: 5rem;
+            margin-bottom: 1rem;
+            outline: var(--x-shell-default-outline);
+            padding: 1rem;
+            text-align: center;
+            width: calc(100% - 2rem);
+          }
 
-    .link-container {
-      text-align: center;
-      width: 100%;
-    }
+          .settings {
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+          }
 
-    .text-container:first-of-type {
-      margin-bottom: 1rem;
-    }
+          .link-container {
+            text-align: center;
+            width: 100%;
+          }
 
-    .text-container {
-      display: flex;
-      flex-direction: column;
-    }
+          .text-container:first-of-type {
+            margin-bottom: 1rem;
+          }
 
-    input[type='file'] {
-      display: none;
-    }
+          .text-container {
+            display: flex;
+            flex-direction: column;
+          }
 
-    label {
-      cursor: pointer;
-      margin: 0 1rem;
-      text-align: center;
-      width: 5rem;
-    }
+          input[type='file'] {
+            display: none;
+          }
 
-    md-switch,
-    md-outlined-button {
-      margin: 0.5rem;
-    }
+          label {
+            cursor: pointer;
+            margin: 0 1rem;
+            text-align: center;
+            width: 5rem;
+          }
 
-    mat-form-field:has(input) {
-      width: 90%;
-    }
+          md-switch,
+          md-outlined-button {
+            margin: 0.5rem;
+          }
 
-    section {
-      text-align: center;
-      width: 100%;
+          mat-form-field:has(input) {
+            width: 90%;
+          }
 
-      button {
-        margin-right: 1rem;
+          section {
+            text-align: center;
+            width: 100%;
+
+            button {
+              margin-right: 1rem;
+            }
+          }
+        }
       }
     }
   `,
@@ -258,8 +265,8 @@ export class XEncryptionComponent implements OnDestroy {
 
   xDialogService: XDialogService = inject(XDialogService);
 
-  @ViewChild('encryptedText') encryptedText!: ElementRef;
-  @ViewChild('plainText') plainText!: ElementRef;
+  @ViewChild('encryptedText') encryptedText!: ElementRef<MdOutlinedTextField>;
+  @ViewChild('plainText') plainText!: ElementRef<MdOutlinedTextField>;
 
   @ViewChild('shouldEncryptToggle') shouldEncryptToggle!: ElementRef;
   @ViewChild('isPlainTextToggle') isPlainTextToggle!: ElementRef;
@@ -488,8 +495,10 @@ export class XEncryptionComponent implements OnDestroy {
       (event.currentTarget as MdOutlinedTextField).value === '';
   }
 
-  async handleCopyTextButtonClick(inputElement: MdOutlinedTextField) {
-    await navigator.clipboard.writeText(inputElement.value);
+  async handleCopyTextButtonClick(
+    inputElement: ElementRef<MdOutlinedTextField>,
+  ) {
+    await navigator.clipboard.writeText(inputElement.nativeElement.value);
   }
 
   async handleFile(file: File) {

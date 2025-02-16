@@ -4,7 +4,7 @@ import { CalculatorModel } from './x-calculator.component';
 export const clear = (
   model: CalculatorModel,
   result: HTMLInputElement,
-  clearModelOnly = false
+  clearModelOnly = false,
 ) => {
   model.numbers.first = '';
   model.numbers.second = '';

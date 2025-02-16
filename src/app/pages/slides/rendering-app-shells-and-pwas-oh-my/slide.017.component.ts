@@ -4,7 +4,6 @@ import { SlideComponent } from '../shared/slide.component';
 
 @Component({
   selector: 'app-slide-017',
-  standalone: true,
   imports: [SlideComponent],
   template: `
     <app-slide>
@@ -15,9 +14,13 @@ import { SlideComponent } from '../shared/slide.component';
         <li quote>
           <blockquote>
             <span>
-              The app shell acts as a parent application for micro frontends. All incoming requests arrive there.
-              It selects the micro frontend the user wants to see and renders it...
-              <a href="https://livebook.manning.com/book/micro-frontends-in-action/chapter-7/20">*</a>
+              The app shell acts as a parent application for micro frontends.
+              All incoming requests arrive there. It selects the micro frontend
+              the user wants to see and renders it...
+              <a
+                href="https://livebook.manning.com/book/micro-frontends-in-action/chapter-7/20"
+                >*</a
+              >
             </span>
           </blockquote>
         </li>

@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  OnInit,
   PLATFORM_ID,
   ViewEncapsulation,
   inject,
@@ -16,23 +17,26 @@ import { SwUpdate, UnrecoverableStateEvent } from '@angular/service-worker';
 
 import { Subscription, interval } from 'rxjs';
 
-import { Theme, ThemeService, Themes } from 'src/app/shell/theme/theme.service';
-import { XDialogComponent } from 'src/app/shell/x-dialog/x-dialog.component';
-import { XDialogService } from 'src/app/shell/x-dialog/x-dialog.service';
-import { XNavigationRailComponent } from 'src/app/shell/x-navigation-rail/x-navigation-rail.component';
-import { XTopAppBarComponent } from 'src/app/shell/x-top-app-bar/x-top-app-bar.component';
+import {
+  Theme,
+  ThemeService,
+  Themes,
+} from '../../../app/shell/theme/theme.service';
+
+import { XDialogComponent } from '../../../app/shell/x-dialog/x-dialog.component';
+import { XDialogService } from '../../../app/shell/x-dialog/x-dialog.service';
+import { XNavigationRailComponent } from '../../../app/shell/x-navigation-rail/x-navigation-rail.component';
+import { XTopAppBarComponent } from '../../../app/shell/x-top-app-bar/x-top-app-bar.component';
 import { XNavigationDrawerComponent } from '../x-navigation-drawer/x-navigation-drawer.component';
 
 @Component({
   selector: 'x-shell',
-  standalone: true,
   encapsulation: ViewEncapsulation.ShadowDom,
   imports: [
     CommonModule,
     MatButtonModule,
     MatSidenavModule,
     RouterModule,
-    RouterOutlet,
     XDialogComponent,
     XNavigationDrawerComponent,
     XNavigationRailComponent,
@@ -43,6 +47,7 @@ import { XNavigationDrawerComponent } from '../x-navigation-drawer/x-navigation-
       (drawerButton)="handleDrawerButton()"
       [isBrowser]="isBrowser"
       [open]="isDrawerOpen"
+      [hidden]="!isDrawerOpen"
     ></x-navigation-drawer>
     <x-navigation-rail
       *ngIf="!isFullscreen"
@@ -90,7 +95,7 @@ import { XNavigationDrawerComponent } from '../x-navigation-drawer/x-navigation-
     `,
   ],
 })
-export class XShellComponent {
+export class XShellComponent implements OnInit {
   public isBrowser: boolean = false;
   public isDialogOpen: boolean = false;
   public isFullscreen: boolean = false;
@@ -109,14 +114,17 @@ export class XShellComponent {
   private document: Document = inject(DOCUMENT);
   private platformId: Object = inject(PLATFORM_ID);
 
-  constructor(private swUpdate: SwUpdate, public el: ElementRef) {
+  constructor(
+    private swUpdate: SwUpdate,
+    public el: ElementRef,
+  ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
 
     if (this.isBrowser) {
       if (!isDevMode()) {
         console.log(
           'Update Service: this.swUpdate.isEnabled',
-          this.swUpdate.isEnabled
+          this.swUpdate.isEnabled,
         );
 
         const TEN_SECONDS = 10000;
@@ -130,7 +138,7 @@ export class XShellComponent {
         this.swUpdate.unrecoverable.subscribe(
           (evt: UnrecoverableStateEvent) => {
             console.log('UnrecoverableStateEvent', evt);
-          }
+          },
         );
 
         this.versionUpdates = this.swUpdate.versionUpdates.subscribe(
@@ -144,7 +152,7 @@ export class XShellComponent {
               case 'VERSION_READY':
                 console.log(`Current app version: ${evt.currentVersion.hash}`);
                 console.log(
-                  `New app version ready for use: ${evt.latestVersion.hash}`
+                  `New app version ready for use: ${evt.latestVersion.hash}`,
                 );
 
                 await this.swUpdate.activateUpdate();
@@ -153,18 +161,18 @@ export class XShellComponent {
                 break;
               case 'VERSION_INSTALLATION_FAILED':
                 console.log(
-                  `Failed to install app version '${evt.version.hash}': ${evt.error}`
+                  `Failed to install app version '${evt.version.hash}': ${evt.error}`,
                 );
 
                 break;
             }
-          }
+          },
         );
 
         this.dialogSubscription = this.dialogService.open$.subscribe(
           (isDialogOpen) => {
             this.isDialogOpen = isDialogOpen;
-          }
+          },
         );
 
         this.dialogResultSubscription = this.dialogService.result$.subscribe(
@@ -176,7 +184,7 @@ export class XShellComponent {
             if (result === 'apps-update-cancel') {
               console.log('cancelled.');
             }
-          }
+          },
         );
       }
 
@@ -185,7 +193,7 @@ export class XShellComponent {
       this.enableTheme(
         this.getThemeFromStorage() ||
           this.getThemeFromBrowser() ||
-          this.getThemeFromTime()
+          this.getThemeFromTime(),
       );
     }
   }
@@ -202,10 +210,10 @@ export class XShellComponent {
 
       // slides - listen for fullscreen events
       this.el.nativeElement.addEventListener('fullscreen', () =>
-        this.fullscreenListener()
+        this.fullscreenListener(),
       );
       this.document.addEventListener('fullscreenchange', () =>
-        this.fullscreenChangeListener()
+        this.fullscreenChangeListener(),
       );
 
       // slides - clear persisted state
@@ -222,12 +230,12 @@ export class XShellComponent {
     // slides - remove fullscreen event listeners
     this.el.nativeElement.removeEventListener(
       'fullscreen',
-      this.fullscreenListener
+      this.fullscreenListener,
     );
 
     this.document.removeEventListener(
       'fullscreenchange',
-      this.fullscreenChangeListener
+      this.fullscreenChangeListener,
     );
 
     this.dialogSubscription?.unsubscribe();
@@ -250,7 +258,7 @@ export class XShellComponent {
     if (persist) {
       this.themeService.persistToStorage(
         this.getPreferenceKey('theme'),
-        newTheme
+        newTheme,
       );
     }
   }
@@ -266,7 +274,7 @@ export class XShellComponent {
 
     sessionStorage.setItem(
       'apps-slides-fullscreen',
-      this.isFullscreen ? 'enabled' : 'disabled'
+      this.isFullscreen ? 'enabled' : 'disabled',
     );
   }
 
@@ -339,7 +347,7 @@ export class XShellComponent {
   }
 
   keepInSync() {
-    globalThis.addEventListener('storage', (event) => {
+    globalThis.addEventListener('storage', (event: any) => {
       if (event.key === this.getPreferenceKey('theme')) {
         if (event.newValue === Themes.Light) {
           this.themeService.theme.set(Themes.Light);
@@ -353,7 +361,7 @@ export class XShellComponent {
 
     if (globalThis.matchMedia) {
       const darkModeMediaQuery = globalThis.matchMedia(
-        '(prefers-color-scheme: dark)'
+        '(prefers-color-scheme: dark)',
       );
 
       darkModeMediaQuery.addEventListener('change', (e) => {
@@ -364,19 +372,19 @@ export class XShellComponent {
         this.themeService.theme.set(mode);
         this.themeService.persistToStorage(
           this.getPreferenceKey('theme'),
-          mode
+          mode,
         );
       });
 
       const storedThemePreference = localStorage.getItem(
-        this.getPreferenceKey('theme')
+        this.getPreferenceKey('theme'),
       );
 
       if (storedThemePreference === Themes.Light) {
         this.themeService.theme.set(Themes.Light);
 
         globalThis.document.documentElement.classList.add(
-          this.getThemePreference(Themes.Light)
+          this.getThemePreference(Themes.Light),
         );
 
         return;
@@ -386,7 +394,7 @@ export class XShellComponent {
         this.themeService.theme.set(Themes.Dark);
 
         globalThis.document.documentElement.classList.add(
-          this.getThemePreference(Themes.Dark)
+          this.getThemePreference(Themes.Dark),
         );
 
         return;
@@ -396,7 +404,7 @@ export class XShellComponent {
         this.themeService.theme.set(Themes.Dark);
 
         globalThis.document.documentElement.classList.add(
-          this.getThemePreference(Themes.Dark)
+          this.getThemePreference(Themes.Dark),
         );
 
         return;
@@ -404,7 +412,7 @@ export class XShellComponent {
       this.themeService.theme.set(Themes.Light);
 
       globalThis.document.documentElement.classList.add(
-        this.getThemePreference(Themes.Light)
+        this.getThemePreference(Themes.Light),
       );
     }
   }
@@ -417,13 +425,13 @@ export class XShellComponent {
         cancelValue: 'apps-update-cancel',
         submitText: 'OK',
         submitValue: 'apps-update-ok',
-      }
+      },
     );
   }
 
   handleCloseStart() {
     this.el.nativeElement.shadowRoot.querySelector(
-      'mat-sidenav-container'
+      'mat-sidenav-container',
     ).style.overflow = 'auto';
   }
 
@@ -446,26 +454,26 @@ export class XShellComponent {
     if (currentTheme === Themes.Light) {
       this.themeService.persistToStorage(
         this.getPreferenceKey('theme'),
-        Themes.Dark
+        Themes.Dark,
       );
 
       this.themeService.theme.set(Themes.Dark);
 
       if (
         globalThis.document.documentElement.classList.contains(
-          this.getThemePreference(Themes.Light)
+          this.getThemePreference(Themes.Light),
         )
       ) {
         globalThis.document.documentElement.classList.replace(
           this.getThemePreference(Themes.Light),
-          this.getThemePreference(Themes.Dark)
+          this.getThemePreference(Themes.Dark),
         );
 
         return;
       }
 
       globalThis.document.documentElement.classList.add(
-        this.getThemePreference(Themes.Dark)
+        this.getThemePreference(Themes.Dark),
       );
 
       return;
@@ -473,33 +481,33 @@ export class XShellComponent {
 
     this.themeService.persistToStorage(
       this.getPreferenceKey('theme'),
-      Themes.Light
+      Themes.Light,
     );
 
     this.themeService.theme.set(Themes.Light);
 
     if (
       globalThis.document.documentElement.classList.contains(
-        this.getThemePreference(Themes.Dark)
+        this.getThemePreference(Themes.Dark),
       )
     ) {
       globalThis.document.documentElement.classList.replace(
         this.getThemePreference(Themes.Dark),
-        this.getThemePreference(Themes.Light)
+        this.getThemePreference(Themes.Light),
       );
 
       return;
     }
 
     globalThis.document.documentElement.classList.add(
-      this.getThemePreference(Themes.Light)
+      this.getThemePreference(Themes.Light),
     );
   }
 
   replaceThemeClass(query: MediaQueryList | MediaQueryListEvent) {
     return document.documentElement.classList.replace(
       this.getTokens(query).token,
-      this.getTokens(query).newToken
+      this.getTokens(query).newToken,
     );
   }
 

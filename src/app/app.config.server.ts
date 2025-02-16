@@ -7,10 +7,7 @@ import { appConfig } from './app.config';
 
 const serverConfig: ApplicationConfig = {
   providers: [
-    provideRouter(
-      serverSideRoutes,
-      withDisabledInitialNavigation()
-    ),
+    provideRouter(serverSideRoutes, withDisabledInitialNavigation()),
     provideServerRendering(),
   ],
 };

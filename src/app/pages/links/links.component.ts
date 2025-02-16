@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-links',
-  standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
     <section app-section-cards>
@@ -12,14 +11,18 @@ import { RouterModule } from '@angular/router';
         <a
           [href]="site.href"
           class="link title"
-          style="background-color: {{ site.titleBackgroundColor }}; color: {{ site.titleColor }};"
-          >
+          style="background-color: {{ site.titleBackgroundColor }}; color: {{
+            site.titleColor
+          }};"
+        >
           {{ site.title }}
-          <i class="material-icons">{{site.icon}}</i>
+          <i class="material-icons">{{ site.icon }}</i>
         </a>
         <div class="subtitle" [innerHTML]="site.subtitle"></div>
         <div class="actions">
-          <button (click)="handleCardButtonClick(site.href)" class="filled">Go</button>
+          <button (click)="handleCardButtonClick(site.href)" class="filled">
+            Go
+          </button>
         </div>
       </section>
     </section>
@@ -40,55 +43,59 @@ import { RouterModule } from '@angular/router';
         justify-content: center;
         padding: 2rem;
 
-        a {
+        .card {
+          min-height: 12.75rem;
+          max-width: 25rem;
+          width: 100%;
+        }
+
+        .title {
+          align-items: center;
+          background: var(
+            --card-heading-background,
+            var(--md-ref-palette-neutral30)
+          );
+          border-radius: 0.25rem 0.25rem 0 0;
+          color: var(--card-heading-color, #fff);
+          display: flex;
+          justify-content: space-between;
+          min-height: 1.75rem;
+
+          &.link {
+            text-decoration: none;
+          }
+        }
+
+        :is(.card) .subtitle {
+          min-height: 4.5rem;
+          padding: 1rem;
+        }
+
+        :is(.card) .actions {
+          justify-content: end;
+          margin: 0.5rem;
+          padding: 0.5rem;
+        }
+
+        .link {
+          cursor: pointer;
           text-decoration: underline;
         }
-      }
 
-      .card {
-        min-height: 12.75rem;
-        max-width: 25rem;
-        width: 100%;
-      }
+        a,
+        a:link,
+        a:focus,
+        a:hover,
+        a:active,
+        a:visited {
+          color: var(--md-sys-color-on-surface);
+          text-decoration: underline;
+        }
 
-      .title {
-        align-items: center;
-        background: var(--card-heading-background, var(--md-ref-palette-neutral30));
-        border-radius: 0.25rem 0.25rem 0 0;
-        color: var(--card-heading-color, #fff);
-        display: flex;
-        justify-content: space-between;
-        min-height: 1.75rem;
-      }
-
-      :is(.card) .subtitle {
-        min-height: 4.5rem;
-        padding: 1rem;
-      }
-
-      :is(.card) .actions {
-        justify-content: end;
-        margin: 0.5rem;
-        padding: 0.5rem;
-      }
-
-      .link {
-        cursor: pointer;
-        text-decoration: underline;
-      }
-
-      a,
-      a:link,
-      a:focus,
-      a:hover,
-      a:active,
-      a:visited {
-        color: var(--md-sys-color-on-surface);
-      }
-
-      :where(.button, button):not(.icon-button, .fab, .chip) {
-        background-color: var(--md-ref-palette-neutral50);
-        color: var(--md-ref-palette-neutral90);
+        :where(.button, button):not(.icon-button, .fab, .chip) {
+          background-color: var(--md-ref-palette-neutral50);
+          color: var(--md-ref-palette-neutral90);
+        }
       }
     `,
   ],

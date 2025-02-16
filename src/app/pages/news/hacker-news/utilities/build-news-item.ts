@@ -4,7 +4,7 @@ import { HackerNewsItem, UpdateQueue } from './state';
 export const buildNewsItem = async (
   newsItem: HackerNewsItem,
   queue: UpdateQueue,
-  shadowRoot: ShadowRoot
+  shadowRoot: ShadowRoot,
 ) => {
   try {
     const { date, time, itemComments, itemTitle, itemLink } = newsItem;

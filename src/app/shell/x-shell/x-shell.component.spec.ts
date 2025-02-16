@@ -14,9 +14,7 @@ describe('XShellComponent', () => {
         XShellComponent,
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
       ],
-      providers: [
-        provideRouter([])
-      ]
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(XShellComponent);

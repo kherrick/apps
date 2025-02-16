@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, inject } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Location, ViewportScroller } from '@angular/common';
 
 import { XShellComponent } from './shell/x-shell/x-shell.component';
@@ -8,7 +8,6 @@ import validPaths from './validPaths.json';
 
 @Component({
   encapsulation: ViewEncapsulation.ShadowDom,
-  standalone: true,
   imports: [XShellComponent],
   selector: 'x-root',
   template: ` <x-shell></x-shell> `,

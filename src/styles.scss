@@ -3,14 +3,15 @@
 // custom theming for Angular Material - for more information: https://material.angular.io/guide/theming
 @use "m3-theme" as *;
 
-@use 'material-design-lite/css/core.css';
+@use "material-design-lite/css/core.css";
 
 @use "material-tokens/css/palette.css";
 @use "material-tokens/css/color.css";
 @use "material-tokens/css/themes/dark.css";
 @use "material-tokens/css/themes/light.css";
 
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
 :root {
   @include mat.all-component-themes($light-theme);
@@ -22,7 +23,9 @@
 
   --md-comp-button-container-height: 2.5rem;
   --md-comp-button-container-shape: 1.25rem;
-  --md-comp-filled-button-container-height: var(--md-comp-button-container-height);
+  --md-comp-filled-button-container-height: var(
+    --md-comp-button-container-height
+  );
 
   --md-sys-color-primary: var(--md-ref-palette-neutral10);
   --md-sys-color-surface: var(--md-ref-palette-neutral99);
@@ -33,9 +36,15 @@
   --md-sys-color-on-surface-rgb: var(--md-ref-palette-neutral10-rgb);
   --md-sys-color-on-surface: var(--md-sys-color-primary);
 
-  --mat-sidenav-container-background-color: var(--x-shell-background-color, white);
+  --mat-sidenav-container-background-color: var(
+    --x-shell-background-color,
+    white
+  );
   --mat-sidenav-container-text-color: black;
-  --mat-sidenav-content-background-color: var(--x-shell-background-color, white);
+  --mat-sidenav-content-background-color: var(
+    --x-shell-background-color,
+    white
+  );
   --mat-sidenav-content-text-color: black;
   --mat-sidenav-scrim-color: #000000cc;
 
@@ -47,137 +56,138 @@
   --pwgen-password-background: var(--md-ref-palette-neutral90);
   --pwgen-password-controls-background: var(--md-sys-color-inverse-surface);
 
-    // use the light theme when client prefers light-theme
-    @media (prefers-color-scheme: light) {
-      @include mat.all-component-themes($light-theme);
-      color-scheme: light;
+  // use the light theme when client prefers light-theme
+  @media (prefers-color-scheme: light) {
+    @include mat.all-component-themes($light-theme);
+    color-scheme: light;
 
-      --x-shell-background-color: white;
-      --x-shell-default-outline: 0.0625rem solid black;
+    --x-shell-background-color: white;
+    --x-shell-default-outline: 0.0625rem solid black;
 
-      --mat-sidenav-container-background-color: var(--x-shell-background-color);
-      --mat-sidenav-container-text-color: black;
-      --mat-sidenav-content-background-color: var(--x-shell-background-color);
-      --mat-sidenav-content-text-color: black;
-      --mat-sidenav-scrim-color: #000000cc;
+    --mat-sidenav-container-background-color: var(--x-shell-background-color);
+    --mat-sidenav-container-text-color: black;
+    --mat-sidenav-content-background-color: var(--x-shell-background-color);
+    --mat-sidenav-content-text-color: black;
+    --mat-sidenav-scrim-color: #000000cc;
 
-      --md-sys-color-primary: var(--md-ref-palette-neutral10);
-      --md-sys-color-surface: var(--md-ref-palette-neutral99);
-      --md-sys-color-tertiary: var(--md-ref-palette-neutral20, #4b4b7d);
-      --md-switch-selected-focus-handle-color: var(--md-ref-palette-neutral90);
-      --md-switch-selected-hover-handle-color: var(--md-ref-palette-neutral90);
-      --md-sys-color-on-primary: var(--md-ref-palette-neutral90);
-      --md-sys-color-on-surface-rgb: var(--md-ref-palette-neutral10-rgb);
-      --md-sys-color-on-surface: var(--md-sys-color-primary);
+    --md-sys-color-primary: var(--md-ref-palette-neutral10);
+    --md-sys-color-surface: var(--md-ref-palette-neutral99);
+    --md-sys-color-tertiary: var(--md-ref-palette-neutral20, #4b4b7d);
+    --md-switch-selected-focus-handle-color: var(--md-ref-palette-neutral90);
+    --md-switch-selected-hover-handle-color: var(--md-ref-palette-neutral90);
+    --md-sys-color-on-primary: var(--md-ref-palette-neutral90);
+    --md-sys-color-on-surface-rgb: var(--md-ref-palette-neutral10-rgb);
+    --md-sys-color-on-surface: var(--md-sys-color-primary);
 
-      --mdc-theme-primary: var(--md-sys-color-on-primary);
-      --mdc-theme-secondary: var(--md-ref-palette-neutral40);
-      --mdc-theme-text-primary-on-background: var(--md-sys-color-on-primary);
+    --mdc-theme-primary: var(--md-sys-color-on-primary);
+    --mdc-theme-secondary: var(--md-ref-palette-neutral40);
+    --mdc-theme-text-primary-on-background: var(--md-sys-color-on-primary);
 
-      --pwgen-password-background: var(--md-ref-palette-neutral90);
-      --pwgen-password-controls-background: var(--md-sys-color-inverse-surface);
-    }
+    --pwgen-password-background: var(--md-ref-palette-neutral90);
+    --pwgen-password-controls-background: var(--md-sys-color-inverse-surface);
+  }
 
-    // use the dark theme when client prefers dark-theme
-    @media (prefers-color-scheme: dark) {
-      @include mat.all-component-themes($dark-theme);
+  // use the dark theme when client prefers dark-theme
+  @media (prefers-color-scheme: dark) {
+    @include mat.all-component-themes($dark-theme);
 
-      color-scheme: dark;
+    color-scheme: dark;
 
-      --x-shell-background-color: #121212;
-      --x-shell-default-outline: 0.0625rem solid white;
+    --x-shell-background-color: #121212;
+    --x-shell-default-outline: 0.0625rem solid white;
 
-      --mat-sidenav-container-background-color: var(--x-shell-background-color);
-      --mat-sidenav-container-text-color: white;
-      --mat-sidenav-content-background-color: var(--x-shell-background-color);
-      --mat-sidenav-content-text-color: white;
-      --mat-sidenav-scrim-color: #000000cc;
+    --mat-sidenav-container-background-color: var(--x-shell-background-color);
+    --mat-sidenav-container-text-color: white;
+    --mat-sidenav-content-background-color: var(--x-shell-background-color);
+    --mat-sidenav-content-text-color: white;
+    --mat-sidenav-scrim-color: #000000cc;
 
-      --md-sys-color-primary: var(--md-ref-palette-neutral90);
-      --md-sys-color-surface: var(--md-ref-palette-neutral10);
-      --md-sys-color-tertiary: var(--md-ref-palette-neutral50);
-      --md-switch-selected-focus-handle-color: var(--md-ref-palette-neutral10);
-      --md-switch-selected-hover-handle-color: var(--md-ref-palette-neutral10);
-      --md-sys-color-on-primary: var(--md-ref-palette-neutral10);
-      --md-sys-color-on-surface-rgb: var(--md-ref-palette-neutral90-rgb);
-      --md-sys-color-on-surface: var(--md-sys-color-primary);
+    --md-sys-color-primary: var(--md-ref-palette-neutral90);
+    --md-sys-color-surface: var(--md-ref-palette-neutral10);
+    --md-sys-color-tertiary: var(--md-ref-palette-neutral50);
+    --md-switch-selected-focus-handle-color: var(--md-ref-palette-neutral10);
+    --md-switch-selected-hover-handle-color: var(--md-ref-palette-neutral10);
+    --md-sys-color-on-primary: var(--md-ref-palette-neutral10);
+    --md-sys-color-on-surface-rgb: var(--md-ref-palette-neutral90-rgb);
+    --md-sys-color-on-surface: var(--md-sys-color-primary);
 
-      --mdc-elevated-card-container-color: var(--md-sys-color-surface);
-      --mdc-tab-text-label-color-default: var(--md-ref-palette-neutral50);
-      --mdc-theme-primary: var(--md-sys-color-on-primary);
-      --mdc-theme-secondary: var(--md-ref-palette-neutral30);
-      --mdc-theme-text-primary-on-background: var(--md-ref-palette-neutral10);
+    --mdc-elevated-card-container-color: var(--md-sys-color-surface);
+    --mdc-tab-text-label-color-default: var(--md-ref-palette-neutral50);
+    --mdc-theme-primary: var(--md-sys-color-on-primary);
+    --mdc-theme-secondary: var(--md-ref-palette-neutral30);
+    --mdc-theme-text-primary-on-background: var(--md-ref-palette-neutral10);
 
-      --pwgen-password-background: var(--md-ref-palette-neutral20);
-      --pwgen-password-controls-background: var(--md-ref-palette-neutral40);
-    }
+    --pwgen-password-background: var(--md-ref-palette-neutral20);
+    --pwgen-password-controls-background: var(--md-ref-palette-neutral40);
+  }
 
-    &.light-theme {
-      @include mat.all-component-themes($light-theme);
+  &.light-theme {
+    @include mat.all-component-themes($light-theme);
 
-      color-scheme: light;
+    color-scheme: light;
 
-      --x-shell-background-color: white;
-      --x-shell-default-outline: 0.0625rem solid black;
+    --x-shell-background-color: white;
+    --x-shell-default-outline: 0.0625rem solid black;
 
-      --mat-sidenav-container-background-color: var(--x-shell-background-color);
-      --mat-sidenav-container-text-color: black;
-      --mat-sidenav-content-background-color: var(--x-shell-background-color);
-      --mat-sidenav-content-text-color: black;
-      --mat-sidenav-scrim-color: #000000cc;
+    --mat-sidenav-container-background-color: var(--x-shell-background-color);
+    --mat-sidenav-container-text-color: black;
+    --mat-sidenav-content-background-color: var(--x-shell-background-color);
+    --mat-sidenav-content-text-color: black;
+    --mat-sidenav-scrim-color: #000000cc;
 
-      --md-sys-color-primary: var(--md-ref-palette-neutral10);
-      --md-sys-color-surface: var(--md-ref-palette-neutral99);
-      --md-sys-color-tertiary: var(--md-ref-palette-neutral20, #4b4b7d);
-      --md-switch-selected-focus-handle-color: var(--md-ref-palette-neutral90);
-      --md-switch-selected-hover-handle-color: var(--md-ref-palette-neutral90);
-      --md-sys-color-on-primary: var(--md-ref-palette-neutral90);
-      --md-sys-color-on-surface-rgb: var(--md-ref-palette-neutral10-rgb);
-      --md-sys-color-on-surface: var(--md-sys-color-primary);
+    --md-sys-color-primary: var(--md-ref-palette-neutral10);
+    --md-sys-color-surface: var(--md-ref-palette-neutral99);
+    --md-sys-color-tertiary: var(--md-ref-palette-neutral20, #4b4b7d);
+    --md-switch-selected-focus-handle-color: var(--md-ref-palette-neutral90);
+    --md-switch-selected-hover-handle-color: var(--md-ref-palette-neutral90);
+    --md-sys-color-on-primary: var(--md-ref-palette-neutral90);
+    --md-sys-color-on-surface-rgb: var(--md-ref-palette-neutral10-rgb);
+    --md-sys-color-on-surface: var(--md-sys-color-primary);
 
-      --mdc-theme-primary: var(--md-sys-color-on-primary);
-      --mdc-theme-secondary: var(--md-ref-palette-neutral40);
-      --mdc-theme-text-primary-on-background: var(--md-sys-color-on-primary);
+    --mdc-theme-primary: var(--md-sys-color-on-primary);
+    --mdc-theme-secondary: var(--md-ref-palette-neutral40);
+    --mdc-theme-text-primary-on-background: var(--md-sys-color-on-primary);
 
-      --pwgen-password-background: var(--md-ref-palette-neutral90);
-      --pwgen-password-controls-background: var(--md-sys-color-inverse-surface);
-    }
+    --pwgen-password-background: var(--md-ref-palette-neutral90);
+    --pwgen-password-controls-background: var(--md-sys-color-inverse-surface);
+  }
 
-    &.dark-theme {
-      @include mat.all-component-themes($dark-theme);
+  &.dark-theme {
+    @include mat.all-component-themes($dark-theme);
 
-      color-scheme: dark;
+    color-scheme: dark;
 
-      --x-shell-background-color: #121212;
-      --x-shell-default-outline: 0.0625rem solid white;
+    --x-shell-background-color: #121212;
+    --x-shell-default-outline: 0.0625rem solid white;
 
-      --mat-sidenav-container-background-color: var(--x-shell-background-color);
-      --mat-sidenav-container-text-color: white;
-      --mat-sidenav-content-background-color: var(--x-shell-background-color);
-      --mat-sidenav-content-text-color: white;
-      --mat-sidenav-scrim-color: #000000cc;
+    --mat-sidenav-container-background-color: var(--x-shell-background-color);
+    --mat-sidenav-container-text-color: white;
+    --mat-sidenav-content-background-color: var(--x-shell-background-color);
+    --mat-sidenav-content-text-color: white;
+    --mat-sidenav-scrim-color: #000000cc;
 
-      --md-sys-color-primary: var(--md-ref-palette-neutral90);
-      --md-sys-color-surface: var(--md-ref-palette-neutral10);
-      --md-sys-color-tertiary: var(--md-ref-palette-neutral50);
-      --md-switch-selected-focus-handle-color: var(--md-ref-palette-neutral10);
-      --md-switch-selected-hover-handle-color: var(--md-ref-palette-neutral10);
-      --md-sys-color-on-primary: var(--md-ref-palette-neutral10);
-      --md-sys-color-on-surface-rgb: var(--md-ref-palette-neutral90-rgb);
-      --md-sys-color-on-surface: var(--md-sys-color-primary);
+    --md-sys-color-primary: var(--md-ref-palette-neutral90);
+    --md-sys-color-surface: var(--md-ref-palette-neutral10);
+    --md-sys-color-tertiary: var(--md-ref-palette-neutral50);
+    --md-switch-selected-focus-handle-color: var(--md-ref-palette-neutral10);
+    --md-switch-selected-hover-handle-color: var(--md-ref-palette-neutral10);
+    --md-sys-color-on-primary: var(--md-ref-palette-neutral10);
+    --md-sys-color-on-surface-rgb: var(--md-ref-palette-neutral90-rgb);
+    --md-sys-color-on-surface: var(--md-sys-color-primary);
 
-      --mdc-elevated-card-container-color: var(--md-sys-color-surface);
-      --mdc-tab-text-label-color-default: var(--md-ref-palette-neutral50);
-      --mdc-theme-primary: var(--md-sys-color-on-primary);
-      --mdc-theme-secondary: var(--md-ref-palette-neutral30);
-      --mdc-theme-text-primary-on-background: var(--md-ref-palette-neutral10);
+    --mdc-elevated-card-container-color: var(--md-sys-color-surface);
+    --mdc-tab-text-label-color-default: var(--md-ref-palette-neutral50);
+    --mdc-theme-primary: var(--md-sys-color-on-primary);
+    --mdc-theme-secondary: var(--md-ref-palette-neutral30);
+    --mdc-theme-text-primary-on-background: var(--md-ref-palette-neutral10);
 
-      --pwgen-password-background: var(--md-ref-palette-neutral20);
-      --pwgen-password-controls-background: var(--md-ref-palette-neutral40);
-    }
+    --pwgen-password-background: var(--md-ref-palette-neutral20);
+    --pwgen-password-controls-background: var(--md-ref-palette-neutral40);
+  }
 }
 
-html, body {
+html,
+body {
   background-color: var(--x-shell-background-color);
   height: 100%;
   margin: 0;
@@ -198,15 +208,17 @@ html {
 
   @include mat.checkbox-color($light-theme, $color-variant: tertiary);
 }
+
 @font-face {
-  font-family: 'Material Icons';
+  font-family: "Material Icons";
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+  src: url(https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2)
+    format("woff2");
 }
 
 .material-icons {
-  font-family: 'Material Icons';
+  font-family: "Material Icons";
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
@@ -218,4 +230,11 @@ html {
   word-wrap: normal;
   direction: ltr;
   -webkit-font-smoothing: antialiased;
+}
+
+/* workaround for template shadowrootmode="open"
+  @ feeds/karl-herrick
+*/
+x-element {
+  display: none;
 }

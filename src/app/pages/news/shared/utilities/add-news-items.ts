@@ -4,7 +4,7 @@ import { NewsState, NewsWindow, UpdateQueue } from './state';
 export const addNewsItems = async (
   shadowRoot: ShadowRoot,
   newsState: NewsState,
-  queue: UpdateQueue
+  queue: UpdateQueue,
 ) => {
   const items = Object.values(newsState.index);
 

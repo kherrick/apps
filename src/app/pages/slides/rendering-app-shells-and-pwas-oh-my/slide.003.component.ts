@@ -4,7 +4,6 @@ import { SlideComponent } from '../shared/slide.component';
 
 @Component({
   selector: 'app-slide-003',
-  standalone: true,
   imports: [SlideComponent],
   template: `
     <app-slide>
@@ -58,4 +57,4 @@ import { SlideComponent } from '../shared/slide.component';
   styles: [],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class Slide003Component { }
+export class Slide003Component {}

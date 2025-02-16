@@ -1,4 +1,10 @@
 import {
+  provideHttpClient,
+  withFetch,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+
+import {
   APP_ID,
   ApplicationConfig,
   isDevMode,
@@ -6,13 +12,11 @@ import {
 } from '@angular/core';
 
 import {
-  provideHttpClient,
-  withFetch,
-  withInterceptorsFromDi,
-} from '@angular/common/http';
+  provideClientHydration,
+  withEventReplay,
+} from '@angular/platform-browser';
 
-import { provideClientHydration } from '@angular/platform-browser';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
 
@@ -21,13 +25,13 @@ import { routes } from './app.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideClientHydration(),
+    provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
-    provideAnimations(),
+    provideAnimationsAsync(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
-      registrationStrategy: 'registerWhenStable:30000',
+      registrationStrategy: 'registerWhenStable:5000',
     }),
     { provide: APP_ID, useValue: 'apps' },
   ],

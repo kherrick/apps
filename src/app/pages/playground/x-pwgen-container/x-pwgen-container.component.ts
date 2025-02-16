@@ -1,11 +1,9 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
-  AfterViewInit,
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
   ElementRef,
   Inject,
-  OnDestroy,
   PLATFORM_ID,
   ViewChild,
   ViewEncapsulation,
@@ -13,7 +11,6 @@ import {
 
 @Component({
   selector: 'x-pwgen-container',
-  standalone: true,
   imports: [CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
@@ -31,8 +28,11 @@ import {
             <p>
               A
               <a href="https://kherrick.github.io/pwgen/">password generator</a>
-              compiled as Wasm for use on the CLI, in a custom element, or as a module. Learn more at the
-              <a href="https://github.com/kherrick/pwgen/" target="_top">project page</a>.
+              compiled as Wasm for use on the CLI, in a custom element, or as a
+              module. Learn more at the
+              <a href="https://github.com/kherrick/pwgen/" target="_top"
+                >project page</a
+              >.
             </p>
           </section>
         </section>
@@ -41,10 +41,13 @@ import {
         </section>
         <section id="bottom">
           <mwc-tab-bar #mwcTabBar>
-            <mwc-tab label="Main"></mwc-tab>
-            <mwc-tab label="Options"></mwc-tab>
+            <mwc-tab (click)="handleMainClick()" label="Main"></mwc-tab>
+            <mwc-tab (click)="handleOptionsClick()" label="Options"></mwc-tab>
           </mwc-tab-bar>
-          <section [ngClass]="tabContentIndex === 0 ? 'hide' : 'show'" data-tab-content-0>
+          <section
+            [ngClass]="tabContentIndex === 0 ? 'show' : 'hide'"
+            data-tab-content-0
+          >
             <mwc-formfield label="Number of Passwords">
               <mwc-slider
                 id="number-of-passwords"
@@ -70,7 +73,10 @@ import {
               ></mwc-slider>
             </mwc-formfield>
           </section>
-          <section [ngClass]="tabContentIndex === 1 ? 'hide' : 'show'" data-tab-content-1>
+          <section
+            [ngClass]="tabContentIndex === 1 ? 'show' : 'hide'"
+            data-tab-content-1
+          >
             <section>
               <mwc-formfield label="Secure">
                 <mwc-checkbox
@@ -100,7 +106,9 @@ import {
               <mwc-formfield label="No Capitals">
                 <mwc-checkbox
                   id="password-no-capitals"
-                  (change)="handleCheckboxChange('password-no-capitals')($event)"
+                  (change)="
+                    handleCheckboxChange('password-no-capitals')($event)
+                  "
                   value="A"
                 ></mwc-checkbox>
               </mwc-formfield>
@@ -109,7 +117,9 @@ import {
               <mwc-formfield label="No Ambiguous characters">
                 <mwc-checkbox
                   id="password-no-ambigious"
-                  (change)="handleCheckboxChange('password-no-ambigious')($event)"
+                  (change)="
+                    handleCheckboxChange('password-no-ambigious')($event)
+                  "
                   value="B"
                 ></mwc-checkbox>
               </mwc-formfield>
@@ -135,8 +145,8 @@ import {
                   <path
                     d="M19 21H8V7h11m0-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m-3-4H4a2 2 0 0 0-2 2v14h2V3h12V1z"
                     fill="#626262"
-                  />
-                </svg>&nbsp;Copy
+                  /></svg
+                >&nbsp;Copy
               </mwc-button>
             </mwc-formfield>
           </section>
@@ -199,6 +209,7 @@ import {
       [data-tab-content-0] > section,
       [data-tab-content-1] > section {
         display: flex;
+        flex-direction: row;
       }
 
       [data-tab-content-1] > section > mwc-formfield {
@@ -282,7 +293,7 @@ import {
   ],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class XPwgenContainerComponent implements AfterViewInit, OnDestroy {
+export class XPwgenContainerComponent {
   module: any;
 
   articles: { content: string }[] = [];
@@ -323,23 +334,20 @@ export class XPwgenContainerComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  ngAfterViewInit(): void {
-    // :-( -- https://github.com/material-components/material-components-web/issues/4221
-    this.tabListener = this.mwcTabBar.nativeElement.addEventListener(
-      'MDCTabBar:activated',
-      ({ detail }: CustomEvent) => {
-        this.tabContentIndex = 1 - detail.index;
-      }
-    );
+  handleMainClick() {
+    console.log('main clicked');
+    this.tabContentIndex = 0;
   }
 
-  ngOnDestroy(): void {
-    // :-( -- https://github.com/material-components/material-components-web/issues/4221
-    this.mwcTabBar.nativeElement.removeEventListener('MDCTabBar:activated', this.tabListener);
+  handleOptionsClick() {
+    console.log('options clicked');
+    this.tabContentIndex = 1;
   }
 
   copyButtonClickHandler() {
-    this.clipboardPolyfill.writeText(this.xpwgen.nativeElement.shadowRoot.querySelector('ul').innerText);
+    this.clipboardPolyfill.writeText(
+      this.xpwgen.nativeElement.shadowRoot.querySelector('ul').innerText,
+    );
   }
 
   handleGenerate() {
@@ -353,13 +361,17 @@ export class XPwgenContainerComponent implements AfterViewInit, OnDestroy {
 
       let currentFlags =
         '-' +
-        removeDash(this.xpwgen.nativeElement.flags).replace(new RegExp((event.currentTarget as any).value, 'g'), '');
+        removeDash(this.xpwgen.nativeElement.flags).replace(
+          new RegExp((event.currentTarget as any).value, 'g'),
+          '',
+        );
 
       if ((event.currentTarget as any).checked) {
         currentFlags = currentFlags + (event.currentTarget as any).value;
       }
 
-      this.xpwgen.nativeElement.flags = currentFlags !== '-' ? currentFlags : '';
+      this.xpwgen.nativeElement.flags =
+        currentFlags !== '-' ? currentFlags : '';
     };
   };
 

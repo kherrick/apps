@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { title } from 'src/app/app.routes';
+import { title } from './../../../app/app.routes';
 
 export const routes: Routes = [
   {
@@ -14,7 +14,7 @@ export const routes: Routes = [
     path: 'herrick-design',
     loadComponent: () =>
       import('./herrick-design/herrick-design.component').then(
-        (x) => x.HerrickDesignComponent
+        (x) => x.HerrickDesignComponent,
       ),
     title: `${title} | Feeds | Herrick Design`,
   },
@@ -22,7 +22,7 @@ export const routes: Routes = [
     path: 'infinitym',
     loadComponent: () =>
       import('./infinitym/infinitym.component').then(
-        (x) => x.InfinitymComponent
+        (x) => x.InfinitymComponent,
       ),
     title: `${title} | Feeds | Infinity M`,
   },
@@ -30,7 +30,7 @@ export const routes: Routes = [
     path: 'karl-herrick',
     loadComponent: () =>
       import('./karl-herrick/karl-herrick.component').then(
-        (x) => x.KarlHerrickComponent
+        (x) => x.KarlHerrickComponent,
       ),
     title: `${title} | Feeds | Karl Herrick`,
   },

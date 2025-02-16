@@ -20,8 +20,16 @@ export const NewsWindow = globalThis as any & {
   newsState: NewsState;
 };
 
-export const getArchives = (shadowRoot: ShadowRoot, newsState: NewsState, queue: UpdateQueue, dataUrl: string) => {
-  const handleIntersectingEntry = async (entry: IntersectionObserverEntry, queue: UpdateQueue) => {
+export const getArchives = (
+  shadowRoot: ShadowRoot,
+  newsState: NewsState,
+  queue: UpdateQueue,
+  dataUrl: string,
+) => {
+  const handleIntersectingEntry = async (
+    entry: IntersectionObserverEntry,
+    queue: UpdateQueue,
+  ) => {
     if (entry.isIntersecting) {
       await getIndex(-1, shadowRoot, dataUrl);
 
@@ -37,10 +45,15 @@ export const getArchives = (shadowRoot: ShadowRoot, newsState: NewsState, queue:
   };
 
   const archivesObserverHandler = (entries: IntersectionObserverEntry[]) => {
-    entries.forEach(async (entry: IntersectionObserverEntry) => handleIntersectingEntry(entry, queue));
+    entries.forEach(async (entry: IntersectionObserverEntry) =>
+      handleIntersectingEntry(entry, queue),
+    );
   };
 
-  const archivesObserver = new IntersectionObserver(archivesObserverHandler, archivesObserverOptions);
+  const archivesObserver = new IntersectionObserver(
+    archivesObserverHandler,
+    archivesObserverOptions,
+  );
 
   setTimeout(() => {
     archivesObserver.observe(archives);
@@ -56,8 +69,12 @@ export const getArchives = (shadowRoot: ShadowRoot, newsState: NewsState, queue:
       archivesObserver.disconnect();
     }
 
-    for (let section of Array.from(shadowRoot.querySelectorAll('#latest > section'))) {
-      (section as HTMLElement).style.display = latestSectionsExpanded ? 'block' : 'none';
+    for (let section of Array.from(
+      shadowRoot.querySelectorAll('#latest > section'),
+    )) {
+      (section as HTMLElement).style.display = latestSectionsExpanded
+        ? 'block'
+        : 'none';
     }
   };
 
@@ -66,10 +83,14 @@ export const getArchives = (shadowRoot: ShadowRoot, newsState: NewsState, queue:
   latestHeader.addEventListener('click', handleLatestHeaderClick);
 };
 
-export const getIndex = async (dayChange: number = 0, shadowRoot: ShadowRoot, baseUrl: string) => {
-  const lastDateTime = (shadowRoot?.getElementById('latest') as HTMLElement)?.querySelector(
-    'section:last-child > section > h4 > span'
-  )?.textContent;
+export const getIndex = async (
+  dayChange: number = 0,
+  shadowRoot: ShadowRoot,
+  baseUrl: string,
+) => {
+  const lastDateTime = (
+    shadowRoot?.getElementById('latest') as HTMLElement
+  )?.querySelector('section:last-child > section > h4 > span')?.textContent;
 
   const nextDateTime = getNextDateTime(lastDateTime ?? '', dayChange);
   let archiveIndex: NewsItem[] = [];
@@ -80,8 +101,13 @@ export const getIndex = async (dayChange: number = 0, shadowRoot: ShadowRoot, ba
     // console.error(error)
   }
 
-  const nextTimeIndex = archiveIndex.findIndex(({ time }: { time: string }) => time === nextDateTime?.slice(-8));
-  const handleIndexUpdate = (index: NewsItem[], existingIndexValues: NewsItem[] = []) => {
+  const nextTimeIndex = archiveIndex.findIndex(
+    ({ time }: { time: string }) => time === nextDateTime?.slice(-8),
+  );
+  const handleIndexUpdate = (
+    index: NewsItem[],
+    existingIndexValues: NewsItem[] = [],
+  ) => {
     index.forEach((i: NewsItem) => {
       existingIndexValues.push(i);
     });

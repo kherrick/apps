@@ -1,7 +1,7 @@
 export const buildDescendants = (
   document: Document,
   descendants = '',
-  itemComments = ''
+  itemComments = '',
 ) => {
   const descendantsLink = document.createElement('a');
   descendantsLink.setAttribute('href', itemComments);

@@ -1,7 +1,7 @@
 import { HackerNewsItem } from './state';
 
 export const buildArchiveIndex = async (
-  lastDateTime: string
+  lastDateTime: string,
 ): Promise<HackerNewsItem[]> => {
   const nextDate = lastDateTime?.slice(0, 10);
   const nextYear = nextDate?.slice(0, 4);
@@ -9,7 +9,7 @@ export const buildArchiveIndex = async (
   return (
     await (
       await fetch(
-        `https://raw.githubusercontent.com/kherrick/hacker-news/main/archives/${nextYear}/${nextDate}/index.md`
+        `https://raw.githubusercontent.com/kherrick/hacker-news/main/archives/${nextYear}/${nextDate}/index.md`,
       )
     ).text()
   )

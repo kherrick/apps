@@ -1,5 +1,5 @@
-import { buildDescendants } from "./build-html-descendants";
-import { parseHtml } from "./parse-html";
+import { buildDescendants } from './build-html-descendants';
+import { parseHtml } from './parse-html';
 
 export const buildNextItem = async (item: {
   document: Document;
@@ -72,7 +72,7 @@ export const buildNextItem = async (item: {
         const descendantsSpan = buildDescendants(
           document,
           `${descendants}`,
-          itemComments
+          itemComments,
         );
 
         itemHeader.appendChild(descendantsSpan);
@@ -83,11 +83,7 @@ export const buildNextItem = async (item: {
       }
     } else {
       // handle comments
-      const comments = buildDescendants(
-        document,
-        '',
-        itemComments
-      );
+      const comments = buildDescendants(document, '', itemComments);
 
       itemHeader.appendChild(comments);
       itemSection.appendChild(itemHeader);

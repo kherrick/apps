@@ -28,12 +28,14 @@ export class XDialogService {
       submitText?: string;
       submitValue?: string;
       title?: string;
-    }
+    },
   ) {
     this.cancelText = options?.cancelText ? options?.cancelText : '';
     this.cancelValue = options?.cancelValue ? options?.cancelValue : '';
     this.content = message;
-    this.indeterminateProgress = options?.indeterminateProgress ? options?.indeterminateProgress : false;
+    this.indeterminateProgress = options?.indeterminateProgress
+      ? options?.indeterminateProgress
+      : false;
     this.modal = options?.modal ? options?.modal : false;
     this.submitText = options?.submitText ? options?.submitText : 'OK';
     this.submitValue = options?.submitValue ? options?.submitValue : 'ok';

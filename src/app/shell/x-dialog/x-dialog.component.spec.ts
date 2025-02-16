@@ -8,9 +8,8 @@ describe('XDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ XDialogComponent ]
-    })
-    .compileComponents();
+      imports: [XDialogComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(XDialogComponent);
     component = fixture.componentInstance;

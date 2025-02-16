@@ -53,9 +53,13 @@
               "routesFile": ".routes.txt"
             },
             "ssr": {
-              "entry": "server.ts"
+              "entry": "src/server.ts"
             },
-            "webWorkerTsConfig": "tsconfig.worker.json"
+            "stylePreprocessorOptions": {
+              "sass": {
+                "silenceDeprecations": ["mixed-decls"]
+              }
+            }
           },
           "configurations": {
             "production": {
@@ -89,9 +93,8 @@
               "serviceWorker": "ngsw-config.json"
             },
             "development": {
-              "extractLicenses": false,
-              "namedChunks": true,
               "optimization": false,
+              "extractLicenses": false,
               "sourceMap": true
             }
           },
@@ -140,8 +143,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
-            "webWorkerTsConfig": "tsconfig.worker.json"
+            "scripts": []
           }
         }
       }

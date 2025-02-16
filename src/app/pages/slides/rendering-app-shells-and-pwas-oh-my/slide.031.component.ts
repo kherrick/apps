@@ -4,13 +4,16 @@ import { SlideComponent } from '../shared/slide.component';
 
 @Component({
   selector: 'app-slide-031',
-  standalone: true,
   imports: [SlideComponent],
   template: `
     <app-slide>
       <h1 header>Progressive Web Apps</h1>
       <h2 sub-header>
-        <strong><a href="https://web.dev/learn/pwa/architecture/">PWA Architecture Patterns</a></strong>
+        <strong
+          ><a href="https://web.dev/learn/pwa/architecture/"
+            >PWA Architecture Patterns</a
+          ></strong
+        >
       </h2>
 
       <ul list>

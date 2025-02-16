@@ -1,13 +1,15 @@
 import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
+
 import {
   Component,
   ElementRef,
-  Inject,
   OnDestroy,
   OnInit,
   PLATFORM_ID,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
+
 import {
   ActivatedRoute,
   Router,
@@ -19,10 +21,9 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-slide',
-  standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <div style="display: flex; height: 100%">
+    <div slide-container>
       @if (tune === 'on' && !isFirst) {
         <div (click)="handleBackward()" class="previous">
           <i style="slide-icon" class="material-icons control-icon"
@@ -67,43 +68,47 @@ import { Subscription } from 'rxjs';
     `
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
 
-      .control-icon {
-        font-size: 2.5rem;
-      }
-
-      .next,
-      .previous {
-        align-items: center;
-        color: var(--md-sys-color-tertiary);
+      [slide-container] {
         display: flex;
-        height: calc(100vh - 6rem);
-        justify-content: center;
-        user-select: none;
-        width: 4rem;
-      }
+        height: 100%;
 
-      .next:hover,
-      .previous:hover {
-        color: var(--md-sys-color-primary);
-        cursor: pointer;
-      }
-
-      #stage {
-        display: block;
-        flex: 1;
-        min-height: 100%;
-        outline: none;
-
-        a,
-        a:link,
-        a:focus,
-        a:hover,
-        a:active,
-        a:visited {
-          color: var(--md-sys-color-on-surface);
+        .control-icon {
+          font-size: 2.5rem;
         }
 
-        /* &.dark {
+        .next,
+        .previous {
+          align-items: center;
+          color: var(--md-sys-color-tertiary);
+          display: flex;
+          height: calc(100vh - 6rem);
+          justify-content: center;
+          user-select: none;
+          width: 4rem;
+        }
+
+        .next:hover,
+        .previous:hover {
+          color: var(--md-sys-color-primary);
+          cursor: pointer;
+        }
+
+        #stage {
+          display: block;
+          flex: 1;
+          min-height: 100%;
+          outline: none;
+
+          a,
+          a:link,
+          a:focus,
+          a:hover,
+          a:active,
+          a:visited {
+            color: var(--md-sys-color-on-surface);
+          }
+
+          /* &.dark {
           background-color: black;
           color: white;
 
@@ -112,116 +117,117 @@ import { Subscription } from 'rxjs';
           }
         } */
 
-        header {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          text-align: center;
-
-          .toggles {
+          header {
             display: flex;
-            margin-right: 1rem;
+            flex-direction: row;
+            justify-content: space-between;
+            text-align: center;
 
-            i.material-icons {
-              cursor: pointer;
-            }
-          }
+            .toggles {
+              display: flex;
+              margin-right: 1rem;
 
-          h1 {
-            font-size: 2rem;
-            width: 100%;
-          }
-        }
-
-        section {
-          overflow: hidden;
-
-          &.with-padding {
-            padding: 1rem 1rem 0 1rem;
-          }
-
-          .content {
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-
-            h2 {
-              text-align: center;
-            }
-
-            ul {
-              padding-left: 1.5rem;
-            }
-
-            @media only screen and (min-width: 599px) {
-              li {
-                width: 240px;
+              i.material-icons {
+                cursor: pointer;
               }
             }
 
-            @media only screen and (min-width: 600px) {
-              ul {
-                font-size: 1.75rem;
-              }
-
-              li {
-                width: 400px;
-              }
-            }
-
-            @media only screen and (min-width: 700px) {
-              li {
-                width: 450px;
-              }
-            }
-
-            @media only screen and (min-width: 1000px) {
-              li {
-                width: 700px;
-              }
-            }
-
-            li:is([media]) {
+            h1 {
+              font-size: 2rem;
               width: 100%;
             }
+          }
 
-            li:is([quote]) {
-              list-style: none;
+          section {
+            overflow: hidden;
+
+            &.with-padding {
+              padding: 1rem 1rem 0 1rem;
             }
 
-            li {
-              animation: 1s alternate slidein;
-              margin-top: 0.25rem;
+            .content {
+              align-items: center;
+              display: flex;
+              flex-direction: column;
 
-              blockquote {
-                font-style: italic;
-                margin: 0.25rem 0 0 0;
-              }
-
-              blockquote {
-                quotes: '"' '"';
-              }
-              blockquote:before {
-                content: open-quote;
-              }
-              blockquote:after {
-                content: close-quote;
+              h2 {
+                text-align: center;
               }
 
-              img {
-                max-width: 700px;
+              ul {
+                padding-left: 1.5rem;
+              }
+
+              @media only screen and (min-width: 599px) {
+                li {
+                  width: 240px;
+                }
+              }
+
+              @media only screen and (min-width: 600px) {
+                ul {
+                  font-size: 1.75rem;
+                }
+
+                li {
+                  width: 400px;
+                }
+              }
+
+              @media only screen and (min-width: 700px) {
+                li {
+                  width: 450px;
+                }
+              }
+
+              @media only screen and (min-width: 1000px) {
+                li {
+                  width: 700px;
+                }
+              }
+
+              li:is([media]) {
                 width: 100%;
               }
 
-              @keyframes slidein {
-                from {
-                  margin-left: 100%;
-                  opacity: 0.5;
+              li:is([quote]) {
+                list-style: none;
+              }
+
+              li {
+                animation: 1s alternate slidein;
+                margin-top: 0.25rem;
+
+                blockquote {
+                  font-style: italic;
+                  margin: 0.25rem 0 0 0;
                 }
 
-                to {
-                  margin-left: 0%;
-                  opacity: 1;
+                blockquote {
+                  quotes: '"' '"';
+                }
+                blockquote:before {
+                  content: open-quote;
+                }
+                blockquote:after {
+                  content: close-quote;
+                }
+
+                img {
+                  max-width: 700px;
+                  width: 100%;
+                }
+
+                @keyframes slidein {
+                  from {
+                    margin-left: 100%;
+                    opacity: 0.5;
+                  }
+
+                  to {
+                    margin-left: 0%;
+                    opacity: 1;
+                  }
                 }
               }
             }
@@ -233,36 +239,34 @@ import { Subscription } from 'rxjs';
   encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class SlideComponent implements OnInit, OnDestroy {
-  public isFullscreen: boolean = false;
-  public isLightMode: boolean = true;
-  public isFirst: boolean = false;
-  public isLast: boolean = false;
-  public isEnd: boolean = false;
-  public endFlag: boolean = false;
   public autoAdvance: string | null = '';
+  public endFlag: boolean = false;
+  public isEnd: boolean = false;
+  public isFirst: boolean = false;
+  public isFullscreen: boolean = false;
+  public isLast: boolean = false;
+  public isLightMode: boolean = true;
+  public seg!: any;
   public tune: string = 'on';
 
+  private document: Document = inject(DOCUMENT);
   private isBrowser: boolean;
-  private maxSteps: number = 100;
-  private slide: number = 0;
   private list!: HTMLUListElement;
+  private maxSteps: number = 100;
+  private platformId: Object = inject(PLATFORM_ID);
   private routeSubscription: Subscription;
   private shouldHide: boolean =
     globalThis?.history?.state['next'] !== false ||
     globalThis?.history?.state['next'] === true;
-
-  seg!: any;
-
+  private slide: number = 0;
   private scrollHandlerTimeout: any;
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    @Inject(DOCUMENT) private document: Document,
     private el: ElementRef,
     private router: Router,
     private route: ActivatedRoute,
   ) {
-    this.isBrowser = isPlatformBrowser(platformId);
+    this.isBrowser = isPlatformBrowser(this.platformId);
 
     this.routeSubscription = this.route.url.subscribe(
       (urlseg: UrlSegment[]) => {

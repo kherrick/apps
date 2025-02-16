@@ -13,54 +13,52 @@ import { XDialogService } from './x-dialog.service';
 
 @Component({
   selector: 'x-dialog',
-  standalone: true,
   imports: [CommonModule],
   template: `
-    <dialog #dialog class="dialog">
-      <div class="title">{{ dialogService.title }}</div>
-      <div class="content">
-        @if (dialogService.indeterminateProgress) {
-          <div class="progress-container">
-            <div class="progress circular indeterminate">
-              <progress indeterminate="">75%</progress>
+    <div dialog-container>
+      <dialog #dialog class="dialog">
+        <div class="title">{{ dialogService.title }}</div>
+        <div class="content">
+          @if (dialogService.indeterminateProgress) {
+            <div class="progress-container">
+              <div class="progress circular indeterminate">
+                <progress indeterminate="">75%</progress>
+              </div>
             </div>
-          </div>
-        }
-        <p>{{ dialogService.content }}</p>
-      </div>
-      <form (submit)="handleSubmit($event)" class="actions" method="dialog">
-        <button
-          *ngIf="
-            this.dialogService.cancelValue && this.dialogService.cancelText
-          "
-          #cancelButton
-          class="button cancel"
-          value="{{ dialogService.cancelValue }}"
-        >
-          {{ dialogService.cancelText }}
-        </button>
-        <button
-          #submitButton
-          class="button submit"
-          value="{{ dialogService.submitValue }}"
-        >
-          {{ dialogService.submitText }}
-        </button>
-      </form>
-    </dialog>
+          }
+          <p>{{ dialogService.content }}</p>
+        </div>
+        <form (submit)="handleSubmit($event)" class="actions" method="dialog">
+          <button
+            *ngIf="
+              this.dialogService.cancelValue && this.dialogService.cancelText
+            "
+            #cancelButton
+            class="button cancel"
+            value="{{ dialogService.cancelValue }}"
+          >
+            {{ dialogService.cancelText }}
+          </button>
+          <button
+            #submitButton
+            class="button submit"
+            value="{{ dialogService.submitValue }}"
+          >
+            {{ dialogService.submitText }}
+          </button>
+        </form>
+      </dialog>
+    </div>
   `,
   styles: [
     `
-      @use 'material-design-lite/css/components/button/style.css' as
-        button-style;
-      @use 'material-design-lite/css/components/dialog/style.css' as
-        dialog-style;
-      @use 'material-design-lite/css/components/progress-indicator/style.css' as
-        progress-style;
+      @use 'material-design-lite/css/components/button/style.css' as button-style;
+      @use 'material-design-lite/css/components/dialog/style.css' as dialog-style;
+      @use 'material-design-lite/css/components/progress-indicator/style.css' as progress-style;
 
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
 
-      :host {
+      [dialog-container] {
         left: 5%;
         margin: 2rem;
         position: absolute;

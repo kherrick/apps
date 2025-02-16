@@ -18,7 +18,7 @@ export const getDateString = (currentDate: string, dayChange: number = 0) => {
   const dateString = date.toISOString();
 
   return `${getYear(dateString)}-${pad(getMonth(dateString))}-${pad(
-    getDay(dateString)
+    getDay(dateString),
   )} @ 23:59:59`;
 };
 

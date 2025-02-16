@@ -4,7 +4,6 @@ import { SlideComponent } from '../shared/slide.component';
 
 @Component({
   selector: 'app-slide-007',
-  standalone: true,
   imports: [SlideComponent],
   template: `
     <app-slide>
@@ -16,16 +15,28 @@ import { SlideComponent } from '../shared/slide.component';
           Static site generation (and prerendering)
 
           <ul>
-            <li>Some languages used
+            <li>
+              Some languages used
               <ul>
                 <li>C#</li>
                 <li>Python</li>
                 <li>Elixir</li>
                 <li>Rust</li>
-                <li><a href="https://github.com/kherrick/hacker-news/blob/main/bin/build-html.js">JavaScript</a></li>
                 <li>
-                  <a href="https://github.com/kherrick/hacker-news/blob/main/bin/build-md.sh">bash</a>
-                  <a href="https://google.github.io/styleguide/shellguide.html#when-to-use-shell">*</a>
+                  <a
+                    href="https://github.com/kherrick/hacker-news/blob/main/bin/build-html.js"
+                    >JavaScript</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/kherrick/hacker-news/blob/main/bin/build-md.sh"
+                    >bash</a
+                  >
+                  <a
+                    href="https://google.github.io/styleguide/shellguide.html#when-to-use-shell"
+                    >*</a
+                  >
                 </li>
                 <li>etc.</li>
               </ul>

@@ -1,18 +1,27 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { addNewsItems } from '../shared/utilities/add-news-items';
-import { getArchives, getIndex, NewsWindow, UpdateQueue } from '../shared/utilities/state';
+import {
+  getArchives,
+  getIndex,
+  NewsWindow,
+  UpdateQueue,
+} from '../shared/utilities/state';
 
 import initialState from './soylent-news.json';
 
 @Component({
   selector: 'app-soylent-news',
-  standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <ng-container>
+    <div news>
       <h1>
         <a [routerLink]="'/news/soylent-news'">Soylent News</a>
       </h1>
@@ -21,30 +30,50 @@ import initialState from './soylent-news.json';
       </section>
       <section id="archives">
         <h2>
-          <a href="https://github.com/kherrick/soylent-news/blob/main/archives/index.md">Archives</a>
+          <a
+            href="https://github.com/kherrick/soylent-news/blob/main/archives/index.md"
+            >Archives</a
+          >
         </h2>
         <section>
           <h3>
-            <a href="https://github.com/kherrick/soylent-news/blob/main/archives/2022/index.md">2022</a>
+            <a
+              href="https://github.com/kherrick/soylent-news/blob/main/archives/2022/index.md"
+              >2022</a
+            >
           </h3>
         </section>
         <section>
           <h3>
-            <a href="https://github.com/kherrick/soylent-news/blob/main/archives/2023/index.md">2023</a>
+            <a
+              href="https://github.com/kherrick/soylent-news/blob/main/archives/2023/index.md"
+              >2023</a
+            >
           </h3>
         </section>
         <section>
           <h3>
-            <a href="https://github.com/kherrick/soylent-news/blob/main/archives/2024/index.md">2024</a>
+            <a
+              href="https://github.com/kherrick/soylent-news/blob/main/archives/2024/index.md"
+              >2024</a
+            >
+          </h3>
+        </section>
+        <section>
+          <h3>
+            <a
+              href="https://github.com/kherrick/soylent-news/blob/main/archives/2025/index.md"
+              >2025</a
+            >
           </h3>
         </section>
       </section>
-    </ng-container>
+    </div>
   `,
   styleUrls: ['../shared/styles/news.scss'],
   styles: [
     `
-      :host {
+      [news] {
         --news-heading-background: linear-gradient(#600, #933);
       }
     `,
@@ -52,7 +81,8 @@ import initialState from './soylent-news.json';
   encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class SoylentNewsComponent implements OnInit {
-  dataUrl: string = 'https://raw.githubusercontent.com/kherrick/soylent-news/main/archives/';
+  dataUrl: string =
+    'https://raw.githubusercontent.com/kherrick/soylent-news/main/archives/';
   shadowRoot: ShadowRoot;
 
   constructor(el: ElementRef) {
@@ -74,8 +104,11 @@ export class SoylentNewsComponent implements OnInit {
     if ('IntersectionObserver' in globalThis) {
       getArchives(this.shadowRoot, newsState, queue, this.dataUrl);
 
-      (this.shadowRoot.querySelector('#latest') as HTMLElement).style.display = 'block';
-      (this.shadowRoot.querySelector('#archives') as HTMLElement).style.display = 'block';
+      (this.shadowRoot.querySelector('#latest') as HTMLElement).style.display =
+        'block';
+      (
+        this.shadowRoot.querySelector('#archives') as HTMLElement
+      ).style.display = 'block';
     }
   }
 }

@@ -11,10 +11,7 @@ describe('XRootComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [XRootComponent],
-      providers: [
-        provideRouter([]),
-        { provide: SwUpdate, useValue: {} }
-      ],
+      providers: [provideRouter([]), { provide: SwUpdate, useValue: {} }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(XRootComponent);

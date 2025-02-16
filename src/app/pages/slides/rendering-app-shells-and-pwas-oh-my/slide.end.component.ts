@@ -4,7 +4,6 @@ import { SlideComponent } from '../shared/slide.component';
 
 @Component({
   selector: 'app-slide-end',
-  standalone: true,
   imports: [SlideComponent],
   template: `
     <app-slide end>

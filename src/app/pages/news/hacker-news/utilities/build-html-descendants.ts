@@ -1,7 +1,7 @@
 export const buildDescendants = (
   document: Document,
   descendants = '',
-  itemComments = ''
+  itemComments = '',
 ) => {
   const descendantsCountText = document.createElement('span');
   descendantsCountText.setAttribute('class', 'descendants');

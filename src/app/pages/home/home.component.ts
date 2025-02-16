@@ -7,13 +7,14 @@ import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-home',
-  standalone: true,
   imports: [CommonModule, MatButtonModule, MatCardModule, RouterModule],
   template: `
     <section app-section-cards>
       <mat-card appearance="raised">
         <mat-card-header [routerLink]="'/news'">
-          <mat-card-title> News <i class="material-icons">newspaper</i> </mat-card-title>
+          <mat-card-title>
+            News <i class="material-icons">newspaper</i>
+          </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <a [routerLink]="'/news'">Recent news items</a>
@@ -24,7 +25,9 @@ import { MatCardModule } from '@angular/material/card';
       </mat-card>
       <mat-card appearance="raised">
         <mat-card-header [routerLink]="'/feeds'">
-          <mat-card-title> Feeds <i class="material-icons">feed</i> </mat-card-title>
+          <mat-card-title>
+            Feeds <i class="material-icons">feed</i>
+          </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <a [routerLink]="'/feeds'">Posts from various feeds</a>
@@ -35,25 +38,36 @@ import { MatCardModule } from '@angular/material/card';
       </mat-card>
       <mat-card appearance="raised">
         <mat-card-header [routerLink]="'/playground'">
-          <mat-card-title> Playground <i class="material-icons">developer_board</i> </mat-card-title>
+          <mat-card-title>
+            Playground <i class="material-icons">developer_board</i>
+          </mat-card-title>
         </mat-card-header>
-        <mat-card-content> A <a [routerLink]="'/playground'">playground</a> for ideas and experimentation.</mat-card-content>
+        <mat-card-content>
+          A <a [routerLink]="'/playground'">playground</a> for ideas and
+          experimentation.</mat-card-content
+        >
         <mat-card-actions>
           <button mat-button [routerLink]="'/playground'">Go</button>
         </mat-card-actions>
       </mat-card>
       <mat-card appearance="raised">
         <mat-card-header [routerLink]="'/links'">
-          <mat-card-title> Links <i class="material-icons">share</i> </mat-card-title>
+          <mat-card-title>
+            Links <i class="material-icons">share</i>
+          </mat-card-title>
         </mat-card-header>
-        <mat-card-content> <a [routerLink]="'/links'">Links</a> to other sites </mat-card-content>
+        <mat-card-content>
+          <a [routerLink]="'/links'">Links</a> to other sites
+        </mat-card-content>
         <mat-card-actions>
           <button mat-button [routerLink]="'/links'">Go</button>
         </mat-card-actions>
       </mat-card>
       <mat-card appearance="raised">
         <mat-card-header [routerLink]="'/slides'">
-          <mat-card-title> Slides <i class="material-icons">slideshow</i> </mat-card-title>
+          <mat-card-title>
+            Slides <i class="material-icons">slideshow</i>
+          </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <a [routerLink]="'/slides'">Slides for presentations</a>
@@ -64,9 +78,13 @@ import { MatCardModule } from '@angular/material/card';
       </mat-card>
       <mat-card appearance="raised">
         <mat-card-header [routerLink]="'/about'">
-          <mat-card-title> About <i class="material-icons">help</i> </mat-card-title>
+          <mat-card-title>
+            About <i class="material-icons">help</i>
+          </mat-card-title>
         </mat-card-header>
-        <mat-card-content> What is this all <a [routerLink]="'/about'">about</a>? </mat-card-content>
+        <mat-card-content>
+          What is this all <a [routerLink]="'/about'">about</a>?
+        </mat-card-content>
         <mat-card-actions>
           <button mat-button [routerLink]="'/about'">Go</button>
         </mat-card-actions>
@@ -100,7 +118,10 @@ import { MatCardModule } from '@angular/material/card';
 
         mat-card-header {
           align-items: center;
-          background-color: var(--card-heading-background, var(--md-ref-palette-neutral30));
+          background-color: var(
+            --card-heading-background,
+            var(--md-ref-palette-neutral30)
+          );
           border-radius: 0.25rem 0.25rem 0 0;
           color: var(--card-heading-color, #fff);
           cursor: pointer;
@@ -147,7 +168,10 @@ import { MatCardModule } from '@angular/material/card';
         }
 
         .mat-mdc-button:not(:disabled) {
-          --mdc-text-button-label-text-color: var(--md-ref-palette-neutral100, #fff);
+          --mdc-text-button-label-text-color: var(
+            --md-ref-palette-neutral100,
+            #fff
+          );
 
           background-color: var(--md-ref-palette-neutral50);
         }

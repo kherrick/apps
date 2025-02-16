@@ -4,7 +4,6 @@ import { SlideComponent } from '../shared/slide.component';
 
 @Component({
   selector: 'app-slide-004',
-  standalone: true,
   imports: [SlideComponent],
   template: `
     <app-slide>
@@ -15,7 +14,11 @@ import { SlideComponent } from '../shared/slide.component';
         <li>
           Client side rendering
           <ul>
-            <li><a href="https://eager.io/blog/a-brief-history-of-weird-scripting-languages/">Some languages traditionally not used</a>
+            <li>
+              <a
+                href="https://eager.io/blog/a-brief-history-of-weird-scripting-languages/"
+                >Some languages traditionally not used</a
+              >
               <ul>
                 <li>Python</li>
                 <li>tcl</li>
@@ -25,12 +28,22 @@ import { SlideComponent } from '../shared/slide.component';
             </li>
           </ul>
           <ul>
-            <li>Current browser supported languages
+            <li>
+              Current browser supported languages
               <ul>
                 <li>JavaScript</li>
                 <li>Wasm</li>
-                <li><a href="https://github.com/jashkenas/coffeescript/wiki/List-of-languages-that-compile-to-JS">Languages that compile to JavaScript</a></li>
-                <li><a href="https://github.com/appcypher/awesome-wasm-langs">Languages that compile to Wasm</a></li>
+                <li>
+                  <a
+                    href="https://github.com/jashkenas/coffeescript/wiki/List-of-languages-that-compile-to-JS"
+                    >Languages that compile to JavaScript</a
+                  >
+                </li>
+                <li>
+                  <a href="https://github.com/appcypher/awesome-wasm-langs"
+                    >Languages that compile to Wasm</a
+                  >
+                </li>
               </ul>
             </li>
           </ul>

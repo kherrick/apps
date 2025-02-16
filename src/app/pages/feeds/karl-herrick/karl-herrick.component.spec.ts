@@ -10,9 +10,8 @@ describe('KarlHerrickComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [KarlHerrickComponent],
-      providers: [provideHttpClient()]
-    })
-    .compileComponents();
+      providers: [provideHttpClient()],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(KarlHerrickComponent);
     component = fixture.componentInstance;

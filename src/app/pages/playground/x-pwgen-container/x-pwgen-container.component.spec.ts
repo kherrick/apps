@@ -8,9 +8,8 @@ describe('XPwgenContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ XPwgenContainerComponent ]
-    })
-    .compileComponents();
+      imports: [XPwgenContainerComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(XPwgenContainerComponent);
     component = fixture.componentInstance;

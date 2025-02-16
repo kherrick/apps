@@ -1,4 +1,4 @@
-import { getNextDateTime } from 'src/app/pages/news/shared/utilities/date-time';
+import { getNextDateTime } from '../../../../../app/pages/news/shared/utilities/date-time';
 
 import { addNewsItems } from './add-news-items';
 import { buildArchiveIndex } from './build-archive-index';
@@ -25,11 +25,11 @@ export const hackerNewsWindow = globalThis as any & {
 export const getArchives = (
   shadowRoot: ShadowRoot,
   hackerNewsState: HackerNewsState,
-  queue: UpdateQueue
+  queue: UpdateQueue,
 ) => {
   const handleIntersectingEntry = async (
     entry: IntersectionObserverEntry,
-    queue: UpdateQueue
+    queue: UpdateQueue,
   ) => {
     if (entry.isIntersecting) {
       await getIndex(-1, shadowRoot);
@@ -47,13 +47,13 @@ export const getArchives = (
 
   const archivesObserverHandler = (entries: IntersectionObserverEntry[]) => {
     entries.forEach(async (entry: IntersectionObserverEntry) =>
-      handleIntersectingEntry(entry, queue)
+      handleIntersectingEntry(entry, queue),
     );
   };
 
   const archivesObserver = new IntersectionObserver(
     archivesObserverHandler,
-    archivesObserverOptions
+    archivesObserverOptions,
   );
 
   setTimeout(() => {
@@ -71,7 +71,7 @@ export const getArchives = (
     }
 
     for (let section of Array.from(
-      shadowRoot.querySelectorAll('#latest > section')
+      shadowRoot.querySelectorAll('#latest > section'),
     )) {
       (section as HTMLElement).style.display = latestSectionsExpanded
         ? 'block'
@@ -86,7 +86,7 @@ export const getArchives = (
 
 export const getIndex = async (
   dayChange: number = 0,
-  shadowRoot: ShadowRoot
+  shadowRoot: ShadowRoot,
 ) => {
   const lastDateTime = (
     shadowRoot?.getElementById('latest') as HTMLElement
@@ -102,11 +102,11 @@ export const getIndex = async (
   }
 
   const nextTimeIndex = archiveIndex.findIndex(
-    ({ time }: { time: string }) => time === nextDateTime?.slice(-8)
+    ({ time }: { time: string }) => time === nextDateTime?.slice(-8),
   );
   const handleIndexUpdate = (
     index: HackerNewsItem[],
-    existingIndexValues: HackerNewsItem[] = []
+    existingIndexValues: HackerNewsItem[] = [],
   ) => {
     index.forEach((i: HackerNewsItem) => {
       existingIndexValues.push(i);
@@ -119,7 +119,7 @@ export const getIndex = async (
     ...hackerNewsWindow.hackerNewsState,
     index: handleIndexUpdate(
       archiveIndex,
-      hackerNewsWindow.hackerNewsState.index
+      hackerNewsWindow.hackerNewsState.index,
     ),
     nextTimeIndex,
   };
@@ -127,7 +127,7 @@ export const getIndex = async (
 
 export const updateSectionById = (
   id: string,
-  shadowRoot: ShadowRoot
+  shadowRoot: ShadowRoot,
 ): Promise<JSON | void> =>
   fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(
     (result) =>
@@ -148,7 +148,7 @@ export const updateSectionById = (
             const comments = buildDescendants(
               document,
               descendants,
-              `https://news.ycombinator.com/item?id=${id}`
+              `https://news.ycombinator.com/item?id=${id}`,
             );
 
             const heading = currentItem.querySelector('h4') as HTMLElement;
@@ -169,7 +169,7 @@ export const updateSectionById = (
             currentItem.appendChild(content);
           }
         }
-      })
+      }),
   );
 
 export class UpdateQueue {

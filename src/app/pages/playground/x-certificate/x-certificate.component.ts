@@ -16,153 +16,154 @@ import '@material/web/button/outlined-button.js';
 
 import { asn1, pkcs12, pki, util } from 'node-forge';
 
-import { XDialogService } from 'src/app/shell/x-dialog/x-dialog.service';
+import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service';
 
 @Component({
   selector: 'x-certificate',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  standalone: true,
   imports: [MatInputModule, MatButtonModule, MatIconModule],
   template: `
-    <div class="certificate-container">
-      <section>
-        <header>
-          <h1>&lt;x-certificate&gt;</h1>
-          <p>
-            Use the inputs below to generate a password protected pfx file, or
-            load one at the bottom to see the generated response.
-          </p>
-        </header>
-      </section>
-      <mat-form-field>
-        <mat-label>Country Name (2 letter code)</mat-label>
-        <input
-          (input)="countryName = countryNameInput.value"
-          [value]="countryName"
-          #countryNameInput
-          matInput
-          type="text"
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>State or Province Name (full name)</mat-label>
-        <input
-          (input)="stateOrProvinceName = stateOrProvinceNameInput.value"
-          [value]="stateOrProvinceName"
-          #stateOrProvinceNameInput
-          matInput
-          type="text"
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Locality Name (eg, city)</mat-label>
-        <input
-          (input)="localityName = localityNameInput.value"
-          [value]="localityName"
-          #localityNameInput
-          matInput
-          type="text"
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Organization Name (eg, company)</mat-label>
-        <input
-          (input)="organizationName = organizationNameInput.value"
-          [value]="organizationName"
-          #organizationNameInput
-          matInput
-          type="text"
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Organizational Unit Name (eg, section)</mat-label>
-        <input
-          (input)="organizationalUnitName = organizationalUnitNameInput.value"
-          [value]="organizationalUnitName"
-          #organizationalUnitNameInput
-          matInput
-          type="text"
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Common Name (e.g. server FQDN or YOUR name)</mat-label>
-        <input
-          (input)="commonName = commonNameInput.value"
-          [value]="commonName"
-          #commonNameInput
-          matInput
-          type="text"
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Email Address</mat-label>
-        <input
-          (input)="emailAddress = emailAddressInput.value"
-          [value]="emailAddress"
-          #emailAddressInput
-          matInput
-          type="text"
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Bits (key length)</mat-label>
-        <input
-          (input)="bits = getNumber(bitsInput.value)"
-          [value]="bits"
-          #bitsInput
-          matInput
-          type="number"
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input
-          (input)="passwordChange($event)"
-          [value]="password"
-          #passwordInput
-          matInput
-          type="password"
-        />
-        @if (password) {
-          <button
-            aria-label="Clear"
-            mat-icon-button
-            matSuffix
-            (click)="
-              passwordInput.type === 'password'
-                ? (passwordInput.type = 'text')
-                : (passwordInput.type = 'password')
-            "
+    <div certificate-container>
+      <div certificate>
+        <section>
+          <header>
+            <h1>&lt;x-certificate&gt;</h1>
+            <p>
+              Use the inputs below to generate a password protected pfx file, or
+              load one at the bottom to see the generated response.
+            </p>
+          </header>
+        </section>
+        <mat-form-field>
+          <mat-label>Country Name (2 letter code)</mat-label>
+          <input
+            (input)="countryName = countryNameInput.value"
+            [value]="countryName"
+            #countryNameInput
+            matInput
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>State or Province Name (full name)</mat-label>
+          <input
+            (input)="stateOrProvinceName = stateOrProvinceNameInput.value"
+            [value]="stateOrProvinceName"
+            #stateOrProvinceNameInput
+            matInput
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Locality Name (eg, city)</mat-label>
+          <input
+            (input)="localityName = localityNameInput.value"
+            [value]="localityName"
+            #localityNameInput
+            matInput
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Organization Name (eg, company)</mat-label>
+          <input
+            (input)="organizationName = organizationNameInput.value"
+            [value]="organizationName"
+            #organizationNameInput
+            matInput
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Organizational Unit Name (eg, section)</mat-label>
+          <input
+            (input)="organizationalUnitName = organizationalUnitNameInput.value"
+            [value]="organizationalUnitName"
+            #organizationalUnitNameInput
+            matInput
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Common Name (e.g. server FQDN or YOUR name)</mat-label>
+          <input
+            (input)="commonName = commonNameInput.value"
+            [value]="commonName"
+            #commonNameInput
+            matInput
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email Address</mat-label>
+          <input
+            (input)="emailAddress = emailAddressInput.value"
+            [value]="emailAddress"
+            #emailAddressInput
+            matInput
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Bits (key length)</mat-label>
+          <input
+            (input)="bits = getNumber(bitsInput.value)"
+            [value]="bits"
+            #bitsInput
+            matInput
+            type="number"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input
+            (input)="passwordChange($event)"
+            [value]="password"
+            #passwordInput
+            matInput
+            type="password"
+          />
+          @if (password) {
+            <button
+              aria-label="Clear"
+              mat-icon-button
+              matSuffix
+              (click)="
+                passwordInput.type === 'password'
+                  ? (passwordInput.type = 'text')
+                  : (passwordInput.type = 'password')
+              "
+            >
+              <mat-icon>{{
+                passwordInput.type === 'password'
+                  ? 'visibility'
+                  : 'visibility_off'
+              }}</mat-icon>
+            </button>
+          }
+        </mat-form-field>
+
+        <div>
+          <md-outlined-button
+            (click)="handleCertificateGeneration()"
+            mat-stroked-button
           >
-            <mat-icon>{{
-              passwordInput.type === 'password'
-                ? 'visibility'
-                : 'visibility_off'
-            }}</mat-icon>
-          </button>
-        }
-      </mat-form-field>
+            Create Certificate
+          </md-outlined-button>
+        </div>
 
-      <div>
-        <md-outlined-button
-          (click)="handleCertificateGeneration()"
-          mat-stroked-button
-        >
-          Create Certificate
-        </md-outlined-button>
-      </div>
-
-      <div class="link-container">
-        <a #link href=""></a>
-      </div>
-      <div class="load-certificate-container">
-        <label for="testCertInput">load pfx file: </label>
-        <input
-          (change)="handleCertificateInputChange($event)"
-          #testCertInput
-          id="testCerTInput"
-          type="file"
-        />
+        <div class="link-container">
+          <a #link href=""></a>
+        </div>
+        <div class="load-certificate-container">
+          <label for="testCertInput">load pfx file: </label>
+          <input
+            (change)="handleCertificateInputChange($event)"
+            #testCertInput
+            id="testCerTInput"
+            type="file"
+          />
+        </div>
       </div>
     </div>
   `,
@@ -170,69 +171,73 @@ import { XDialogService } from 'src/app/shell/x-dialog/x-dialog.service';
     @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
 
     :host {
-      align-items: center;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      grid-column-gap: 1rem;
-      grid-row-gap: 1rem;
-      justify-content: center;
-      padding: 0 1rem 1rem 1rem;
-
       --md-outlined-button-container-shape: 1rem;
       --md-outlined-button-disabled-label-text-color: var(
         --md-sys-color-on-surface
       );
 
-      .certificate-container {
-        max-width: 60rem;
-      }
-    }
+      [certificate-container] {
+        display: flex;
+        justify-content: center;
 
-    .load-certificate-container {
-      align-items: center;
-      border-radius: 1rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      margin-top: 1rem;
-      outline: var(--x-shell-default-outline);
-      padding: 1rem 0 1rem 3.5rem;
-      text-align: center;
+        [certificate] {
+          align-items: center;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          grid-column-gap: 1rem;
+          grid-row-gap: 1rem;
+          justify-content: center;
+          max-width: 60rem;
+          padding: 0 1rem 1rem 1rem;
+        }
 
-      label {
-        margin-bottom: 0.25rem;
-      }
-    }
+        .load-certificate-container {
+          align-items: center;
+          border-radius: 1rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-top: 1rem;
+          outline: var(--x-shell-default-outline);
+          padding: 1rem 0 1rem 3.5rem;
+          text-align: center;
 
-    .link-container {
-      text-align: left;
-      width: 100%;
-    }
+          label {
+            margin-bottom: 0.25rem;
+          }
+        }
 
-    .text-container:first-of-type {
-      margin-bottom: 1rem;
-    }
+        .link-container {
+          text-align: left;
+          width: 100%;
+        }
 
-    .text-container {
-      display: flex;
-      flex-direction: column;
-    }
+        .text-container:first-of-type {
+          margin-bottom: 1rem;
+        }
 
-    md-outlined-button {
-      margin: 0.5rem;
-    }
+        .text-container {
+          display: flex;
+          flex-direction: column;
+        }
 
-    mat-form-field:has(input) {
-      width: 100%;
-    }
+        md-outlined-button {
+          margin: 0.5rem;
+        }
 
-    section {
-      text-align: center;
-      width: 100%;
+        mat-form-field:has(input) {
+          width: 100%;
+        }
 
-      button {
-        margin-right: 1rem;
+        section {
+          text-align: center;
+          width: 100%;
+
+          button {
+            margin-right: 1rem;
+          }
+        }
       }
     }
   `,

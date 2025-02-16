@@ -5,7 +5,9 @@ export const serverSideRoutes = [
   {
     path: 'shell',
     loadComponent: () =>
-      import('./shell/x-shell/x-shell.component').then((x) => x.XShellComponent),
+      import('./shell/x-shell/x-shell.component').then(
+        (x) => x.XShellComponent,
+      ),
   },
   {
     path: '**',

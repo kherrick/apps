@@ -8,7 +8,7 @@ describe('LinksComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [LinksComponent]
+      imports: [LinksComponent],
     });
     fixture = TestBed.createComponent(LinksComponent);
     component = fixture.componentInstance;

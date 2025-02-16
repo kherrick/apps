@@ -10,9 +10,8 @@ describe('InfinitymComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [InfinitymComponent],
-      providers: [provideHttpClient()]
-    })
-    .compileComponents();
+      providers: [provideHttpClient()],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(InfinitymComponent);
     component = fixture.componentInstance;

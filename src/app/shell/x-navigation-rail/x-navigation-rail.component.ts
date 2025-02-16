@@ -9,7 +9,6 @@ import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'x-navigation-rail',
-  standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
     <aside id="nav-rail" class="navigation-rail">
@@ -93,10 +92,8 @@ import { Router, RouterModule } from '@angular/router';
   `,
   styles: [
     `
-      @use 'material-design-lite/css/components/navigation-icon/style.css' as
-        navigation-icon-style;
-      @use 'material-design-lite/css/components/navigation-rail/style.css' as
-        navigation-rail-style;
+      @use 'material-design-lite/css/components/navigation-icon/style.css' as navigation-icon-style;
+      @use 'material-design-lite/css/components/navigation-rail/style.css' as navigation-rail-style;
 
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
 
@@ -107,7 +104,7 @@ import { Router, RouterModule } from '@angular/router';
         --md-comp-navigation-rail-container-height: 100vh;
 
         min-height: var(--md-comp-navigation-rail-container-height);
-        min-width: var(--md-comp-navigation-rail-container-width);
+        min-width: 0;
       }
 
       :is(.navigation-rail) {

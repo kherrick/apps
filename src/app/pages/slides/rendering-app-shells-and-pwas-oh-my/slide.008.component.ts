@@ -4,7 +4,6 @@ import { SlideComponent } from '../shared/slide.component';
 
 @Component({
   selector: 'app-slide-008',
-  standalone: true,
   imports: [SlideComponent],
   template: `
     <app-slide>
@@ -16,10 +15,16 @@ import { SlideComponent } from '../shared/slide.component';
           Pros
           <ul>
             <li>
-              Consistently fast <a href="https://en.wikipedia.org/wiki/Time_to_first_byte">Time To First Byte</a>
+              Consistently fast
+              <a href="https://en.wikipedia.org/wiki/Time_to_first_byte"
+                >Time To First Byte</a
+              >
             </li>
             <li>
-              Can take advantage of CDN "<a href="https://techterms.com/definition/edge_caching">edge caching</a>"
+              Can take advantage of CDN "<a
+                href="https://techterms.com/definition/edge_caching"
+                >edge caching</a
+              >"
             </li>
           </ul>
         </li>

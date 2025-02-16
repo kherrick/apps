@@ -4,11 +4,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 
-import { Themes, ThemeService } from 'src/app/shell/theme/theme.service';
+import { Themes, ThemeService } from '../../../app/shell/theme/theme.service';
 
 @Component({
   selector: 'x-top-app-bar',
-  standalone: true,
   imports: [CommonModule, RouterModule, MatToolbarModule, MatIconModule],
   template: `
     <mat-toolbar>
@@ -68,6 +67,11 @@ import { Themes, ThemeService } from 'src/app/shell/theme/theme.service';
 
       :host {
         --md-sys-comp-top-app-bar-padding: 1rem;
+        --mat-toolbar-standard-height: 4rem;
+
+        height: var(--mat-toolbar-standard-height);
+        min-height: var(--mat-toolbar-standard-height);
+        max-height: var(--mat-toolbar-standard-height);
       }
 
       #top-app-drawer-btn {

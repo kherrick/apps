@@ -22,7 +22,6 @@ import initialState from './hacker-news.json';
 
 @Component({
   selector: 'app-hacker-news',
-  standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
     <ng-container>
@@ -64,6 +63,15 @@ import initialState from './hacker-news.json';
               href="https://github.com/kherrick/hacker-news/blob/main/archives/2024/index.md"
             >
               2024
+            </a>
+          </h3>
+        </section>
+        <section>
+          <h3>
+            <a
+              href="https://github.com/kherrick/hacker-news/blob/main/archives/2025/index.md"
+            >
+              2025
             </a>
           </h3>
         </section>

@@ -1,19 +1,20 @@
 import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
+
 import {
   Component,
   ElementRef,
-  Inject,
   OnDestroy,
   OnInit,
   PLATFORM_ID,
   ViewChild,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 
 import { Subject, Subscription } from 'rxjs';
 
-import { XDialogService } from 'src/app/shell/x-dialog/x-dialog.service';
-import { environment } from 'src/environments/environment';
+import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service';
+import { environment } from '../../../../environments/environment';
 
 import { clear, isOperation } from './utils';
 
@@ -29,200 +30,191 @@ export interface CalculatorModel {
 
 @Component({
   selector: 'x-calculator',
-  standalone: true,
   imports: [CommonModule],
   template: `
-    <section>
-      <header>
-        <h1>&lt;x-calculator&gt;</h1>
-        <p>
-          An experiment with Wasm using
-          <a
-            href="https://karlherrick.com/2022/11/27/c-sharp-in-the-browser-without-blazor/"
-            >C# in the browser without the Blazor framework</a
-          >
-        </p>
-      </header>
-    </section>
-    <section app-section>
-      <div class="column">
-        <div class="row">
-          <label class="text-field outlined">
-            <input
-              (keydown)="handleResultKeydown($event)"
-              (beforeInput)="handleResultBeforeInput($event)"
-              type="text"
-              inputMode="none"
-              id="result"
-              #result
-            />
-            <span>Calculator</span>
-          </label>
-          <button
-            type="button"
-            (click)="buttonHandler($event)"
-            (keydown)="buttonHandler($event)"
-            value="c"
-            #clear
-          >
-            c
-          </button>
+    <div calculator-container>
+      <section>
+        <header>
+          <h1>&lt;x-calculator&gt;</h1>
+          <p>
+            An experiment with Wasm using
+            <a
+              href="https://karlherrick.com/2022/11/27/c-sharp-in-the-browser-without-blazor/"
+              >C# in the browser without the Blazor framework</a
+            >
+          </p>
+        </header>
+      </section>
+      <section app-section>
+        <div class="column">
+          <div class="row">
+            <label class="text-field outlined">
+              <input
+                (keydown)="handleResultKeydown($event)"
+                (beforeInput)="handleResultBeforeInput($event)"
+                type="text"
+                inputMode="none"
+                id="result"
+                #result
+              />
+              <span>Calculator</span>
+            </label>
+            <button
+              type="button"
+              (click)="buttonHandler($event)"
+              (keydown)="buttonHandler($event)"
+              value="c"
+              #clear
+            >
+              c
+            </button>
+          </div>
+          <div class="row">
+            <button
+              type="button"
+              (click)="buttonHandler($event)"
+              (keydown)="buttonHandler($event)"
+              value="1"
+            >
+              1
+            </button>
+            <button
+              type="button"
+              (click)="buttonHandler($event)"
+              (keydown)="buttonHandler($event)"
+              value="2"
+            >
+              2
+            </button>
+            <button
+              type="button"
+              (click)="buttonHandler($event)"
+              (keydown)="buttonHandler($event)"
+              value="3"
+            >
+              3
+            </button>
+            <button
+              type="button"
+              (click)="buttonHandler($event)"
+              (keydown)="buttonHandler($event)"
+              value="/"
+            >
+              /
+            </button>
+          </div>
+          <div class="row">
+            <button
+              type="button"
+              (click)="buttonHandler($event)"
+              (keydown)="buttonHandler($event)"
+              value="4"
+            >
+              4
+            </button>
+            <button
+              type="button"
+              (click)="buttonHandler($event)"
+              (keydown)="buttonHandler($event)"
+              value="5"
+            >
+              5
+            </button>
+            <button
+              type="button"
+              (click)="buttonHandler($event)"
+              (keydown)="buttonHandler($event)"
+              value="6"
+            >
+              6
+            </button>
+            <button
+              type="button"
+              (click)="buttonHandler($event)"
+              (keydown)="buttonHandler($event)"
+              value="*"
+            >
+              *
+            </button>
+          </div>
+          <div class="row">
+            <button
+              type="button"
+              (click)="buttonHandler($event)"
+              (keydown)="buttonHandler($event)"
+              value="7"
+            >
+              7
+            </button>
+            <button
+              type="button"
+              (click)="buttonHandler($event)"
+              (keydown)="buttonHandler($event)"
+              value="8"
+            >
+              8
+            </button>
+            <button
+              type="button"
+              (click)="buttonHandler($event)"
+              (keydown)="buttonHandler($event)"
+              value="9"
+            >
+              9
+            </button>
+            <button
+              type="button"
+              (click)="buttonHandler($event)"
+              (keydown)="buttonHandler($event)"
+              value="-"
+            >
+              -
+            </button>
+          </div>
+          <div class="row">
+            <button
+              type="button"
+              (click)="buttonHandler($event)"
+              (keydown)="buttonHandler($event)"
+              value="0"
+            >
+              0
+            </button>
+            <button
+              type="button"
+              (click)="buttonHandler($event)"
+              (keydown)="buttonHandler($event)"
+              value="."
+            >
+              .
+            </button>
+            <button
+              type="button"
+              (click)="buttonHandler($event)"
+              (keydown)="buttonHandler($event)"
+              value="="
+            >
+              =
+            </button>
+            <button
+              type="button"
+              (click)="buttonHandler($event)"
+              (keydown)="buttonHandler($event)"
+              value="+"
+            >
+              +
+            </button>
+          </div>
         </div>
-        <div class="row">
-          <button
-            type="button"
-            (click)="buttonHandler($event)"
-            (keydown)="buttonHandler($event)"
-            value="1"
-          >
-            1
-          </button>
-          <button
-            type="button"
-            (click)="buttonHandler($event)"
-            (keydown)="buttonHandler($event)"
-            value="2"
-          >
-            2
-          </button>
-          <button
-            type="button"
-            (click)="buttonHandler($event)"
-            (keydown)="buttonHandler($event)"
-            value="3"
-          >
-            3
-          </button>
-          <button
-            type="button"
-            (click)="buttonHandler($event)"
-            (keydown)="buttonHandler($event)"
-            value="/"
-          >
-            /
-          </button>
-        </div>
-        <div class="row">
-          <button
-            type="button"
-            (click)="buttonHandler($event)"
-            (keydown)="buttonHandler($event)"
-            value="4"
-          >
-            4
-          </button>
-          <button
-            type="button"
-            (click)="buttonHandler($event)"
-            (keydown)="buttonHandler($event)"
-            value="5"
-          >
-            5
-          </button>
-          <button
-            type="button"
-            (click)="buttonHandler($event)"
-            (keydown)="buttonHandler($event)"
-            value="6"
-          >
-            6
-          </button>
-          <button
-            type="button"
-            (click)="buttonHandler($event)"
-            (keydown)="buttonHandler($event)"
-            value="*"
-          >
-            *
-          </button>
-        </div>
-        <div class="row">
-          <button
-            type="button"
-            (click)="buttonHandler($event)"
-            (keydown)="buttonHandler($event)"
-            value="7"
-          >
-            7
-          </button>
-          <button
-            type="button"
-            (click)="buttonHandler($event)"
-            (keydown)="buttonHandler($event)"
-            value="8"
-          >
-            8
-          </button>
-          <button
-            type="button"
-            (click)="buttonHandler($event)"
-            (keydown)="buttonHandler($event)"
-            value="9"
-          >
-            9
-          </button>
-          <button
-            type="button"
-            (click)="buttonHandler($event)"
-            (keydown)="buttonHandler($event)"
-            value="-"
-          >
-            -
-          </button>
-        </div>
-        <div class="row">
-          <button
-            type="button"
-            (click)="buttonHandler($event)"
-            (keydown)="buttonHandler($event)"
-            value="0"
-          >
-            0
-          </button>
-          <button
-            type="button"
-            (click)="buttonHandler($event)"
-            (keydown)="buttonHandler($event)"
-            value="."
-          >
-            .
-          </button>
-          <button
-            type="button"
-            (click)="buttonHandler($event)"
-            (keydown)="buttonHandler($event)"
-            value="="
-          >
-            =
-          </button>
-          <button
-            type="button"
-            (click)="buttonHandler($event)"
-            (keydown)="buttonHandler($event)"
-            value="+"
-          >
-            +
-          </button>
-        </div>
-      </div>
-    </section>
+      </section>
+    </div>
   `,
   styles: [
     `
-      @use 'material-design-lite/css/components/button/style.css' as
-        button-style;
-      @use 'material-design-lite/css/components/text-field/style.css' as
-        text-field-style;
+      @use 'material-design-lite/css/components/button/style.css' as button-style;
+      @use 'material-design-lite/css/components/text-field/style.css' as text-field-style;
 
-      [app-section] {
-        display: flex;
-        height: 100%;
-        justify-content: center;
-        overflow: hidden;
-        position: relative;
-      }
-
-      :host {
+      [calculator-container] {
         align-items: center;
         display: flex;
         flex-direction: column;
@@ -247,6 +239,24 @@ export interface CalculatorModel {
           height: 6rem;
         }
 
+        :is(.text-field).outlined {
+          outline: none;
+        }
+
+        [app-section] {
+          align-items: center;
+          display: flex;
+          height: 100%;
+          justify-content: center;
+          overflow: hidden;
+          position: relative;
+        }
+
+        section {
+          text-align: center;
+          width: 100%;
+        }
+
         h1 {
           font-size: larger;
           font-weight: bold;
@@ -266,6 +276,10 @@ export interface CalculatorModel {
         button:hover {
           background-color: var(--md-sys-color-secondary);
           color: var(--md-sys-color-on-secondary);
+        }
+
+        button:focus-visible {
+          outline: 2px solid var(--md-sys-color-primary);
         }
 
         button[value='c'] {
@@ -292,21 +306,18 @@ export interface CalculatorModel {
           opacity: 0;
         }
       }
-
-      section {
-        text-align: center;
-        width: 100%;
-      }
     `,
   ],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class XCalculatorComponent implements OnInit, OnDestroy {
+  private calculator = null; // define placeholder for instance of C# calculator
+  private dialogService: XDialogService = inject(XDialogService);
+  private dialogSubscription: Subscription;
+  private document: Document = inject(DOCUMENT);
   private isBrowser: boolean;
   private isReady: Subject<boolean> = new Subject<boolean>();
-  private dialogSubscription: Subscription;
-
-  private calculator = null; // define placeholder for instance of C# calculator
+  private platformId: Object = inject(PLATFORM_ID);
 
   public results = 'loading...';
   public isDialogOpen = false;
@@ -324,13 +335,8 @@ export class XCalculatorComponent implements OnInit, OnDestroy {
 
   nativeElement!: HTMLElement;
 
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-    @Inject(PLATFORM_ID) private platformId: Object,
-    @Inject(XDialogService) public dialogService: XDialogService,
-    el: ElementRef,
-  ) {
-    this.isBrowser = isPlatformBrowser(platformId);
+  constructor(el: ElementRef) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
 
     if (this.isBrowser) {
       this.nativeElement = el.nativeElement;
@@ -347,7 +353,7 @@ export class XCalculatorComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.isBrowser) {
-      let script = null;
+      let script: HTMLScriptElement | null = null;
 
       if (!this.document.querySelector('[data-dotnet-script]')) {
         script = this.document.createElement('script');

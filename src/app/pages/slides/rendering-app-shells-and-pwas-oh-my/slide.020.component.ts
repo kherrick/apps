@@ -4,7 +4,6 @@ import { SlideComponent } from '../shared/slide.component';
 
 @Component({
   selector: 'app-slide-020',
-  standalone: true,
   imports: [SlideComponent],
   template: `
     <app-slide>
@@ -15,7 +14,8 @@ import { SlideComponent } from '../shared/slide.component';
         <li quote>
           <blockquote>
             <span>
-              An application shell is the minimal HTML, CSS, and JavaScript powering a user interface.
+              An application shell is the minimal HTML, CSS, and JavaScript
+              powering a user interface.
               <a href="https://developer.chrome.com/blog/app-shell/">*</a>
             </span>
           </blockquote>

@@ -1,44 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <title>apps - redirect service</title>
-    <base href="/apps/" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="apps - redirect service" />
     <meta
       http-equiv="refresh"
-      content="1;url=https://kherrick.github.io/apps/"
+      content="0;url=https://kherrick.github.io/apps/"
     />
     <script>
-      const base = document.querySelector("base").href;
-
-      let splitLocation;
-
-      try {
-        splitLocation = window.location.href.split(base)[1];
-      } catch (e) {}
-
-      if (splitLocation) {
-        const match = "slides/";
-        if (window.location.href.split(base)[1].includes(match)) {
-          if (location.pathname.includes(match)) {
-            const result = location.pathname.slice(
-              location.pathname.indexOf(match) + match.length
-            );
-
-            if (!isNaN(result)) {
-              location.replace(
-                `${base}/slides/rendering-app-shells-and-pwas-oh-my/${result}${location.search}`
-              );
-            }
-          }
-        } else {
-          location.replace(`${base}${window.location.href.split(base)[1]}`);
-        }
-      } else {
-        location.replace(base);
-      }
+      location.replace("https://kherrick.github.io/apps/");
     </script>
   </head>
   <body></body>

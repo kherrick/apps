@@ -72,7 +72,7 @@ export const buildNextItem = async (item: {
         const descendantsSpan = buildDescendants(
           document,
           `${descendants}`,
-          itemComments
+          itemComments,
         );
 
         itemHeader.appendChild(descendantsSpan);

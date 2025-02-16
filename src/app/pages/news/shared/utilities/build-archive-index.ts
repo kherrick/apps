@@ -2,17 +2,13 @@ import { NewsItem } from './state';
 
 export const buildArchiveIndex = async (
   lastDateTime: string,
-  baseUrl: string
+  baseUrl: string,
 ): Promise<NewsItem[]> => {
   const nextDate = lastDateTime?.slice(0, 10);
   const nextYear = nextDate?.slice(0, 4);
 
   return (
-    await (
-      await fetch(
-        `${baseUrl}${nextYear}/${nextDate}/index.md`
-      )
-    ).text()
+    await (await fetch(`${baseUrl}${nextYear}/${nextDate}/index.md`)).text()
   )
     .split('\n')
     .filter((line) => line.match(new RegExp('^\\* \\[')))

@@ -1,5 +1,12 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+  ViewEncapsulation,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 // Import @tensorflow/tfjs or @tensorflow/tfjs-core
@@ -9,7 +16,11 @@ import * as tf from '@tensorflow/tfjs';
 import '@tensorflow/tfjs-backend-wasm';
 
 // Import model
-import { BlazeFaceModel, NormalizedFace, load } from '@tensorflow-models/blazeface';
+import {
+  BlazeFaceModel,
+  NormalizedFace,
+  load,
+} from '@tensorflow-models/blazeface';
 
 import { setWasmPaths } from '@tensorflow/tfjs-backend-wasm';
 
@@ -17,19 +28,32 @@ import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-face-detector',
-  standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <section>
+    <section class="face-detector">
       <section id="buttons-section">
-        <section class="flex-section"></section>
         <section id="buttons">
-          <button id="startWebcam" (click)="this.startWebcam($event)" disabled>start webcam</button>
-          <button id="stopWebcam" (click)="this.stopWebcam($event)" disabled>stop webcam</button>
-          <button id="startPredictions" (click)="this.startPredictions()" disabled>start predictions</button>
-          <button id="stopPredictions" (click)="this.stopPredictions()" disabled>stop predictions</button>
+          <button id="startWebcam" (click)="this.startWebcam($event)" disabled>
+            start webcam
+          </button>
+          <button id="stopWebcam" (click)="this.stopWebcam($event)" disabled>
+            stop webcam
+          </button>
+          <button
+            id="startPredictions"
+            (click)="this.startPredictions()"
+            disabled
+          >
+            start predictions
+          </button>
+          <button
+            id="stopPredictions"
+            (click)="this.stopPredictions()"
+            disabled
+          >
+            stop predictions
+          </button>
         </section>
-        <section class="flex-section"></section>
       </section>
       <section
         id="canvas-section"
@@ -52,55 +76,78 @@ import { environment } from '../../environments/environment';
     `
       @use 'material-design-lite/css/components/button/style.css' as button-style;
 
-      .flex-section {
-        flex: 1;
-      }
+      .face-detector {
+        padding-bottom: 1rem;
 
-      #buttons-section {
-        display: none;
-        justify-content: center;
-        margin: 0 0 1rem;
-      }
+        .flex-section {
+          display: none;
+          flex: 1;
+        }
 
-      #buttons {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
+        #buttons-section {
+          display: none;
+          flex-direction: row;
+          justify-content: center;
+          margin: 0 0 1rem;
+        }
 
-      #canvas-section {
-        display: flex;
-      }
+        #buttons {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
 
-      #loading-section {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-      }
+        #canvas-section {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+        }
 
-      #loading {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 1rem;
-        pointer-events: none;
-        width: 100%;
-      }
+        #loading-section {
+          min-width: unset;
+          max-width: 21rem;
+          text-align: center;
+        }
 
-      button {
-        margin: 0.5rem;
-      }
+        #loading {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 1rem;
+          pointer-events: none;
+          width: 100%;
+        }
 
-      canvas {
-        display: none;
-        background-color: var(--face-detector-canvas-background-color, transparent);
-        width: var(--face-detector-canvas-width, 100%);
-        height: var(--face-detector-canvas-height, auto);
-      }
+        button {
+          margin: 0.5rem;
+        }
 
-      video {
-        display: none;
-        width: var(--face-detector-video-width, 100%);
-        height: var(--face-detector-video-height, auto);
+        canvas {
+          display: none;
+          background-color: var(
+            --face-detector-canvas-background-color,
+            transparent
+          );
+          width: var(--face-detector-canvas-width, 100%);
+          height: var(--face-detector-canvas-height, auto);
+        }
+
+        video {
+          display: none;
+          width: var(--face-detector-video-width, 100%);
+          height: var(--face-detector-video-height, auto);
+        }
+
+        @media screen and (min-width: 859px) {
+          .flex-section {
+            display: flex;
+          }
+
+          #loading-section {
+            min-width: 21rem;
+            max-width: unset;
+          }
+        }
       }
     `,
   ],
@@ -122,15 +169,21 @@ export class FaceDetectorComponent implements OnInit {
   canPredictVideo = false;
   private isBrowser: boolean;
 
-  constructor(private el: ElementRef, @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(
+    private el: ElementRef,
+    @Inject(PLATFORM_ID) private platformId: Object,
+  ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
   async ngOnInit(): Promise<void> {
     if (this.isBrowser) {
-      this.canvasElement = this.el.nativeElement.shadowRoot.querySelector('#canvas');
-      this.loadingElement = this.el.nativeElement.shadowRoot.querySelector('#loading');
-      this.videoElement = this.el.nativeElement.shadowRoot.querySelector('#video');
+      this.canvasElement =
+        this.el.nativeElement.shadowRoot.querySelector('#canvas');
+      this.loadingElement =
+        this.el.nativeElement.shadowRoot.querySelector('#loading');
+      this.videoElement =
+        this.el.nativeElement.shadowRoot.querySelector('#video');
 
       setWasmPaths(this.wasmPath);
       const isBackendSet: boolean = await tf.setBackend('wasm');
@@ -143,19 +196,27 @@ export class FaceDetectorComponent implements OnInit {
       this.isReadyToPredict = true;
 
       this.handleImageUrlPrediction(this.canvasElement, this.imgUrl);
-      this.el.nativeElement.shadowRoot.querySelector('#buttons-section').style.display = 'flex';
+      this.el.nativeElement.shadowRoot.querySelector(
+        '#buttons-section',
+      ).style.display = 'flex';
 
       const devices = (await navigator?.mediaDevices?.enumerateDevices()) ?? [];
-      const hasVideoInput = devices.filter((device) => device.kind === 'videoinput').length > 0;
-      this.el.nativeElement.shadowRoot.querySelector('#startWebcam').disabled = !hasVideoInput;
+      const hasVideoInput =
+        devices.filter((device) => device.kind === 'videoinput').length > 0;
+      this.el.nativeElement.shadowRoot.querySelector('#startWebcam').disabled =
+        !hasVideoInput;
     }
   }
 
-  async drawPrediction(ctx: CanvasRenderingContext2D | null, image: HTMLImageElement): Promise<void> {
+  async drawPrediction(
+    ctx: CanvasRenderingContext2D | null,
+    image: HTMLImageElement,
+  ): Promise<void> {
     // Pass in an image or video to the model. The model returns an array of
     // bounding boxes, probabilities, and landmarks, one for each detected face.
     const returnTensors = false; // Pass in `true` to get tensors back, rather than values.
-    const predictions: NormalizedFace[] = (await this.model?.estimateFaces(image, returnTensors)) ?? [];
+    const predictions: NormalizedFace[] =
+      (await this.model?.estimateFaces(image, returnTensors)) ?? [];
 
     if (ctx && predictions.length > 0) {
       /*
@@ -211,10 +272,11 @@ export class FaceDetectorComponent implements OnInit {
 
   requestVideoStream(): Promise<boolean> {
     return new Promise((isStreaming) => {
-      const mediaDevices: Promise<MediaStream> = navigator.mediaDevices.getUserMedia({
-        video: true,
-        audio: false,
-      });
+      const mediaDevices: Promise<MediaStream> =
+        navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: false,
+        });
 
       mediaDevices
         .then((stream: MediaStream) => {
@@ -238,7 +300,7 @@ export class FaceDetectorComponent implements OnInit {
             isStreaming(true);
           }
         },
-        false
+        false,
       );
     });
   }
@@ -297,15 +359,7 @@ export class FaceDetectorComponent implements OnInit {
     }
 
     this.canvasElement.style.display = 'initial';
-
-    if (imageWidth > document.documentElement.clientWidth) {
-      this.canvasElement.style.width = '100%';
-      this.canvasElement.style.height = 'auto';
-
-      return;
-    }
-
-    this.canvasElement.style.width = 'auto';
+    this.canvasElement.style.width = '100%';
     this.canvasElement.style.height = 'auto';
   }
 
@@ -345,7 +399,7 @@ export class FaceDetectorComponent implements OnInit {
 
   getCanvasContext(
     canvas: HTMLCanvasElement,
-    { image, video }: { image?: any; video?: any }
+    { image, video }: { image?: any; video?: any },
   ): CanvasRenderingContext2D | null {
     const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
     const media = video ? video : image;
@@ -403,8 +457,12 @@ export class FaceDetectorComponent implements OnInit {
     this.videoElement.style.display = 'none';
 
     // toggle the buttons disabled status
-    this.el.nativeElement.shadowRoot.querySelector('#startPredictions').disabled = true;
-    this.el.nativeElement.shadowRoot.querySelector('#stopPredictions').disabled = false;
+    this.el.nativeElement.shadowRoot.querySelector(
+      '#startPredictions',
+    ).disabled = true;
+    this.el.nativeElement.shadowRoot.querySelector(
+      '#stopPredictions',
+    ).disabled = false;
   }
 
   stopPredictions(): void {
@@ -417,7 +475,9 @@ export class FaceDetectorComponent implements OnInit {
     this.videoElement.style.display = 'flex';
 
     // toggle the buttons disabled status
-    this.el.nativeElement.shadowRoot.querySelector('#stopPredictions').disabled = true;
+    this.el.nativeElement.shadowRoot.querySelector(
+      '#stopPredictions',
+    ).disabled = true;
   }
 
   async startWebcam(event: Event): Promise<void> {
@@ -429,7 +489,9 @@ export class FaceDetectorComponent implements OnInit {
 
     this.loadingElement.style.display = 'flex';
     this.canvasElement.style.display = 'none';
-    this.el.nativeElement.shadowRoot.querySelector('#loading-section').style.flex = 100;
+    this.el.nativeElement.shadowRoot.querySelector(
+      '#loading-section',
+    ).style.flex = 100;
 
     const isStreaming = await this.requestVideoStream();
 
@@ -438,8 +500,11 @@ export class FaceDetectorComponent implements OnInit {
     this.videoElement.style.display = isStreaming ? 'flex' : 'none';
 
     // toggle the buttons disabled status
-    this.el.nativeElement.shadowRoot.querySelector('#stopWebcam').disabled = !isStreaming;
-    this.el.nativeElement.shadowRoot.querySelector('#startPredictions').disabled = !isStreaming;
+    this.el.nativeElement.shadowRoot.querySelector('#stopWebcam').disabled =
+      !isStreaming;
+    this.el.nativeElement.shadowRoot.querySelector(
+      '#startPredictions',
+    ).disabled = !isStreaming;
 
     this.isStreaming = isStreaming;
   }
@@ -452,9 +517,11 @@ export class FaceDetectorComponent implements OnInit {
     }
 
     const mediaStream: MediaProvider | null = this.videoElement.srcObject;
-    (mediaStream as MediaStream).getTracks().forEach((track: MediaStreamTrack) => {
-      track.stop();
-    });
+    (mediaStream as MediaStream)
+      .getTracks()
+      .forEach((track: MediaStreamTrack) => {
+        track.stop();
+      });
 
     this.isStreaming = false;
 
@@ -470,12 +537,19 @@ export class FaceDetectorComponent implements OnInit {
       // set the image back to what it was before the video was started
       this.videoElement.style.display = 'none';
       this.canvasElement.style.display = 'flex';
-      this.el.nativeElement.shadowRoot.querySelector('#loading-section').style.flex = 1;
+      this.el.nativeElement.shadowRoot.querySelector(
+        '#loading-section',
+      ).style.flex = 1;
 
       // toggle the buttons disabled status
-      this.el.nativeElement.shadowRoot.querySelector('#stopWebcam').disabled = true;
-      this.el.nativeElement.shadowRoot.querySelector('#startPredictions').disabled = true;
-      this.el.nativeElement.shadowRoot.querySelector('#stopPredictions').disabled = true;
+      this.el.nativeElement.shadowRoot.querySelector('#stopWebcam').disabled =
+        true;
+      this.el.nativeElement.shadowRoot.querySelector(
+        '#startPredictions',
+      ).disabled = true;
+      this.el.nativeElement.shadowRoot.querySelector(
+        '#stopPredictions',
+      ).disabled = true;
     });
 
     setTimeout(() => {

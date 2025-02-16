@@ -9,8 +9,6 @@ export const clientSideRoutes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    // loadComponent: () =>
-    //   import('./pages/home/home.component').then((x) => x.HomeComponent),
     title,
   },
   {

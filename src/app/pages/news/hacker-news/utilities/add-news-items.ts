@@ -4,7 +4,7 @@ import { HackerNewsState, hackerNewsWindow, UpdateQueue } from './state';
 export const addNewsItems = async (
   shadowRoot: ShadowRoot,
   hackerNewsState: HackerNewsState,
-  queue: UpdateQueue
+  queue: UpdateQueue,
 ) => {
   const items = Object.values(hackerNewsState.index);
 

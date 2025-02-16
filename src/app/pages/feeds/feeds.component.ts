@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
     <section app-section-cards>
@@ -61,74 +60,71 @@ import { RouterModule } from '@angular/router';
         justify-content: center;
         padding: 2rem;
 
-        a {
+        .card {
+          min-height: 12.75rem;
+          max-width: 25rem;
+          width: 100%;
+        }
+
+        .title {
+          align-items: center;
+          background: var(
+            --card-heading-background,
+            var(--md-ref-palette-neutral30)
+          );
+          border-radius: 0.25rem 0.25rem 0 0;
+          color: var(--card-heading-color, #fff);
+          display: flex;
+          justify-content: space-between;
+          min-height: 1.75rem;
+
+          &.link {
+            text-decoration: none;
+          }
+        }
+
+        :is(.card) .subtitle {
+          min-height: 4.5rem;
+          padding: 1rem;
+        }
+
+        :is(.card) .actions {
+          justify-content: end;
+          margin: 0.5rem;
+          padding: 0.5rem;
+        }
+
+        [karlherrick] {
+          --card-heading-background: #495890;
+        }
+
+        [herrickdesign] {
+          --card-heading-background: #333;
+        }
+
+        [infinitym] {
+          --card-heading-background: #697fce;
+        }
+
+        .link {
+          cursor: pointer;
           text-decoration: underline;
         }
-      }
 
-      .card {
-        min-height: 12.75rem;
-        max-width: 25rem;
-        width: 100%;
-      }
+        a,
+        a:link,
+        a:focus,
+        a:hover,
+        a:active,
+        a:visited {
+          color: var(--md-sys-color-on-surface);
+          text-decoration: underline;
+        }
 
-      .title {
-        align-items: center;
-        background: var(
-          --card-heading-background,
-          var(--md-ref-palette-neutral30)
-        );
-        border-radius: 0.25rem 0.25rem 0 0;
-        color: var(--card-heading-color, #fff);
-        display: flex;
-        justify-content: space-between;
-        min-height: 1.75rem;
-      }
-
-      :is(.card) .subtitle {
-        min-height: 4.5rem;
-        padding: 1rem;
-      }
-
-      :is(.card) .actions {
-        justify-content: end;
-        margin: 0.5rem;
-        padding: 0.5rem;
-      }
-
-      [karlherrick] {
-        --card-heading-background: #495890;
-      }
-
-      [herrickdesign] {
-        --card-heading-background: #333;
-      }
-
-      [infinitym] {
-        --card-heading-background: #697fce;
-      }
-
-      :is(.card) .actions {
-        justify-content: end;
-      }
-
-      .link {
-        cursor: pointer;
-        text-decoration: underline;
-      }
-
-      a,
-      a:link,
-      a:focus,
-      a:hover,
-      a:active,
-      a:visited {
-        color: var(--md-sys-color-on-surface);
-      }
-
-      :where(.button, button):not(.icon-button, .fab, .chip) {
-        background-color: var(--md-ref-palette-neutral50);
-        color: var(--md-ref-palette-neutral90);
+        :where(.button, button):not(.icon-button, .fab, .chip) {
+          background-color: var(--md-ref-palette-neutral50);
+          color: var(--md-ref-palette-neutral90);
+        }
       }
     `,
   ],

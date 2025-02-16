@@ -4,7 +4,6 @@ import { SlideComponent } from '../shared/slide.component';
 
 @Component({
   selector: 'app-slide-014',
-  standalone: true,
   imports: [SlideComponent],
   template: `
     <app-slide>
@@ -12,14 +11,18 @@ import { SlideComponent } from '../shared/slide.component';
       <h2 sub-header>Combinations - service workers + streams</h2>
 
       <ul list>
-        <li> Streaming Responses
+        <li>
+          Streaming Responses
           <blockquote>
             <span>
               With the introduction and wide availability of the Streams API,
               both app shell and content can be combined in the service worker
               and streamed to the browser, giving you the caching flexibility of
               app shell with the speed of MPAs.
-              <a href="https://web.dev/learn/pwa/architecture/#streaming-responses">*</a>
+              <a
+                href="https://web.dev/learn/pwa/architecture/#streaming-responses"
+                >*</a
+              >
             </span>
           </blockquote>
         </li>

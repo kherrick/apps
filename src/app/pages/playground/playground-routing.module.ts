@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { title } from 'src/app/app.routes';
+import { title } from './../../../app/app.routes';
 
 export const routes: Routes = [
   {
@@ -14,7 +14,7 @@ export const routes: Routes = [
     path: 'certificates',
     loadComponent: () =>
       import('./x-certificate/x-certificate.component').then(
-        (x) => x.XCertificateComponent
+        (x) => x.XCertificateComponent,
       ),
     title: `${title} | Playground | Certificates`,
   },
@@ -22,7 +22,7 @@ export const routes: Routes = [
     path: 'encryption',
     loadComponent: () =>
       import('./x-encryption/x-encryption.component').then(
-        (x) => x.XEncryptionComponent
+        (x) => x.XEncryptionComponent,
       ),
     title: `${title} | Playground | Encryption`,
   },
