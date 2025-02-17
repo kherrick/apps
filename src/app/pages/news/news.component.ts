@@ -104,6 +104,13 @@ import { parse, parseFragment, serialize } from 'parse5';
           ul {
             margin-bottom: 0;
             margin-top: 0;
+
+            li {
+              > a {
+                display: inline-block;
+                padding: 1rem 0;
+              }
+            }
           }
 
           hr {
