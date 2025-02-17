@@ -8,7 +8,6 @@ import {
   inject,
 } from '@angular/core';
 
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
@@ -23,7 +22,7 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
 @Component({
   selector: 'x-encryption',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [MatInputModule, MatButtonModule, MatIconModule],
+  imports: [MatInputModule, MatIconModule],
   template: `
     <div encryption-container>
       <div encryption>
@@ -43,7 +42,6 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
               <md-outlined-button
                 (click)="handleDecryptButton($event)"
                 #decryptButton
-                mat-stroked-button
                 disabled
               >
                 Decrypt
@@ -61,7 +59,6 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
               <md-outlined-button
                 (click)="handleEncryptButton($event)"
                 #encryptButton
-                mat-stroked-button
               >
                 Encrypt
               </md-outlined-button>
@@ -119,7 +116,6 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
                 (click)="handleCopyTextButtonClick(this.plainText)"
                 #copyPlainTextButton
                 disabled
-                mat-stroked-button
               >
                 Copy Plain Text
               </md-outlined-button>
@@ -134,7 +130,6 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
               <md-outlined-button
                 (click)="handleCopyTextButtonClick(this.encryptedText)"
                 #copyEncryptedTextButton
-                mat-stroked-button
                 disabled
               >
                 Copy Encrypted Text
@@ -241,6 +236,7 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
           }
 
           mat-form-field:has(input) {
+            margin: auto;
             width: 90%;
           }
 
