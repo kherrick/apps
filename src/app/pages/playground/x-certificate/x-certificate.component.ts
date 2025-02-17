@@ -8,7 +8,6 @@ import {
   inject,
 } from '@angular/core';
 
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
@@ -21,7 +20,7 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
 @Component({
   selector: 'x-certificate',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [MatInputModule, MatButtonModule, MatIconModule],
+  imports: [MatInputModule, MatIconModule],
   template: `
     <div certificate-container>
       <div certificate>
@@ -146,7 +145,6 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
         <div>
           <md-outlined-button
             (click)="handleCertificateGeneration()"
-            mat-stroked-button
           >
             Create Certificate
           </md-outlined-button>
@@ -211,6 +209,10 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
         .link-container {
           text-align: left;
           width: 100%;
+
+          a {
+            text-decoration: underline;
+          }
         }
 
         .text-container:first-of-type {
