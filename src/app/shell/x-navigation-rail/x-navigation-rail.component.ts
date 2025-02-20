@@ -97,16 +97,6 @@ import { Router, RouterModule } from '@angular/router';
 
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
 
-      :host {
-        z-index: 2;
-
-        --md-comp-navigation-rail-container-width: 5rem;
-        --md-comp-navigation-rail-container-height: 100vh;
-
-        min-height: var(--md-comp-navigation-rail-container-height);
-        min-width: 0;
-      }
-
       :is(.navigation-rail) {
         position: fixed;
         padding-bottom: 2rem;

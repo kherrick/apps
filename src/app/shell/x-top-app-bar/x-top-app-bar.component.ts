@@ -65,55 +65,48 @@ import { Themes, ThemeService } from '../../../app/shell/theme/theme.service';
     `
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
 
-      :host {
-        --md-sys-comp-top-app-bar-padding: 1rem;
-        --mat-toolbar-standard-height: 4rem;
-
-        height: var(--mat-toolbar-standard-height);
-        min-height: var(--mat-toolbar-standard-height);
-        max-height: var(--mat-toolbar-standard-height);
-      }
-
-      #top-app-drawer-btn {
-        display: contents;
-      }
-
-      #top-app-drawer-btn:hover,
-      .mode-toggle:hover {
-        cursor: pointer;
-      }
-
-      #top-app-drawer-btn > mat-icon {
-        margin-right: 1rem;
-      }
-
-      .spacer {
-        flex: 1 1 auto;
-      }
-
-      .title {
-        font-size: 1.375rem;
-      }
-
-      [mat-button] {
-        margin-left: 0.5rem;
-      }
-
-      button {
-        border: 0;
-      }
-
-      a,
-      button,
-      span.title {
-        background-color: unset;
-        text-decoration: none;
-        color: var(--md-sys-comp-top-app-bar-color);
-      }
-
-      @media screen and (min-width: 859px) {
+      mat-toolbar {
         #top-app-drawer-btn {
-          display: none;
+          display: contents;
+        }
+
+        #top-app-drawer-btn:hover,
+        .mode-toggle:hover {
+          cursor: pointer;
+        }
+
+        #top-app-drawer-btn > mat-icon {
+          margin-right: 1rem;
+        }
+
+        .spacer {
+          flex: 1 1 auto;
+        }
+
+        .title {
+          font-size: 1.375rem;
+        }
+
+        [mat-button] {
+          margin-left: 0.5rem;
+        }
+
+        button {
+          border: 0;
+        }
+
+        a,
+        button,
+        span.title {
+          background-color: unset;
+          text-decoration: none;
+          color: var(--md-sys-comp-top-app-bar-color);
+        }
+
+        @media screen and (min-width: 859px) {
+          #top-app-drawer-btn {
+            display: none;
+          }
         }
       }
     `,

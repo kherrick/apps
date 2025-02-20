@@ -67,22 +67,33 @@ import { XNavigationDrawerComponent } from '../x-navigation-drawer/x-navigation-
   `,
   styles: [
     `
-      :host {
-        min-height: 100vh;
-      }
-
       section {
         display: flex;
         flex-direction: column;
         flex: 1;
-      }
 
-      section > main {
-        height: 100%;
+        x-top-app-bar {
+          --md-sys-comp-top-app-bar-padding: 1rem;
+          --mat-toolbar-standard-height: 4rem;
+
+          height: var(--mat-toolbar-standard-height);
+          min-height: var(--mat-toolbar-standard-height);
+          max-height: var(--mat-toolbar-standard-height);
+        }
+
+        main {
+          height: 100%;
+        }
       }
 
       x-navigation-rail {
+        --md-comp-navigation-rail-container-height: 100vh;
+        --md-comp-navigation-rail-container-width: 5rem;
+
         display: none;
+        min-height: var(--md-comp-navigation-rail-container-height);
+        min-width: 0;
+        z-index: 2;
       }
 
       @media screen and (min-width: 859px) {
