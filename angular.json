@@ -17,7 +17,7 @@
       "prefix": "x",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular/build:application",
           "options": {
             "outputPath": "dist/apps",
             "index": "src/index.html",

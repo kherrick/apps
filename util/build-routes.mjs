@@ -26,6 +26,7 @@ if (!host) {
   await appendFile(
     outputFilename,
     validPaths
+      .filter((line) => line !== '')
       .map((line) => {
         return `${line}\n`;
       })

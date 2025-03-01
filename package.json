@@ -32,6 +32,7 @@
     "test": "npm run test-ci",
     "test-debug": "ng test --code-coverage --progress --watch true",
     "test-ci": "ng test --browsers ChromeHeadless --watch false",
+    "build:ssr:shell": "npm run build -- --output-mode server",
     "serve:ssr:shell": "node dist/apps/server/server.mjs"
   },
   "private": true,
