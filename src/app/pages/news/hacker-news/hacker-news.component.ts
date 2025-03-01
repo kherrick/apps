@@ -24,7 +24,7 @@ import initialState from './hacker-news.json';
   selector: 'app-hacker-news',
   imports: [CommonModule, RouterModule],
   template: `
-    <ng-container>
+    <div news>
       <h1>
         <a [routerLink]="'/news/hacker-news'">Hacker News</a>
       </h1>
@@ -76,10 +76,15 @@ import initialState from './hacker-news.json';
           </h3>
         </section>
       </section>
-    </ng-container>
+    </div>
   `,
   styles: [
     `
+      [news] {
+        --news-heading-background: rgb(255, 102, 0);
+        width: 100%;
+      }
+
       body {
         color: var(--md-sys-color-on-surface);
         font-family: Verdana, Geneva, sans-serif;
@@ -102,7 +107,7 @@ import initialState from './hacker-news.json';
       }
 
       h1 {
-        background-color: rgb(255, 102, 0);
+        background: var(--news-heading-background, #000);
         margin: 0;
         padding: 1rem;
       }

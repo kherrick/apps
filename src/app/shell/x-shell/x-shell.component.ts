@@ -81,8 +81,13 @@ import { XNavigationDrawerComponent } from '../x-navigation-drawer/x-navigation-
           max-height: var(--mat-toolbar-standard-height);
         }
 
-        main {
+        main,
+        main > router-outlet + * {
+          align-items: start;
+          display: flex;
           height: 100%;
+          justify-content: center;
+          width: 100%;
         }
       }
 

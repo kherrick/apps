@@ -75,6 +75,7 @@ import initialState from './soylent-news.json';
     `
       [news] {
         --news-heading-background: linear-gradient(#600, #933);
+        width: 100%;
       }
     `,
   ],

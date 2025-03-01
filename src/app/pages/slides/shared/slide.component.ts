@@ -68,7 +68,12 @@ import { Subscription } from 'rxjs';
     `
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
 
+      app-slide {
+        width: 100%;
+      }
+
       [slide-container] {
+
         display: flex;
         height: 100%;
 

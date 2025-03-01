@@ -75,6 +75,7 @@ import initialState from './lobsters.json';
     `
       [news] {
         --news-heading-background: linear-gradient(#500, #ac130d);
+        width: 100%;
       }
     `,
   ],

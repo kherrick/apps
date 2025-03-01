@@ -75,6 +75,7 @@ import initialState from './slashdot.json';
     `
       [news] {
         --news-heading-background: #016765;
+        width: 100%;
       }
     `,
   ],
