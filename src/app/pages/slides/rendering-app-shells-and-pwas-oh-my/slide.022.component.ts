@@ -3,10 +3,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { SlideComponent } from '../shared/slide.component';
 
 @Component({
-  selector: 'app-slide-022',
+  selector: 'x-slide-022',
   imports: [SlideComponent],
   template: `
-    <app-slide>
+    <x-slide>
       <h1 header>Progressive Web Apps</h1>
       <h2 sub-header>What are they?</h2>
 
@@ -21,7 +21,7 @@ import { SlideComponent } from '../shared/slide.component';
           ideals and best practices.
         </li>
       </ul>
-    </app-slide>
+    </x-slide>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.ShadowDom,

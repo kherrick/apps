@@ -18,7 +18,7 @@ import {
 import initialState from './soylent-news.json';
 
 @Component({
-  selector: 'app-soylent-news',
+  selector: 'x-soylent-news',
   imports: [CommonModule, RouterModule],
   template: `
     <div news>

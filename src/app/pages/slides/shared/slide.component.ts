@@ -20,7 +20,7 @@ import {
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-slide',
+  selector: 'x-slide',
   imports: [CommonModule, RouterModule],
   template: `
     <div slide-container>
@@ -32,7 +32,7 @@ import { Subscription } from 'rxjs';
         </div>
       }
       <section
-        app-section
+        x-section
         (keydown)="handleKeydown($event)"
         id="stage"
         tabindex="0"
@@ -68,7 +68,7 @@ import { Subscription } from 'rxjs';
     `
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
 
-      app-slide {
+      x-slide {
         width: 100%;
       }
 

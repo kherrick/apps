@@ -3,15 +3,15 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { SlideComponent } from '../shared/slide.component';
 
 @Component({
-  selector: 'app-slide-000',
+  selector: 'x-slide-000',
   imports: [SlideComponent],
   template: `
-    <app-slide first>
+    <x-slide first>
       <h1 header>Rendering, App Shells, and PWAs, oh my!</h1>
       <h2 sub-header>Use the right arrow key or swipe left to continue.</h2>
 
       <ul list></ul>
-    </app-slide>
+    </x-slide>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.ShadowDom,

@@ -3,10 +3,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { SlideComponent } from '../shared/slide.component';
 
 @Component({
-  selector: 'app-slide-027',
+  selector: 'x-slide-027',
   imports: [SlideComponent],
   template: `
-    <app-slide>
+    <x-slide>
       <h1 header>Progressive Web Apps</h1>
       <h2 sub-header>
         <strong
@@ -32,7 +32,7 @@ import { SlideComponent } from '../shared/slide.component';
           about Location API, Push Notifications, Background Sync, etc
         </li>
       </ul>
-    </app-slide>
+    </x-slide>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.ShadowDom,

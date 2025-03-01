@@ -21,7 +21,7 @@ import {
 import initialState from './hacker-news.json';
 
 @Component({
-  selector: 'app-hacker-news',
+  selector: 'x-hacker-news',
   imports: [CommonModule, RouterModule],
   template: `
     <div news>

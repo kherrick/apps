@@ -8,7 +8,7 @@ import { Observable, firstValueFrom } from 'rxjs';
 import { parse, parseFragment, serialize } from 'parse5';
 
 @Component({
-  selector: 'app-news',
+  selector: 'x-news',
   imports: [CommonModule, RouterModule],
   template: `
     <div news-container>
@@ -22,7 +22,7 @@ import { parse, parseFragment, serialize } from 'parse5';
           The content above has been machine generated from the sources below.
         </p>
       </section>
-      <section app-section-cards>
+      <section x-section-cards>
         <div soylentNews class="card">
           <div [routerLink]="'/news/soylent-news'" class="title link">
             Soylent News <i class="material-icons">feed</i>
@@ -82,7 +82,7 @@ import { parse, parseFragment, serialize } from 'parse5';
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
       [news-summary] a,
       [news-sources] a,
-      [app-section-cards] a {
+      [x-section-cards] a {
         text-decoration: underline;
       }
 
@@ -132,7 +132,7 @@ import { parse, parseFragment, serialize } from 'parse5';
           }
         }
 
-        [app-section-cards] {
+        [x-section-cards] {
           align-items: center;
           display: flex;
           flex-direction: row;

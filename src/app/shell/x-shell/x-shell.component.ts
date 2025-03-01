@@ -91,6 +91,10 @@ import { XNavigationDrawerComponent } from '../x-navigation-drawer/x-navigation-
         }
       }
 
+      x-slide {
+        width: 100%;
+      }
+
       x-navigation-rail {
         --md-comp-navigation-rail-container-height: 100vh;
         --md-comp-navigation-rail-container-width: 5rem;

@@ -45,7 +45,7 @@ export interface CalculatorModel {
           </p>
         </header>
       </section>
-      <section app-section>
+      <section x-section>
         <div class="column">
           <div class="row">
             <label class="text-field outlined">
@@ -243,7 +243,7 @@ export interface CalculatorModel {
           outline: none;
         }
 
-        [app-section] {
+        [x-section] {
           align-items: center;
           display: flex;
           height: 100%;

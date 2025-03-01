@@ -26,7 +26,7 @@ interface Post {
 }
 
 @Component({
-  selector: 'app-infinitym',
+  selector: 'x-infinitym',
   imports: [CommonModule, RouterModule],
   template: `
     <div article-container>

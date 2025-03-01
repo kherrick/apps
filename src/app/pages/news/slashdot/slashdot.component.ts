@@ -18,7 +18,7 @@ import {
 import initialState from './slashdot.json';
 
 @Component({
-  selector: 'app-slashdot',
+  selector: 'x-slashdot',
   imports: [CommonModule, RouterModule],
   template: `
     <div news>

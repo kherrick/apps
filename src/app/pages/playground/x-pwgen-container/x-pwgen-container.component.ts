@@ -14,7 +14,7 @@ import {
   imports: [CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
-    <section app-section>
+    <section x-section>
       <section id="grid-container">
         <section id="top">
           <section id="branding">
@@ -162,7 +162,7 @@ import {
   `,
   styles: [
     `
-      [app-section] {
+      [x-section] {
         color: var(--md-sys-color-on-surface);
         display: flex;
         height: 100%;

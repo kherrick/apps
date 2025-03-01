@@ -3,10 +3,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { SlideComponent } from '../shared/slide.component';
 
 @Component({
-  selector: 'app-slide-024',
+  selector: 'x-slide-024',
   imports: [SlideComponent],
   template: `
-    <app-slide>
+    <x-slide>
       <h1 header>Progressive Web Apps</h1>
       <h2 sub-header>
         <a
@@ -35,7 +35,7 @@ import { SlideComponent } from '../shared/slide.component';
           >) to prevent hijacking by captive portals (and worse)
         </li>
       </ul>
-    </app-slide>
+    </x-slide>
   `,
   styles: [],
   encapsulation: ViewEncapsulation.ShadowDom,

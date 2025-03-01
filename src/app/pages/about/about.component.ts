@@ -5,10 +5,10 @@ import { RouterModule } from '@angular/router';
 import { FaceDetectorComponent } from '../../../app/shared/face-detector.component';
 
 @Component({
-  selector: 'app-about',
+  selector: 'x-about',
   imports: [CommonModule, RouterModule, FaceDetectorComponent],
   template: `
-    <section app-section-generic>
+    <section x-section-generic>
       <article>
         <p>
           <a [routerLink]="'/'">Apps</a> is a
@@ -48,13 +48,13 @@ import { FaceDetectorComponent } from '../../../app/shared/face-detector.compone
         </p>
       </article>
       <section>
-        <app-face-detector></app-face-detector>
+        <x-face-detector></x-face-detector>
       </section>
     </section>
   `,
   styles: [
     `
-      [app-section-generic] {
+      [x-section-generic] {
         margin: 0 1rem;
 
         section,

@@ -27,7 +27,7 @@ import { setWasmPaths } from '@tensorflow/tfjs-backend-wasm';
 import { environment } from '../../environments/environment';
 
 @Component({
-  selector: 'app-face-detector',
+  selector: 'x-face-detector',
   imports: [CommonModule, RouterModule],
   template: `
     <section class="face-detector">

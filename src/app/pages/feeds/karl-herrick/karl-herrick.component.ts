@@ -26,7 +26,7 @@ interface Post {
 }
 
 @Component({
-  selector: 'app-karl-herrick',
+  selector: 'x-karl-herrick',
   imports: [CommonModule, RouterModule],
   template: `
     <div article-container>

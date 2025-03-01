@@ -3,10 +3,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
+  selector: 'x-home',
   imports: [CommonModule, RouterModule],
   template: `
-    <section app-section-cards>
+    <section x-section-cards>
       <div karlherrick class="card">
         <div [routerLink]="'/feeds/karl-herrick'" class="title link">
           Karl Herrick <i class="material-icons">bolt</i>
@@ -51,7 +51,7 @@ import { RouterModule } from '@angular/router';
 
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
 
-      [app-section-cards] {
+      [x-section-cards] {
         align-items: center;
         display: flex;
         flex-direction: row;

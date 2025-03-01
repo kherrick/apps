@@ -18,7 +18,7 @@ import {
 import initialState from './lobsters.json';
 
 @Component({
-  selector: 'app-lobsters',
+  selector: 'x-lobsters',
   imports: [CommonModule, RouterModule],
   template: `
     <div news>

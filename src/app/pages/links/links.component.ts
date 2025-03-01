@@ -3,10 +3,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-links',
+  selector: 'x-links',
   imports: [CommonModule, RouterModule],
   template: `
-    <section app-section-cards>
+    <section x-section-cards>
       <section *ngFor="let site of sites" site class="card">
         <a
           [href]="site.href"
@@ -34,7 +34,7 @@ import { RouterModule } from '@angular/router';
 
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
 
-      [app-section-cards] {
+      [x-section-cards] {
         align-items: center;
         display: flex;
         flex-direction: row;

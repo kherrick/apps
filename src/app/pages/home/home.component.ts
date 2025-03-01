@@ -6,10 +6,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  selector: 'app-home',
+  selector: 'x-home',
   imports: [CommonModule, MatButtonModule, MatCardModule, RouterModule],
   template: `
-    <section app-section-cards>
+    <section x-section-cards>
       <mat-card appearance="raised">
         <mat-card-header [routerLink]="'/news'">
           <mat-card-title>
@@ -98,7 +98,7 @@ import { MatCardModule } from '@angular/material/card';
 
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
 
-      [app-section-cards] {
+      [x-section-cards] {
         align-items: center;
         color: var(--md-sys-color-on-surface);
         display: flex;
