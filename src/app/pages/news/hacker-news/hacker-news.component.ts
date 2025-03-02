@@ -83,114 +83,108 @@ import initialState from './hacker-news.json';
       [news] {
         --news-heading-background: rgb(255, 102, 0);
         width: 100%;
-      }
 
-      body {
-        color: var(--md-sys-color-on-surface);
-        font-family: Verdana, Geneva, sans-serif;
-        margin: 0;
-      }
+        a {
+          text-decoration: none;
+        }
 
-      a {
-        text-decoration: none;
-      }
+        a:link,
+        a:focus,
+        a:hover,
+        a:active {
+          color: var(--md-sys-color-tertiary);
+        }
 
-      a:link,
-      a:focus,
-      a:hover,
-      a:active {
-        color: var(--md-sys-color-tertiary);
-      }
+        a:visited {
+          color: var(--md-sys-color-on-surface);
+        }
 
-      a:visited {
-        color: var(--md-sys-color-on-surface);
-      }
+        h1 {
+          background: var(--news-heading-background, #000);
+          margin: 0;
+          padding: 1rem;
+        }
 
-      h1 {
-        background: var(--news-heading-background, #000);
-        margin: 0;
-        padding: 1rem;
-      }
+        h1 > a,
+        h1 > a:link,
+        h1 > a:focus,
+        h1 > a:hover,
+        h1 > a:active,
+        h1 > a:visited {
+          color: var(--md-sys-color-on-surface);
+        }
 
-      h1 > a,
-      h1 > a:link,
-      h1 > a:focus,
-      h1 > a:hover,
-      h1 > a:active,
-      h1 > a:visited {
-        color: var(--md-sys-color-on-surface);
-      }
+        h2,
+        h2 > a,
+        h2 > a:link,
+        h2 > a:focus,
+        h2 > a:hover,
+        h2 > a:active,
+        h2 > a:visited {
+          color: var(--md-ref-palette-neutral95);
+        }
 
-      h2,
-      h2 > a,
-      h2 > a:link,
-      h2 > a:focus,
-      h2 > a:hover,
-      h2 > a:active,
-      h2 > a:visited {
-        color: var(--md-ref-palette-neutral95);
-      }
+        h2 {
+          background-color: var(--md-ref-palette-neutral50);
+          margin: 1rem 0;
+          padding: 0.5rem 0.5rem 0.5rem 1rem;
+        }
 
-      h2 {
-        background-color: var(--md-ref-palette-neutral50);
-        margin: 1rem 0;
-        padding: 0.5rem 0.5rem 0.5rem 1rem;
-      }
+        #archives {
+          display: none;
+        }
 
-      #archives {
-        display: none;
-      }
+        #latest > section,
+        #archives > section {
+          margin: 0 1rem 1rem 1rem;
+          padding-bottom: 1rem;
+        }
 
-      #latest > section,
-      #archives > section {
-        margin: 0 1rem 1rem 1rem;
-        padding-bottom: 1rem;
-      }
+        #latest > section:not(:last-child),
+        #archives > section:not(:last-child) {
+          border-bottom: 1px dotted var(--md-sys-color-secondary);
+        }
 
-      #latest > section:not(:last-child),
-      #archives > section:not(:last-child) {
-        border-bottom: 1px dotted var(--md-sys-color-secondary);
-      }
+        section > h3 {
+          margin: 0 0 0.5rem 0;
+        }
 
-      section > h3 {
-        margin: 0 0 0.5rem 0;
-      }
+        section > h4 {
+          font-weight: normal;
+          margin: 0 0 0 1rem;
+        }
 
-      section > h4 {
-        font-weight: normal;
-        margin: 0 0 0 1rem;
-      }
+        .descendants-container,
+        .points-container {
+          align-items: center;
+          border-left: 1px solid #333;
+          display: inline-flex;
+          margin-left: 0.5rem;
+          padding-left: 0.5rem;
+          text-align: center;
+        }
 
-      .descendants-container,
-      .points-container {
-        align-items: center;
-        border-left: 1px solid #333;
-        display: inline-flex;
-        margin-left: 0.5rem;
-        padding-left: 0.5rem;
-        text-align: center;
-      }
+        .points {
+          align-items: center;
+          display: inline-flex;
+          height: 1rem;
+          margin-left: 1ch;
+          min-width: 3ch;
+        }
 
-      .points {
-        align-items: center;
-        display: inline-flex;
-        height: 1rem;
-        margin-left: 1ch;
-        min-width: 3ch;
-      }
+        .text {
+          line-height: 1.5rem;
+          margin: 1rem 1rem 0 1rem;
+          overflow: auto;
+        }
 
-      .text {
-        line-height: 1.5rem;
-        margin: 1rem 1rem 0 1rem;
-        overflow: auto;
-      }
+        .text > p:first-child {
+          margin-top: 1rem;
+        }
 
-      .text > p:first-child {
-        margin-top: 1rem;
-      }
-
-      .text > p:last-child {
-        margin-bottom: 0;
+        .text > p:last-child {
+          margin-bottom: 0;
+        }
       }
     `,
   ],

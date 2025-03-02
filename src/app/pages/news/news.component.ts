@@ -80,6 +80,7 @@ import { parse, parseFragment, serialize } from 'parse5';
       @use 'material-design-lite/css/components/button/style.css' as button-style;
 
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
+
       [news-summary] a,
       [news-sources] a,
       [x-section-cards] a {
