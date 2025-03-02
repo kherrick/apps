@@ -147,6 +147,7 @@ if (!host) {
   await writeFile(
     outputFilename,
     validPaths
+      .filter((line) => line !== '')
       .map((line) => {
         const result =
           line === "/" ? `${host ?? ""}${line}` : `${host ?? ""}${line}/`;
