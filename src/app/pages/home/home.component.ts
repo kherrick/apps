@@ -107,73 +107,73 @@ import { MatCardModule } from '@angular/material/card';
         gap: 2rem;
         justify-content: center;
         padding: 2rem;
-      }
 
-      mat-card {
-        height: 100%;
-        justify-content: space-between;
-        max-width: 25rem;
-        min-height: 12.75rem;
-        width: 100%;
-
-        mat-card-header {
-          align-items: center;
-          background-color: var(
-            --card-heading-background,
-            var(--md-ref-palette-neutral30)
-          );
-          border-radius: 0.25rem 0.25rem 0 0;
-          color: var(--card-heading-color, #fff);
-          cursor: pointer;
-          display: flex;
+        mat-card {
+          height: 100%;
           justify-content: space-between;
+          max-width: 25rem;
+          min-height: 12.75rem;
+          width: 100%;
 
-          &.mat-mdc-card-header {
-            padding: 8px 16px;
-          }
+          mat-card-header {
+            align-items: center;
+            background-color: var(
+              --card-heading-background,
+              var(--md-ref-palette-neutral30)
+            );
+            border-radius: 0.25rem 0.25rem 0 0;
+            color: var(--card-heading-color, #fff);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
 
-          .mat-mdc-card-header-text {
-            width: 100%;
+            &.mat-mdc-card-header {
+              padding: 8px 16px;
+            }
 
-            mat-card-title {
-              align-items: center;
-              display: flex;
-              flex-direction: row;
-              font-size: 1.375rem;
-              justify-content: space-between;
-              min-height: 1.75rem;
+            .mat-mdc-card-header-text {
+              width: 100%;
+
+              mat-card-title {
+                align-items: center;
+                display: flex;
+                flex-direction: row;
+                font-size: 1.375rem;
+                justify-content: space-between;
+                min-height: 1.75rem;
+              }
             }
           }
-        }
 
-        mat-card-content.mat-mdc-card-content {
-          margin: 0;
-          min-height: 4.5rem;
-          padding: 1rem;
-        }
+          mat-card-content.mat-mdc-card-content {
+            margin: 0;
+            min-height: 4.5rem;
+            padding: 1rem;
+          }
 
-        mat-card-actions {
-          justify-content: end;
-          margin: 0.5rem;
-        }
+          mat-card-actions {
+            justify-content: end;
+            margin: 0.5rem;
+          }
 
-        a,
-        a:link,
-        a:focus,
-        a:hover,
-        a:active,
-        a:visited {
-          color: var(--md-sys-color-on-surface);
-          text-decoration: underline;
-        }
+          a,
+          a:link,
+          a:focus,
+          a:hover,
+          a:active,
+          a:visited {
+            color: var(--md-sys-color-on-surface);
+            text-decoration: underline;
+          }
 
-        .mat-mdc-button:not(:disabled) {
-          --mdc-text-button-label-text-color: var(
-            --md-ref-palette-neutral100,
-            #fff
-          );
+          .mat-mdc-button:not(:disabled) {
+            --mdc-text-button-label-text-color: var(
+              --md-ref-palette-neutral100,
+              #fff
+            );
 
-          background-color: var(--md-ref-palette-neutral50);
+            background-color: var(--md-ref-palette-neutral50);
+          }
         }
       }
     `,
