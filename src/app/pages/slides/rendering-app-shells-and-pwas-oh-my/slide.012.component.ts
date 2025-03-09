@@ -19,14 +19,14 @@ import { SlideComponent } from '../shared/slide.component';
         <li>
           At the framework level
           <a
-            href="https://nextjs.org/learn/foundations/how-nextjs-works/rendering"
+            href="https://web.archive.org/web/20250117104520/https://nextjs.org/docs/app/building-your-application/rendering"
             >*</a
           >
         </li>
         <li>
           Server rendering and client side rendering with rehydration
           <a
-            href="https://web.dev/rendering-on-the-web/#combining-server-rendering-and-csr-via-rehydration"
+            href="https://web.dev/articles/rendering-on-the-web#rehydration"
             >*</a
           >
         </li>
@@ -34,7 +34,7 @@ import { SlideComponent } from '../shared/slide.component';
           Streaming server rendering and Progressive Rehydration (progressively
           rendered as it's received)
           <a
-            href="https://web.dev/rendering-on-the-web/#streaming-server-rendering-and-progressive-rehydration"
+            href="https://web.dev/articles/rendering-on-the-web#stream"
             >*</a
           >
         </li>
@@ -42,7 +42,7 @@ import { SlideComponent } from '../shared/slide.component';
           There are many
           <a href="https://mburakerman.github.io/blog/web-rendering-patterns">
             web rendering patterns </a
-          >&nbsp;<a href="https://web.dev/rendering-on-the-web/#wrapping-up"
+          >&nbsp;<a href="https://web.dev/articles/rendering-on-the-web#conclusion"
             >*</a
           >
         </li>

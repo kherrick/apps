@@ -20,7 +20,7 @@ import { SlideComponent } from '../shared/slide.component';
               and streamed to the browser, giving you the caching flexibility of
               app shell with the speed of MPAs.
               <a
-                href="https://web.dev/learn/pwa/architecture/#streaming-responses"
+                href="https://web.dev/learn/pwa/architecture/#streaming_responses"
                 >*</a
               >
             </span>

@@ -28,7 +28,7 @@ import { SlideComponent } from '../shared/slide.component';
         </li>
         <li>
           See relevant
-          <a href="https://web.dev/tags/progressive-web-apps/">case studies</a>
+          <a href="https://web.dev/case-studies">case studies</a>
         </li>
       </ul>
     </x-slide>

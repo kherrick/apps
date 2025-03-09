@@ -10,7 +10,7 @@ import { SlideComponent } from '../shared/slide.component';
       <h1 header>Rendering on the Web</h1>
       <h2 sub-header>
         <a
-          href="https://web.dev/user-centric-performance-metrics/#important-metrics-to-measure"
+          href="https://web.dev/articles/user-centric-performance-metrics#important-metrics"
           >Combinations - service workers + streams</a
         >
       </h2>

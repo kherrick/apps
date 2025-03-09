@@ -22,7 +22,7 @@ import { SlideComponent } from '../shared/slide.component';
               and any new content is requested from the server (if it isn't
               available in the cache already).
               <a
-                href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/App_structure#app_shell"
+                href="https://web.archive.org/web/20230316213011/https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/App_structure#app_shell"
                 >*</a
               >
             </span>

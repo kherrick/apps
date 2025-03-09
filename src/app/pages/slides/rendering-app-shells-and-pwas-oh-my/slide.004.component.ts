@@ -16,7 +16,7 @@ import { SlideComponent } from '../shared/slide.component';
           <ul>
             <li>
               <a
-                href="https://eager.io/blog/a-brief-history-of-weird-scripting-languages/"
+                href="https://web.archive.org/web/20230402111210/https://eager.io/blog/a-brief-history-of-weird-scripting-languages/"
                 >Some languages traditionally not used</a
               >
               <ul>
