@@ -3,15 +3,17 @@ import {
   Component,
   ElementRef,
   OnDestroy,
-  ViewChild,
+  Signal,
   ViewEncapsulation,
   inject,
+  viewChild,
 } from '@angular/core';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
 import '@material/web/button/outlined-button.js';
+import '@material/web/switch/switch.js';
 
 import { asn1, pkcs12, pki, util } from 'node-forge';
 
@@ -32,135 +34,151 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
               load one at the bottom to see the generated response.
             </p>
           </header>
-        </section>
-        <mat-form-field>
-          <mat-label>Country Name (2 letter code)</mat-label>
-          <input
-            (input)="countryName = countryNameInput.value"
-            [value]="countryName"
-            #countryNameInput
-            matInput
-            type="text"
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>State or Province Name (full name)</mat-label>
-          <input
-            (input)="stateOrProvinceName = stateOrProvinceNameInput.value"
-            [value]="stateOrProvinceName"
-            #stateOrProvinceNameInput
-            matInput
-            type="text"
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Locality Name (eg, city)</mat-label>
-          <input
-            (input)="localityName = localityNameInput.value"
-            [value]="localityName"
-            #localityNameInput
-            matInput
-            type="text"
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Organization Name (eg, company)</mat-label>
-          <input
-            (input)="organizationName = organizationNameInput.value"
-            [value]="organizationName"
-            #organizationNameInput
-            matInput
-            type="text"
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Organizational Unit Name (eg, section)</mat-label>
-          <input
-            (input)="organizationalUnitName = organizationalUnitNameInput.value"
-            [value]="organizationalUnitName"
-            #organizationalUnitNameInput
-            matInput
-            type="text"
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Common Name (e.g. server FQDN or YOUR name)</mat-label>
-          <input
-            (input)="commonName = commonNameInput.value"
-            [value]="commonName"
-            #commonNameInput
-            matInput
-            type="text"
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Email Address</mat-label>
-          <input
-            (input)="emailAddress = emailAddressInput.value"
-            [value]="emailAddress"
-            #emailAddressInput
-            matInput
-            type="text"
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Bits (key length)</mat-label>
-          <input
-            (input)="bits = getNumber(bitsInput.value)"
-            [value]="bits"
-            #bitsInput
-            matInput
-            type="number"
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Password</mat-label>
-          <input
-            (input)="passwordChange($event)"
-            [value]="password"
-            #passwordInput
-            matInput
-            type="password"
-          />
-          @if (password) {
-            <button
-              aria-label="Clear"
-              mat-icon-button
-              matSuffix
-              (click)="
-                passwordInput.type === 'password'
-                  ? (passwordInput.type = 'text')
-                  : (passwordInput.type = 'password')
-              "
-            >
-              <mat-icon>{{
-                passwordInput.type === 'password'
-                  ? 'visibility'
-                  : 'visibility_off'
-              }}</mat-icon>
-            </button>
-          }
-        </mat-form-field>
 
-        <div>
-          <md-outlined-button
-            (click)="handleCertificateGeneration()"
-          >
+          <section class="settings">
+            <label for="shouldCreate"> Read </label>
+            <md-switch
+              (change)="handleMdSwitchChange()"
+              [selected]="shouldCreate"
+              #shouldCreateToggle
+              id="shouldCreate"
+            />
+            <label for="shouldCreate"> Write </label>
+          </section>
+        </section>
+        <section #createCertificate>
+          <mat-form-field>
+            <mat-label>Country Name (2 letter code)</mat-label>
+            <input
+              (input)="countryName = countryNameInput.value"
+              [value]="countryName"
+              #countryNameInput
+              matInput
+              type="text"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>State or Province Name (full name)</mat-label>
+            <input
+              (input)="stateOrProvinceName = stateOrProvinceNameInput.value"
+              [value]="stateOrProvinceName"
+              #stateOrProvinceNameInput
+              matInput
+              type="text"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Locality Name (eg, city)</mat-label>
+            <input
+              (input)="localityName = localityNameInput.value"
+              [value]="localityName"
+              #localityNameInput
+              matInput
+              type="text"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Organization Name (eg, company)</mat-label>
+            <input
+              (input)="organizationName = organizationNameInput.value"
+              [value]="organizationName"
+              #organizationNameInput
+              matInput
+              type="text"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Organizational Unit Name (eg, section)</mat-label>
+            <input
+              (input)="
+                organizationalUnitName = organizationalUnitNameInput.value
+              "
+              [value]="organizationalUnitName"
+              #organizationalUnitNameInput
+              matInput
+              type="text"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Common Name (e.g. server FQDN or YOUR name)</mat-label>
+            <input
+              (input)="commonName = commonNameInput.value"
+              [value]="commonName"
+              #commonNameInput
+              matInput
+              type="text"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Email Address</mat-label>
+            <input
+              (input)="emailAddress = emailAddressInput.value"
+              [value]="emailAddress"
+              #emailAddressInput
+              matInput
+              type="text"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Bits (key length)</mat-label>
+            <input
+              (input)="bits = getNumber(bitsInput.value)"
+              [value]="bits"
+              #bitsInput
+              matInput
+              type="number"
+            />
+          </mat-form-field>
+        </section>
+        <section certificate-password>
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input
+              (input)="passwordChange($event)"
+              [value]="password"
+              #passwordInput
+              matInput
+              type="password"
+            />
+            @if (password) {
+              <button
+                aria-label="Clear"
+                mat-icon-button
+                matSuffix
+                (click)="
+                  passwordInput.type === 'password'
+                    ? (passwordInput.type = 'text')
+                    : (passwordInput.type = 'password')
+                "
+              >
+                <mat-icon>{{
+                  passwordInput.type === 'password'
+                    ? 'visibility'
+                    : 'visibility_off'
+                }}</mat-icon>
+              </button>
+            }
+          </mat-form-field>
+        </section>
+
+        @if (shouldCreate) {
+          <md-outlined-button (click)="handleCertificateGeneration()">
             Create Certificate
           </md-outlined-button>
-        </div>
+        } @else {
+          <div class="load-certificate-container" (click)="certInput.click()">
+            <label for="certInput">Load PFX File</label>
+            <input
+              (change)="handleCertificateInputChange($event)"
+              #certInput
+              id="cerTInput"
+              type="file"
+            />
+          </div>
+        }
 
         <div class="link-container">
           <a #link href=""></a>
-        </div>
-        <div class="load-certificate-container">
-          <label for="testCertInput">load pfx file: </label>
-          <input
-            (change)="handleCertificateInputChange($event)"
-            #testCertInput
-            id="testCerTInput"
-            type="file"
-          />
         </div>
       </div>
     </div>
@@ -181,33 +199,58 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
         [certificate] {
           align-items: center;
           display: flex;
-          flex-direction: row;
+          flex-direction: column;
           flex-wrap: wrap;
           grid-column-gap: 1rem;
           grid-row-gap: 1rem;
           justify-content: center;
           max-width: 60rem;
-          padding: 0 1rem 1rem 1rem;
+          padding: 1rem;
         }
 
         .load-certificate-container {
           align-items: center;
           border-radius: 1rem;
+          cursor: pointer;
           display: flex;
           flex-direction: column;
           justify-content: center;
-          margin-top: 1rem;
           outline: var(--x-shell-default-outline);
-          padding: 1rem 0 1rem 3.5rem;
+          padding: 0.5rem 1rem;
           text-align: center;
 
           label {
-            margin-bottom: 0.25rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            height: 1.25rem;
+            line-height: 1.25rem;
+            width: 100%;
+          }
+        }
+
+        .load-certificate-container:hover {
+          background-color: var(--md-sys-color-on-primary);
+        }
+
+        label {
+          text-align: center;
+          width: 5rem;
+        }
+
+        .settings {
+          align-items: center;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+
+          label {
+            cursor: pointer;
           }
         }
 
         .link-container {
-          text-align: left;
+          text-align: center;
           width: 100%;
 
           a {
@@ -224,12 +267,18 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
           flex-direction: column;
         }
 
+        input[type='file'] {
+          display: none;
+        }
+
+        md-switch,
         md-outlined-button {
           margin: 0.5rem;
         }
 
         mat-form-field:has(input) {
-          width: 100%;
+          margin: auto;
+          width: 90%;
         }
 
         section {
@@ -246,33 +295,28 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
   encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class XCertificateComponent implements OnDestroy {
-  bits = 2048;
-  commonName = 'example.com';
   countryName = 'US';
-  emailAddress = 'example@example.com';
-  localityName = 'Detroit';
-  organizationalUnitName = 'Sector 7-G';
-  organizationName = 'Internet Widgits Pty Ltd';
-  password = '';
   stateOrProvinceName = 'Michigan';
+  localityName = 'Detroit';
+  organizationName = 'Internet Widgits Pty Ltd';
+  organizationalUnitName = 'Sector 7-G';
+  commonName = 'example.com';
+  emailAddress = 'example@example.com';
+  bits = 2048;
+  password = '';
+
+  shouldCreate = true;
 
   xDialogService: XDialogService = inject(XDialogService);
 
-  @ViewChild('bitsInput') bitsInput!: ElementRef;
-  @ViewChild('commonNameInput') commonNameInput!: ElementRef;
-  @ViewChild('countryNameInput') countryNameInput!: ElementRef;
-  @ViewChild('emailAddressInput') emailAddressInput!: ElementRef;
-  @ViewChild('link') link!: ElementRef;
-  @ViewChild('localityNameInput') localityNameInput!: ElementRef;
-  @ViewChild('organizationalUnitNameInput')
-  organizationalUnitNameInput!: ElementRef;
-  @ViewChild('organizationNameInput') organizationNameInput!: ElementRef;
-  @ViewChild('passwordInput') passwordInput!: ElementRef;
-  @ViewChild('stateOrProvinceNameInput') stateOrProvinceNameInput!: ElementRef;
-  @ViewChild('testCertInput') testCertInput!: ElementRef;
+  link: Signal<ElementRef | undefined> = viewChild('link');
+  shouldCreateToggle: Signal<ElementRef | undefined> =
+    viewChild('shouldCreateToggle');
+  createCertificate: Signal<ElementRef | undefined> =
+    viewChild('createCertificate');
 
   worker?: Worker;
-  workerEventListener?: any;
+  workerEventListener!: (event: MessageEvent) => Promise<void>;
 
   constructor() {
     if (typeof Worker !== 'undefined') {
@@ -300,13 +344,17 @@ export class XCertificateComponent implements OnDestroy {
           case 'create-certificate':
             // generate a URL for the Blob
             const url = URL.createObjectURL(event.data.result.blob);
+            const link = this.link();
 
-            this.link.nativeElement.innerText = event.data.result.filename;
-            this.link.nativeElement.setAttribute(
-              'download',
-              event.data.result.filename,
-            );
-            this.link.nativeElement.href = url;
+            if (link) {
+              link.nativeElement.innerText = event.data.result.filename;
+              link.nativeElement.setAttribute(
+                'download',
+                event.data.result.filename,
+              );
+              link.nativeElement.href = url;
+            }
+
             break;
           default:
             break;
@@ -349,6 +397,19 @@ export class XCertificateComponent implements OnDestroy {
 
   getNumber(v: string): number {
     return Number(v);
+  }
+
+  handleMdSwitchChange() {
+    this.shouldCreate = !this.shouldCreate;
+
+    const createCertificate = this.createCertificate();
+    const shouldCreateToggle = this.shouldCreateToggle();
+
+    if (createCertificate && shouldCreateToggle) {
+      this.shouldCreate
+        ? createCertificate.nativeElement.removeAttribute('hidden')
+        : createCertificate.nativeElement.setAttribute('hidden', 'hidden');
+    }
   }
 
   passwordChange(event: Event) {
@@ -433,31 +494,61 @@ export class XCertificateComponent implements OnDestroy {
   }
 
   async handleCertificateInputChange(event: Event) {
-    const files = (event.target as HTMLInputElement).files;
+    const fileInput = event.target as HTMLInputElement;
+    const [pfx] = fileInput.files ?? [];
 
-    if (files) {
-      const pfx = files[0];
+    let privateKey = undefined;
+    let certificate = undefined;
 
-      let { privateKey, certificate } = this.extractFromPfx(
+    try {
+      fileInput.value = '';
+
+      const extracted = this.extractFromPfx(
         await pfx.arrayBuffer(),
         this.password,
       );
 
-      const pkcs8 = this.privateKeyToPkcs8(privateKey);
-
-      const cryptoKey = await crypto.subtle.importKey(
-        'pkcs8',
-        pkcs8,
-        { name: 'RSASSA-PKCS1-v1_5', hash: { name: 'SHA-256' } },
-        true,
-        ['sign'],
+      privateKey = extracted.privateKey;
+      certificate = extracted.certificate;
+    } catch (error) {
+      this.xDialogService.openDialog(
+        'The certificate details could not be extracted. Is the certificate and password valid? See the DevTools / Console for more details.',
+        {
+          modal: true,
+        },
       );
 
-      this.xDialogService.openDialog('see dev tools for results', {
-        modal: true,
-      });
+      console.error(
+        'ERROR',
+        {
+          certificate,
+          cryptoKey: undefined,
+          pkcs8: undefined,
+          privateKey,
+        },
+        error,
+      );
 
-      console.log('Results', { certificate, cryptoKey, pkcs8, privateKey });
+      return;
     }
+
+    const pkcs8 = this.privateKeyToPkcs8(privateKey);
+
+    const cryptoKey = await crypto.subtle.importKey(
+      'pkcs8',
+      pkcs8,
+      { name: 'RSASSA-PKCS1-v1_5', hash: { name: 'SHA-256' } },
+      true,
+      ['sign'],
+    );
+
+    this.xDialogService.openDialog(
+      'The certificate details have been extracted. See the DevTools / Console for more details.',
+      {
+        modal: true,
+      },
+    );
+
+    console.log('Results', { certificate, cryptoKey, pkcs8, privateKey });
   }
 }

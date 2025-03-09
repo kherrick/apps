@@ -53,7 +53,7 @@ import { XNavigationDrawerComponent } from '../x-navigation-drawer/x-navigation-
       *ngIf="!isFullscreen"
       (drawerButton)="handleDrawerButton()"
     ></x-navigation-rail>
-    <section>
+    <div id="container">
       <x-top-app-bar
         *ngIf="!isFullscreen"
         (drawerButton)="handleDrawerButton()"
@@ -63,11 +63,11 @@ import { XNavigationDrawerComponent } from '../x-navigation-drawer/x-navigation-
         <x-dialog></x-dialog>
         <router-outlet></router-outlet>
       </main>
-    </section>
+    </div>
   `,
   styles: [
     `
-      section {
+      #container {
         display: flex;
         flex-direction: column;
         flex: 1;
