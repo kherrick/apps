@@ -166,15 +166,15 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
             Create Certificate
           </md-outlined-button>
         } @else {
-          <div class="load-certificate-container" (click)="certInput.click()">
-            <label for="certInput">Load PFX File</label>
-            <input
-              (change)="handleCertificateInputChange($event)"
-              #certInput
-              id="cerTInput"
-              type="file"
-            />
-          </div>
+          <md-outlined-button (click)="certInput.click()">
+            Load PFX File
+          </md-outlined-button>
+          <input
+            (change)="handleCertificateInputChange($event)"
+            #certInput
+            id="certInput"
+            type="file"
+          />
         }
 
         <div class="link-container">
@@ -206,31 +206,6 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
           justify-content: center;
           max-width: 60rem;
           padding: 1rem;
-        }
-
-        .load-certificate-container {
-          align-items: center;
-          border-radius: 1rem;
-          cursor: pointer;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          outline: var(--x-shell-default-outline);
-          padding: 0.5rem 1rem;
-          text-align: center;
-
-          label {
-            cursor: pointer;
-            font-size: 0.875rem;
-            font-weight: 500;
-            height: 1.25rem;
-            line-height: 1.25rem;
-            width: 100%;
-          }
-        }
-
-        .load-certificate-container:hover {
-          background-color: var(--md-sys-color-on-primary);
         }
 
         label {
