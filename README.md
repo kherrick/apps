@@ -2,7 +2,7 @@
 
 [![Screenshot of Apps](./src/assets/images/screenshot.png)](https://kherrick.github.io/apps/)
 
-[Apps](/apps/) is a [progressive web app](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) that aims to adhere to the [App Shell model](https://angular.io/guide/app-shell). The primary routes are [prerendered](https://angular.io/guide/prerendering) as static HTML during the build process and are [loaded lazily](https://angular.io/guide/lazy-loading-ngmodules) at runtime to ensure a smaller client-side JavaScript bundle. The [source code](https://github.com/kherrick/apps) is hosted on [GitHub](https://github.com/) and comprises several components that operate within the [Angular](https://angular.io/) framework.
+[Apps](/apps/) is a [progressive web app](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) that aims to adhere to the [App Shell model](https://angular.dev/ecosystem/service-workers/app-shell). The primary routes are [prerendered](https://angular.dev/guide/prerendering) as static HTML during the build process and are [loaded lazily](https://angular.dev/guide/routing/common-router-tasks#lazy-loading) at runtime to ensure a smaller client-side JavaScript bundle. The [source code](https://github.com/kherrick/apps) is hosted on [GitHub](https://github.com/) and comprises several components that operate within the [Angular](https://angular.dev/) framework.
 
 ## Sections
 
