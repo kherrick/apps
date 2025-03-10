@@ -18,18 +18,18 @@ import { FaceDetectorComponent } from '../../../app/shared/face-detector.compone
             progressive web app
           </a>
           that aims to adhere to the
-          <a href="https://angular.io/guide/app-shell">App Shell model</a>. The
+          <a href="https://angular.dev/ecosystem/service-workers/app-shell">App Shell model</a>. The
           primary routes are
-          <a href="https://angular.io/guide/prerendering">prerendered</a> as
+          <a href="https://angular.dev/guide/prerendering">prerendered</a> as
           static HTML during the build process and are
-          <a href="https://angular.io/guide/lazy-loading-ngmodules">
+          <a href="https://angular.dev/guide/routing/common-router-tasks#lazy-loading">
             loaded lazily</a
           >
           at runtime to ensure a smaller client-side JavaScript bundle. The
           <a href="https://github.com/kherrick/apps">source code</a> is hosted
           on <a href="https://github.com/">GitHub</a> and comprises several
           components that operate within the
-          <a href="https://angular.io/">Angular</a> framework.
+          <a href="https://angular.dev/">Angular</a> framework.
         </p>
         <p>
           As an example, try the face-detector component below. It is built with
