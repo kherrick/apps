@@ -15,12 +15,12 @@ import { SlideComponent } from '../shared/slide.component';
           <blockquote>
             <span>
               If you're unsure whether a given solution is static rendering or
-              prerendering, try this test: disable JavaScript and load the
-              created web pages. For statically rendered pages, most of the
-              functionality will still exist without JavaScript enabled. For
-              prerendered pages, there may still be some basic functionality
-              like links, but most of the page will be inert.
-              <a href="https://web.dev/rendering-on-the-web/#static-rendering"
+              prerendering, try disabling JavaScript and load the page you want
+              to test. For statically rendered pages, most interactive features
+              still exist without JavaScript. Prerendered pages might still have
+              some basic features like links with JavaScript disabled, but most
+              of the page is inert.
+              <a href="https://web.dev/articles/rendering-on-the-web#static"
                 >*</a
               >
             </span>
