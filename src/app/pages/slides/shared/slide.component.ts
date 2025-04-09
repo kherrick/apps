@@ -1,6 +1,7 @@
 import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
 
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   OnDestroy,
@@ -23,215 +24,254 @@ import { Subscription } from 'rxjs';
   selector: 'x-slide',
   imports: [CommonModule, RouterModule],
   template: `
-    <div slide-container>
-      @if (tune === 'on' && !isFirst) {
-        <div (click)="handleBackward()" class="previous">
-          <i style="slide-icon" class="material-icons control-icon"
-            >arrow_back</i
-          >
-        </div>
-      }
-      <section
-        x-section
-        (keydown)="handleKeydown($event)"
-        id="stage"
-        tabindex="0"
-        [ngClass]="{ dark: !isLightMode, light: isLightMode }"
-      >
-        <section [ngClass]="{ 'with-padding': isFullscreen }">
-          <header>
-            <ng-content select="[header]"></ng-content>
-            <div class="toggles">
-              <i (click)="handleTune()" class="material-icons">tune</i>
-              <i (click)="handleFullScreen($event)" class="material-icons">{{
-                isFullscreen ? 'fullscreen_exit' : 'fullscreen'
-              }}</i>
+    <div (keydown)="handleKeydown($event)" slide-container>
+      <div toggles [ngClass]="{ fullscreen: isFullscreen }">
+        <i (click)="handleTune()" class="material-icons">tune</i>
+        <i (click)="handleFullScreen($event)" class="material-icons">{{
+          isFullscreen ? 'fullscreen_exit' : 'fullscreen'
+        }}</i>
+      </div>
+      <div stage-container>
+        @if (tune === 'on') {
+          @if (isFirst) {
+            <div class="previous"></div>
+          } @else {
+            <div class="previous" (click)="handleBackward()">
+              <button class="previous pointer">
+                <i class="material-icons control-icon" style="slide-icon">
+                  arrow_back
+                </i>
+              </button>
             </div>
-          </header>
-          <section class="content">
-            <ng-content select="[sub-header]"></ng-content>
-            <ng-content select="[list]"></ng-content>
-          </section>
-          <footer><ng-content select="[footer]"></ng-content></footer>
-        </section>
-      </section>
-      @if (tune === 'on' && !isEnd) {
-        <div class="next" (click)="handleForward()">
-          <i style="slide-icon" class="material-icons control-icon"
-            >arrow_forward</i
+          }
+        }
+        <section
+          id="stage"
+          tabindex="0"
+          [ngClass]="{ dark: !isLightMode, light: isLightMode }"
+        >
+          <section
+            [ngClass]="{ 'with-padding': isFullscreen || this.tune === 'off' }"
           >
-        </div>
-      }
+            <header>
+              <ng-content select="[header]"></ng-content>
+            </header>
+            <section class="content">
+              <ng-content select="[sub-header]"></ng-content>
+              <ng-content select="[list]"></ng-content>
+            </section>
+            <footer><ng-content select="[footer]"></ng-content></footer>
+          </section>
+        </section>
+        @if (tune === 'on') {
+          @if (isEnd) {
+            <div class="next"></div>
+          } @else {
+            <div class="next" (click)="handleForward()">
+              <button class="next pointer">
+                <i class="material-icons control-icon" style="slide-icon">
+                  arrow_forward
+                </i>
+              </button>
+            </div>
+          }
+        }
+      </div>
     </div>
   `,
   styles: [
     `
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
 
-      x-slide {
-        width: 100%;
-      }
-
       [slide-container] {
-
         display: flex;
         height: 100%;
+        flex-direction: column;
 
         .control-icon {
           font-size: 2.5rem;
         }
 
-        .next,
-        .previous {
-          align-items: center;
-          color: var(--md-sys-color-tertiary);
+        [toggles] {
           display: flex;
-          height: calc(100vh - 6rem);
-          justify-content: center;
-          user-select: none;
-          width: 4rem;
-        }
+          justify-content: right;
+          margin-right: 1rem;
 
-        .next:hover,
-        .previous:hover {
-          color: var(--md-sys-color-primary);
-          cursor: pointer;
-        }
-
-        #stage {
-          display: block;
-          flex: 1;
-          min-height: 100%;
-          outline: none;
-
-          a,
-          a:link,
-          a:focus,
-          a:hover,
-          a:active,
-          a:visited {
-            color: var(--md-sys-color-on-surface);
+          i.material-icons {
+            cursor: pointer;
           }
 
-          /* &.dark {
-          background-color: black;
-          color: white;
-
-          a {
-            color: #ddd;
+          &.fullscreen {
+            padding-top: 1rem;
           }
-        } */
+        }
 
-          header {
+        [stage-container] {
+          display: flex;
+          flex: auto;
+
+          .next,
+          .previous {
+            align-items: center;
+            color: var(--md-sys-color-tertiary);
             display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            text-align: center;
-
-            .toggles {
-              display: flex;
-              margin-right: 1rem;
-
-              i.material-icons {
-                cursor: pointer;
-              }
-            }
-
-            h1 {
-              font-size: 2rem;
-              width: 100%;
-            }
+            justify-content: center;
+            user-select: none;
+            width: 4rem;
           }
 
-          section {
-            overflow: hidden;
+          button.previous,
+          button.next {
+            height: 95%;
+            margin: 0 1rem;
+            padding: 0;
+          }
 
-            &.with-padding {
-              padding: 1rem 1rem 0 1rem;
+          .pointer:hover,
+          .pointer:hover {
+            color: var(--md-sys-color-primary);
+            cursor: pointer;
+          }
+
+          #stage {
+            display: block;
+            flex: 1;
+            min-height: 100%;
+            outline: none;
+
+            a,
+            a:link,
+            a:focus,
+            a:hover,
+            a:active,
+            a:visited {
+              color: var(--md-sys-color-on-surface);
+              text-decoration: 1px underline #999;
             }
 
-            .content {
-              align-items: center;
-              display: flex;
-              flex-direction: column;
+            /* &.dark {
+              background-color: black;
+              color: white;
 
-              h2 {
+              a {
+                color: #ddd;
+              }
+            } */
+
+            section {
+              overflow: hidden;
+
+              header {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
                 text-align: center;
-              }
 
-              ul {
-                padding-left: 1.5rem;
-              }
-
-              @media only screen and (min-width: 599px) {
-                li {
-                  width: 240px;
+                h1 {
+                  font-size: 2rem;
+                  width: 100%;
                 }
               }
 
-              @media only screen and (min-width: 600px) {
+              &.with-padding {
+                padding: 1rem 1rem 0 1rem;
+              }
+
+              .content {
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+
+                h2 {
+                  text-align: center;
+                }
+
                 ul {
-                  font-size: 1.75rem;
+                  padding-left: 1.5rem;
+
+                  &[video] {
+                    list-style: none;
+                    padding: 0;
+                  }
                 }
 
-                li {
-                  width: 400px;
-                }
-              }
-
-              @media only screen and (min-width: 700px) {
-                li {
-                  width: 450px;
-                }
-              }
-
-              @media only screen and (min-width: 1000px) {
-                li {
-                  width: 700px;
-                }
-              }
-
-              li:is([media]) {
-                width: 100%;
-              }
-
-              li:is([quote]) {
-                list-style: none;
-              }
-
-              li {
-                animation: 1s alternate slidein;
-                margin-top: 0.25rem;
-
-                blockquote {
-                  font-style: italic;
-                  margin: 0.25rem 0 0 0;
+                @media only screen and (min-width: 599px) {
+                  li {
+                    width: 240px;
+                  }
                 }
 
-                blockquote {
-                  quotes: '"' '"';
-                }
-                blockquote:before {
-                  content: open-quote;
-                }
-                blockquote:after {
-                  content: close-quote;
+                @media only screen and (min-width: 600px) {
+                  ul {
+                    font-size: 1.75rem;
+                  }
+
+                  li {
+                    width: 400px;
+                  }
                 }
 
-                img {
-                  max-width: 700px;
+                @media only screen and (min-width: 700px) {
+                  li {
+                    width: 450px;
+                  }
+                }
+
+                @media only screen and (min-width: 1000px) {
+                  li {
+                    width: 700px;
+                  }
+                }
+
+                li:is([media]) {
                   width: 100%;
                 }
 
-                @keyframes slidein {
-                  from {
-                    margin-left: 100%;
-                    opacity: 0.5;
+                li:is([quote]) {
+                  list-style: none;
+                }
+
+                li {
+                  animation: 1s alternate slidein;
+                  margin-top: 0.25rem;
+
+                  blockquote {
+                    font-style: italic;
+                    margin: 0.25rem 0 0 0;
                   }
 
-                  to {
-                    margin-left: 0%;
-                    opacity: 1;
+                  blockquote {
+                    quotes: '"' '"';
+                  }
+
+                  blockquote:before {
+                    content: open-quote;
+                  }
+
+                  blockquote:after {
+                    content: close-quote;
+                  }
+
+                  img {
+                    max-width: 700px;
+                    width: 100%;
+                  }
+
+                  video {
+                    max-height: 90vh;
+                    width: 100%;
+                  }
+
+                  @keyframes slidein {
+                    from {
+                      margin-left: 100%;
+                      opacity: 0.5;
+                    }
+
+                    to {
+                      margin-left: 0%;
+                      opacity: 1;
+                    }
                   }
                 }
               }
@@ -243,7 +283,7 @@ import { Subscription } from 'rxjs';
   ],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class SlideComponent implements OnInit, OnDestroy {
+export class SlideComponent implements AfterViewInit, OnInit, OnDestroy {
   public autoAdvance: string | null = '';
   public endFlag: boolean = false;
   public isEnd: boolean = false;
@@ -296,14 +336,6 @@ export class SlideComponent implements OnInit, OnDestroy {
     localStorage.setItem('apps-slides-tune', nextVal);
     this.tune = nextVal;
 
-    // setup gesture detection
-    import('hammerjs').then((HammerStatic) => {
-      const hammer = new (HammerStatic as any).default(stage).on(
-        'swipeleft swiperight',
-        (event: HammerInput) => this.handleGestures(event),
-      );
-    });
-
     // get persisted state for fullscreen and mode
     const isFullscreen =
       sessionStorage.getItem('apps-slides-fullscreen') === 'enabled';
@@ -317,10 +349,6 @@ export class SlideComponent implements OnInit, OnDestroy {
     this.isFirst = shadowRoot.host.getAttribute('first') !== null;
     this.isEnd = shadowRoot.host.getAttribute('end') !== null;
     this.isLast = shadowRoot.host.getAttribute('last') !== null;
-
-    // focus the stage
-    const stage = shadowRoot.getElementById('stage');
-    stage.focus();
 
     this.list = shadowRoot.querySelector('ul');
     this.list?.removeAttribute('hidden');
@@ -366,7 +394,28 @@ export class SlideComponent implements OnInit, OnDestroy {
     // @todo // (globalThis as any).
     this.scrollHandlerTimeout = setTimeout(() => {
       (globalThis as any).scrollTo(0, this.document.body.scrollHeight);
-    }, 1000);
+    }, 0);
+  }
+
+  ngAfterViewInit(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    const shadowRoot = this.el.nativeElement.shadowRoot;
+
+    // focus the stage
+    const stage = shadowRoot.querySelector('#stage');
+    stage.focus();
+
+    // setup gesture detection
+    const slideContainer = shadowRoot.querySelector('[slide-container]');
+    import('hammerjs').then((HammerStatic) => {
+      new (HammerStatic as any).default(slideContainer).on(
+        'swipeleft swiperight',
+        (event: HammerInput) => this.handleGestures(event),
+      );
+    });
   }
 
   ngOnDestroy(): void {

@@ -92,6 +92,7 @@ import { XNavigationDrawerComponent } from '../x-navigation-drawer/x-navigation-
       }
 
       x-slide {
+        height: 100%;
         width: 100%;
       }
 
