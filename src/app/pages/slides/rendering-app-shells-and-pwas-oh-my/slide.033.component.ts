@@ -17,7 +17,7 @@ import { SlideComponent } from '../shared/slide.component';
           Frameworks
           <ul>
             <li>
-              <a href="https://www.npmjs.com/package/@angular/service-worker"
+              <a href="https://angular.dev/ecosystem/service-workers"
                 >&#64;angular/service-worker</a
               >
             </li>
@@ -53,7 +53,7 @@ import { SlideComponent } from '../shared/slide.component';
               >
             </li>
             <li>
-              <a href="https://web.dev/offline-cookbook/"
+              <a href="https://web.dev/articles/offline-cookbook"
                 >The Offline Cookbook</a
               >
             </li>

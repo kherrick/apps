@@ -18,7 +18,7 @@ import { SlideComponent } from '../shared/slide.component';
       <ul list>
         <li>
           A
-          <a href="https://developer.mozilla.org/en-US/docs/Web/Manifest"
+          <a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest"
             >Web App Manifest</a
           >
           with the following properties referenced: name, short_name, start_url,
@@ -30,7 +30,7 @@ import { SlideComponent } from '../shared/slide.component';
         </li>
         <li>
           Apps must be served over TLS (<a
-            href="https://web.dev/fixing-mixed-content/"
+            href="https://web.dev/articles/fixing-mixed-content"
             >green padlock / no active mixed content</a
           >) to prevent hijacking by captive portals (and worse)
         </li>

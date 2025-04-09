@@ -24,7 +24,7 @@ import { SlideComponent } from '../shared/slide.component';
               initial/non-JS navigations, and then have your service worker take
               on rendering of HTML for navigations after it has been installed
               <a
-                href="https://web.dev/rendering-on-the-web/#trisomorphic-rendering"
+                href="https://web.dev/articles/rendering-on-the-web#trisomorphic-rendering"
                 >*</a
               >
             </span>

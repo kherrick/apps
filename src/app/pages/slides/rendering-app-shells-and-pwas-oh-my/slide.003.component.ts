@@ -43,7 +43,7 @@ import { SlideComponent } from '../shared/slide.component';
                 <li>Servers!</li>
                 <li>
                   <a
-                    href="https://www.netlify.com/blog/the-acronyms-of-rendering/#server-side-rendering-ssr"
+                    href="https://www.netlify.com/blog/the-acronyms-of-rendering/#types-of-rendering"
                     >Edge functions?</a
                   >
                 </li>

@@ -9,7 +9,7 @@ import { SlideComponent } from '../shared/slide.component';
     <x-slide>
       <h1 header>Rendering on the Web</h1>
       <h2 sub-header>
-        <a href="https://web.dev/user-centric-performance-metrics/"
+        <a href="https://web.dev/articles/user-centric-performance-metrics"
           >Server side rendering</a
         >
       </h2>
@@ -19,11 +19,11 @@ import { SlideComponent } from '../shared/slide.component';
           Pros
           <ul>
             <li>
-              <a href="https://web.dev/rendering-on-the-web/#server-rendering"
+              <a href="https://web.dev/articles/rendering-on-the-web#server-side"
                 >Generally produces</a
               >
               a fast
-              <a href="https://web.dev/fcp/">First Contentful Paint</a> and
+              <a href="https://web.dev/articles/fcp">First Contentful Paint</a> and
               <a
                 href="https://developer.chrome.com/docs/lighthouse/performance/interactive/"
                 >Time to Interactive</a
