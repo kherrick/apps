@@ -65,10 +65,10 @@ import { Router, RouterModule } from '@angular/router';
             <span>Links</span>
           </label>
         </a>
-        <a [routerLink]="'/slides/rendering-app-shells-and-pwas-oh-my'">
+        <a [routerLink]="'/slides/slides'">
           <label
             (keydown)="
-              handleEnterKey('/slides/rendering-app-shells-and-pwas-oh-my')(
+              handleEnterKey('/slides/slides')(
                 $event
               )
             "

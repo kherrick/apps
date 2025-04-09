@@ -77,11 +77,11 @@ import { Router, RouterModule } from '@angular/router';
             <div
               (click)="closeDrawer()"
               (keydown)="
-                handleEnterKey('/slides/rendering-app-shells-and-pwas-oh-my')(
+                handleEnterKey('/slides/slides')(
                   $event
                 )
               "
-              [routerLink]="'/slides/rendering-app-shells-and-pwas-oh-my'"
+              [routerLink]="'/slides/slides'"
               class="list-tile"
             >
               <span class="title">Slides</span>

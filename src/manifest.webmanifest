@@ -2,7 +2,7 @@
   "name": "apps",
   "short_name": "apps",
   "theme_color": "#333333",
-  "background_color": "#fafafa",
+  "background_color": "#121212",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",

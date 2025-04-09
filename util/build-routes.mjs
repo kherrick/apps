@@ -26,16 +26,16 @@ if (!host) {
   await appendFile(
     outputFilename,
     validPaths
-      .filter((line) => line !== '')
+      .filter((line) => line !== "")
       .map((line) => {
         return `${line}\n`;
       })
       .join(""),
   );
 } else {
-  const slideRoute = "rendering-app-shells-and-pwas-oh-my";
-  const slideMap = {
-    [slideRoute]: {
+  const presentationRouteOne = "rendering-app-shells-and-pwas-oh-my";
+  const presentationMapOne = {
+    [presentationRouteOne]: {
       "": {
         lastItem: 0,
       },
@@ -144,22 +144,126 @@ if (!host) {
     },
   };
 
+  const presentationRouteTwo = "progressive-web-apps";
+  const presentationMapTwo = {
+    [presentationRouteTwo]: {
+      "": {
+        lastItem: 0,
+      },
+      1: {
+        lastItem: 1,
+      },
+      2: {
+        lastItem: 1,
+      },
+      3: {
+        lastItem: 1,
+      },
+      4: {
+        lastItem: 1,
+      },
+      5: {
+        lastItem: 1,
+      },
+      6: {
+        lastItem: 7,
+      },
+      7: {
+        lastItem: 7,
+      },
+      8: {
+        lastItem: 1,
+      },
+      9: {
+        lastItem: 1,
+      },
+      10: {
+        lastItem: 3,
+      },
+      11: {
+        lastItem: 3,
+      },
+      12: {
+        lastItem: 3,
+      },
+      13: {
+        lastItem: 3,
+      },
+      14: {
+        lastItem: 4,
+      },
+      15: {
+        lastItem: 4,
+      },
+      16: {
+        lastItem: 4,
+      },
+      17: {
+        lastItem: 3,
+      },
+      18: {
+        lastItem: 3,
+      },
+      19: {
+        lastItem: 3,
+      },
+      20: {
+        lastItem: 4,
+      },
+      21: {
+        lastItem: 1,
+      },
+      22: {
+        lastItem: 1,
+      },
+      23: {
+        lastItem: 1,
+      },
+      24: {
+        lastItem: 1,
+      },
+      25: {
+        lastItem: 1,
+      },
+      26: {
+        lastItem: 1,
+      },
+      27: {
+        lastItem: 8,
+      },
+      28: {
+        lastItem: 13,
+      },
+      end: {
+        lastItem: 1,
+      },
+    },
+  };
   await writeFile(
     outputFilename,
     validPaths
-      .filter((line) => line !== '')
+      .filter((line) => line !== "")
       .map((line) => {
         const result =
           line === "/" ? `${host ?? ""}${line}` : `${host ?? ""}${line}/`;
-        const hasSlidesRoutes = result.includes(slideRoute);
+
+        const hasPresentationOneRoute = result.includes(presentationRouteOne);
+        const hasPresentationTwoRoute = result.includes(presentationRouteTwo);
 
         let append = "";
 
-        if (hasSlidesRoutes) {
+        if (hasPresentationOneRoute) {
           let slide = result.split("\n")[0].split("/");
           slide = slide[slide.length - 2];
 
-          append = `?n=${slideMap[slideRoute][slide === slideRoute ? "" : slide].lastItem}`;
+          append = `?n=${presentationMapOne[presentationRouteOne][slide === presentationRouteOne ? "" : slide].lastItem}`;
+        }
+
+        if (hasPresentationTwoRoute) {
+          let slide = result.split("\n")[0].split("/");
+          slide = slide[slide.length - 2];
+
+          append = `?n=${presentationMapTwo[presentationRouteTwo][slide === presentationRouteTwo ? "" : slide].lastItem}`;
         }
 
         return `${result}${append}\n`;

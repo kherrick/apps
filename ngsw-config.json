@@ -55,6 +55,7 @@
         "https://hacker-news.firebaseio.com/**",
         "https://herrickdesign.com/wp-content/**",
         "https://herrickdesign.com/wp-json/**",
+        "https://herrickdesign.com/assets/**",
         "https://infinitym.ca/**",
         "https://raw.githubusercontent.com/**",
         "https://tfhub.dev/**"

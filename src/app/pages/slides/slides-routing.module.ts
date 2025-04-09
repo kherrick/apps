@@ -13,8 +13,24 @@ export const routes: Routes = [
     title: `${title} | Slides | Rendering App Shells and PWAs oh my!`,
   },
   {
+    path: 'progressive-web-apps',
+    loadChildren: () =>
+      import(
+        './progressive-web-apps/presentation-002-routing.module'
+      ).then((m) => m.Presentation002RoutingModule),
+    title: `${title} | Slides | Progressive Web Apps`,
+  },
+  {
+    path: 'slides',
+    loadChildren: () =>
+      import(
+        './slides/slides-component-routing.module'
+      ).then((m) => m.SlidesComponentRoutingModule),
+    title: `${title} | Slides`,
+  },
+  {
     path: '**',
-    redirectTo: 'rendering-app-shells-and-pwas-oh-my',
+    redirectTo: 'slides',
   },
 ];
 
