@@ -41,6 +41,11 @@ import { SlideComponent } from '../shared/slide.component';
               >
             </li>
             <li>
+              <a href="https://www.manning.com/books/progressive-web-apps"
+                >Progressive Web Apps - Dean Alan Hume</a
+              >
+            </li>
+            <li>
               <a
                 href="https://www.amazon.ca/Building-Progressive-Web-Apps-Bringing/dp/1491961651"
                 >Building Progressive Web Apps: Bringing the Power of Native to
@@ -57,6 +62,24 @@ import { SlideComponent } from '../shared/slide.component';
                 >The Offline Cookbook</a
               >
             </li>
+          </ul>
+        </li>
+        <li>
+          Stores
+          <ul>
+            <li>
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable#installation_from_an_app_store"
+                >Installation from an app store</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://web.dev/learn/pwa/installation#app_catalogs_and_stores"
+                >App catalogs and stores</a
+              >
+            </li>
+            <li><a href="https://store.app/">store.app</a></li>
           </ul>
         </li>
       </ul>

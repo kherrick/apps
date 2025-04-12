@@ -41,6 +41,11 @@ import { SlideComponent } from '../shared/slide.component';
               >
             </li>
             <li>
+              <a href="https://www.manning.com/books/progressive-web-apps"
+                >Progressive Web Apps - Dean Alan Hume</a
+              >
+            </li>
+            <li>
               <a
                 href="https://www.amazon.ca/Building-Progressive-Web-Apps-Bringing/dp/1491961651"
                 >Building Progressive Web Apps: Bringing the Power of Native to
