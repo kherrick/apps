@@ -27,6 +27,12 @@ export const routes: Routes = [
     title: `${title} | Playground | Encryption`,
   },
   {
+    path: 'peer',
+    loadComponent: () =>
+      import('./x-peer/x-peer.component').then((x) => x.XPeerComponent),
+    title: `${title} | Playground | WebRTC`,
+  },
+  {
     path: '**',
     redirectTo: '',
   },

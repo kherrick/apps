@@ -18,8 +18,11 @@
 
   color-scheme: light;
 
-  --x-shell-background-color: white;
-  --x-shell-default-outline: 0.0625rem solid black;
+  --x-shell-background-color: #fff;
+  --x-shell-default-outline: 0.0625rem solid #000;
+  --peer-message-peer: #007aff;
+  --peer-message-peer-color: #fff;
+  --x-peer-container-spacer: 1.6875rem;
 
   --md-comp-button-container-height: 2.5rem;
   --md-comp-button-container-shape: 1.25rem;
@@ -36,16 +39,21 @@
   --md-sys-color-on-surface-rgb: var(--md-ref-palette-neutral10-rgb);
   --md-sys-color-on-surface: var(--md-sys-color-primary);
 
+  --mat-button-text-label-text-color: var(--mat-sys-on-primary-container);
+  --mat-menu-item-with-icon-leading-spacing: 1rem;
+  --mat-menu-item-with-icon-trailing-spacing: 1rem;
+  --mat-sys-on-primary-container: var(--md-sys-color-surface);
+  --mat-sys-primary-container: var(--md-sys-color-tertiary);
+  --mat-tab-container-height: 3rem;
+  --mat-toolbar-standard-height: 4rem;
+
   --mat-sidenav-container-background-color: var(
     --x-shell-background-color,
-    white
+    #fff
   );
-  --mat-sidenav-container-text-color: black;
-  --mat-sidenav-content-background-color: var(
-    --x-shell-background-color,
-    white
-  );
-  --mat-sidenav-content-text-color: black;
+  --mat-sidenav-container-text-color: #000;
+  --mat-sidenav-content-background-color: var(--x-shell-background-color, #fff);
+  --mat-sidenav-content-text-color: #000;
   --mat-sidenav-scrim-color: #000000cc;
 
   --mdc-theme-primary: var(--md-sys-color-on-primary);
@@ -61,13 +69,16 @@
     @include mat.all-component-themes($light-theme);
     color-scheme: light;
 
-    --x-shell-background-color: white;
-    --x-shell-default-outline: 0.0625rem solid black;
+    --x-shell-background-color: #fff;
+    --x-shell-default-outline: 0.0625rem solid #000;
+    --peer-message-peer: #007aff;
+    --peer-message-peer-color: #fff;
+    --x-peer-container-spacer: 1.6875rem;
 
     --mat-sidenav-container-background-color: var(--x-shell-background-color);
-    --mat-sidenav-container-text-color: black;
+    --mat-sidenav-container-text-color: #000;
     --mat-sidenav-content-background-color: var(--x-shell-background-color);
-    --mat-sidenav-content-text-color: black;
+    --mat-sidenav-content-text-color: #000;
     --mat-sidenav-scrim-color: #000000cc;
 
     --md-sys-color-primary: var(--md-ref-palette-neutral10);
@@ -78,6 +89,14 @@
     --md-sys-color-on-primary: var(--md-ref-palette-neutral90);
     --md-sys-color-on-surface-rgb: var(--md-ref-palette-neutral10-rgb);
     --md-sys-color-on-surface: var(--md-sys-color-primary);
+
+    --mat-button-text-label-text-color: var(--mat-sys-on-primary-container);
+    --mat-menu-item-with-icon-leading-spacing: 1rem;
+    --mat-menu-item-with-icon-trailing-spacing: 1rem;
+    --mat-sys-on-primary-container: var(--md-sys-color-surface);
+    --mat-sys-primary-container: var(--md-sys-color-tertiary);
+    --mat-tab-container-height: 3rem;
+    --mat-toolbar-standard-height: 4rem;
 
     --mdc-theme-primary: var(--md-sys-color-on-primary);
     --mdc-theme-secondary: var(--md-ref-palette-neutral40);
@@ -94,12 +113,15 @@
     color-scheme: dark;
 
     --x-shell-background-color: #121212;
-    --x-shell-default-outline: 0.0625rem solid white;
+    --x-shell-default-outline: 0.0625rem solid #fff;
+    --peer-message-peer: #32d74b;
+    --peer-message-peer-color: #000;
+    --x-peer-container-spacer: 1.6875rem;
 
     --mat-sidenav-container-background-color: var(--x-shell-background-color);
-    --mat-sidenav-container-text-color: white;
+    --mat-sidenav-container-text-color: #fff;
     --mat-sidenav-content-background-color: var(--x-shell-background-color);
-    --mat-sidenav-content-text-color: white;
+    --mat-sidenav-content-text-color: #fff;
     --mat-sidenav-scrim-color: #000000cc;
 
     --md-sys-color-primary: var(--md-ref-palette-neutral90);
@@ -110,6 +132,14 @@
     --md-sys-color-on-primary: var(--md-ref-palette-neutral10);
     --md-sys-color-on-surface-rgb: var(--md-ref-palette-neutral90-rgb);
     --md-sys-color-on-surface: var(--md-sys-color-primary);
+
+    --mat-button-text-label-text-color: var(--mat-sys-on-primary-container);
+    --mat-menu-item-with-icon-leading-spacing: 1rem;
+    --mat-menu-item-with-icon-trailing-spacing: 1rem;
+    --mat-sys-on-primary-container: var(--md-sys-color-surface);
+    --mat-sys-primary-container: var(--md-sys-color-tertiary);
+    --mat-tab-container-height: 3rem;
+    --mat-toolbar-standard-height: 4rem;
 
     --mdc-elevated-card-container-color: var(--md-sys-color-surface);
     --mdc-tab-text-label-color-default: var(--md-ref-palette-neutral50);
@@ -126,13 +156,16 @@
 
     color-scheme: light;
 
-    --x-shell-background-color: white;
-    --x-shell-default-outline: 0.0625rem solid black;
+    --x-shell-background-color: #fff;
+    --x-shell-default-outline: 0.0625rem solid #000;
+    --peer-message-peer: #007aff;
+    --peer-message-peer-color: #fff;
+    --x-peer-container-spacer: 1.6875rem;
 
     --mat-sidenav-container-background-color: var(--x-shell-background-color);
-    --mat-sidenav-container-text-color: black;
+    --mat-sidenav-container-text-color: #000;
     --mat-sidenav-content-background-color: var(--x-shell-background-color);
-    --mat-sidenav-content-text-color: black;
+    --mat-sidenav-content-text-color: #000;
     --mat-sidenav-scrim-color: #000000cc;
 
     --md-sys-color-primary: var(--md-ref-palette-neutral10);
@@ -143,6 +176,14 @@
     --md-sys-color-on-primary: var(--md-ref-palette-neutral90);
     --md-sys-color-on-surface-rgb: var(--md-ref-palette-neutral10-rgb);
     --md-sys-color-on-surface: var(--md-sys-color-primary);
+
+    --mat-button-text-label-text-color: var(--mat-sys-on-primary-container);
+    --mat-menu-item-with-icon-leading-spacing: 1rem;
+    --mat-menu-item-with-icon-trailing-spacing: 1rem;
+    --mat-sys-on-primary-container: var(--md-sys-color-surface);
+    --mat-sys-primary-container: var(--md-sys-color-tertiary);
+    --mat-tab-container-height: 3rem;
+    --mat-toolbar-standard-height: 4rem;
 
     --mdc-theme-primary: var(--md-sys-color-on-primary);
     --mdc-theme-secondary: var(--md-ref-palette-neutral40);
@@ -158,12 +199,15 @@
     color-scheme: dark;
 
     --x-shell-background-color: #121212;
-    --x-shell-default-outline: 0.0625rem solid white;
+    --x-shell-default-outline: 0.0625rem solid #fff;
+    --peer-message-peer: #32d74b;
+    --peer-message-peer-color: #000;
+    --x-peer-container-spacer: 1.6875rem;
 
     --mat-sidenav-container-background-color: var(--x-shell-background-color);
-    --mat-sidenav-container-text-color: white;
+    --mat-sidenav-container-text-color: #fff;
     --mat-sidenav-content-background-color: var(--x-shell-background-color);
-    --mat-sidenav-content-text-color: white;
+    --mat-sidenav-content-text-color: #fff;
     --mat-sidenav-scrim-color: #000000cc;
 
     --md-sys-color-primary: var(--md-ref-palette-neutral90);
@@ -174,6 +218,14 @@
     --md-sys-color-on-primary: var(--md-ref-palette-neutral10);
     --md-sys-color-on-surface-rgb: var(--md-ref-palette-neutral90-rgb);
     --md-sys-color-on-surface: var(--md-sys-color-primary);
+
+    --mat-button-text-label-text-color: var(--mat-sys-on-primary-container);
+    --mat-menu-item-with-icon-leading-spacing: 1rem;
+    --mat-menu-item-with-icon-trailing-spacing: 1rem;
+    --mat-sys-on-primary-container: var(--md-sys-color-surface);
+    --mat-sys-primary-container: var(--md-sys-color-tertiary);
+    --mat-tab-container-height: 3rem;
+    --mat-toolbar-standard-height: 4rem;
 
     --mdc-elevated-card-container-color: var(--md-sys-color-surface);
     --mdc-tab-text-label-color-default: var(--md-ref-palette-neutral50);
@@ -230,6 +282,22 @@ html {
   word-wrap: normal;
   direction: ltr;
   -webkit-font-smoothing: antialiased;
+}
+
+/* workaround for .cdk-overlay-container and menu */
+.cdk-overlay-container {
+  .mat-mdc-menu-panel {
+    background-color: var(--x-shell-background-color);
+    margin-bottom: 1rem;
+
+    .mat-mdc-menu-content {
+      padding: 0.5rem 1rem 0 1rem;
+
+      .mat-mdc-menu-item {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
 }
 
 /* workaround for template shadowrootmode="open"

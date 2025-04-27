@@ -19,11 +19,13 @@ import { SlideComponent } from '../shared/slide.component';
           Pros
           <ul>
             <li>
-              <a href="https://web.dev/articles/rendering-on-the-web#server-side"
+              <a
+                href="https://web.dev/articles/rendering-on-the-web#server-side"
                 >Generally produces</a
               >
               a fast
-              <a href="https://web.dev/articles/fcp">First Contentful Paint</a> and
+              <a href="https://web.dev/articles/fcp">First Contentful Paint</a>
+              and
               <a
                 href="https://developer.chrome.com/docs/lighthouse/performance/interactive/"
                 >Time to Interactive</a

@@ -1,30 +1,31 @@
-import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'x-links',
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   template: `
     <section x-section-cards>
-      <section *ngFor="let site of sites" site class="card">
-        <a
-          [href]="site.href"
-          class="link title"
-          style="background-color: {{ site.titleBackgroundColor }}; color: {{
-            site.titleColor
-          }};"
-        >
-          {{ site.title }}
-          <i class="material-icons">{{ site.icon }}</i>
-        </a>
-        <div class="subtitle" [innerHTML]="site.subtitle"></div>
-        <div class="actions">
-          <button (click)="handleCardButtonClick(site.href)" class="filled">
-            Go
-          </button>
-        </div>
-      </section>
+      @for (site of sites; track site) {
+        <section site class="card">
+          <a
+            [href]="site.href"
+            class="link title"
+            style="background-color: {{ site.titleBackgroundColor }}; color: {{
+              site.titleColor
+            }};"
+          >
+            {{ site.title }}
+            <i class="material-icons">{{ site.icon }}</i>
+          </a>
+          <div class="subtitle" [innerHTML]="site.subtitle"></div>
+          <div class="actions">
+            <button (click)="handleCardButtonClick(site.href)" class="filled">
+              Go
+            </button>
+          </div>
+        </section>
+      }
     </section>
   `,
   styles: [

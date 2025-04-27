@@ -1,4 +1,4 @@
-import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 
 import {
   Component,
@@ -9,6 +9,7 @@ import {
   ViewChild,
   ViewEncapsulation,
   inject,
+  DOCUMENT,
 } from '@angular/core';
 
 import { Subject, Subscription } from 'rxjs';
@@ -30,7 +31,7 @@ export interface CalculatorModel {
 
 @Component({
   selector: 'x-calculator',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div calculator-container>
       <section>

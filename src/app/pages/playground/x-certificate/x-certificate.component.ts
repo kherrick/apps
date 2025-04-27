@@ -143,7 +143,6 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
             @if (password) {
               <button
                 aria-label="Clear"
-                mat-icon-button
                 matSuffix
                 (click)="
                   passwordInput.type === 'password'

@@ -1,10 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'x-home',
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   template: `
     <section x-section-cards>
       <div karlherrick class="card">

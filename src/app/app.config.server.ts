@@ -1,5 +1,5 @@
+import { provideServerRendering } from '@angular/ssr';
 import { ApplicationConfig, mergeApplicationConfig } from '@angular/core';
-import { provideServerRendering } from '@angular/platform-server';
 import { provideRouter, withDisabledInitialNavigation } from '@angular/router';
 
 import { serverSideRoutes } from './app-routing.server.module';

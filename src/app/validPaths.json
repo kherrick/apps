@@ -16,6 +16,7 @@
   "/playground",
   "/playground/certificates",
   "/playground/encryption",
+  "/playground/peer",
   "/pwgen",
   "/slides/slides",
   "/slides/rendering-app-shells-and-pwas-oh-my",

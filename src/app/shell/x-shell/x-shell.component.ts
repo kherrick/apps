@@ -7,9 +7,10 @@ import {
   inject,
   isDevMode,
   viewChild,
+  DOCUMENT,
 } from '@angular/core';
 
-import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule, RouterOutlet } from '@angular/router';
@@ -33,7 +34,6 @@ import { XNavigationDrawerComponent } from '../x-navigation-drawer/x-navigation-
   selector: 'x-shell',
   encapsulation: ViewEncapsulation.ShadowDom,
   imports: [
-    CommonModule,
     MatButtonModule,
     MatSidenavModule,
     RouterModule,
@@ -49,16 +49,18 @@ import { XNavigationDrawerComponent } from '../x-navigation-drawer/x-navigation-
       [open]="isDrawerOpen"
       [hidden]="!isDrawerOpen"
     ></x-navigation-drawer>
-    <x-navigation-rail
-      *ngIf="!isFullscreen"
-      (drawerButton)="handleDrawerButton()"
-    ></x-navigation-rail>
-    <div id="container">
-      <x-top-app-bar
-        *ngIf="!isFullscreen"
+    @if (!isFullscreen) {
+      <x-navigation-rail
         (drawerButton)="handleDrawerButton()"
-        (themeButton)="handleThemeButton($event)"
-      />
+      ></x-navigation-rail>
+    }
+    <div id="container">
+      @if (!isFullscreen) {
+        <x-top-app-bar
+          (drawerButton)="handleDrawerButton()"
+          (themeButton)="handleThemeButton($event)"
+        />
+      }
       <main>
         <x-dialog></x-dialog>
         <router-outlet></router-outlet>
@@ -74,7 +76,6 @@ import { XNavigationDrawerComponent } from '../x-navigation-drawer/x-navigation-
 
         x-top-app-bar {
           --md-sys-comp-top-app-bar-padding: 1rem;
-          --mat-toolbar-standard-height: 4rem;
 
           height: var(--mat-toolbar-standard-height);
           min-height: var(--mat-toolbar-standard-height);
