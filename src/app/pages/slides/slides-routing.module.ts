@@ -15,17 +15,17 @@ export const routes: Routes = [
   {
     path: 'progressive-web-apps',
     loadChildren: () =>
-      import(
-        './progressive-web-apps/presentation-002-routing.module'
-      ).then((m) => m.Presentation002RoutingModule),
+      import('./progressive-web-apps/presentation-002-routing.module').then(
+        (m) => m.Presentation002RoutingModule,
+      ),
     title: `${title} | Slides | Progressive Web Apps`,
   },
   {
     path: 'slides',
     loadChildren: () =>
-      import(
-        './slides/slides-component-routing.module'
-      ).then((m) => m.SlidesComponentRoutingModule),
+      import('./slides/slides-component-routing.module').then(
+        (m) => m.SlidesComponentRoutingModule,
+      ),
     title: `${title} | Slides`,
   },
   {

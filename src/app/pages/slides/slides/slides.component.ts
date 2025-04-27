@@ -1,30 +1,33 @@
-import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'x-links',
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   template: `
     <section x-section-cards>
-      <section *ngFor="let site of sites" site class="card">
-        <a
-          [routerLink]="site.route"
-          class="link title"
-          style="background-color: {{ site.titleBackgroundColor }}; color: {{
-            site.titleColor
-          }};"
-        >
-          <div class="title-text">{{ site.title }}</div>
-          <div class="icon"><i class="material-icons">{{ site.icon }}</i></div>
-        </a>
-        <div class="subtitle" [innerHTML]="site.subtitle"></div>
-        <div class="actions">
-          <button (click)="handleCardButtonClick(site.href)" class="filled">
-            Go
-          </button>
-        </div>
-      </section>
+      @for (site of sites; track site) {
+        <section site class="card">
+          <a
+            [routerLink]="site.route"
+            class="link title"
+            style="background-color: {{ site.titleBackgroundColor }}; color: {{
+              site.titleColor
+            }};"
+          >
+            <div class="title-text">{{ site.title }}</div>
+            <div class="icon">
+              <i class="material-icons">{{ site.icon }}</i>
+            </div>
+          </a>
+          <div class="subtitle" [innerHTML]="site.subtitle"></div>
+          <div class="actions">
+            <button (click)="handleCardButtonClick(site.href)" class="filled">
+              Go
+            </button>
+          </div>
+        </section>
+      }
     </section>
   `,
   styles: [
@@ -42,7 +45,7 @@ import { RouterModule } from '@angular/router';
         gap: 2rem;
         justify-content: center;
         padding: 2rem;
-        width:100%;
+        width: 100%;
 
         .card {
           min-height: 12.75rem;
@@ -61,7 +64,6 @@ import { RouterModule } from '@angular/router';
           display: flex;
           justify-content: space-between;
           min-height: 1.75rem;
-
 
           &.link {
             text-decoration: none;

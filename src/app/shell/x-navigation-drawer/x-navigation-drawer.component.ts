@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -15,7 +14,7 @@ import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'x-navigation-drawer',
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   template: `
     <div drawer-container>
       <dialog
@@ -76,11 +75,7 @@ import { Router, RouterModule } from '@angular/router';
             </div>
             <div
               (click)="closeDrawer()"
-              (keydown)="
-                handleEnterKey('/slides/slides')(
-                  $event
-                )
-              "
+              (keydown)="handleEnterKey('/slides/slides')($event)"
               [routerLink]="'/slides/slides'"
               class="list-tile"
             >
@@ -107,10 +102,8 @@ import { Router, RouterModule } from '@angular/router';
   `,
   styles: [
     `
-      @use 'material-design-lite/css/components/navigation-drawer/style.css' as
-        navigation-drawer-style;
-      @use 'material-design-lite/css/components/list-tile/style.css' as
-        list-tile-style;
+      @use 'material-design-lite/css/components/navigation-drawer/style.css' as navigation-drawer-style;
+      @use 'material-design-lite/css/components/list-tile/style.css' as list-tile-style;
       @use 'material-design-lite/css/components/button/style.css' as button-style;
 
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');

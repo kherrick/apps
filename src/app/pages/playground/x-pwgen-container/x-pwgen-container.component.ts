@@ -153,10 +153,10 @@ import {
         </section>
       </section>
       <div id="password-background">
-        <ng-container *ngFor="let password of passwords">
+        @for (password of passwords; track password) {
           <span>{{ password }}</span
           >&nbsp;
-        </ng-container>
+        }
       </div>
     </section>
   `,

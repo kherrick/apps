@@ -21,13 +21,16 @@ import { SlideComponent } from '../shared/slide.component';
           They can be
           <a
             href="https://medium.com/dev-channel/building-a-hybrid-rendered-pwa-c9d645baf158"
-          >built with any architectural style</a>
+            >built with any architectural style</a
+          >
           (<a
             href="https://medium.com/@adamzerner/client-side-rendering-vs-server-side-rendering-a32d2cf3bfcc"
-          >server-side rendered, client-side rendered</a>, prerendered, or a
+            >server-side rendered, client-side rendered</a
+          >, prerendered, or a
           <a
             href="https://medium.freecodecamp.org/what-exactly-is-client-side-rendering-and-hows-it-different-from-server-side-rendering-bd5c786b340d"
-          >combination</a>) but service workers imply some subtle changes in how you build your
+            >combination</a
+          >) but service workers imply some subtle changes in how you build your
           application architecture.
         </li>
         <li>

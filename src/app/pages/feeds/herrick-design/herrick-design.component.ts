@@ -30,18 +30,20 @@ interface Post {
   imports: [CommonModule, RouterModule],
   template: `
     <div article-container>
-      <article *ngFor="let post of posts">
-        <h1>
-          <a
-            href="{{ post.link }}"
-            [innerHTML]="trustHtml(post.title.rendered)"
-          ></a>
-        </h1>
-        <h2>{{ post.date_gmt | date: 'medium' }}</h2>
-        <p></p>
-        <div [innerHTML]="trustHtml(post.content.rendered)"></div>
-        <hr />
-      </article>
+      @for (post of posts; track post) {
+        <article>
+          <h1>
+            <a
+              href="{{ post.link }}"
+              [innerHTML]="trustHtml(post.title.rendered)"
+            ></a>
+          </h1>
+          <h2>{{ post.date_gmt | date: 'medium' }}</h2>
+          <p></p>
+          <div [innerHTML]="trustHtml(post.content.rendered)"></div>
+          <hr />
+        </article>
+      }
     </div>
   `,
   styles: [

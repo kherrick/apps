@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -7,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'x-home',
-  imports: [CommonModule, MatButtonModule, MatCardModule, RouterModule],
+  imports: [MatButtonModule, MatCardModule, RouterModule],
   template: `
     <section x-section-cards>
       <mat-card appearance="raised">

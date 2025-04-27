@@ -30,24 +30,26 @@ interface Post {
   imports: [CommonModule, RouterModule],
   template: `
     <div article-container>
-      <article *ngFor="let post of posts">
-        <h1>
-          <a
-            href="{{
-              buildArticleLink(
-                post.link,
-                'content.karlherrick.com',
-                'karlherrick.com'
-              )
-            }}"
-            [innerHTML]="trustHtml(post.title.rendered)"
-          ></a>
-        </h1>
-        <h2>{{ post.date_gmt | date: 'medium' }}</h2>
-        <p></p>
-        <div [innerHTML]="trustHtml(post.content.rendered)"></div>
-        <hr />
-      </article>
+      @for (post of posts; track post) {
+        <article>
+          <h1>
+            <a
+              href="{{
+                buildArticleLink(
+                  post.link,
+                  'content.karlherrick.com',
+                  'karlherrick.com'
+                )
+              }}"
+              [innerHTML]="trustHtml(post.title.rendered)"
+            ></a>
+          </h1>
+          <h2>{{ post.date_gmt | date: 'medium' }}</h2>
+          <p></p>
+          <div [innerHTML]="trustHtml(post.content.rendered)"></div>
+          <hr />
+        </article>
+      }
     </div>
   `,
   styles: [
@@ -318,7 +320,7 @@ export class KarlHerrickComponent {
       scr?.setAttribute('id', modName);
       scr?.setAttribute(
         'src',
-        `${(globalThis?.document?.querySelector('base') as HTMLBaseElement).href}assets/scripts/feed-karl-herrick-additions.js`,
+        `${(globalThis?.document?.querySelector('base') as HTMLBaseElement)?.href}assets/scripts/feed-karl-herrick-additions.js`,
       );
 
       globalThis?.document?.body.appendChild(scr);

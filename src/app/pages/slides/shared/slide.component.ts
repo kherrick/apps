@@ -1,4 +1,4 @@
-import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 import {
   AfterViewInit,
@@ -9,6 +9,7 @@ import {
   PLATFORM_ID,
   ViewEncapsulation,
   inject,
+  DOCUMENT,
 } from '@angular/core';
 
 import {
