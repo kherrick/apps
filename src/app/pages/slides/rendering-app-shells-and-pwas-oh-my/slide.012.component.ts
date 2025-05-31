@@ -25,24 +25,21 @@ import { SlideComponent } from '../shared/slide.component';
         </li>
         <li>
           Server rendering and client side rendering with rehydration
-          <a
-            href="https://web.dev/articles/rendering-on-the-web#rehydration"
+          <a href="https://web.dev/articles/rendering-on-the-web#rehydration"
             >*</a
           >
         </li>
         <li>
           Streaming server rendering and Progressive Rehydration (progressively
           rendered as it's received)
-          <a
-            href="https://web.dev/articles/rendering-on-the-web#stream"
-            >*</a
-          >
+          <a href="https://web.dev/articles/rendering-on-the-web#stream">*</a>
         </li>
         <li>
           There are many
           <a href="https://mburakerman.github.io/blog/web-rendering-patterns">
             web rendering patterns </a
-          >&nbsp;<a href="https://web.dev/articles/rendering-on-the-web#conclusion"
+          >&nbsp;<a
+            href="https://web.dev/articles/rendering-on-the-web#conclusion"
             >*</a
           >
         </li>

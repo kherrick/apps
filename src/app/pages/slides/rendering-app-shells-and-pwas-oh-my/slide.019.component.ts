@@ -19,7 +19,9 @@ import { SlideComponent } from '../shared/slide.component';
               quickly launching a static rendered page (a skeleton common to all
               pages) while the browser downloads the full client version and
               switches to it automatically after the code loads.
-              <a href="https://angular.dev/ecosystem/service-workers/app-shell">*</a>
+              <a href="https://angular.dev/ecosystem/service-workers/app-shell"
+                >*</a
+              >
             </span>
           </blockquote>
         </li>

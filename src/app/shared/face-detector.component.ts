@@ -1,4 +1,4 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -28,7 +28,7 @@ import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'x-face-detector',
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   template: `
     <section class="face-detector">
       <section id="buttons-section">

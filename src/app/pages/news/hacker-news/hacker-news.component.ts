@@ -1,5 +1,3 @@
-import { CommonModule } from '@angular/common';
-
 import {
   Component,
   ElementRef,
@@ -22,7 +20,7 @@ import initialState from './hacker-news.json';
 
 @Component({
   selector: 'x-hacker-news',
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   template: `
     <div news>
       <h1>
@@ -128,6 +126,10 @@ import initialState from './hacker-news.json';
           background-color: var(--md-ref-palette-neutral50);
           margin: 1rem 0;
           padding: 0.5rem 0.5rem 0.5rem 1rem;
+        }
+
+        #latest {
+          max-width: 100vw;
         }
 
         #archives {

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -19,7 +18,7 @@ import initialState from './lobsters.json';
 
 @Component({
   selector: 'x-lobsters',
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   template: `
     <div news>
       <h1>

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -9,7 +8,7 @@ import { parse, parseFragment, serialize } from 'parse5';
 
 @Component({
   selector: 'x-news',
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   template: `
     <div news-container>
       <section news-summary [innerHTML]="newsSummary"></section>
@@ -130,6 +129,10 @@ import { parse, parseFragment, serialize } from 'parse5';
           h2 {
             margin-bottom: 0;
             margin-top: 0;
+          }
+
+          p {
+            padding: 1rem;
           }
         }
 

@@ -18,7 +18,8 @@ import { SlideComponent } from '../shared/slide.component';
       <ul list>
         <li>
           A
-          <a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest"
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest"
             >Web App Manifest</a
           >
           with the following properties referenced: name, short_name, start_url,

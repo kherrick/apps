@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -9,7 +8,7 @@ import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'x-navigation-rail',
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   template: `
     <aside id="nav-rail" class="navigation-rail">
       <button
@@ -67,11 +66,7 @@ import { Router, RouterModule } from '@angular/router';
         </a>
         <a [routerLink]="'/slides/slides'">
           <label
-            (keydown)="
-              handleEnterKey('/slides/slides')(
-                $event
-              )
-            "
+            (keydown)="handleEnterKey('/slides/slides')($event)"
             class="navigation-icon"
           >
             <i class="material-icons">slideshow</i>

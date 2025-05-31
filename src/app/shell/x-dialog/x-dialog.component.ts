@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -13,7 +12,7 @@ import { XDialogService } from './x-dialog.service';
 
 @Component({
   selector: 'x-dialog',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div dialog-container>
       <dialog #dialog class="dialog">
@@ -29,16 +28,17 @@ import { XDialogService } from './x-dialog.service';
           <p>{{ dialogService.content }}</p>
         </div>
         <form (submit)="handleSubmit($event)" class="actions" method="dialog">
-          <button
-            *ngIf="
-              this.dialogService.cancelValue && this.dialogService.cancelText
-            "
-            #cancelButton
-            class="button cancel"
-            value="{{ dialogService.cancelValue }}"
-          >
-            {{ dialogService.cancelText }}
-          </button>
+          @if (
+            this.dialogService.cancelValue && this.dialogService.cancelText
+          ) {
+            <button
+              #cancelButton
+              class="button cancel"
+              value="{{ dialogService.cancelValue }}"
+            >
+              {{ dialogService.cancelText }}
+            </button>
+          }
           <button
             #submitButton
             class="button submit"

@@ -1,10 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'x-home',
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   template: `
     <section x-section-cards>
       <div encryption class="card">
@@ -53,6 +52,17 @@ import { RouterModule } from '@angular/router';
         </div>
         <div class="actions">
           <button [routerLink]="'/pwgen'">Go</button>
+        </div>
+      </div>
+      <div peer class="card">
+        <div [routerLink]="'/playground/peer'" class="title link">
+          peer <i class="material-icons">public</i>
+        </div>
+        <div class="subtitle">
+          <a [routerLink]="'/playground/peer'">Experiment with WebRTC</a>
+        </div>
+        <div class="actions">
+          <button [routerLink]="'/playground/peer'">Go</button>
         </div>
       </div>
     </section>
@@ -115,12 +125,19 @@ import { RouterModule } from '@angular/router';
           --card-heading-background: #697fce;
         }
 
+        [peer] {
+          --card-heading-background: #333;
+        }
+
         :is(.card) .actions {
           justify-content: end;
         }
 
-        .subtitle {
+        .link, .subtitle, .title {
           cursor: pointer;
+        }
+
+        .subtitle {
           text-decoration: underline;
         }
 

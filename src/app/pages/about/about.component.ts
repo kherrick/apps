@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -6,7 +5,7 @@ import { FaceDetectorComponent } from '../../../app/shared/face-detector.compone
 
 @Component({
   selector: 'x-about',
-  imports: [CommonModule, RouterModule, FaceDetectorComponent],
+  imports: [RouterModule, FaceDetectorComponent],
   template: `
     <section x-section-generic>
       <article>
@@ -18,11 +17,14 @@ import { FaceDetectorComponent } from '../../../app/shared/face-detector.compone
             progressive web app
           </a>
           that aims to adhere to the
-          <a href="https://angular.dev/ecosystem/service-workers/app-shell">App Shell model</a>. The
-          primary routes are
+          <a href="https://angular.dev/ecosystem/service-workers/app-shell"
+            >App Shell model</a
+          >. The primary routes are
           <a href="https://angular.dev/guide/prerendering">prerendered</a> as
           static HTML during the build process and are
-          <a href="https://angular.dev/guide/routing/common-router-tasks#lazy-loading">
+          <a
+            href="https://angular.dev/guide/routing/common-router-tasks#lazy-loading"
+          >
             loaded lazily</a
           >
           at runtime to ensure a smaller client-side JavaScript bundle. The

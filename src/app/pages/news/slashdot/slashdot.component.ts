@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -19,7 +18,7 @@ import initialState from './slashdot.json';
 
 @Component({
   selector: 'x-slashdot',
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   template: `
     <div news>
       <h1>

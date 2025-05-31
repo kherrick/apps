@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject, output, ViewEncapsulation } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -8,14 +7,13 @@ import { Themes, ThemeService } from '../../../app/shell/theme/theme.service';
 
 @Component({
   selector: 'x-top-app-bar',
-  imports: [CommonModule, RouterModule, MatToolbarModule, MatIconModule],
+  imports: [RouterModule, MatToolbarModule, MatIconModule],
   template: `
     <mat-toolbar>
       <button
         (click)="handleDrawerButton($event)"
         aria-label="menu icon"
         id="top-app-drawer-btn"
-        mat-icon-button
       >
         <mat-icon>menu</mat-icon>
       </button>
