@@ -40,6 +40,21 @@
           "https://fonts.gstatic.com/**"
         ]
       }
+    },
+        {
+      "name": "cdns",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "resources": {
+        "urls": [
+          "https://cdn.jsdeliver.net/**",
+          "https://rawgit.com/**",
+          "https://unpkg.com/**",
+          "https://esm.run/**",
+          "https://cdn.skypack.dev/"
+
+        ]
+      }
     }
   ],
   "dataGroups": [
@@ -58,7 +73,12 @@
         "https://herrickdesign.com/assets/**",
         "https://infinitym.ca/**",
         "https://raw.githubusercontent.com/**",
-        "https://tfhub.dev/**"
+        "https://tfhub.dev/**",
+        "https://cdn.jsdeliver.net/**",
+        "https://rawgit.com/**",
+        "https://unpkg.com/**",
+        "https://esm.run/**",
+        "https://cdn.skypack.dev/"
       ]
     }
   ]
