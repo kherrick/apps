@@ -1,5 +1,6 @@
 import {
   CUSTOM_ELEMENTS_SCHEMA,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   OnDestroy,
@@ -254,11 +255,12 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
   encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class XEncryptionComponent implements OnDestroy {
+  private xDialogService: XDialogService = inject(XDialogService);
+  private cdr = inject(ChangeDetectorRef);
+
   password = '';
   isPlainText = true;
   shouldEncrypt = true;
-
-  xDialogService: XDialogService = inject(XDialogService);
 
   @ViewChild('encryptedText') encryptedText!: ElementRef<MdOutlinedTextField>;
   @ViewChild('plainText') plainText!: ElementRef<MdOutlinedTextField>;
@@ -281,6 +283,8 @@ export class XEncryptionComponent implements OnDestroy {
   workerErrorListener?: any;
 
   constructor() {
+    this.xDialogService.registerChangeDetector(this.cdr);
+
     if (typeof Worker !== 'undefined') {
       this.worker = new Worker(
         new URL('./x-encryption.worker', import.meta.url),

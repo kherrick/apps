@@ -1,3 +1,4 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 
@@ -9,8 +10,8 @@ describe('FeedsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [provideZonelessChangeDetection(), provideRouter([])],
       imports: [FeedsComponent],
-      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FeedsComponent);

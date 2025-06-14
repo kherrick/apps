@@ -6,8 +6,7 @@
     "clean": "node util/build-clean.mjs",
     "init": "npm install",
     "start": "npm run clean && ng serve",
-    "build": "npm run clean && ng build",
-    "build-routes": "node --no-warnings util/build-routes.mjs .routes.txt",
+    "build": "npm run clean && ng build --output-mode static",
     "build-html-news-hacker-news": "node util/build-html-news.mjs hacker-news",
     "build-html-news-soylent-news": "node util/build-html-news.mjs soylent-news",
     "build-html-news-lobsters": "node util/build-html-news.mjs lobsters",
@@ -49,7 +48,7 @@
     "@angular/platform-server": "^20.0.0",
     "@angular/router": "^20.0.0",
     "@angular/service-worker": "^20.0.0",
-    "@angular/ssr": "^20.0.0",
+    "@angular/ssr": "^20.0.2",
     "@material/web": "^2.3.0",
     "@ngrx/signals": "^19.2.1",
     "@tensorflow-models/blazeface": "^0.1.0",
@@ -67,12 +66,11 @@
     "tslib": "^2.8.1",
     "uuid": "^11.1.0",
     "x-pwgen-components": "github:kherrick/x-pwgen-components",
-    "zone.js": "^0.15.0",
     "zxing-wasm": "^2.1.0"
   },
   "devDependencies": {
-    "@angular/build": "^20.0.0",
-    "@angular/cli": "^20.0.0",
+    "@angular/build": "^20.0.2",
+    "@angular/cli": "^20.0.2",
     "@angular/compiler-cli": "^20.0.0",
     "@types/express": "^5.0.0",
     "@types/hammerjs": "^2.0.46",
@@ -97,7 +95,7 @@
   },
   "overrides": {
     "@ngrx/signals": {
-      "@angular/core": "20.0.0"
+      "@angular/core": "^20.0.0"
     }
   }
 }

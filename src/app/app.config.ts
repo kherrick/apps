@@ -8,12 +8,14 @@ import {
   APP_ID,
   ApplicationConfig,
   isDevMode,
-  provideZoneChangeDetection,
+  provideBrowserGlobalErrorListeners,
+  provideZonelessChangeDetection,
 } from '@angular/core';
 
 import {
   provideClientHydration,
   withEventReplay,
+  withHttpTransferCacheOptions,
 } from '@angular/platform-browser';
 
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -24,11 +26,15 @@ import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
-    provideClientHydration(withEventReplay()),
+    provideBrowserGlobalErrorListeners(),
+    provideZonelessChangeDetection(),
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
+    provideRouter(routes),
+    provideClientHydration(
+      withEventReplay(),
+      withHttpTransferCacheOptions({ includePostRequests: true }),
+    ),
     provideAnimationsAsync(),
-    provideZoneChangeDetection({ eventCoalescing: true }),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:5000',

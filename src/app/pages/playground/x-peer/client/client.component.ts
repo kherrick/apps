@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 
 import {
+  ChangeDetectorRef,
   Component,
   DOCUMENT,
   Inject,
@@ -288,6 +289,8 @@ import {
   `,
 })
 export class XPeerClientComponent implements OnDestroy {
+  private cdr = inject(ChangeDetectorRef);
+
   readonly store = inject(PeerStore);
   readonly fullscreen = output<boolean>();
   readonly xDialogService: XDialogService = inject(XDialogService);
@@ -318,6 +321,7 @@ export class XPeerClientComponent implements OnDestroy {
 
   constructor(@Inject(DOCUMENT) private document: Document) {
     this.#isBrowser = isPlatformBrowser(this.#platformId);
+    this.xDialogService.registerChangeDetector(this.cdr);
 
     if (globalThis.addEventListener) {
       globalThis?.addEventListener(
