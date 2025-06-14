@@ -8,6 +8,7 @@ import {
   isDevMode,
   viewChild,
   DOCUMENT,
+  ChangeDetectorRef,
 } from '@angular/core';
 
 import { isPlatformBrowser } from '@angular/common';
@@ -130,7 +131,8 @@ export class XShellComponent implements OnInit {
   private unrecoverable!: Subscription;
   private versionUpdates!: Subscription;
 
-  public dialogService: XDialogService = inject(XDialogService);
+  private cdr = inject(ChangeDetectorRef);
+  public xDialogService: XDialogService = inject(XDialogService);
   public themeService: ThemeService = inject(ThemeService);
 
   private document: Document = inject(DOCUMENT);
@@ -143,6 +145,8 @@ export class XShellComponent implements OnInit {
     this.isBrowser = isPlatformBrowser(this.platformId);
 
     if (this.isBrowser) {
+      this.xDialogService.registerChangeDetector(this.cdr);
+
       if (!isDevMode()) {
         console.log(
           'Update Service: this.swUpdate.isEnabled',
@@ -191,13 +195,13 @@ export class XShellComponent implements OnInit {
           },
         );
 
-        this.dialogSubscription = this.dialogService.open$.subscribe(
+        this.dialogSubscription = this.xDialogService.open$.subscribe(
           (isDialogOpen) => {
             this.isDialogOpen = isDialogOpen;
           },
         );
 
-        this.dialogResultSubscription = this.dialogService.result$.subscribe(
+        this.dialogResultSubscription = this.xDialogService.result$.subscribe(
           (result) => {
             if (result === 'apps-update-ok') {
               location.reload();
@@ -440,7 +444,7 @@ export class XShellComponent implements OnInit {
   }
 
   handleAppUpdate(): void {
-    this.dialogService.openDialog(
+    this.xDialogService.openDialog(
       'Apps has updated. Press OK to load the new version.',
       {
         cancelText: 'Cancel',

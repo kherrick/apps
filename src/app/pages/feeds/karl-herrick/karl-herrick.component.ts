@@ -6,17 +6,6 @@ import { RouterModule } from '@angular/router';
 
 import { environment } from '../../../../environments/environment';
 
-// npm run build-feed-karl-herrick
-// consider investigating TransferState:
-// https://angular.io/api/platform-browser/TransferState
-// https://brianflove.com/2020-06-05/angular-transfer-state/
-// https://www.ganatan.com/tutorials/transfer-state-with-angular
-
-// docs: https://developer.wordpress.org/rest-api/reference/posts/
-// endpoint: https://content.karlherrick.com/wp-json/wp/v2/posts?per_page=2
-
-import initialState from './karl-herrick.json';
-
 interface Post {
   id: number;
   date_gmt: string;
@@ -30,7 +19,7 @@ interface Post {
   imports: [CommonModule, RouterModule],
   template: `
     <div article-container>
-      @for (post of posts; track post) {
+      @for (post of (posts$ | async); track post.id) {
         <article>
           <h1>
             <a
@@ -290,7 +279,9 @@ export class KarlHerrickComponent {
   private httpClient: HttpClient = inject(HttpClient);
   private sanitizer: DomSanitizer = inject(DomSanitizer);
 
-  public posts: Post[] = initialState;
+  public posts$ = this.httpClient.get(
+    `${environment.API_URL_KARLHERRICK}?per_page=10`,
+  );
 
   buildArticleLink(link: string, find: string, replace: string) {
     return link.replace(find, replace);
@@ -301,16 +292,6 @@ export class KarlHerrickComponent {
   }
 
   constructor() {
-    this.httpClient
-      .get(`${environment.API_URL_KARLHERRICK}?per_page=10`)
-      .subscribe((posts: any) => {
-        this.posts = posts.map(
-          (post: Post) =>
-            this.posts.find((searchPost: Post) => searchPost.id === post.id) ??
-            post,
-        );
-      });
-
     // this is special handling of element registration for this feed within apps
     const modName = 'feedKarlHerrickAdditions';
     let scr = globalThis?.document?.getElementById(modName);

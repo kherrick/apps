@@ -1,3 +1,4 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
@@ -11,7 +12,11 @@ describe('XRootComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [XRootComponent],
-      providers: [provideRouter([]), { provide: SwUpdate, useValue: {} }],
+      providers: [
+        provideZonelessChangeDetection(),
+        provideRouter([]),
+        { provide: SwUpdate, useValue: {} },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(XRootComponent);

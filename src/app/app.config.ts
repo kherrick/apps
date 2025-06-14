@@ -8,7 +8,8 @@ import {
   APP_ID,
   ApplicationConfig,
   isDevMode,
-  provideZoneChangeDetection,
+  provideBrowserGlobalErrorListeners,
+  provideZonelessChangeDetection,
 } from '@angular/core';
 
 import {
@@ -24,11 +25,12 @@ import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideZonelessChangeDetection(),
+    provideHttpClient(withFetch(), withInterceptorsFromDi()),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch(), withInterceptorsFromDi()),
     provideAnimationsAsync(),
-    provideZoneChangeDetection({ eventCoalescing: true }),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:5000',

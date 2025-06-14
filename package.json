@@ -12,13 +12,12 @@
     "build-html-news-soylent-news": "node util/build-html-news.mjs soylent-news",
     "build-html-news-lobsters": "node util/build-html-news.mjs lobsters",
     "build-html-news-slashdot": "node util/build-html-news.mjs slashdot",
+    "build-feed-herrick-design": "node util/get-feed-json.mjs https://herrickdesign.com/wp-json/wp/v2/posts src/app/pages/feeds/herrick-design/herrick-design.json",
+    "build-feed-infinitym": "node util/get-feed-json.mjs https://infinitym.ca/wp-json/wp/v2/posts src/app/pages/feeds/infinitym/infinitym.json",
     "build-json-news-hacker-news": "node util/build-json-news.mjs hacker-news > src/app/pages/news/hacker-news/hacker-news.json",
     "build-json-news-soylent-news": "node util/build-json-news.mjs soylent-news > src/app/pages/news/soylent-news/soylent-news.json",
     "build-json-news-lobsters": "node util/build-json-news.mjs lobsters > src/app/pages/news/lobsters/lobsters.json",
     "build-json-news-slashdot": "node util/build-json-news.mjs slashdot > src/app/pages/news/slashdot/slashdot.json",
-    "build-feed-herrick-design": "node util/get-feed-json.mjs https://herrickdesign.com/wp-json/wp/v2/posts src/app/pages/feeds/herrick-design/herrick-design.json",
-    "build-feed-infinitym": "node util/get-feed-json.mjs https://infinitym.ca/wp-json/wp/v2/posts src/app/pages/feeds/infinitym/infinitym.json",
-    "build-feed-karl-herrick": "node util/get-feed-json.mjs https://content.karlherrick.com/wp-json/wp/v2/posts src/app/pages/feeds/karl-herrick/karl-herrick.json",
     "build-site-verification": "node util/build-site-verification.mjs dist/apps/browser/index.html",
     "build-txt-sitemap": "node --no-warnings util/build-routes.mjs dist/apps/browser/sitemap.txt https://kherrick.github.io/apps",
     "build-txt-robots": "node util/build-txt-robots.mjs",
@@ -49,7 +48,7 @@
     "@angular/platform-server": "^20.0.0",
     "@angular/router": "^20.0.0",
     "@angular/service-worker": "^20.0.0",
-    "@angular/ssr": "^20.0.0",
+    "@angular/ssr": "^20.0.2",
     "@material/web": "^2.3.0",
     "@ngrx/signals": "^19.2.1",
     "@tensorflow-models/blazeface": "^0.1.0",
@@ -67,12 +66,11 @@
     "tslib": "^2.8.1",
     "uuid": "^11.1.0",
     "x-pwgen-components": "github:kherrick/x-pwgen-components",
-    "zone.js": "^0.15.0",
     "zxing-wasm": "^2.1.0"
   },
   "devDependencies": {
-    "@angular/build": "^20.0.0",
-    "@angular/cli": "^20.0.0",
+    "@angular/build": "^20.0.2",
+    "@angular/cli": "^20.0.2",
     "@angular/compiler-cli": "^20.0.0",
     "@types/express": "^5.0.0",
     "@types/hammerjs": "^2.0.46",
@@ -97,7 +95,7 @@
   },
   "overrides": {
     "@ngrx/signals": {
-      "@angular/core": "20.0.0"
+      "@angular/core": "^20.0.0"
     }
   }
 }

@@ -1,3 +1,4 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { XPwgenContainerComponent } from './x-pwgen-container.component';
@@ -8,6 +9,7 @@ describe('XPwgenContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [provideZonelessChangeDetection()],
       imports: [XPwgenContainerComponent],
     }).compileComponents();
 

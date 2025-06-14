@@ -37,7 +37,6 @@ jobs:
         npm run build-json-news-slashdot
         npm run build-feed-herrick-design
         npm run build-feed-infinitym
-        npm run build-feed-karl-herrick
         npm run gh-pages--build
         npm run build-html-news-hacker-news
         npm run build-html-news-soylent-news

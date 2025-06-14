@@ -1,3 +1,4 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { XPeerSettingsComponent } from './settings.component';
@@ -8,6 +9,7 @@ describe('XPeerSettingsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [provideZonelessChangeDetection()],
       imports: [XPeerSettingsComponent],
     }).compileComponents();
 
