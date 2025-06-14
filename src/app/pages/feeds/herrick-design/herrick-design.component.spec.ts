@@ -1,4 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HerrickDesignComponent } from './herrick-design.component';
@@ -9,8 +10,8 @@ describe('HerrickDesignComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [provideZonelessChangeDetection(), provideHttpClient()],
       imports: [HerrickDesignComponent],
-      providers: [provideHttpClient()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HerrickDesignComponent);

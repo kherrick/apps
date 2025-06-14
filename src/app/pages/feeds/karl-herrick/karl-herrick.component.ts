@@ -1,8 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewEncapsulation, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+
+import { tap } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
 
@@ -30,7 +33,7 @@ interface Post {
   imports: [CommonModule, RouterModule],
   template: `
     <div article-container>
-      @for (post of posts; track post) {
+      @for (post of posts; track post.id) {
         <article>
           <h1>
             <a
@@ -303,13 +306,18 @@ export class KarlHerrickComponent {
   constructor() {
     this.httpClient
       .get(`${environment.API_URL_KARLHERRICK}?per_page=10`)
-      .subscribe((posts: any) => {
-        this.posts = posts.map(
-          (post: Post) =>
-            this.posts.find((searchPost: Post) => searchPost.id === post.id) ??
-            post,
-        );
-      });
+      .pipe(
+        takeUntilDestroyed(),
+        tap((posts: any) => {
+          this.posts = posts.map(
+            (post: Post) =>
+              this.posts.find(
+                (searchPost: Post) => searchPost.id === post.id,
+              ) ?? post,
+          );
+        }),
+      )
+      .subscribe();
 
     // this is special handling of element registration for this feed within apps
     const modName = 'feedKarlHerrickAdditions';

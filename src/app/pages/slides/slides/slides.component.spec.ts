@@ -1,3 +1,4 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 
@@ -9,8 +10,8 @@ describe('SlidesComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      providers: [provideZonelessChangeDetection(), provideRouter([])],
       imports: [SlidesComponent],
-      providers: [provideRouter([])],
     });
     fixture = TestBed.createComponent(SlidesComponent);
     component = fixture.componentInstance;

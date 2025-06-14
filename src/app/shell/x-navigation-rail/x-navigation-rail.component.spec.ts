@@ -1,5 +1,6 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 
 import { XNavigationRailComponent } from './x-navigation-rail.component';
 
@@ -9,7 +10,8 @@ describe('XNavigationRailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [XNavigationRailComponent, RouterTestingModule],
+      providers: [provideZonelessChangeDetection(), provideRouter([])],
+      imports: [XNavigationRailComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(XNavigationRailComponent);

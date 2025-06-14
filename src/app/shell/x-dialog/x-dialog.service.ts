@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class XDialogService {
+  private cdr: ChangeDetectorRef | null = null;
+
   public open$: Subject<boolean> = new Subject<boolean>();
   public result$: Subject<string> = new Subject<string>();
 
@@ -17,6 +19,10 @@ export class XDialogService {
   public submitText: string = '';
   public submitValue: string = '';
   public title?: string = 'Alert';
+
+  registerChangeDetector(cdr: ChangeDetectorRef) {
+    this.cdr = cdr;
+  }
 
   openDialog(
     message: string,
@@ -41,6 +47,7 @@ export class XDialogService {
     this.submitValue = options?.submitValue ? options?.submitValue : 'ok';
     this.title = options?.title ? options?.title : 'Alert';
 
+    this.cdr?.markForCheck();
     this.open$.next(true);
   }
 
@@ -54,6 +61,7 @@ export class XDialogService {
     this.submitValue = '';
     this.title = 'Alert';
 
+    this.cdr?.markForCheck();
     this.open$.next(false);
   }
 }

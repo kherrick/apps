@@ -1,3 +1,4 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { provideRouter } from '@angular/router';
@@ -14,7 +15,7 @@ describe('XShellComponent', () => {
         XShellComponent,
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
       ],
-      providers: [provideRouter([])],
+      providers: [provideZonelessChangeDetection(), provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(XShellComponent);

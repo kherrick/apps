@@ -22,9 +22,6 @@
             "outputPath": "dist/apps",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -49,16 +46,10 @@
             "scripts": [],
             "server": "src/main.server.ts",
             "prerender": {
-              "discoverRoutes": false,
-              "routesFile": ".routes.txt"
+              "discoverRoutes": true
             },
             "ssr": {
               "entry": "src/server.ts"
-            },
-            "stylePreprocessorOptions": {
-              "sass": {
-                "silenceDeprecations": ["mixed-decls"]
-              }
             }
           },
           "configurations": {
@@ -118,10 +109,6 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -151,31 +138,5 @@
   },
   "cli": {
     "analytics": false
-  },
-  "schematics": {
-    "@schematics/angular:component": {
-      "type": "component"
-    },
-    "@schematics/angular:directive": {
-      "type": "directive"
-    },
-    "@schematics/angular:service": {
-      "type": "service"
-    },
-    "@schematics/angular:guard": {
-      "typeSeparator": "."
-    },
-    "@schematics/angular:interceptor": {
-      "typeSeparator": "."
-    },
-    "@schematics/angular:module": {
-      "typeSeparator": "."
-    },
-    "@schematics/angular:pipe": {
-      "typeSeparator": "."
-    },
-    "@schematics/angular:resolver": {
-      "typeSeparator": "."
-    }
   }
 }

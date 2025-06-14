@@ -1,5 +1,6 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 
 import { XTopAppBarComponent } from './x-top-app-bar.component';
 
@@ -9,7 +10,8 @@ describe('XTopAppBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [XTopAppBarComponent, RouterTestingModule],
+      providers: [provideZonelessChangeDetection(), provideRouter([])],
+      imports: [XTopAppBarComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(XTopAppBarComponent);

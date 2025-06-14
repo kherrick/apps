@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ViewEncapsulation, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { Observable, firstValueFrom } from 'rxjs';
@@ -225,8 +225,9 @@ import { parse, parseFragment, serialize } from 'parse5';
   ],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class NewsComponent implements OnInit {
+export class NewsComponent implements AfterViewInit {
   private http = inject(HttpClient);
+  private cdr = inject(ChangeDetectorRef);
 
   newsSummary: string = '';
   data: Observable<string> = this.http.get(
@@ -236,7 +237,7 @@ export class NewsComponent implements OnInit {
     },
   );
 
-  async ngOnInit(): Promise<void> {
+  async ngAfterViewInit(): Promise<void> {
     const data = await firstValueFrom(this.data);
     const parsedDoc = parse(data);
 
@@ -286,6 +287,7 @@ export class NewsComponent implements OnInit {
 
     try {
       this.newsSummary = serialize(result);
+      this.cdr.detectChanges();
     } catch (error) {}
   }
 }

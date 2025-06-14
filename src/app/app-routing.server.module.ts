@@ -1,16 +1,8 @@
-import { clientSideRoutes } from './app.routes';
+import { RenderMode, ServerRoute } from '@angular/ssr';
 
-export const serverSideRoutes = [
-  ...clientSideRoutes,
-  {
-    path: 'shell',
-    loadComponent: () =>
-      import('./shell/x-shell/x-shell.component').then(
-        (x) => x.XShellComponent,
-      ),
-  },
+export const serverSideRoutes: ServerRoute[] = [
   {
     path: '**',
-    redirectTo: '',
-  },
+    renderMode: RenderMode.Prerender
+  }
 ];

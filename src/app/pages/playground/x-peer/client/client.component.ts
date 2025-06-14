@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 
 import {
+  ChangeDetectorRef,
   Component,
   DOCUMENT,
   Inject,
@@ -288,6 +289,8 @@ import {
   `,
 })
 export class XPeerClientComponent implements OnDestroy {
+  private cdr = inject(ChangeDetectorRef);
+
   readonly store = inject(PeerStore);
   readonly fullscreen = output<boolean>();
   readonly xDialogService: XDialogService = inject(XDialogService);
@@ -318,6 +321,7 @@ export class XPeerClientComponent implements OnDestroy {
 
   constructor(@Inject(DOCUMENT) private document: Document) {
     this.#isBrowser = isPlatformBrowser(this.#platformId);
+    this.xDialogService.registerChangeDetector(this.cdr);
 
     if (globalThis.addEventListener) {
       globalThis?.addEventListener(
@@ -339,6 +343,8 @@ export class XPeerClientComponent implements OnDestroy {
   handleProgressPercentage(e: any) {
     this.progressPercentage =
       (e?.detail?.chunkInfo?.count / e?.detail?.chunkInfo?.total) * 100;
+
+    this.cdr?.markForCheck();
   }
 
   handlePeerCall(call: any) {
@@ -365,6 +371,8 @@ export class XPeerClientComponent implements OnDestroy {
       this.#isSending = false;
       this.progressMode = 'determinate';
       this.progressPercentage = 0;
+
+      this.cdr?.markForCheck();
     }
 
     if (data?.type === 'peer-connected') {
@@ -389,6 +397,8 @@ export class XPeerClientComponent implements OnDestroy {
 
       setTimeout(() => {
         this.progressPercentage = 0;
+
+        this.cdr?.markForCheck();
       }, 200);
     }
 
@@ -453,6 +463,8 @@ export class XPeerClientComponent implements OnDestroy {
 
       setTimeout(() => {
         this.progressPercentage = 0;
+
+        this.cdr?.markForCheck();
       }, 200);
     }
   }
@@ -761,6 +773,8 @@ export class XPeerClientComponent implements OnDestroy {
       });
 
       this.progressMode = 'indeterminate';
+
+      this.cdr?.markForCheck();
     }
   }
 

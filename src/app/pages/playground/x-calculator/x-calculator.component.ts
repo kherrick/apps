@@ -10,6 +10,7 @@ import {
   ViewEncapsulation,
   inject,
   DOCUMENT,
+  ChangeDetectorRef,
 } from '@angular/core';
 
 import { Subject, Subscription } from 'rxjs';
@@ -313,8 +314,9 @@ export interface CalculatorModel {
 })
 export class XCalculatorComponent implements OnInit, OnDestroy {
   private calculator = null; // define placeholder for instance of C# calculator
-  private dialogService: XDialogService = inject(XDialogService);
-  private dialogSubscription: Subscription;
+  private cdr = inject(ChangeDetectorRef);
+  private xDialogService: XDialogService = inject(XDialogService);
+  private xDialogSubscription: Subscription;
   private document: Document = inject(DOCUMENT);
   private isBrowser: boolean;
   private isReady: Subject<boolean> = new Subject<boolean>();
@@ -345,8 +347,9 @@ export class XCalculatorComponent implements OnInit, OnDestroy {
       this.isReady.subscribe(() => this.isReadyHandler());
     }
 
-    this.dialogSubscription = this.dialogService.open$.subscribe(
-      (isDialogOpen) => {
+    this.xDialogService.registerChangeDetector(this.cdr);
+    this.xDialogSubscription = this.xDialogService.open$.subscribe(
+      (isDialogOpen: boolean) => {
         this.isDialogOpen = isDialogOpen;
       },
     );
@@ -401,7 +404,7 @@ export class XCalculatorComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.isReady?.unsubscribe();
-    this.dialogSubscription?.unsubscribe();
+    this.xDialogSubscription?.unsubscribe();
   }
 
   buttonHandler(event: Event) {
@@ -497,7 +500,7 @@ export class XCalculatorComponent implements OnInit, OnDestroy {
     const number2 = model.numbers.second;
 
     if (calculator === null) {
-      this.dialogService.openDialog(
+      this.xDialogService.openDialog(
         'Required dependencies are still loading...',
       );
 

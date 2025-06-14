@@ -30,7 +30,6 @@ jobs:
         npm run init
     - name: Build HTML
       run: |-
-        npm run build-routes
         npm run build-json-news-hacker-news
         npm run build-json-news-soylent-news
         npm run build-json-news-lobsters

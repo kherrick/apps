@@ -1,5 +1,6 @@
 import {
   CUSTOM_ELEMENTS_SCHEMA,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   OnDestroy,
@@ -269,6 +270,9 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
   encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class XCertificateComponent implements OnDestroy {
+  private xDialogService: XDialogService = inject(XDialogService);
+  private cdr = inject(ChangeDetectorRef);
+
   countryName = 'US';
   stateOrProvinceName = 'Michigan';
   localityName = 'Detroit';
@@ -281,8 +285,6 @@ export class XCertificateComponent implements OnDestroy {
 
   shouldCreate = true;
 
-  xDialogService: XDialogService = inject(XDialogService);
-
   link: Signal<ElementRef | undefined> = viewChild('link');
   shouldCreateToggle: Signal<ElementRef | undefined> =
     viewChild('shouldCreateToggle');
@@ -293,6 +295,8 @@ export class XCertificateComponent implements OnDestroy {
   workerEventListener!: (event: MessageEvent) => Promise<void>;
 
   constructor() {
+    this.xDialogService.registerChangeDetector(this.cdr);
+
     if (typeof Worker !== 'undefined') {
       this.worker = new Worker(
         new URL('./x-certificate.worker', import.meta.url),
