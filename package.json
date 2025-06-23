@@ -56,7 +56,7 @@
     "@tensorflow/tfjs-backend-wasm": "^4.22.0",
     "express": "^5.1.0",
     "hammerjs": "^2.0.8",
-    "material-design-lite": "github:kherrick/material-design-lite#v3.0.0-rc.1.4",
+    "material-design-lite": "github:kherrick/material-design-lite#v3.0.0-rc.1.5",
     "material-tokens": "github:kherrick/material-tokens",
     "minimal-c-sharp-wasm": "github:kherrick/minimal-c-sharp-wasm#0.0.1+angular",
     "node-forge": "^1.3.1",
