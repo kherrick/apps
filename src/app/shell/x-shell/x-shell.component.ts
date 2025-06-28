@@ -453,6 +453,8 @@ export class XShellComponent implements OnInit {
         submitValue: 'apps-update-ok',
       },
     );
+
+    this.cdr?.markForCheck();
   }
 
   handleCloseStart() {

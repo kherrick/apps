@@ -386,7 +386,10 @@ export class XCalculatorComponent implements OnInit, OnDestroy {
         // set C# calculator
         getAssemblyExports().then((assemblyExports) => {
           this.calculator = assemblyExports.Calculator;
-          this.isReady.next(true);
+
+          if (!this.isReady.closed) {
+            this.isReady.next(true);
+          }
         });
       };
 

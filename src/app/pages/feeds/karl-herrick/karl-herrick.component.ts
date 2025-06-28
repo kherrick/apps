@@ -328,7 +328,7 @@ export class KarlHerrickComponent {
       scr?.setAttribute('id', modName);
       scr?.setAttribute(
         'src',
-        `${(globalThis?.document?.querySelector('base') as HTMLBaseElement)?.href}assets/scripts/feed-karl-herrick-additions.js`,
+        `${(globalThis?.document?.querySelector('base') as HTMLBaseElement)?.href ?? '/'}assets/scripts/feed-karl-herrick-additions.js`,
       );
 
       globalThis?.document?.body.appendChild(scr);
