@@ -31,11 +31,12 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
           <header>
             <h1>&lt;x-encryption&gt;</h1>
             <p>
-              <a href="https://en.wikipedia.org/wiki/PBKDF2">PBKDF2</a> will
-              securely generate an encryption key from a given password, then
+              Use the inputs below to encrypt data.
+              <a href="https://en.wikipedia.org/wiki/PBKDF2">PBKDF2</a> will be
+              used to securely generate a key from a given password, then
               <a href="https://en.wikipedia.org/wiki/AES-GCM">AES-GCM</a> will
-              use that key to encrypt provided data, offering both
-              confidentiality and integrity protection.
+              be used with that key to offer both confidentiality and integrity
+              protection.
             </p>
           </header>
           <section class="settings">
@@ -183,6 +184,10 @@ import { XDialogService } from '../../../../app/shell/x-dialog/x-dialog.service'
         grid-column-gap: 1rem;
         grid-row-gap: 1rem;
         justify-content: center;
+
+        a {
+          text-decoration: underline;
+        }
 
         [encryption] {
           max-width: 60rem;

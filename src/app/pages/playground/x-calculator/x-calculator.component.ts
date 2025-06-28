@@ -222,6 +222,10 @@ export interface CalculatorModel {
         flex-direction: column;
         justify-content: center;
 
+        a {
+          text-decoration: underline;
+        }
+
         .column {
           display: flex;
           flex-direction: column;
@@ -257,11 +261,6 @@ export interface CalculatorModel {
         section {
           text-align: center;
           width: 100%;
-        }
-
-        h1 {
-          font-size: larger;
-          font-weight: bold;
         }
 
         button {
