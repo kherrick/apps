@@ -1,3 +1,4 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { XBackgroundRemoval } from './x-background-removal';
@@ -8,9 +9,9 @@ describe('XBackgroundRemoval', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [XBackgroundRemoval]
-    })
-    .compileComponents();
+      providers: [provideZonelessChangeDetection()],
+      imports: [XBackgroundRemoval],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(XBackgroundRemoval);
     component = fixture.componentInstance;

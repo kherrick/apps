@@ -347,6 +347,8 @@ export class XCertificateComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.worker?.removeEventListener('message', this.workerEventListener);
+
+    this.worker?.terminate();
   }
 
   extractFromPfx(pfxAb: ArrayBuffer, password: any) {

@@ -43,6 +43,19 @@ import { RouterModule } from '@angular/router';
           <button [routerLink]="'/calculator'">Go</button>
         </div>
       </div>
+      <div background-removal class="card">
+        <div [routerLink]="'/playground/background-removal'" class="title link">
+          Background Removal <i class="material-icons">filter</i>
+        </div>
+        <div class="subtitle">
+          <a [routerLink]="'/playground/background-removal'"
+            >Experiment with Background Removal</a
+          >
+        </div>
+        <div class="actions">
+          <button [routerLink]="'/playground/background-removal'">Go</button>
+        </div>
+      </div>
       <div pwgen class="card">
         <div [routerLink]="'/pwgen'" class="title link">
           pwgen <i class="material-icons">password</i>
@@ -70,7 +83,8 @@ import { RouterModule } from '@angular/router';
   styles: [
     `
       @use 'material-design-lite/css/components/card/style.css' as card-style;
-      @use 'material-design-lite/css/components/button/style.css' as button-style;
+      @use 'material-design-lite/css/components/button/style.css' as
+        button-style;
 
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
 
@@ -121,19 +135,33 @@ import { RouterModule } from '@angular/router';
           --card-heading-background: #016765;
         }
 
+        [calculator] {
+          --card-heading-background: #333;
+        }
+
+        [background-removal] {
+          --card-heading-background: #495890;
+        }
+
+        [canvas-image-manipulation] {
+          --card-heading-background: #016765;
+        }
+
         [pwgen] {
-          --card-heading-background: #697fce;
+          --card-heading-background: #333;
         }
 
         [peer] {
-          --card-heading-background: #333;
+          --card-heading-background: #697fce;
         }
 
         :is(.card) .actions {
           justify-content: end;
         }
 
-        .link, .subtitle, .title {
+        .link,
+        .subtitle,
+        .title {
           cursor: pointer;
         }
 

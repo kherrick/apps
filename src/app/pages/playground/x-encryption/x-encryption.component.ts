@@ -421,6 +421,8 @@ export class XEncryptionComponent implements OnDestroy {
     this.worker?.removeEventListener('error', this.workerErrorListener);
     this.worker?.removeEventListener('messageerror', this.workerErrorListener);
     this.worker?.removeEventListener('message', this.workerEventListener);
+
+    this.worker?.terminate();
   }
 
   clickDropZoneHandler() {

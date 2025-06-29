@@ -33,6 +33,14 @@ export const routes: Routes = [
     title: `${title} | Playground | WebRTC`,
   },
   {
+    path: 'background-removal',
+    loadComponent: () =>
+      import('./x-background-removal/x-background-removal').then(
+        (x) => x.XBackgroundRemoval,
+      ),
+    title: `${title} | Playground | Background Removal`,
+  },
+  {
     path: '**',
     redirectTo: '',
   },

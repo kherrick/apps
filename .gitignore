@@ -47,3 +47,6 @@ src/app/pages/feeds/**/*.json
 
 # Initial news state
 src/app/pages/news/**/*.json
+
+# Background removal data package
+src/assets/background-removal-package.tgz

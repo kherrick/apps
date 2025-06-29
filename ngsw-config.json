@@ -48,11 +48,13 @@
       "resources": {
         "urls": [
           "https://cdn.jsdeliver.net/**",
-          "https://rawgit.com/**",
-          "https://unpkg.com/**",
+          "https://cdn.skypack.dev/",
           "https://esm.run/**",
-          "https://cdn.skypack.dev/"
-
+          "https://raw.githubusercontent.com/**",
+          "https://rawgit.com/**",
+          "https://staticimgly.com/**",
+          "https://tfhub.dev/**",
+          "https://unpkg.com/**"
         ]
       }
     }
@@ -72,13 +74,14 @@
         "https://herrickdesign.com/wp-json/**",
         "https://herrickdesign.com/assets/**",
         "https://infinitym.ca/**",
-        "https://raw.githubusercontent.com/**",
-        "https://tfhub.dev/**",
         "https://cdn.jsdeliver.net/**",
-        "https://rawgit.com/**",
-        "https://unpkg.com/**",
+        "https://cdn.skypack.dev/",
         "https://esm.run/**",
-        "https://cdn.skypack.dev/"
+        "https://raw.githubusercontent.com/**",
+        "https://rawgit.com/**",
+        "https://staticimgly.com/**",
+        "https://tfhub.dev/**",
+        "https://unpkg.com/**"
       ]
     }
   ]
