@@ -1,3 +1,4 @@
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { XCanvasImageManipulation } from './x-canvas-image-manipulation';
@@ -8,9 +9,9 @@ describe('XCanvasImageManipulation', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [XCanvasImageManipulation]
-    })
-    .compileComponents();
+      providers: [provideZonelessChangeDetection()],
+      imports: [XCanvasImageManipulation],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(XCanvasImageManipulation);
     component = fixture.componentInstance;

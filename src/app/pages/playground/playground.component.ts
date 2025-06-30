@@ -56,6 +56,22 @@ import { RouterModule } from '@angular/router';
           <button [routerLink]="'/playground/background-removal'">Go</button>
         </div>
       </div>
+      <div canvas-image-manipulation class="card">
+        <div
+          [routerLink]="'/playground/canvas-image-manipulation'"
+          class="title link"
+        >
+          Canvas Image Manipulation <i class="material-icons">palette</i>
+        </div>
+        <div class="subtitle">
+          <a [routerLink]="'/playground/canvas-image-manipulation'"
+            >Experiment with Canvas Image Manipulation</a
+          >
+        </div>
+        <div class="actions">
+          <button [routerLink]="'/playground/canvas-image-manipulation'">Go</button>
+        </div>
+      </div>
       <div pwgen class="card">
         <div [routerLink]="'/pwgen'" class="title link">
           pwgen <i class="material-icons">password</i>

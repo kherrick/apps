@@ -124,7 +124,7 @@ type DownloadProgress = {
         align-items: center;
         display: flex;
         flex-direction: column;
-        padding: 1rem;
+        padding: 0 1rem;
         position: relative;
         max-width: 60rem;
         text-align: center;

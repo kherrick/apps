@@ -41,6 +41,14 @@ export const routes: Routes = [
     title: `${title} | Playground | Background Removal`,
   },
   {
+    path: 'canvas-image-manipulation',
+    loadComponent: () =>
+      import('./x-canvas-image-manipulation/x-canvas-image-manipulation').then(
+        (x) => x.XCanvasImageManipulation,
+      ),
+    title: `${title} | Playground | Canvas Image Manipulation`,
+  },
+  {
     path: '**',
     redirectTo: '',
   },
