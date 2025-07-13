@@ -40,28 +40,11 @@
           "https://fonts.gstatic.com/**"
         ]
       }
-    },
-        {
-      "name": "cdns",
-      "installMode": "prefetch",
-      "updateMode": "prefetch",
-      "resources": {
-        "urls": [
-          "https://cdn.jsdeliver.net/**",
-          "https://cdn.skypack.dev/",
-          "https://esm.run/**",
-          "https://raw.githubusercontent.com/**",
-          "https://rawgit.com/**",
-          "https://staticimgly.com/**",
-          "https://tfhub.dev/**",
-          "https://unpkg.com/**"
-        ]
-      }
     }
   ],
   "dataGroups": [
     {
-      "name": "apps",
+      "name": "content",
       "cacheConfig": {
         "maxSize": 999,
         "maxAge": "365d",
@@ -73,12 +56,21 @@
         "https://herrickdesign.com/wp-content/**",
         "https://herrickdesign.com/wp-json/**",
         "https://herrickdesign.com/assets/**",
-        "https://infinitym.ca/**",
+        "https://infinitym.ca/**"
+      ]
+    },
+        {
+      "name": "cdn",
+      "cacheConfig": {
+        "maxSize": 999,
+        "maxAge": "365d",
+        "strategy": "performance"
+      },
+      "urls": [
         "https://cdn.jsdeliver.net/**",
         "https://cdn.skypack.dev/",
         "https://esm.run/**",
         "https://raw.githubusercontent.com/**",
-        "https://rawgit.com/**",
         "https://staticimgly.com/**",
         "https://tfhub.dev/**",
         "https://unpkg.com/**"
