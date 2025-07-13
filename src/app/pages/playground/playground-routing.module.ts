@@ -49,6 +49,14 @@ export const routes: Routes = [
     title: `${title} | Playground | Canvas Image Manipulation`,
   },
   {
+    path: 'signature-detection',
+    loadComponent: () =>
+      import('./x-signature-detection/x-signature-detection').then(
+        (x) => x.XSignatureDetection,
+      ),
+    title: `${title} | Playground | Signature Detection`,
+  },
+  {
     path: '**',
     redirectTo: '',
   },

@@ -19,6 +19,7 @@
   "/playground/certificates",
   "/playground/encryption",
   "/playground/peer",
+  "/playground/signature-detection",
   "/pwgen",
   "/slides/slides",
   "/slides/progressive-web-apps",

@@ -69,7 +69,25 @@ import { RouterModule } from '@angular/router';
           >
         </div>
         <div class="actions">
-          <button [routerLink]="'/playground/canvas-image-manipulation'">Go</button>
+          <button [routerLink]="'/playground/canvas-image-manipulation'">
+            Go
+          </button>
+        </div>
+      </div>
+      <div signature-detection class="card">
+        <div
+          [routerLink]="'/playground/signature-detection'"
+          class="title link"
+        >
+          Signature Detection <i class="material-icons">draw</i>
+        </div>
+        <div class="subtitle">
+          <a [routerLink]="'/playground/signature-detection'"
+            >Experiment with Signature Detection</a
+          >
+        </div>
+        <div class="actions">
+          <button [routerLink]="'/playground/signature-detection'">Go</button>
         </div>
       </div>
       <div pwgen class="card">
@@ -163,12 +181,16 @@ import { RouterModule } from '@angular/router';
           --card-heading-background: #016765;
         }
 
-        [pwgen] {
+        [signature-detection] {
           --card-heading-background: #333;
         }
 
-        [peer] {
+        [pwgen] {
           --card-heading-background: #697fce;
+        }
+
+        [peer] {
+          --card-heading-background: #016765;
         }
 
         :is(.card) .actions {

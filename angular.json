@@ -38,6 +38,11 @@
                 "glob": "**/*",
                 "input": "./node_modules/@tensorflow/tfjs-backend-wasm/dist",
                 "output": "./assets/tfjs-backend-wasm/"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/onnxruntime-web/dist",
+                "output": "./assets/onnxruntime-web/"
               }
             ],
             "styles": [
@@ -125,6 +130,11 @@
                 "glob": "**/*",
                 "input": "./node_modules/@tensorflow/tfjs-backend-wasm/dist",
                 "output": "./assets/tfjs-backend-wasm/"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/onnxruntime-web/dist",
+                "output": "./assets/onnxruntime-web/"
               }
             ],
             "styles": [
