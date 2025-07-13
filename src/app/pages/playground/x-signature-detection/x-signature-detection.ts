@@ -114,6 +114,19 @@ type DownloadProgress = {
         </div>
       </mat-card>
 
+      @if (isCameraActive()) {
+        <mat-card class="camera-preview">
+          <video
+            #videoElement
+            autoplay
+            playsinline
+            muted
+            [style.display]="isCameraActive() ? 'block' : 'none'"
+          ></video>
+          <canvas #captureCanvas style="display: none;"></canvas>
+        </mat-card>
+      }
+
       <div class="camera-controls">
         <button
           mat-raised-button
@@ -167,19 +180,6 @@ type DownloadProgress = {
         </mat-form-field>
       </div>
 
-      @if (isCameraActive()) {
-        <mat-card class="camera-preview">
-          <video
-            #videoElement
-            autoplay
-            playsinline
-            muted
-            [style.display]="isCameraActive() ? 'block' : 'none'"
-          ></video>
-          <canvas #captureCanvas style="display: none;"></canvas>
-        </mat-card>
-      }
-
       @if (downloadProgress().key) {
         <div class="progress-container">
           <mat-progress-bar
@@ -204,7 +204,7 @@ type DownloadProgress = {
       }
 
       <div class="images-grid">
-        @for (img of imageItems(); track img.id) {
+        @for (img of reversedImageItems; track img.id) {
           <mat-card class="image-card">
             <div
               class="skeleton"
@@ -264,13 +264,10 @@ type DownloadProgress = {
 
         .controls {
           display: flex;
-          flex-wrap: wrap;
           gap: 1rem;
-          justify-content: center;
-          margin: 1rem 0;
 
           mat-form-field {
-            width: 200px;
+            max-width: 40vw;
           }
         }
 
@@ -496,6 +493,10 @@ export class XSignatureDetection
   >;
   @ViewChild('videoElement') videoElement!: ElementRef<HTMLVideoElement>;
   @ViewChild('captureCanvas') captureCanvas!: ElementRef<HTMLCanvasElement>;
+
+  get reversedImageItems(): ImageItem[] {
+    return [...this.imageItems()].reverse();
+  }
 
   ngAfterViewChecked(): void {
     if (this.#pendingDrawings.size > 0) {
@@ -738,6 +739,8 @@ export class XSignatureDetection
   }
 
   async #processImageFile(file: File, id: string) {
+    if (!isPlatformBrowser(this.#platformId)) return;
+
     if (!this.#worker) {
       console.error('Worker not initialized');
       this.#markItemAsError(id);
