@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 
 import { HomeComponent } from './pages/home/home.component';
+import { XShellComponent } from './shell/x-shell/x-shell.component';
 
 export const title = 'Apps';
 
-export const clientSideRoutes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
@@ -13,42 +13,31 @@ export const clientSideRoutes: Routes = [
   },
   {
     path: 'news',
-    loadChildren: () =>
-      import('./pages/news/news-routing.module').then(
-        (m) => m.NewsRoutingModule,
-      ),
+    loadChildren: () => import('./pages/news/news-routing.module').then((m) => m.NewsRoutingModule),
   },
   {
     path: 'feeds',
     loadChildren: () =>
-      import('./pages/feeds/feeds-routing.module').then(
-        (m) => m.FeedsRoutingModule,
-      ),
+      import('./pages/feeds/feeds-routing.module').then((m) => m.FeedsRoutingModule),
   },
   {
     path: 'playground',
     loadChildren: () =>
-      import('./pages/playground/playground-routing.module').then(
-        (m) => m.PlaygroundRoutingModule,
-      ),
+      import('./pages/playground/playground-routing.module').then((m) => m.PlaygroundRoutingModule),
   },
   {
     path: 'links',
-    loadComponent: () =>
-      import('./pages/links/links.component').then((x) => x.LinksComponent),
+    loadComponent: () => import('./pages/links/links.component').then((x) => x.LinksComponent),
     title: `${title} | Links`,
   },
   {
     path: 'slides',
     loadChildren: () =>
-      import('./pages/slides/slides-routing.module').then(
-        (m) => m.SlidesRoutingModule,
-      ),
+      import('./pages/slides/slides-routing.module').then((m) => m.SlidesRoutingModule),
   },
   {
     path: 'about',
-    loadComponent: () =>
-      import('./pages/about/about.component').then((x) => x.AboutComponent),
+    loadComponent: () => import('./pages/about/about.component').then((x) => x.AboutComponent),
     title: `${title} | About`,
   },
   {
@@ -62,29 +51,18 @@ export const clientSideRoutes: Routes = [
   {
     path: 'pwgen',
     loadComponent: () =>
-      import(
-        './pages/playground/x-pwgen-container/x-pwgen-container.component'
-      ).then((x) => x.XPwgenContainerComponent),
+      import('./pages/playground/x-pwgen-container/x-pwgen-container.component').then(
+        (x) => x.XPwgenContainerComponent,
+      ),
     title: `${title} | Playground | pwgen`,
   },
-];
-
-export const routes = [
-  ...clientSideRoutes,
+  {
+    path: 'shell',
+    component: XShellComponent,
+    title,
+  },
   {
     path: '**',
     redirectTo: '',
   },
 ];
-
-@NgModule({
-  imports: [
-    RouterModule.forRoot(routes, {
-      initialNavigation: 'enabledNonBlocking',
-      anchorScrolling: 'enabled',
-      scrollPositionRestoration: 'enabled',
-    }),
-  ],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}

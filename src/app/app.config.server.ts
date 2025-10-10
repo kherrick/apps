@@ -1,11 +1,13 @@
-import { ApplicationConfig, mergeApplicationConfig } from '@angular/core';
-import { provideServerRendering, withRoutes } from '@angular/ssr';
+import { mergeApplicationConfig, ApplicationConfig } from '@angular/core';
+import { provideServerRendering, withRoutes, withAppShell } from '@angular/ssr';
 
-import { serverSideRoutes } from './app-routing.server.module';
 import { appConfig } from './app.config';
+import { serverRoutes } from './app.routes.server';
+
+import { XShellComponent } from './shell/x-shell/x-shell.component';
 
 const serverConfig: ApplicationConfig = {
-  providers: [provideServerRendering(withRoutes(serverSideRoutes))],
+  providers: [provideServerRendering(withRoutes(serverRoutes), withAppShell(XShellComponent))],
 };
 
 export const config = mergeApplicationConfig(appConfig, serverConfig);

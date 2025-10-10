@@ -67,9 +67,10 @@
         "strategy": "performance"
       },
       "urls": [
+        "https://cdn.skypack.dev/**",
         "https://cdn.jsdeliver.net/**",
-        "https://cdn.skypack.dev/",
         "https://esm.run/**",
+        "https://esm.sh/**/",
         "https://raw.githubusercontent.com/**",
         "https://staticimgly.com/**",
         "https://tfhub.dev/**",

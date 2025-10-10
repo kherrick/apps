@@ -18,10 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 
-import {
-  MatProgressBarModule,
-  ProgressBarMode,
-} from '@angular/material/progress-bar';
+import { MatProgressBarModule, ProgressBarMode } from '@angular/material/progress-bar';
 
 import { DataConnection, Peer, PeerError } from 'peerjs';
 
@@ -58,14 +55,7 @@ import {
     [x-peer-client-container] {
       --actions-button-margin: 0.5rem;
       --actions-height: calc(
-        calc(
-          var(--mat-fab-extended-container-height)
-          * 2
-        )
-        + calc(
-          var(--actions-button-margin)
-          * 4
-        )
+        calc(var(--mat-fab-extended-container-height) * 2) + calc(var(--actions-button-margin) * 4)
       );
 
       --mat-fab-touch-target-display: none;
@@ -104,23 +94,15 @@ import {
 
       // when .chat-output is an adjacent sibling of .video
       .video + .chat-output {
-        max-height: calc(
-          var(--chat-output-height)
-          - var(--video-height)
-        );
+        max-height: calc(var(--chat-output-height) - var(--video-height));
       }
 
       // when .chat-output has .actions as an adjacent sibling
       .chat-output:has(+ .actions) {
         height: calc(
-          100vh
-          - var(--actions-height)
-          - var(--mat-toolbar-standard-height)
-          - var(--mat-tab-container-height)
-          - calc(
-            var(--actions-button-margin)
-            / 2
-          )
+          100vh - var(--actions-height) - var(--mat-toolbar-standard-height) - var(
+              --mat-tab-container-height
+            ) - calc(var(--actions-button-margin) / 2)
         );
       }
 
@@ -188,12 +170,7 @@ import {
       </section>
       @if (!store.dataConnectionIsConnected()) {
         <section class="actions">
-          <button
-            (click)="setupPeerClient()"
-            [disabled]="!store.canAnnounce()"
-            extended
-            mat-fab
-          >
+          <button (click)="setupPeerClient()" [disabled]="!store.canAnnounce()" extended mat-fab>
             <mat-icon>cloud_sync</mat-icon>
             Announce
           </button>
@@ -209,10 +186,7 @@ import {
         </section>
       }
       <section class="progress-container">
-        <mat-progress-bar
-          [mode]="progressMode"
-          value="{{ progressPercentage }}"
-        ></mat-progress-bar>
+        <mat-progress-bar [mode]="progressMode" value="{{ progressPercentage }}"></mat-progress-bar>
       </section>
       @if (store.dataConnectionIsConnected()) {
         <section class="chat-input">
@@ -226,11 +200,7 @@ import {
               type="text"
             />
           </mat-form-field>
-          <button
-            (click)="handleChatInput($event)"
-            class="chat-input-actions"
-            mat-fab
-          >
+          <button (click)="handleChatInput($event)" class="chat-input-actions" mat-fab>
             <mat-icon>sms</mat-icon>
           </button>
           <button
@@ -242,11 +212,7 @@ import {
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button
-              (click)="setupPeerClient()"
-              [disabled]="!store.canAnnounce()"
-              mat-menu-item
-            >
+            <button (click)="setupPeerClient()" [disabled]="!store.canAnnounce()" mat-menu-item>
               <mat-icon>cloud_sync</mat-icon>
               Announce
             </button>
@@ -259,9 +225,7 @@ import {
               Connect
             </button>
             <button (click)="handleFullscreen()" mat-menu-item>
-              <mat-icon>{{
-                isFullscreen() ? 'fullscreen_exit' : 'fullscreen'
-              }}</mat-icon>
+              <mat-icon>{{ isFullscreen() ? 'fullscreen_exit' : 'fullscreen' }}</mat-icon>
               <span>Fullscreen</span>
             </button>
             <button (click)="handleScreenShare()" extended mat-menu-item>
@@ -275,12 +239,7 @@ import {
             <button (click)="handleSendButton($event)" extended mat-menu-item>
               <mat-icon>send</mat-icon>
               <label for="file-upload" id="file-upload-label">Send File</label>
-              <input
-                (change)="handleInputButton($event)"
-                id="file-upload"
-                hidden
-                type="file"
-              />
+              <input (change)="handleInputButton($event)" id="file-upload" hidden type="file" />
             </button>
           </mat-menu>
         </section>
@@ -341,8 +300,7 @@ export class XPeerClientComponent implements OnDestroy {
   }
 
   handleProgressPercentage(e: any) {
-    this.progressPercentage =
-      (e?.detail?.chunkInfo?.count / e?.detail?.chunkInfo?.total) * 100;
+    this.progressPercentage = (e?.detail?.chunkInfo?.count / e?.detail?.chunkInfo?.total) * 100;
 
     this.cdr?.markForCheck();
   }
@@ -382,9 +340,7 @@ export class XPeerClientComponent implements OnDestroy {
 
     // handle chat messages from peer
     if (data?.type === 'chat') {
-      this.store.updateChats(
-        prepareChatMessage(this.document, 'peer', data?.detail?.text),
-      );
+      this.store.updateChats(prepareChatMessage(this.document, 'peer', data?.detail?.text));
 
       this.myDataConnection?.send({
         type: 'progress-complete',
@@ -428,11 +384,7 @@ export class XPeerClientComponent implements OnDestroy {
             'peer',
             data.detail.name,
             getObjectUrl(data.detail.file, data.detail.type),
-            buildVideoContainer(
-              data.detail.file,
-              data.detail.type,
-              this.document,
-            ),
+            buildVideoContainer(data.detail.file, data.detail.type, this.document),
           ),
         );
       }
@@ -486,11 +438,7 @@ export class XPeerClientComponent implements OnDestroy {
     });
 
     this.store.updateChats(
-      prepareChatMessage(
-        this.document,
-        'me',
-        this.chatInput.nativeElement.value,
-      ),
+      prepareChatMessage(this.document, 'me', this.chatInput.nativeElement.value),
     );
 
     this.chatInput.nativeElement.value = '';
@@ -527,9 +475,7 @@ export class XPeerClientComponent implements OnDestroy {
   }
 
   setupMyDataConnectionEventHandlers(peerDataconnection: DataConnection) {
-    peerDataconnection.on('data', (data) =>
-      this.handlePeerDataConnection(data),
-    );
+    peerDataconnection.on('data', (data) => this.handlePeerDataConnection(data));
 
     peerDataconnection.on('open', () => {
       console.log('peerDataconnection.on open');
@@ -539,9 +485,7 @@ export class XPeerClientComponent implements OnDestroy {
       console.log('peerDataconnection.on error', error),
     );
 
-    peerDataconnection.on('close', () =>
-      console.log('peerDataconnection.on close'),
-    );
+    peerDataconnection.on('close', () => console.log('peerDataconnection.on close'));
 
     peerDataconnection.on('iceStateChanged', (iceStateChanged: string) =>
       console.log('peerDataconnection.on iceStateChanged', iceStateChanged),
@@ -569,11 +513,7 @@ export class XPeerClientComponent implements OnDestroy {
     store: InstanceType<typeof PeerStore>,
     chatOutput: HTMLElement,
   ) {
-    const myDataConnection = this.setupMyDataConnection(
-      peer,
-      store,
-      chatOutput,
-    );
+    const myDataConnection = this.setupMyDataConnection(peer, store, chatOutput);
 
     if (myDataConnection) {
       this.setupMyDataConnectionEventHandlers(myDataConnection);
@@ -629,20 +569,14 @@ export class XPeerClientComponent implements OnDestroy {
       this.peer.on('connection', (peerDataConnection: DataConnection) => {
         this.peerDataConnection = peerDataConnection;
 
-        this.peerDataConnection?.on('data', (data) =>
-          this.handlePeerDataConnection(data),
-        );
+        this.peerDataConnection?.on('data', (data) => this.handlePeerDataConnection(data));
 
         this.peerDataConnection?.on('open', () => {
           if (
             this.myDataConnection === undefined ||
             this.myDataConnection?.peerConnection === null
           ) {
-            this.initialize(
-              this.peer,
-              this.store,
-              this.chatOutput.nativeElement,
-            );
+            this.initialize(this.peer, this.store, this.chatOutput.nativeElement);
           }
 
           this.peerDataConnection?.send({
@@ -736,9 +670,7 @@ export class XPeerClientComponent implements OnDestroy {
     };
 
     try {
-      stream = await navigator.mediaDevices.getDisplayMedia(
-        mediaConstraints as any,
-      );
+      stream = await navigator.mediaDevices.getDisplayMedia(mediaConstraints as any);
     } catch (error) {
       console.error(error);
     }
@@ -751,12 +683,7 @@ export class XPeerClientComponent implements OnDestroy {
     }
   }
 
-  async handleSendFile(
-    file: File | undefined,
-    type: string,
-    name: string,
-    size: string,
-  ) {
+  async handleSendFile(file: File | undefined, type: string, name: string, size: string) {
     const buff = await file?.arrayBuffer();
 
     if (buff) {
@@ -768,7 +695,7 @@ export class XPeerClientComponent implements OnDestroy {
           type,
           name,
           size,
-          sha256: await getSha256(new Uint8Array(buff)),
+          sha256: await getSha256(buff),
         },
       });
 

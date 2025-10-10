@@ -95,22 +95,28 @@ const preProcessHtmlOutput = (html) =>
 
 writeFile(
   `./dist/apps/browser/news/${newsProject}/index.html`,
-  shouldMinify === "MINIFY"
-    ? (
-        await htmlnano.process(
-          preProcessHtmlOutput(new XMLSerializer().serializeToString(document)),
-          {
-            mergeScripts: false,
-            mergeStyles: false,
-          },
-          htmlnano.presets.safe,
-        )
-      ).html
-    : await prettier.format(
-        preProcessHtmlOutput(new XMLSerializer().serializeToString(document)),
-        {
-          parser: "html",
-        },
-      ),
-  "utf8",
+  preProcessHtmlOutput(new XMLSerializer().serializeToString(document)),
+  "utf8"
 );
+
+// writeFile(
+//   `./dist/apps/browser/news/${newsProject}/index.html`,
+//   shouldMinify === "MINIFY"
+//     ? (
+//         await htmlnano.process(
+//           preProcessHtmlOutput(new XMLSerializer().serializeToString(document)),
+//           {
+//             mergeScripts: false,
+//             mergeStyles: false,
+//           },
+//           htmlnano.presets.safe,
+//         )
+//       ).html
+//     : await prettier.format(
+//         preProcessHtmlOutput(new XMLSerializer().serializeToString(document)),
+//         {
+//           parser: "html",
+//         },
+//       ),
+//   "utf8",
+// );

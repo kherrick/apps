@@ -6,6 +6,19 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule],
   template: `
     <section x-section-cards>
+      <div sprite-garden class="card">
+        <div [routerLink]="'/playground/sprite-garden'" class="title link">
+          Sprite Garden <i class="material-icons">enhanced_encryption</i>
+        </div>
+        <div class="subtitle">
+          <a [routerLink]="'/playground/sprite-garden'"
+            >Grow Sprites</a
+          >
+        </div>
+        <div class="actions">
+          <button [routerLink]="'/playground/sprite-garden'">Go</button>
+        </div>
+      </div>
       <div encryption class="card">
         <div [routerLink]="'/playground/encryption'" class="title link">
           Encryption <i class="material-icons">enhanced_encryption</i>
@@ -159,6 +172,10 @@ import { RouterModule } from '@angular/router';
           justify-content: end;
           margin: 0.5rem;
           padding: 0.5rem;
+        }
+
+        [sprite-garden] {
+          --card-heading-background: #333;
         }
 
         [encryption] {

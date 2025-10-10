@@ -43,10 +43,7 @@ if (!(Uint8Array as any).prototype.toBase64) {
 
 // static method polyfill for Uint8Array.fromBase64
 if (!(Uint8Array as any).fromBase64) {
-  (Uint8Array as any).fromBase64 = function (
-    base64String: string,
-    options = {},
-  ) {
+  (Uint8Array as any).fromBase64 = function (base64String: string, options = {}) {
     // handle invalid options
     if (options && typeof options !== 'object') {
       throw new TypeError('Options must be an object');
@@ -109,15 +106,11 @@ async function decompressFromBase64Url(b64: string | null) {
 // compress string to base64url gzip
 async function compressToBase64Url(str: string): Promise<string> {
   const input = new TextEncoder().encode(str);
-  const compressedStream = new Blob([input])
-    .stream()
-    .pipeThrough(new CompressionStream('gzip'));
+  const compressedStream = new Blob([input]).stream().pipeThrough(new CompressionStream('gzip'));
 
   const compressedBlob = await new Response(compressedStream).blob();
 
-  const compressedArray = new (Uint8Array as any)(
-    await compressedBlob.arrayBuffer(),
-  );
+  const compressedArray = new (Uint8Array as any)(await compressedBlob.arrayBuffer());
 
   return compressedArray.toBase64({ alphabet: 'base64url' });
 }
@@ -156,11 +149,7 @@ export const buildImageContainer = (
   return imageContainer;
 };
 
-export const buildVideoContainer = (
-  file: File,
-  fileType: string,
-  doc: Document,
-): HTMLElement => {
+export const buildVideoContainer = (file: File, fileType: string, doc: Document): HTMLElement => {
   const videoContainer = doc.createElement('section');
   videoContainer.classList.toggle('video');
 
@@ -178,12 +167,7 @@ export const buildVideoContainer = (
   return videoContainer;
 };
 
-export const getDateParagraph = (
-  id: string,
-  name: any,
-  date: any,
-  doc: Document,
-) => {
+export const getDateParagraph = (id: string, name: any, date: any, doc: Document) => {
   const paragraph = doc.createElement(QUERY_PARAM_KEY.PEER);
   paragraph.setAttribute('class', `${id}-text`);
 
@@ -201,13 +185,7 @@ export const getDateParagraph = (
   return paragraph;
 };
 
-export const getChatParagraph = (
-  id: string,
-  name: any,
-  date: any,
-  text: any,
-  doc: Document,
-) => {
+export const getChatParagraph = (id: string, name: any, date: any, text: any, doc: Document) => {
   const paragraph = getDateParagraph(id, name, date, doc);
 
   const textSpan = doc.createElement('span');
@@ -232,10 +210,7 @@ export const getFileChatParagraph = (
   const fileBlobUrl = URL.createObjectURL(new Blob([data?.detail?.file]));
 
   // some videos we'll try to display
-  if (
-    data?.detail?.fileType === 'video/webm' ||
-    data?.detail?.fileType === 'video/mp4'
-  ) {
+  if (data?.detail?.fileType === 'video/webm' || data?.detail?.fileType === 'video/mp4') {
     const videoElement = doc.createElement('video');
     videoElement.setAttribute('controls', '');
     videoElement.setAttribute('src', fileBlobUrl);
@@ -274,9 +249,7 @@ export const getFileChatParagraph = (
 export const getConfig = async (searchParam: any) => {
   const decompressedSearchParam = await decompressFromBase64Url(searchParam);
 
-  return searchParam && decompressedSearchParam
-    ? JSON.parse(decompressedSearchParam)
-    : {};
+  return searchParam && decompressedSearchParam ? JSON.parse(decompressedSearchParam) : {};
 };
 
 export const getDateString = () =>
@@ -327,10 +300,7 @@ export const getPeerClient = async (
   return new Peer(myId, config);
 };
 
-export const getPeerEncodedURIComponent = async (
-  myId: string,
-  peerId: string,
-) =>
+export const getPeerEncodedURIComponent = async (myId: string, peerId: string) =>
   await compressToBase64Url(
     JSON.stringify({
       m: peerId,
@@ -356,17 +326,9 @@ export const getAuthorStyle = (author: string) => `
 `;
 
 export const getMessageStyle = (author: string) => `
-  background-color: ${
-    author === 'peer'
-      ? 'var(--peer-message-peer)'
-      : 'var(--peer-message-me)'
-  };
+  background-color: ${author === 'peer' ? 'var(--peer-message-peer)' : 'var(--peer-message-me)'};
   border-radius: 0.75rem;
-  color: ${
-    author === 'peer'
-      ? 'var(--peer-message-peer-color)'
-      : 'var(--peer-message-me-color)'
-  };
+  color: ${author === 'peer' ? 'var(--peer-message-peer-color)' : 'var(--peer-message-me-color)'};
   line-height: 3;
   padding: 0.75rem;
   box-decoration-break: clone;
@@ -383,19 +345,14 @@ export const getMyUrl = async (myId: string, peerId: string) =>
 
 export const getRandomId = () => uuidv5(uuidv4(), uuidv5.URL);
 
-export const getSha256 = async (
-  input: ArrayBuffer | string,
-): Promise<string> => {
+export const getSha256 = async (input: ArrayBuffer | string): Promise<string> => {
   let buffer;
 
   if (typeof input === 'string') {
-    buffer = await crypto.subtle.digest(
-      'SHA-256',
-      new TextEncoder().encode(input),
-    );
+    buffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input));
   }
 
-  if (input instanceof ArrayBuffer || ArrayBuffer.isView(input)) {
+  if (input instanceof ArrayBuffer) {
     buffer = await crypto.subtle.digest('SHA-256', input);
   }
 
@@ -407,9 +364,7 @@ export const getSha256 = async (
 };
 
 export const getTextLink = (text: string, textLink: string) =>
-  textLink
-    ? `<a style="color: #fff;" href="${textLink}" download="${text}">${text}</a>`
-    : text;
+  textLink ? `<a style="color: #fff;" href="${textLink}" download="${text}">${text}</a>` : text;
 
 export const prepareChatMessage = (
   doc: Document,

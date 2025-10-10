@@ -1,7 +1,10 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { XRootComponent } from './app/x-root.component';
+import { BootstrapContext, bootstrapApplication } from '@angular/platform-browser';
+
 import { config } from './app/app.config.server';
 
-const bootstrap = () => bootstrapApplication(XRootComponent, config);
+import { XShellComponent } from './app/shell/x-shell/x-shell.component';
+
+const bootstrap = (context: BootstrapContext) =>
+  bootstrapApplication(XShellComponent, config, context);
 
 export default bootstrap;

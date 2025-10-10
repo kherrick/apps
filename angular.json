@@ -24,6 +24,16 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "allowedCommonJsDependencies": [
+              "encoding",
+              "hammerjs",
+              "long",
+              "node-forge",
+              "pwgen",
+              "sdp",
+              "seedrandom",
+              "whatwg-url"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/404.html",
@@ -51,6 +61,7 @@
             "scripts": [],
             "server": "src/main.server.ts",
             "prerender": {
+              "routesFile": "src/app/routes.list.txt",
               "discoverRoutes": true
             },
             "ssr": {
@@ -71,20 +82,6 @@
                   "maximumError": "100kB"
                 }
               ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": {
-                "fonts": true,
-                "scripts": true,
-                "styles": {
-                  "minify": true,
-                  "inlineCritical": true
-                }
-              },
               "outputHashing": "all",
               "serviceWorker": "ngsw-config.json"
             },
@@ -139,8 +136,7 @@
             ],
             "styles": [
               "src/styles.scss"
-            ],
-            "scripts": []
+            ]
           }
         }
       }
