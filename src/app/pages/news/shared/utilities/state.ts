@@ -55,9 +55,11 @@ export const getArchives = (
     archivesObserverOptions,
   );
 
-  setTimeout(() => {
-    archivesObserver.observe(archives);
-  }, 250);
+  if (archives) {
+    setTimeout(() => {
+      archivesObserver.observe(archives);
+    }, 250);
+  }
 
   let latestSectionsExpanded = true;
   const handleLatestHeaderClick = () => {

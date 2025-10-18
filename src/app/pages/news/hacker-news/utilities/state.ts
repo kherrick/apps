@@ -56,9 +56,11 @@ export const getArchives = (
     archivesObserverOptions,
   );
 
-  setTimeout(() => {
-    archivesObserver.observe(archives);
-  }, 250);
+  if (archives) {
+    setTimeout(() => {
+      archivesObserver.observe(archives);
+    }, 250);
+  }
 
   let latestSectionsExpanded = true;
   const handleLatestHeaderClick = () => {
@@ -80,8 +82,11 @@ export const getArchives = (
   };
 
   const latestHeader = shadowRoot.querySelector('#latest > h2') as HTMLElement;
-  latestHeader.style.cursor = 'pointer';
-  latestHeader.addEventListener('click', handleLatestHeaderClick);
+
+  if (latestHeader) {
+    latestHeader.style.cursor = 'pointer';
+    latestHeader.addEventListener('click', handleLatestHeaderClick);
+  }
 };
 
 export const getIndex = async (

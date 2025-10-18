@@ -104,11 +104,15 @@ export class LobstersComponent implements OnInit {
     if ('IntersectionObserver' in globalThis) {
       getArchives(this.shadowRoot, newsState, queue, this.dataUrl);
 
-      (this.shadowRoot.querySelector('#latest') as HTMLElement).style.display =
-        'block';
-      (
-        this.shadowRoot.querySelector('#archives') as HTMLElement
-      ).style.display = 'block';
+      const latest = (this.shadowRoot.querySelector('#latest') as HTMLElement);
+      if (latest) {
+        latest.style.display = 'block';
+      }
+
+      const archives = (this.shadowRoot.querySelector('#archives') as HTMLElement);
+      if (archives) {
+        archives.style.display = 'block';
+      }
     }
   }
 }

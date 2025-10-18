@@ -111,7 +111,6 @@
   // use the dark theme when client prefers dark-theme
   @media (prefers-color-scheme: dark) {
     @include mat.all-component-themes($dark-theme);
-
     color-scheme: dark;
 
     --x-shell-background-color: #121212;
