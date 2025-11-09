@@ -253,7 +253,9 @@ x-shell {
   background-color: var(--x-shell-background-color);
   display: flex;
   min-height: 100vh;
-  width: 100%;
+  min-height: 100dvh;
+  width: 100vw;
+  width: 100dvw;
 }
 
 html {

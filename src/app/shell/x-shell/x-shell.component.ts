@@ -71,7 +71,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         display: flex;
         flex-direction: column;
         flex: 1;
-        max-width: calc(100% - calc(var(--md-comp-navigation-rail-container-width, 5rem) + 1px));
 
         x-top-app-bar {
           --md-sys-comp-top-app-bar-padding: 1rem;

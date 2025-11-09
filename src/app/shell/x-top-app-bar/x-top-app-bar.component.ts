@@ -10,21 +10,12 @@ import { Themes, ThemeService } from '../../../app/shell/theme/theme.service';
   imports: [RouterModule, MatToolbarModule, MatIconModule],
   template: `
     <mat-toolbar>
-      <button
-        (click)="handleDrawerButton($event)"
-        aria-label="menu icon"
-        id="top-app-drawer-btn"
-      >
+      <button (click)="handleDrawerButton($event)" aria-label="menu icon" id="top-app-drawer-btn">
         <mat-icon>menu</mat-icon>
       </button>
       <a [routerLink]="'/'"><span class="title">Apps</span></a>
       <span class="spacer"></span>
-      <a
-        (click)="handleModeToggle($event)"
-        aria-label="theme icon"
-        href
-        mat-button
-      >
+      <a (click)="handleModeToggle($event)" aria-label="theme icon" href mat-button>
         <mat-icon>{{
           themeService.theme() === themes.Light ? 'dark_mode' : 'light_mode'
         }}</mat-icon>
@@ -63,48 +54,46 @@ import { Themes, ThemeService } from '../../../app/shell/theme/theme.service';
     `
       @import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=block');
 
-      mat-toolbar {
+      #top-app-drawer-btn {
+        display: contents;
+      }
+
+      #top-app-drawer-btn:hover,
+      .mode-toggle:hover {
+        cursor: pointer;
+      }
+
+      #top-app-drawer-btn > mat-icon {
+        margin-right: 1rem;
+      }
+
+      .spacer {
+        flex: 1 1 auto;
+      }
+
+      .title {
+        font-size: 1.375rem;
+      }
+
+      [mat-button] {
+        margin-left: 0.5rem;
+      }
+
+      button {
+        border: 0;
+      }
+
+      a,
+      button,
+      span.title {
+        background-color: unset;
+        text-decoration: none;
+        color: var(--md-sys-comp-top-app-bar-color);
+      }
+
+      @media screen and (min-width: 859px) {
         #top-app-drawer-btn {
-          display: contents;
-        }
-
-        #top-app-drawer-btn:hover,
-        .mode-toggle:hover {
-          cursor: pointer;
-        }
-
-        #top-app-drawer-btn > mat-icon {
-          margin-right: 1rem;
-        }
-
-        .spacer {
-          flex: 1 1 auto;
-        }
-
-        .title {
-          font-size: 1.375rem;
-        }
-
-        [mat-button] {
-          margin-left: 0.5rem;
-        }
-
-        button {
-          border: 0;
-        }
-
-        a,
-        button,
-        span.title {
-          background-color: unset;
-          text-decoration: none;
-          color: var(--md-sys-comp-top-app-bar-color);
-        }
-
-        @media screen and (min-width: 859px) {
-          #top-app-drawer-btn {
-            display: none;
-          }
+          display: none;
         }
       }
     `,

@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'x-home',
+  selector: 'x-feeds',
   imports: [RouterModule],
   template: `
     <section x-section-cards>
