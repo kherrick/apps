@@ -96,6 +96,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         width: 100%;
       }
 
+      x-sprite-garden {
+        background-color: var(--x-shell-background-color);
+      }
+
       x-navigation-rail {
         --md-comp-navigation-rail-container-height: 100vh;
         --md-comp-navigation-rail-container-width: 5rem;

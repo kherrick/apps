@@ -215,7 +215,6 @@ import { RouterModule } from '@angular/router';
         }
 
         .link,
-        .subtitle,
         .title {
           cursor: pointer;
         }
