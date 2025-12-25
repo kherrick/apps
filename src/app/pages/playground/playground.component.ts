@@ -19,6 +19,19 @@ import { RouterModule } from '@angular/router';
           <button [routerLink]="'/playground/sprite-garden'">Go</button>
         </div>
       </div>
+      <div block-garden class="card">
+        <div [routerLink]="'/playground/block-garden'" class="title link">
+          Block Garden <i class="material-icons">enhanced_encryption</i>
+        </div>
+        <div class="subtitle">
+          <a [routerLink]="'/playground/block-garden'"
+            >Grow Blocks</a
+          >
+        </div>
+        <div class="actions">
+          <button [routerLink]="'/playground/block-garden'">Go</button>
+        </div>
+      </div>
       <div encryption class="card">
         <div [routerLink]="'/playground/encryption'" class="title link">
           Encryption <i class="material-icons">enhanced_encryption</i>
@@ -178,16 +191,20 @@ import { RouterModule } from '@angular/router';
           --card-heading-background: #333;
         }
 
+        [block-garden] {
+           --card-heading-background: #d9822b;
+        }
+
         [encryption] {
           --card-heading-background: #495890;
         }
 
         [certificates] {
-          --card-heading-background: #016765;
+          --card-heading-background: #333;
         }
 
         [calculator] {
-          --card-heading-background: #333;
+          --card-heading-background: #016765;
         }
 
         [background-removal] {
@@ -195,19 +212,19 @@ import { RouterModule } from '@angular/router';
         }
 
         [canvas-image-manipulation] {
-          --card-heading-background: #016765;
+          --card-heading-background: #d9822b;
         }
 
         [signature-detection] {
-          --card-heading-background: #333;
+          --card-heading-background: #016765;
         }
 
         [pwgen] {
-          --card-heading-background: #697fce;
+          --card-heading-background: #d9822b;
         }
 
         [peer] {
-          --card-heading-background: #016765;
+          --card-heading-background: #333;
         }
 
         :is(.card) .actions {
