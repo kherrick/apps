@@ -22,6 +22,12 @@ export const routes: Routes = [
     title: `${title} | Playground | SpriteGarden`,
   },
   {
+    path: 'block-garden',
+    loadComponent: () =>
+      import('./x-block-garden/x-block-garden.component').then((x) => x.XBlockGardenComponent),
+    title: `${title} | Playground | Block Garden`,
+  },
+  {
     path: 'encryption',
     loadComponent: () =>
       import('./x-encryption/x-encryption.component').then((x) => x.XEncryptionComponent),
