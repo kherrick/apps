@@ -13,6 +13,7 @@
 /news/soylent-news
 /playground
 /playground/background-removal
+/playground/block-garden
 /playground/canvas-image-manipulation
 /playground/certificates
 /playground/encryption
