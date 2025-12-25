@@ -96,6 +96,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         width: 100%;
       }
 
+      x-block-garden,
       x-sprite-garden {
         background-color: var(--x-shell-background-color);
       }
