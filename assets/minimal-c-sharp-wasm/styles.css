@@ -1,0 +1,51 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 50rem;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+dialog {
+  text-align: center;
+}
+
+button,
+input[type="button"] {
+  background-color: darkblue;
+  border-radius: 0.3125rem;
+  border: 0.0625rem solid white;
+  color: white;
+  font-size: 3rem;
+  height: 6rem;
+  margin: 0;
+  min-width: 4.0625rem;
+  width: 100%;
+}
+
+button:active,
+button:hover,
+input[type="button"]:active,
+input[type="button"]:hover {
+  background-color: darkslategray;
+}
+
+input[type="text"] {
+  border-radius: 0.3125rem;
+  border: 0.0625rem outset grey;
+  font-family: monospace;
+  font-size: 3.75rem;
+  margin: 0.1875rem;
+  min-width: 9.6875rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+input[value="c"] {
+  max-width: 25%;
+}
