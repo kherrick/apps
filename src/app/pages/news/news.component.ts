@@ -1,5 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, ChangeDetectorRef, Component, ViewEncapsulation, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ViewEncapsulation,
+  inject,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { Observable, firstValueFrom } from 'rxjs';
@@ -17,9 +23,7 @@ import { parse, parseFragment, serialize } from 'parse5';
           <a href="https://kherrick.github.io/news-summary/">News Summary</a>
         </h1>
         <h2>Sources</h2>
-        <p>
-          The content above has been machine generated from the sources below.
-        </p>
+        <p>The content above has been machine generated from the sources below.</p>
       </section>
       <section x-section-cards>
         <div soylentNews class="card">
@@ -100,7 +104,6 @@ import { parse, parseFragment, serialize } from 'parse5';
             margin-top: 0;
           }
 
-          h2,
           ul {
             margin-bottom: 0;
             margin-top: 0;
@@ -111,6 +114,11 @@ import { parse, parseFragment, serialize } from 'parse5';
                 padding: 1rem 0;
               }
             }
+          }
+
+          h2 {
+            margin-bottom: 0;
+            margin-top: 2rem;
           }
 
           hr {
@@ -153,10 +161,7 @@ import { parse, parseFragment, serialize } from 'parse5';
 
           .title {
             align-items: center;
-            background: var(
-              --card-heading-background,
-              var(--md-ref-palette-neutral30)
-            );
+            background: var(--card-heading-background, var(--md-ref-palette-neutral30));
             border-radius: 0.25rem 0.25rem 0 0;
             color: var(--card-heading-color, #fff);
             display: flex;
@@ -230,20 +235,15 @@ export class NewsComponent implements AfterViewInit {
   private cdr = inject(ChangeDetectorRef);
 
   newsSummary: string = '';
-  data: Observable<string> = this.http.get(
-    'https://kherrick.github.io/news-summary/index.html',
-    {
-      responseType: 'text',
-    },
-  );
+  data: Observable<string> = this.http.get('https://kherrick.github.io/news-summary/index.html', {
+    responseType: 'text',
+  });
 
   async ngAfterViewInit(): Promise<void> {
     const data = await firstValueFrom(this.data);
     const parsedDoc = parse(data);
 
-    const [htmlDoc] = parsedDoc.childNodes.filter(
-      (childNode) => childNode.nodeName === 'html',
-    );
+    const [htmlDoc] = parsedDoc.childNodes.filter((childNode) => childNode.nodeName === 'html');
 
     const [bodyNode] = (
       (htmlDoc as unknown as ChildNode).childNodes as unknown as ChildNode[]
@@ -257,33 +257,36 @@ export class NewsComponent implements AfterViewInit {
 
     let index = 0;
     // grab all of the elements up to the horizontal rule
-    while (
-      index < bodyNode.childNodes.length &&
-      bodyNode.childNodes[index].nodeName !== 'hr'
-    ) {
+    while (index < bodyNode.childNodes.length && bodyNode.childNodes[index].nodeName !== 'hr') {
       // find and adjust the header value
       if (bodyNode.childNodes[index].nodeName === 'h1') {
         const [anchor] = bodyNode.childNodes[index].childNodes as any;
         const [anchorText] = anchor.childNodes as any;
         const [anchorLink] = anchor.attrs;
 
-        anchorLink.value = 'https://kherrick.github.io/apps/news';
-        anchorText.value = 'News';
+        if (anchorLink) anchorLink.value = 'https://kherrick.github.io/apps/news';
+        if (anchorText) anchorText.value = 'News';
       }
 
-      pushChildNode(
-        result.childNodes as unknown as ChildNode[],
-        bodyNode.childNodes[index],
-      );
+      pushChildNode(result.childNodes as unknown as ChildNode[], bodyNode.childNodes[index]);
 
       index = index + 1;
     }
 
     // push the 'hr' node
-    pushChildNode(
-      result.childNodes as unknown as ChildNode[],
-      bodyNode.childNodes[index],
-    );
+    if (index < bodyNode.childNodes.length) {
+      pushChildNode(result.childNodes as unknown as ChildNode[], bodyNode.childNodes[index]);
+    } else {
+      pushChildNode(
+        result.childNodes as unknown as ChildNode[],
+        {
+          nodeName: 'hr',
+          tagName: 'hr',
+          attrs: [],
+          namespaceURI: 'http://www.w3.org/1999/xhtml',
+        } as unknown as ChildNode,
+      );
+    }
 
     try {
       this.newsSummary = serialize(result);
